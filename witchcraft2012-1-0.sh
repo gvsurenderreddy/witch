@@ -1,4 +1,8 @@
 #! /bin/bash
+
+#dev note for refunctionise branch.  "i'm gonna strip out a fuckload of the comments, and concentrate on keeping the code more concise, so it's easier to reorganise the functions, so that 
+they'll be more easilly called whenever needed through the script."
+
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
