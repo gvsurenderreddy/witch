@@ -1,0 +1,46 @@
+witch Linux version 0.00
+
+what is witch?  what is it's history?
+
+witch is a gnu|linux distribution that started from a conversation mainly between "Him" and "digitteknohippie" in crunchbang's irc.  the inaugeral line from Him went something like this: "you should create a distro called witch, so folks could burn them [to cd]", to which digitteknohippie took great liking, in a monty python sort of way, and having already been mulling over many ideas*(elaborated on bellow) for distros, decided to go for it.  within a couple hours, steps were taken with SLAX, towards these ideas, with the release of witch alpha1.  it didnt work.  about a week after that, a virtualbox debian "alpha2" came along.  and alpha3 shortly after that.  alpha 4 used debian-live-helper, and thus was a live-installer iso you could actually burn to cd.
+ 
+by this point, a clearer vision of the releases digit[teknohippie] wanted to make had formed:  rowan (the base version, called "rowan", because the rowan tree is said to ward off evil, specifically, in this context, the evil of bloat), willow (a slightly more convenient but still lightweight version, like rowan, named after a tree, with more flex) and jamella (a showcase of tiling window managers, named after the npc from act4 of diablo2, who had a big book of tricks). 
+
+debian rowan witch alpha4, is still the best version to go for if you want a useable system, though you will have to use lilo (something went wrong with grub), and also reconfigure it's apt sources.list, if you plan on installing more software.  other than that, it should work great as a live cd.
+
+after the live/installer cd debian release of rowan however, an arch version of rowan was released in virtualbox form.  arch rowan witch alpha5.  alpha6 then was an attempt to make a live-installer cd using archiso, which was pretty much abandoned after it became clear it was not a path to easy one-click remastery.  alpha 7 (which i dont think i ever released) tried to use slitaz, since it was very "rowan"esq, and already had the ideal one-click remastery feature in place.  problems getting scrotwm held back it's release.   more unreleased witches based on arch, slitaz, and slackware currently reside on digit's laptop.
+
+alpha8... here the ideas became excessively grand. :)
+
+an early idea, from alpha1, was that witch should be able to install software from any distro, be they .deb, .rpm, .tgz, or whatever.  this idea had been put on the back burner, as a bit of a pipe-dream, but gave rise to an almost equally challenging proposal... that witch could use any distro as it's base.  so witch alpha8 is effectively an installer script which enables the user to choose which base distro goes under the hood.  much akin to how you can choose ubuntu or debian base for linuxmint, witch, would permit you to choose from, (in order they're planned for...) gentoo, funtoo, exherbo, freebsd, openbsd, .... and presumably adding more and more alternatives as it went on.  so not only would you get to pick your base from this installer, but also which desktop environment set (e.g. rowan), which gives the distro it's character from a user perspective.  also planned for this was to frankenstein bit's of slitaz's remasterer's write-iso feature into the script, keeping both install and remastery in one file.   ... and yes, it's a rather long script. lol.  at time of writing, it's currently sat waiting to get a thorough debugging of it's basic gentoo installer.   this alone, even without the desktop-set installations (rowan, willow, jamella, and any others who come along)
+*
+what are the ideas that started witch?
+on a shallow starting level,
+a distro with tiling window management out of the box, utilising only basic minimal tools to get one started, but be fully useable for all main desktop tasks.
+on a deeper, more philosophical level,
+no official.  anyone can re-release a witch, taking the principles of gnu & the fsf a tiny step farther.  roll-your-own / respin / remastery would be simple as click a button.  everyone is a witch developer, no distinguishing between users and developers "use is development", where the policy is "dont ask to do, just do, and inform."  (e.g. wrong way: [s]"can we get a thingymibob?"[/s], right way: "i've set up a thingymibob")  since everyone can remaster their own, no one steps on anyone else's toes, and development arguments are mute.
+in practice so far though, this has looked like a digitteknohippie distro... rather than a spray of everyone's respins.   ... understandibly, this is likely largely due to the starting point having never got out of alpha.  a solid base, and means of not just easy witch remastery, but easy upload and sharing of witches, would see the vision take off.
+you kept mentioning rowan... wtf is rowan?
+rowan is a tree, traditionally planted either side of doorways to ward off evil. 
+rowan is thus the name chosen for the base distro.  it's kinda wiccan sounding, and does well to describe it.  the prime evil it wards off in this context, is bloat.
+rowan has also sort of become a mascot and logo of sorts.
+the rowan desktop environment set consists of:
+scrotwm
+mc
+mplayer
+tilda
+links
+irssi
+mlocate
+sudo
+wget
+ftp
+wodim
+and... er... there was [a little] more to it than that... it was all written out in the old forum several times.  doh.   ... i'll fetch the info from my workstation at some point and clean this up.   but anyways, that^'s the jist of it.  has a file manager, a text editor, media player, web browser, irc client... all the basic stuff you're likely to need.
+[vapourware:]
+willow's much the same, but would add a full gui browser (probably firefox or chrome), and a gui file manager (probably pcmanfm or sunflower).
+[vapouurware:]
+jamella built off the same, but just adds another dozen or so tiling window managers & desktop images with handy keybind hints & links to help get you started with each.
+but like i say, current state is:
+want an live-installer iso?  use drw-alpha4.
+want something newer, then the latest is the epic installer-remasterer script "witchcraft", as seen in the last link in #witchlinux on irc.freenode.net.  (or you could update the drw-alpha4)
