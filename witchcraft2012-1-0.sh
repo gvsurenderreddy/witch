@@ -40,6 +40,7 @@ echo "welcome to the latest incarnation of the witchcraft script.  this one incl
 #and loads of little bites here n there
 
 #other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, 
+#     debian (jony123)
 
 #############
 #############
@@ -222,8 +223,9 @@ echo "what meta-distro do you want your witch based on?
 4) Gentoo/BSD
 5) Gentoo/Hurd
 6) FreeBSD
-7) combo
-8) other
+7) Debian
+8) combo
+9) other
 
 enter number preference of preference:"
 
@@ -257,11 +259,16 @@ case $BASEDISTRO in
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the FreeBSD bit"
                 ;;
-        7)
+        8)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the bit debian bit
+				installdebian"
+                ;;				
+        8)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you're selecting which basedistro... oh well, there's no real harm in having it in here again, right?"
                 ;;
-        8)
+        9)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "idkwtf goes here...  something, surely."
                 ;;
@@ -1114,4 +1121,10 @@ case $WITCHCRAFTMODE in
                 exit 1
                 ;;
 esac
+}
 
+###  DEBIAN witch Linux
+
+installdebian(){
+
+}
