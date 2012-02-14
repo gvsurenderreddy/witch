@@ -1,0 +1,6 @@
+#!/bin/bash
+#make location point to the lunacat2.hs to make this lunacat2 script launch lunacat2.
+
+runhaskell ~/bin/lunacat2.hs
+
+#in the lunacat2.hs, you can change which irc channel you want the daskeb bot to go.
