@@ -90,6 +90,7 @@ esac
 cauldren()  {
 
 ### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
+#### once the function gutting is done, remove this guff^
 
 ## cauldren is called from the install option of witchcraft2011, and leads to the various installs (installgentoo, installfuntoo, etc)
 
@@ -115,6 +116,7 @@ cauldren()  {
 # http://pastebin.com/T9Wb0GiB http://pastebin.com/ETPZ23Ja thnx to rstrcogburn.
 
 # rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
+# tho he prolly has new ones now.
 clear
 echo "ok, so you want to install some hardcore 'nix."
 echo
@@ -149,7 +151,7 @@ case $CauldrenOption in
         B|b)
                 echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
                 sleep 5
-                stage3                
+                stage3
                 ;;
         C|c) 
                 echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode." && echo "exiting to full manual mode now" && exit
