@@ -1,12 +1,17 @@
 #! /bin/bash
 
-#dev note for refunctionise branch.  "i'm gonna strip out a fuckload of the comments, and concentrate on keeping the code more concise, so it's easier to reorganise the functions, so that 
-they'll be more easilly called whenever needed through the script."
+#dev note for refunctionise branch.  
+#"im gonna
+#strip out a fuckload of the comments, 
+#and concentrate on keeping the code more concise, 
+##so its easier to reorganise the functions, 
+#so thatthey'll be more easilly called whenever needed through the script."
 
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
 ### ^ the above is now complete, and what were maaaany scripts and snippets, are all integrated into one cohesive whole... barely.  so, dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up still.
+#### but not for long.   remove ^ this ^ guff ^ once you've de-wacked the comments.
 
 #version (probably gonna keep version as "concept v0.00" until it's at least ready for a trial run.
 echo "VERSION: gentoo install test v0.00 " #oldversion#echo "VERSION: concept v0.00"
@@ -20,7 +25,7 @@ sleep 3
 #intro
 echo "Hi, \"$USER\"."
 sleep 1
-echo "welcome to the latest incarnation of the witchcraft script.  this one includes new ideas inspired by the still vapourware distro idea of \"flowchartos\""
+echo "welcome to the latest incarnation of the witchcraft script."
 
 #the plan for this script is as a wrapper for the various commands required for building a gentoo/funtoo/exherbo/witch, offering preset options to choose from, and a final option offering the ability to input your own commands or data.
 
