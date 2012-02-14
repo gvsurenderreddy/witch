@@ -255,22 +255,27 @@ case $BASEDISTRO in
         4)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the Gentoo/BSD bit"
+		cauldren
                 ;;
         5)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the Gentoo/Hurd bit"
+                cauldren
                 ;;
         6)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the FreeBSD bit"
+                cauldren
                 ;;
         7)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you're selecting which basedistro... oh well, there's no real harm in having it in here again, right?"
+                cauldren
                 ;;
         8)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "idkwtf goes here...  something, surely."
+                cauldren
                 ;;
         *)
                 echo "Valid Choices are 1,2,3,4,5,6,7,8"
