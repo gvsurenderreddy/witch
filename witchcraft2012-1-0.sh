@@ -32,14 +32,10 @@ echo "welcome to the latest incarnation of the witchcraft script."
 #for example, when selecting kernel, preset options of a handfull of kernels may be offered, 1. the latest stable from kernel.org, 2. gentoo sources, 3. zen kernel, 4. enter your own url
 #for example, for partition locations, select location for / root dir, 1. /dev/sda1, 2. enter own location
 #for examples, when selecting stage3, when selecting boot options, even offering the option to make an iso of the existing system.
+# just to give you an idea.
 
-#^ so said i originally when starting this project ^
 
-#see cauldren and rewic for the two scripts that will be reintegrated into this one.  maybe.
-
-#
-#to be begun
-#metro-idge
+#for consideration of future addition to the script: metro
 
 #
 #to be completed
@@ -48,7 +44,7 @@ echo "welcome to the latest incarnation of the witchcraft script."
 #tazlito hackage
 #and loads of little bites here n there
 
-#other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, 
+#other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, hadron, freebsd, openbsd, dragonflybsd 
 
 #############
 #############
@@ -95,8 +91,8 @@ cauldren()  {
 
 ### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
 
-### NOTE! this script was/is kinda the second option (insntall) of witchcraft2011, and it's functions have in the writing proces kinda all been usurped by the split up scripts of % installgentoo % installfuntoo % distroselectormk2~snippet, and only % rewic hasnt been stepping on it's toes because it's for the first option, the remastering bit..
-## so it comes from the install option of witchcraft2011, and leads to the various installs (installgentoo, installfuntoo, etc), (or even incorporate them all into this script)... is that how it will eventually work out (when//if/prior-to it gets all amalgamated into one heafing great big single script... which makes more sence for portabilit~  sry, rambling a novel in my scripts again.)
+## cauldren is called from the install option of witchcraft2011, and leads to the various installs (installgentoo, installfuntoo, etc)
+
 #distroselectormk2 for now.
 
 #dev notes n reminders
