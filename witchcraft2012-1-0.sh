@@ -297,7 +297,7 @@ esac
 
 installgentoo() {
 
-#this is the defaultishness-autoness-ish.  meaning this is just the first slap dash aproach to feel around n see what issues or ideas crop up from it.  writing so far, it seems like there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
+#for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
 
 #this doesnt need a comment.  it's self explanitory, surely.
 ARCH=uname -m
