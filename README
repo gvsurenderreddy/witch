@@ -1,5 +1,11 @@
 witch Linux version 0.00
 
+
+(Warning,  This will probaly most likely cause damage to your system.  It might not even run.  Not for the faint hearted.)
+(Don't you beleave me?  Im serious,  I probaly wont even run the script myself for ages to build a system!!!)
+
+(You still want to try,  Well I cant stop you)
+
 To run the witch Linux installer script simply exicute it on a command line.  
 
 	chmod +x witchcraft*.sh
