@@ -305,13 +305,14 @@ ARCH=uname -m
 # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
 PACKAGEMANAGERNAME=portage
 
-#think we should maybe leave this bit as the default editor... since that's what folks will be used to?  n stop trying to be so damn clever?  or at least give them the choice, rather than this peculiar insistance on mcedit.  ... uncomment the most sane version you can come up with...
+#editor section to be improved
 #EDITOR=mcedit
 EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
 
 #get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
 #TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
+#echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
@@ -344,9 +345,15 @@ read -p
 [ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
 
 
-#^ need to develope a more automated process for this methinks.
+
+# need to develope a more automated process for this methinks.
+
+#for refunctionise git branch, stages section would be put in their own functions, 
+#and variablised to denote any special needs per specific stages (such as the differences between exherbo and gentoo 
+stages.)
 read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
-Once the page loads and you've found a close mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
+Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be 
+stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
 ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
 [ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
 [ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
@@ -357,6 +364,7 @@ echo "unpacking your stage3."
 tar -xvjpf stage3-* 
 
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
+# also put package manager section in own function(s).  thus allowing mix-and-match between gentoo's portage, funtoo's git portage, vanilla paludis, or exherbo's paludis
 echo "Now that the stage is installed, we continue to installing Portage, the package manager."
 sleep 1
 echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
@@ -369,6 +377,7 @@ ready to download your portage (y - yes) (p - yes, with proxy support)"
 
 md5sum -c portage-latest.tar.bz2.md5sum
 
+# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own cunction (or series of functions rather)
 tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
 
 # /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
@@ -383,7 +392,8 @@ else
 cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
 fi
 
-echo "how do you wanna handle configuring your /etc/make.conf file?"
+#put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
+echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we've not chrooted into your new system yet.)"
 echo -n "
 m - manually edit
 d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
@@ -409,14 +419,24 @@ read -p
 [ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
 
-
+#might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
 echo "look at this and make sure it looks right (and then press q to continue once you've looked)"
 sleep 3
 less /mnt/$DISTRONAME/etc/make.conf
 echo "did that look right? (y/n)"
 read -p
 [ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+#remove this line if the above suggested looping gets made
+echo "well if it is not sorted as you want, you can always tweak it later."
+#might wanna consider making that able to be called any time (or specific non-borky times)
 
+
+##########################################
+##########################################
+####################      prechroot      #
+##########################################
+##########################################
+#put prechroot and wichroot sections in a function too.
 echo " copying your net connection dns stuffs to your $DISTRONAME with \"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/\""
 cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/
 
@@ -424,6 +444,8 @@ echo "TO THE CHROOT"
 sleep 1
 echo "In a few moments, we will change the Linux root towards the new location. To make sure that the new environment works properly, we need to make certain file systems available there as well."
 sleep 2
+echo "you should be running this from a clean non-borked system, if not... pray."
+sleep 1
 
 echo "mount -t proc none /mnt/$DISTRONAME/proc"
 mount -t proc none /mnt/$DISTRONAME/proc
@@ -452,6 +474,8 @@ emerge --sync --quiet
 
 # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
 
+
+#put profile selection into own function(s) too?  variablise and caseifthenesac it for the various bases and their variations (such as the number of profiles they offer)
 echo "First, a small definition is in place.
 
 A profile is a building block for any Gentoo system. Not only does it specify default values for USE, CFLAGS and other important variables, it also locks the system to a certain range of package versions. This is all maintained by the Gentoo developers.
@@ -563,10 +587,7 @@ echo "make sure the useflags look right (and then press q to continue once you'v
 sleep 3
 less /etc/make.conf
 
-echo "what would you like to do for your useflags in make.conf?
-
-
-enter letter of preference:"
+echo "what would you like to do for your useflags in make.conf?"
 
 echo "
 m - manually edit
@@ -574,7 +595,8 @@ d - dont care, do it for me, default it.  (warning, incomplete! overwrites!)
 w - wget from _____ (warning this will overwrite existing make.conf)
 c - copy from _____ (warning this will overwrite existing make.conf)
 v - vanilla - dont touch it!  leave as is now.
-u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)"
+u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
+enter letter of preference: "
 read -p
 [ "$REPLY" == "m" ] && $EDITOR /etc/make.conf
 [ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you'll probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf #
@@ -585,6 +607,7 @@ read -p
 
 #FIXME ^ default
 
+#functionise these following bits too?  i presume they're all fairly universal, n not much (if any) variation between base distros.
 echo "You will probably only use one or maybe two locales on your system. You can specify locales you will need in /etc/locale.gen
 
 e.g.
@@ -609,10 +632,10 @@ read -p
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
 [ "$REPLY" == "v" ] && echo "well that's easily done.  ... done.  locale.gen as is."
 
-echo "now running local-gen"
-local-gen
-
+echo "now running local-gen" && local-gen
 sleep 1
+
+#presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what's pre-kernel-getting and what's actually kernel-getting
 echo "now you'll likely need a kernel too"
 sleep 1
 echo "let's get your timezone sorted for that...
@@ -630,11 +653,16 @@ cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 echo "The core around which all distributions are built is the Linux kernel. It is the layer between the user programs and your system hardware. Gentoo provides its users several possible kernel sources. A full listing with description is available at http://www.gentoo.org/doc/en/gentoo-kernel.xml "
 
 sleep 3
+#see previous comment.   kernel-getting.  
+#exherbo has taught us well here... let the user choose what kernel they want. 
+#grand expanding of this section, offering:
+#genkernel, debian kernels, hurd, freebsd, vanila kernel.org kernels, hurd+mach, hurd+l4, xenkernel, etc etc etc.
+# ....there'in we'll see why digitteknohippie insist's it's called witch, before it's called witchlinux... the linux kernel need not even be present.  :)
 
 echo "so let's get on with getting you a kernel..."
 sleep 1
 echo "how would you like to get a kernel?
-g - gentoo-sources+genkernel 
+g - gentoo-sources + genkernel 
 m - manual (incomplete)
 
 select which option:   "
@@ -657,6 +685,7 @@ echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel
 
 #ls -l /usr/src/linux
 
+#put fstab section in it's own function
 echo "
 _______What is fstab?
 
@@ -713,7 +742,7 @@ read -p
 ####NETWORK####
 #___#######___#
 ###############
-############### mk2
+############### mk2  (put network mk2 in it's own function.  network mk1 can probably be deleted now, right?
 clear
 echo "you'll wanna be online too right?"
 
@@ -822,6 +851,7 @@ echo "system logger"
 clear 
 echo "system logger"
 sleep 1
+#may want/need to variablise this, n have some checks of variables to know how to proceed for each base distro's different stage3s
 echo "Some tools are missing from the stage3 archive because several packages provide the same functionality. It is now up to you to choose which ones you want to install.
 
 The first tool you need to decide on has to provide logging facilities for your system. Unix and Linux have an excellent history of logging capabilities -- if you want you can log everything that happens on your system in logfiles. This happens through the system logger.
@@ -853,6 +883,7 @@ read -p
 [ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
 [ "$REPLY" == "d" ] && echo "enter name of your choice of system logger: " read -p SYSLOGA && emerge $SYSLOGA && & rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
 
+#put crons into function(s) too
 clear
 echo "now on to command schedulers, a.k.a. cron daemons."
 
@@ -880,12 +911,15 @@ read -p
 [ "$REPLY" == "c" ] && emerge fcron && rc-update add fcron default && crontab /etc/crontab
 [ "$REPLY" == "d" ] && echo "enter name of your choice of cron: " read -p CRONNER && emerge $CRONNER && & rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
 
+#functionise
 echo "If you want to index your system's files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
 do you want locate? (y)
 "
 read -p
 [ "$REPLY" == "y" ] && emerge mlocate
 
+#functionise
+#re-write to add automation and other options?
 echo "will you need dhcp or ppp?
 d. dhcp
 p. ppp
@@ -906,6 +940,7 @@ echo -n "boo!"
 sleep 1
 clear
 
+#oh rly, not even gonna give them a choice?  there's far more than just one.  :P  ;)  FIX ME... and functionise.   bootloader section could pretty much do with a whole rewrite.
 echo "Now that your kernel is configured and compiled and the necessary system configuration files are filled in correctly, it is time to install a program that will fire up your kernel when you start the system. Such a program is called a bootloader."
 sleep 2
 echo "installing grub"
@@ -924,7 +959,7 @@ splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
 title=$DISTRONAME
 root (hd0,0)
-kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev
+kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/$ROOTDEV udev
 initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 
 # Only in case you want to dual-boot
