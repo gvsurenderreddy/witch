@@ -74,6 +74,10 @@ rewic()  {
 
 ###  let the hacking commence!
 #removed... ...devomer#
+
+#might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
+#but tazlito's rather the tits, so if we could get it to work instead, it'd be... " the tits "
+
 esac
 }
 
@@ -1015,61 +1019,20 @@ chroot /mnt/$DISTRONAME /bin/bash
 
 installfuntoo() {
 
-#! /bin/bash
-#this is the defaulishness-autoness
-
-#CAREFUL!  THIS WAS JUST A SNAPSHOT COPY OF THE installgentoo SCRIPT, NEEDS THOROUGH GOING OVER, STEP BY STEP.
-echo "#CAREFUL!  THIS WAS JUST A SNAPSHOT COPY OF THE installgentoo SCRIPT, NEEDS THOROUGH GOING OVER, STEP BY STEP."
-ARCH=uname -m
-
-# will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
-PACKAGEMANAGERNAME=portage
-
-EDITOR=mcedit
-
- if [ -d /mnt/$a ] else mkdir /mnt
-
-echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt, and use this name throughout):"
-read -n DISTRONAME
-if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
-cd /mnt/$DISTRONAME
-
-#^ need to develope a more automated process for this methinks.
-read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
-Once the page loads and you've found a close mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
-ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
-[ "$REPLY" == "p" ] && links -http-proxy proxy.server.com:8080 http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
-#this is just mucking around when i got a lil stressed n needed some whimsical relief.
-[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we'll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don't have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it's no skin off our nose if you've decided to fail.  " && sleep 3 && echo -n "and anyways... we're just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you're not still here are you?  " && sleep 3 && echo -n "look we've told you already...  " && sleep 2 && echo -n "go away, there's nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it's funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i'll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i'd be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i'll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..." && sleep 2 && echo -n " it seems there's only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the only thing keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 2 && clear && sleep 999h && exit
-
-echo "unpacking your stage3."
-tar -xvjpf stage3-* 
-
-# as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
-echo "Now that the stage is installed, we continue to installing Portage, the package manager."
-sleep 1
-echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
-in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
-
-ready to download your portage (y - yes) (p - yes, with proxy support)"
-
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
-[ "$REPLY" == "p" ] && links -http-proxy proxy.server.com:8080 http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
-
-# the proxy method there for stage and package manager, needs to get a variable aliased to a user-input proxy there.  
-# .... or just get rid of it entirely?
-
-md5sum -c portage-latest.tar.bz2.md5sum
-
-tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
-
-# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
-
-###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
-
+#section removed for re-functionising of the script.  
+#these base distro choices, will set variables which will control the shape of various options (/install sections) suited to that distro (e.g. differences of stuff included in the stage3s)
+echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what's going on, and to join in, in building the script. :)"
 }
-installexherbo() { echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the installgentoo and installfuntoo sections.  easy."
+
+installexherbo() { 
+#kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
+echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the installgentoo and installfuntoo sections.  easy."
+}
+
+installdebian() {
+#hehe.  debootstrapping's close enough to a gentoo style stage three that we aught include it too.  :)  yay.
+echo "this is another hole yet to be filled in the script.  you could consider a manual debootstrap debian install. http://www.debian-administration.org/articles/426 see?"
+#possibly out of date, but a good suggestion of a place to start for adding debian-base to this script.
 }
 
 ##########
