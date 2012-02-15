@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #dev note for refunctionise branch.  
-#"im gonna
+#"im gonna:
 #strip out a fuckload of the comments, 
 #and concentrate on keeping the code more concise, 
 ##so its easier to reorganise the functions, 
