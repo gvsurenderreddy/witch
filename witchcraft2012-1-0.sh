@@ -78,7 +78,6 @@ rewic()  {
 #might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
 #but tazlito's rather the tits, so if we could get it to work instead, it'd be... " the tits "
 
-esac
 }
 
 ##########
