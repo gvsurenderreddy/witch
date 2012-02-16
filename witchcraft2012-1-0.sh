@@ -300,7 +300,7 @@ esac
 ##########
 
 installgentoo() {
-BASEDISTRO=GENTOO
+METADISTRO=GENTOO
 #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
 
 #this doesnt need a comment.  it's self explanitory, surely.
