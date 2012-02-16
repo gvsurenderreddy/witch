@@ -64,6 +64,132 @@ echo "welcome to the latest incarnation of the witchcraft script."
 #############
 
 
+#############
+#############
+# driveprep
+
+driveprep() {
+#this is the partition preparation function.  calls of it  aught preceed the stageinstall function
+ if [ -d /mnt/$a ] else mkdir /mnt
+
+echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
+read -r DISTRONAME
+if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
+cd /mnt/$DISTRONAME
+
+echo "do you need to partition? (y/n):" && read -p
+[ "$REPLY" == "y" ] && partmanselector
+[ "$REPLY" == "n" ] && echo "ok, ready to go so..."
+
+echo "where ya putting your root dir? (e.g. sda3):"
+read -r ROOTDEV
+mount /dev/$ROOTDEV /mnt/$DISTRONAME
+
+echo "you want a separate boot right? (y):"
+read -p
+[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/boot && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+# i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
+
+echo "you want a separate home too? (y):"
+read -p
+[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+
+#here is the end of the drivepre function.
+}
+
+# driveprep
+#############
+#############
+
+#############
+#############
+# stageinstall
+
+stageinstall() {
+#for refunctionise git branch, stages section would be put in their own functions, 
+#and variablised to denote any special needs per specific stages (such as the differences between exherbo and gentoo 
+stages.)
+read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
+Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be 
+stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
+ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
+[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." 
+else ech
+o "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
+[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 
+downloaded succes
+sfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to 
+you."
+#this is just mucking around when i got a lil stressed n needed some whimsical relief.
+[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we'll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don't have all 
+day.  "
+&& sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it's no skin off our nose if you've 
+decided to f
+ail.  " && sleep 3 && echo -n "and anyways... we're just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should 
+just go st
+art this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " 
+&& sleep
+ 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you're not still here are you?  " && sleep 3 && echo -n "look we've told you already...  " && sleep 2 && echo -n "go away, there's 
+nothing t
+o see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think 
+it's fun
+ny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i'll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you 
+i'd be bac
+k.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if 
+you dont
+bog off though... i'll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && 
+sleep 2
+ && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo 
+-n "2" &
+& sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are 
+still here.
+..  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n 
+"  ..."
+&& sleep 2 && echo -n " it seems there's only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be 
+the only
+thing keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 2 && clear && sleep 999h && exit
+
+echo "unpacking your stage3."
+tar -xvjpf stage3-* 
+
+#here ends the stage install section.   simple huh?  ;D
+}
+
+# stageinstall
+#############
+#############
+
+#############
+#############
+# stage3
+
+stage3()  { 
+
+#called from second top layer in cauldren, once you select to do a proper stage3 install.
+
+#currently just calls the distroselector function, to select which route of stage3 install to use, (gentoo, funtoo, etc) and then the desktop selector
+#once the refunctionising is done, this may change.
+
+distroselector
+deskfigselector
+} 
+
+# stage3
+############
+############
+
+############
+############
+# simpleinstall
+
+#simpleinstall... see about adding a simplified install for presets.
+simpleinstall()  { echo "incomplete portion of script, sorry"
+}
+
+# simpleinstall
+############
+############
+
 ##########
 ##########
 ##########
@@ -131,48 +257,6 @@ clear
 echo "ok, so you want to install some hardcore 'nix."
 echo
 echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
-
-#simpleinstall... see about adding a simplified install for presets.
-simpleinstall()  { echo "incomplete portion of script, sorry"
-}
-
-stage3()  { 
-
-#currently just calls the distroselector function, to select which route of stage3 install to use, (gentoo, funtoo, etc) and then the desktop selector
-#once the refunctionising is done, this may change.
-
-distroselector
-deskfigselector
-} 
-
-driveprep() {
-#this is the partition preparation function.  calls of it  aught preceed the stageinstall function
- if [ -d /mnt/$a ] else mkdir /mnt
-
-echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
-read -r DISTRONAME
-if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
-cd /mnt/$DISTRONAME
-
-echo "do you need to partition? (y/n):" && read -p
-[ "$REPLY" == "y" ] && partmanselector
-[ "$REPLY" == "n" ] && echo "ok, ready to go so..."
-
-echo "where ya putting your root dir? (e.g. sda3):"
-read -r ROOTDEV
-mount /dev/$ROOTDEV /mnt/$DISTRONAME
-
-echo "you want a separate boot right? (y):"
-read -p
-[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/boot && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
-# i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
-
-echo "you want a separate home too? (y):"
-read -p
-[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
-
-#here is the end of the drivepre function.
-}
 
 #cauldren first question
 echo "what do you want to do?"
@@ -363,21 +447,8 @@ echo "will you need to use a http-proxy to access the web? (y):" && read -p
 #call the drive preparation function.
 driveprep
 
-
-#for refunctionise git branch, stages section would be put in their own functions, 
-#and variablised to denote any special needs per specific stages (such as the differences between exherbo and gentoo 
-stages.)
-read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
-Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be 
-stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
-ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
-[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
-#this is just mucking around when i got a lil stressed n needed some whimsical relief.
-[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we'll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don't have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it's no skin off our nose if you've decided to fail.  " && sleep 3 && echo -n "and anyways... we're just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you're not still here are you?  " && sleep 3 && echo -n "look we've told you already...  " && sleep 2 && echo -n "go away, there's nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it's funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i'll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i'd be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i'll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..." && sleep 2 && echo -n " it seems there's only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the only thing keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 2 && clear && sleep 999h && exit
-
-echo "unpacking your stage3."
-tar -xvjpf stage3-* 
+#call the stage installation function
+stageinstall
 
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
 # also put package manager section in own function(s).  thus allowing mix-and-match between gentoo's portage, funtoo's git portage, vanilla paludis, or exherbo's paludis
