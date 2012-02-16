@@ -7,6 +7,13 @@
 ##so its easier to reorganise the functions, 
 #so thatthey'll be more easilly called whenever needed through the script."
 
+######### REFUNCTIONISING NOTES
+######## mark start and end of function first, just to be safe n sure (measure twice, cut once)
+######## either side of the marks (on the outside of what's to be functionised), add the name of the function, as if it were being called, in place of all that text.
+######## paste the chunk of code, marker to marker, to somewhere above where it's getting called.  
+######## clean up marker comments, and continue on doing same with other refunctionings, and/or cleaning up code to be more func'y
+
+
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
@@ -980,14 +987,14 @@ chainloader +1" > /boot/grub/grub.conf
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
 
 
-
+echo "job done. your base system is installed.  now let's make it a witch. :)
 
 ##########################################
 ##########################################
 ###################       wichroot       #
 ##########################################
 ##########################################
-####       reminder: add the wichroot into
+####       the wichroot fits into
 ####                 the here-CHEOF like i
 ####                 mentioned whenst echo
 ####                 "ENTER THE CHROOT" as
@@ -995,17 +1002,22 @@ chainloader +1" > /boot/grub/grub.conf
 ####                 able to use some more
 ####                 syntax highlighting!!
 ##########################################
-########################################## ok. did that... shud b ok, from _cheof_ to _cheof_
-##########################################
+########################################## ok. did that... shud b ok, from _cheof_ to _cheof_  ... but now, we need to get all the variables passed into the chroot system too.
+##########################################  .... uhhh check the CHEOF (the chroot EOF "here" command)... isnt it missing something?
 CHEOF > /mnt/$DISTRONAME/bin/witchroot && chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash" && chroot /mnt/$DISTRONAME /bin/bash witchroot
 
+#
 sleep 1
 echo "chroot /mnt/$DISTRONAME /bin/bash"
 chroot /mnt/$DISTRONAME /bin/bash
+#^^^^^ end of witchroot function here?  or just before the chroot command?
 
 
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?
+#good, cos it should already be lined up to run, thnx to the stage3 function (as a top level option from cauldren), which calls it straight after running the distroselector function.
+#first you get run the witchcraft, thn you choose the cauldren, then you choose a proper stage3 install, then you get the distro, then you get the desktop.  ^_^  
+#... is how this path rolls.  ^_^
 
 }
 
@@ -1030,7 +1042,8 @@ echo "script section incomplete.  open your irc software and join \#witchlinux o
 installexherbo() {
 METADISTRO=EXHERBO 
 #kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
-echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the installgentoo and installfuntoo sections.  easy."
+echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the 
+installgentoo and installfuntoo sections.  easy.   ... er... or do it right, n hook it up with all the cool variables, future proofing it."
 }
 
 installdebian() {
