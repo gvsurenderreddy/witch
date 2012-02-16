@@ -3,7 +3,7 @@
 #dev note for refunctionise branch.  
 #"im gonna:
 #strip out a fuckload of the comments, 
-#and concentrate on keeping the code more concise, 
+#and concentrate on keeping the code more concise,   #[though might keep in some of the fun silly bits for now... teehee.]#
 ##so its easier to reorganise the functions, 
 #so thatthey'll be more easilly called whenever needed through the script."
 
@@ -130,7 +130,11 @@ echo "this script presumes you have already prepared your hard drive partitions,
 simpleinstall()  { echo "incomplete portion of script, sorry"
 }
 
-stage3()  { #calls the distroselector function, to select which route of stage3 install to use, (gentoo, funtoo, etc) and then the desktop selector
+stage3()  { 
+
+#currently just calls the distroselector function, to select which route of stage3 install to use, (gentoo, funtoo, etc) and then the desktop selector
+#once the refunctionising is done, this may change.
+
 distroselector
 deskfigselector
 } 
