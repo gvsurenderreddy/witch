@@ -145,7 +145,34 @@ distroselector
 deskfigselector
 } 
 
+driveprep() {
+#this is the partition preparation function.  calls of it  aught preceed the stageinstall function
+ if [ -d /mnt/$a ] else mkdir /mnt
 
+echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
+read -r DISTRONAME
+if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
+cd /mnt/$DISTRONAME
+
+echo "do you need to partition? (y/n):" && read -p
+[ "$REPLY" == "y" ] && partmanselector
+[ "$REPLY" == "n" ] && echo "ok, ready to go so..."
+
+echo "where ya putting your root dir? (e.g. sda3):"
+read -r ROOTDEV
+mount /dev/$ROOTDEV /mnt/$DISTRONAME
+
+echo "you want a separate boot right? (y):"
+read -p
+[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/boot && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+# i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
+
+echo "you want a separate home too? (y):"
+read -p
+[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+
+#here is the end of the drivepre function.
+}
 
 #cauldren first question
 echo "what do you want to do?"
@@ -333,34 +360,9 @@ EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano.
 echo "will you need to use a http-proxy to access the web? (y):" && read -p
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
+#call the drive preparation function.
+driveprep
 
- if [ -d /mnt/$a ] else mkdir /mnt
-
-echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
-read -r DISTRONAME
-if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
-cd /mnt/$DISTRONAME
-
-echo "do you need to partition? (y/n):" && read -p
-[ "$REPLY" == "y" ] && partmanselector
-[ "$REPLY" == "n" ] && echo "ok, ready to go so..."
-
-echo "where ya putting your root dir? (e.g. sda3):"
-read -r ROOTDEV
-mount /dev/$ROOTDEV /mnt/$DISTRONAME
-
-echo "you want a separate boot right? (y):"
-read -p
-[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/boot && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
-# i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
-
-echo "you want a separate home too? (y):"
-read -p
-[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
-
-
-
-# need to develope a more automated process for this methinks.
 
 #for refunctionise git branch, stages section would be put in their own functions, 
 #and variablised to denote any special needs per specific stages (such as the differences between exherbo and gentoo 
