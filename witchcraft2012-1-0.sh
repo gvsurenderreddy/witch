@@ -1018,20 +1018,20 @@ chroot /mnt/$DISTRONAME /bin/bash
 
 
 installfuntoo() {
-BASEDISTRO=FUNTOO
+METADISTRO=FUNTOO
 #section removed for re-functionising of the script.  
 #these base distro choices, will set variables which will control the shape of various options (/install sections) suited to that distro (e.g. differences of stuff included in the stage3s)
 echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what's going on, and to join in, in building the script. :)"
 }
 
 installexherbo() {
-BASEDISTRO=EXHERBO 
+METADISTRO=EXHERBO 
 #kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
 echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the installgentoo and installfuntoo sections.  easy."
 }
 
 installdebian() {
-BASEDISTRO=DEBIAN
+METADISTRO=DEBIAN
 #hehe.  debootstrapping's close enough to a gentoo style stage three that we aught include it too.  :)  yay.
 echo "this is another hole yet to be filled in the script.  you could consider a manual debootstrap debian install. http://www.debian-administration.org/articles/426 see?"
 #possibly out of date, but a good suggestion of a place to start for adding debian-base to this script.
