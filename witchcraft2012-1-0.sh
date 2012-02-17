@@ -228,345 +228,6 @@ tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
 ############
 ############
 
-
-
-
-
-
-
-
-############
-############
-# initialmakeconf
-
-initialmakeconf() {
-###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence 
-of a de
-fault for rowan witch, would make sense.
-
-#backup the original one.
-if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] 
-then
-cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup
-else 
-cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
-fi
-
-#put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
-echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we've not chrooted into your new system yet.)"
-echo -n "
-m - manually edit
-d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
-w - wget from _____
-c - copy from _____
-v - vanilla - dont touch it!
-u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
-read -p
-[ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you'll probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or 
-/mnt/$DISTRONAME/usr/sh
-are/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf 
-section in
- such a state of disrepair." > /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC 
-/mnt/$DISTRONAME
-/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-[ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
-
-echo "not quite done with your make.conf yet.  wanna select a fast mirror for portage?"
-echo -n "
-m - manually edit (feel free to 
-d - dont care, do it for me, default it with mirrorselect.
-v - vanilla - dont touch it!"
-read -p
-[ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-
-#might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
-echo "look at this and make sure it looks right (and then press q to continue once you've looked)"
-sleep 3
-less /mnt/$DISTRONAME/etc/make.conf
-echo "did that look right? (y/n)"
-read -p
-[ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-#remove this line if the above suggested looping gets made
-echo "well if it is not sorted as you want, you can always tweak it later."
-#might wanna consider making that able to be called any time (or specific non-borky times)
-
-}
-# initialmakeconf
-#############
-#############
-
-##########
-##########
-##########
-##########
-#### rewic
-##########
-##########
-##########
-##########
-
-#insert rewic here, once it's sorted out
-rewic()  {
-# NOTE! this function in the script WAS (now removed) a franken-disection-hackage gutted from tazlitoforwitchcraftextractions, which is just a copy of the earliest tazlito to have write-iso included.  it still needs much re-reading n hackage to get to work, especially across all gentoo-esq (and other) distros.    ... so i just completely removed it for now.  i think it was 1.3... er... or 2.1  or..   sometime around there it got the writeiso feature.
-#all tazlito changed to rewic, and all slitaz changed to witch.  ;)  just so you know.
-
-###  let the hacking commence!
-#removed... ...devomer#
-
-#might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
-#but tazlito's remasterer is rather the tits, so if we could get it to work instead, it'd be... " the tits "
-
-}
-
-##########
-##########
-##########
-##########
-# cauldren
-##########
-##########
-##########
-##########
-
-cauldren()  {
-
-### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
-#### once the function gutting is done, remove this guff^
-
-## cauldren is called from the install option of witchcraft2011, and leads to the various installs (installgentoo, installfuntoo, etc)
-
-#distroselectormk2 for now.
-
-#dev notes n reminders
-
-## partitions n fs
-#mountings
-#stage3
-#chroot
-#package managment
-#configure  ~~~~~~
-#kernel
-#bootloader
-#users
-#startup daemons
-#final packages, configs n post-install scripts
-#cleanup & remove stage3 tarball & remove package manager tarball
-
-#mntchrt and umntchrt
-#one builds a chroot of a folder and the other umounts it automagically
-# http://pastebin.com/T9Wb0GiB http://pastebin.com/ETPZ23Ja thnx to rstrcogburn.
-
-# rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
-# tho he prolly has new ones now.
-clear
-echo "ok, so you want to install some hardcore 'nix."
-echo
-echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
-
-#cauldren first question
-echo "what do you want to do?"
-echo "
-    A.    simple install  -  less choices, control, flexibility.  just presets.
-    B.    proper install  -  pick which metadistro, and which desktop config.
-    C.    v leet install  -  do it all yourself"
-
-read CauldrenOption
-
-case $CauldrenOption in
-        A|a)
-                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
-                sleep 5
-                simpleinstall
-                ;;
-        B|b)
-                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
-                sleep 5
-                stage3
-                ;;
-        C|c) 
-                echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode." && echo "exiting to full manual mode now" && exit
-                ;;
-          *)
-                echo "Valid Choices are A,B,C"
-                exit 1
-                ;;
-esac
-}
-
-##########
-##########
-##########
-##########
-## partman
-##########
-##########
-##########
-##########
-
-partmanselector () {
-
-echo "once you've partitioned your hard drive satasfactorilly, exit the partition manager, and the script will continue."
-echo "which partition manager do you want to use?"
-echo "
-    A.    fdisk
-    B.    gparted
-    C.    enter your own preference of partition manager"
-
-read PARTITIONER
-
-case $PARTITIONER in
-        A|a)
-                echo "Choice was $PARTITIONER. launching..."
-                sleep 5
-                fdisk
-                echo "okies, i'm still working on the bit for creating file systems after using fdisk."
-                ;;
-        B|b)
-                echo "Choice was $PARTITIONER. launching..."
-                sleep 5
-                gparted
-                ;;
-        C|c) 
-                echo "Choice was $PARTITIONER. "
-                echo "enter name of your prefered partition manager" && read -r PARTMANSEL
-                $PARTMANSEL
-                ;;
-          *)
-                echo "Valid Choices are A,B,C, try again."
-                partmanselector
-                ;;
-esac
-
-echo "partitioning complete"; }
-
-
-##########
-##########
-##########
-##########
-### distro
-##########
-##########
-##########
-##########
-
-distroselector() {
-#distroselector first question
-echo "what meta-distro do you want your witch based on?
-1) Gentoo
-2) Funtoo
-3) Exherbo
-4) Gentoo/BSD
-5) Gentoo/Hurd
-6) FreeBSD
-7) combo
-8) other
-
-enter number preference of preference:"
-
-
-read BASEDISTRO
-case $BASEDISTRO in
-        1)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this is where you get taken to the gentoo bit"
-                installgentoo
-                ;;
-        2)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this is where you get taken to the funtoo bit"
-                installfuntoo
-                ;;
-        3)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this is where you get taken to the exherbo bit"
-                installexherbo
-                ;;
-        4)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this would be where you get taken to the Gentoo/BSD bit"
-		cauldren
-                ;;
-        5)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this would be where you get taken to the Gentoo/Hurd bit"
-                cauldren
-                ;;
-        6)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this would be where you get taken to the FreeBSD bit"
-                cauldren
-                ;;
-        7)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you're selecting which basedistro... oh well, there's no real harm in having it in here again, right?"
-                cauldren
-                ;;
-        8)
-                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "idkwtf goes here...  something, surely."
-                cauldren
-                ;;
-        *)
-                echo "Valid Choices are 1,2,3,4,5,6,7,8"
-                exit 1
-                ;;
-esac
-}
-
-
-##########
-##########
-##########
-##########
-### gentoo
-##########
-##########
-##########
-##########
-
-installgentoo() {
-METADISTRO=GENTOO
-#for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
-
-#this doesnt need a comment.  it's self explanitory, surely.
-ARCH=uname -m
-
-# will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
-PACKAGEMANAGERNAME=portage
-
-#editor section to be improved
-#EDITOR=mcedit
-EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
-#echo "what is your prefered text editor?" && read -r EDITOR
-
-#get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
-#TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
-#echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
-#   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
-
-#so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
-echo "will you need to use a http-proxy to access the web? (y):" && read -p
-[ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
-
-#call the drive preparation function.
-driveprep
-
-#call the stage installation function
-stageinstall
-
-#call the package manager installation function
-installpackagemanager
-
-#call the function for initial configuration of make.conf
-initialmakeconf
-
 ############
 ############
 # initialmakeconf
@@ -582,9 +243,60 @@ else
 cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
 fi
 
+#put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
+echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we have not chrooted into your new system yet.)"
+echo -n "
+m - manually edit
+d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
+w - wget from _____
+c - copy from _____
+v - vanilla - dont touch it!
+u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
+read -p
+[ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or 
+/mnt/$DISTRONAME/usr/sh
+are/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf 
+section in
+ such a state of disrepair." > /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC 
+/mnt/$DISTRONAME
+/etc/make.conf
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
+[ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
 
-#############################3halfway
+echo "not finished with your make.conf yet.  wanna pick a fast portage-mirror? "
+echo -n "
+m - manually edit 
+d - dont care, auto-pick, default it with mirrorselect.
+v - vanilla - dont touch it."
+read -p
+[ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 
+#might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
+echo "look at this and make sure it looks right (and then press q to continue once you have looked)"
+sleep 3
+less /mnt/$DISTRONAME/etc/make.conf
+echo "did that look right? (y/n)"
+read -p
+[ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+#remove this line if the above suggested looping gets made
+echo "well if it is not sorted as you want, you can always tweak it later."
+#might wanna consider making that able to be called any time (or specific non-borky times)
+
+}
+# initialmakeconf
+#############
+#############
+
+#############
+#############
+# prechroot
+
+prechroot() {
 
 ##########################################
 ##########################################
@@ -592,12 +304,15 @@ fi
 ##########################################
 ##########################################
 #put prechroot and wichroot sections in a function too.
-echo " copying your net connection dns stuffs to your $DISTRONAME with \"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/\""
-cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/
+#variable-ise this to accomodate differences between systems
+echo " copying your net connection dns stuffs to your $DISTRONAME with
+\"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/\"" cp -L /etc/resolv.conf
+/mnt/$DISTRONAME/etc/
 
 echo "TO THE CHROOT"
 sleep 1
-echo "In a few moments, we will change the Linux root towards the new location. To make sure that the new environment works properly, we need to make certain file systems available there as well."
+echo "In a few moments, we will change the Linux root towards the new location. To make sure that the new environment works properly, we need to make certain file systems available there as 
+well."
 sleep 2
 echo "you should be running this from a clean non-borked system, if not... pray."
 sleep 1
@@ -607,6 +322,18 @@ mount -t proc none /mnt/$DISTRONAME/proc
 echo "mount --rbind /dev /mnt/$DISTRONAME/dev"
 mount --rbind /dev /mnt/$DISTRONAME/dev
 
+}
+
+# prechroot
+#############
+#############
+
+
+############
+############
+# wichroot
+
+wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
 echo << CHEOF 
 ##########################################
@@ -1128,7 +855,7 @@ chainloader +1" > /boot/grub/grub.conf
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
 
 
-echo "job done. your base system is installed.  now let's make it a witch. :)
+echo "job done. your base system is installed.  now let's make it a witch. :)"
 
 ##########################################
 ##########################################
@@ -1152,7 +879,291 @@ sleep 1
 echo "chroot /mnt/$DISTRONAME /bin/bash"
 chroot /mnt/$DISTRONAME /bin/bash
 #^^^^^ end of witchroot function here?  or just before the chroot command?
+#going for just after, for now.
 
+
+#uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice?
+
+}
+
+# wichroot
+############
+############
+
+
+
+
+##########
+##########
+##########
+##########
+#### rewic
+##########
+##########
+##########
+##########
+
+#insert rewic here, once it's sorted out
+rewic()  {
+# NOTE! this function in the script WAS (now removed) a franken-disection-hackage gutted from tazlitoforwitchcraftextractions, which is just a copy of the earliest tazlito to have write-iso included.  it still needs much re-reading n hackage to get to work, especially across all gentoo-esq (and other) distros.    ... so i just completely removed it for now.  i think it was 1.3... er... or 2.1  or..   sometime around there it got the writeiso feature.
+#all tazlito changed to rewic, and all slitaz changed to witch.  ;)  just so you know.
+
+###  let the hacking commence!
+#removed... ...devomer#
+
+#might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
+#but tazlito's remasterer is rather the tits, so if we could get it to work instead, it'd be... " the tits "
+
+}
+
+##########
+##########
+##########
+##########
+# cauldren
+##########
+##########
+##########
+##########
+
+cauldren()  {
+
+### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
+#### once the function gutting is done, remove this guff^
+
+## cauldren is called from the install option of witchcraft2011, and leads to the various installs (installgentoo, installfuntoo, etc)
+
+#distroselectormk2 for now.
+
+#dev notes n reminders
+
+## partitions n fs
+#mountings
+#stage3
+#chroot
+#package managment
+#configure  ~~~~~~
+#kernel
+#bootloader
+#users
+#startup daemons
+#final packages, configs n post-install scripts
+#cleanup & remove stage3 tarball & remove package manager tarball
+
+#mntchrt and umntchrt
+#one builds a chroot of a folder and the other umounts it automagically
+# http://pastebin.com/T9Wb0GiB http://pastebin.com/ETPZ23Ja thnx to rstrcogburn.
+
+# rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
+# tho he prolly has new ones now.
+clear
+echo "ok, so you want to install some hardcore 'nix."
+echo
+echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
+
+#cauldren first question
+echo "what do you want to do?"
+echo "
+    A.    simple install  -  less choices, control, flexibility.  just presets.
+    B.    proper install  -  pick which metadistro, and which desktop config.
+    C.    v leet install  -  do it all yourself"
+
+read CauldrenOption
+
+case $CauldrenOption in
+        A|a)
+                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+                sleep 5
+                simpleinstall
+                ;;
+        B|b)
+                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+                sleep 5
+                stage3
+                ;;
+        C|c) 
+                echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode." && echo "exiting to full manual mode now" && exit
+                ;;
+          *)
+                echo "Valid Choices are A,B,C"
+                exit 1
+                ;;
+esac
+}
+
+##########
+##########
+##########
+##########
+## partman
+##########
+##########
+##########
+##########
+
+partmanselector () {
+
+echo "once you've partitioned your hard drive satasfactorilly, exit the partition manager, and the script will continue."
+echo "which partition manager do you want to use?"
+echo "
+    A.    fdisk
+    B.    gparted
+    C.    enter your own preference of partition manager"
+
+read PARTITIONER
+
+case $PARTITIONER in
+        A|a)
+                echo "Choice was $PARTITIONER. launching..."
+                sleep 5
+                fdisk
+                echo "okies, i'm still working on the bit for creating file systems after using fdisk."
+                ;;
+        B|b)
+                echo "Choice was $PARTITIONER. launching..."
+                sleep 5
+                gparted
+                ;;
+        C|c) 
+                echo "Choice was $PARTITIONER. "
+                echo "enter name of your prefered partition manager" && read -r PARTMANSEL
+                $PARTMANSEL
+                ;;
+          *)
+                echo "Valid Choices are A,B,C, try again."
+                partmanselector
+                ;;
+esac
+
+echo "partitioning complete"; }
+
+
+##########
+##########
+##########
+##########
+### distro
+##########
+##########
+##########
+##########
+
+distroselector() {
+#distroselector first question
+echo "what meta-distro do you want your witch based on?
+1) Gentoo
+2) Funtoo
+3) Exherbo
+4) Gentoo/BSD
+5) Gentoo/Hurd
+6) FreeBSD
+7) combo
+8) other
+
+enter number preference of preference:"
+
+
+read BASEDISTRO
+case $BASEDISTRO in
+        1)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the gentoo bit"
+                installgentoo
+                ;;
+        2)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the funtoo bit"
+                installfuntoo
+                ;;
+        3)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the exherbo bit"
+                installexherbo
+                ;;
+        4)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the Gentoo/BSD bit"
+		cauldren
+                ;;
+        5)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the Gentoo/Hurd bit"
+                cauldren
+                ;;
+        6)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the FreeBSD bit"
+                cauldren
+                ;;
+        7)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you're selecting which basedistro... oh well, there's no real harm in having it in here again, right?"
+                cauldren
+                ;;
+        8)
+                echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+                echo "idkwtf goes here...  something, surely."
+                cauldren
+                ;;
+        *)
+                echo "Valid Choices are 1,2,3,4,5,6,7,8"
+                exit 1
+                ;;
+esac
+}
+
+
+##########
+##########
+##########
+##########
+### gentoo
+##########
+##########
+##########
+##########
+
+installgentoo() {
+METADISTRO=GENTOO
+#for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
+
+#this doesnt need a comment.  it's self explanitory, surely.
+ARCH=uname -m
+
+# will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
+PACKAGEMANAGERNAME=portage
+
+#editor section to be improved
+#EDITOR=mcedit
+EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
+#echo "what is your prefered text editor?" && read -r EDITOR
+
+#get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
+#TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
+#echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
+#   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
+
+#so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
+echo "will you need to use a http-proxy to access the web? (y):" && read -p
+[ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
+
+#call the drive preparation function.
+driveprep
+
+#call the stage installation function
+stageinstall
+
+#call the package manager installation function
+installpackagemanager
+
+#call the function for initial configuration of make.conf
+initialmakeconf
+
+#call the preparation for chroot
+prechroot
+
+#call the wichroot
+wichroot
 
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?
