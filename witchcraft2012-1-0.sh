@@ -51,7 +51,7 @@ echo "welcome to the latest incarnation of the witchcraft script."
 #tazlito hackage
 #and loads of little bites here n there
 
-#other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, hadron, freebsd, openbsd, dragonflybsd 
+#other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, hadron, freebsd, openbsd, dragonflybsd, stali
 
 #############
 #############
@@ -64,12 +64,13 @@ echo "welcome to the latest incarnation of the witchcraft script."
 #############
 
 
+
 #############
 #############
 # driveprep
 
 driveprep() {
-#this is the partition preparation function.  calls of it  aught preceed the stageinstall function
+#this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
  if [ -d /mnt/$a ] else mkdir /mnt
 
 echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
@@ -106,9 +107,8 @@ read -p
 # stageinstall
 
 stageinstall() {
-#for refunctionise git branch, stages section would be put in their own functions, 
-#and variablised to denote any special needs per specific stages (such as the differences between exherbo and gentoo 
-stages.)
+ 
+#variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
 Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be 
 stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
@@ -190,6 +190,117 @@ simpleinstall()  { echo "incomplete portion of script, sorry"
 ############
 ############
 
+
+############
+############
+# installpackagemanager
+
+installpackagemanger() {
+
+# as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
+# also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
+echo "Now that the stage is installed, we continue to installing Portage, the package manager."
+sleep 1
+echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
+in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
+
+ready to download your portage (y - yes) (p - yes, with proxy support)"
+
+[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] then echo "excellent you seem to have got your package manager 
+($PACKAGEMAN
+AGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] then echo "excellent you seem to have got your 
+package mana
+ger ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  
+...unle
+ss u know better" 
+
+md5sum -c portage-latest.tar.bz2.md5sum
+
+# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own cunction (or series of functions rather)
+tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
+
+# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
+
+}
+
+# installpackagemanager
+############
+############
+
+
+
+
+
+
+
+
+############
+############
+# initialmakeconf
+
+initialmakeconf() {
+###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence 
+of a de
+fault for rowan witch, would make sense.
+
+#backup the original one.
+if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] 
+then
+cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup
+else 
+cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
+fi
+
+#put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
+echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we've not chrooted into your new system yet.)"
+echo -n "
+m - manually edit
+d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
+w - wget from _____
+c - copy from _____
+v - vanilla - dont touch it!
+u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
+read -p
+[ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you'll probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or 
+/mnt/$DISTRONAME/usr/sh
+are/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf 
+section in
+ such a state of disrepair." > /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC 
+/mnt/$DISTRONAME
+/etc/make.conf
+[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
+[ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
+
+echo "not quite done with your make.conf yet.  wanna select a fast mirror for portage?"
+echo -n "
+m - manually edit (feel free to 
+d - dont care, do it for me, default it with mirrorselect.
+v - vanilla - dont touch it!"
+read -p
+[ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
+[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
+
+#might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
+echo "look at this and make sure it looks right (and then press q to continue once you've looked)"
+sleep 3
+less /mnt/$DISTRONAME/etc/make.conf
+echo "did that look right? (y/n)"
+read -p
+[ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+#remove this line if the above suggested looping gets made
+echo "well if it is not sorted as you want, you can always tweak it later."
+#might wanna consider making that able to be called any time (or specific non-borky times)
+
+}
+# initialmakeconf
+#############
+#############
+
 ##########
 ##########
 ##########
@@ -202,14 +313,14 @@ simpleinstall()  { echo "incomplete portion of script, sorry"
 
 #insert rewic here, once it's sorted out
 rewic()  {
-# NOTE! this function in the script was a franken-disection-hackage gutted from tazlitoforwitchcraftextractions, which is just a copy of the earliest tazlito to have write-iso included.  it still needs much re-reading n hackage to get to work, especially across all gentoo-esq (and other) distros.    ... so i just completely removed it for now.  i think it was 1.3... er... or 2.1  or..   sometime around there it got the writeiso feature.
+# NOTE! this function in the script WAS (now removed) a franken-disection-hackage gutted from tazlitoforwitchcraftextractions, which is just a copy of the earliest tazlito to have write-iso included.  it still needs much re-reading n hackage to get to work, especially across all gentoo-esq (and other) distros.    ... so i just completely removed it for now.  i think it was 1.3... er... or 2.1  or..   sometime around there it got the writeiso feature.
 #all tazlito changed to rewic, and all slitaz changed to witch.  ;)  just so you know.
 
 ###  let the hacking commence!
 #removed... ...devomer#
 
 #might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
-#but tazlito's rather the tits, so if we could get it to work instead, it'd be... " the tits "
+#but tazlito's remasterer is rather the tits, so if we could get it to work instead, it'd be... " the tits "
 
 }
 
@@ -450,25 +561,17 @@ driveprep
 #call the stage installation function
 stageinstall
 
-# as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
-# also put package manager section in own function(s).  thus allowing mix-and-match between gentoo's portage, funtoo's git portage, vanilla paludis, or exherbo's paludis
-echo "Now that the stage is installed, we continue to installing Portage, the package manager."
-sleep 1
-echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
-in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
+#call the package manager installation function
+installpackagemanager
 
-ready to download your portage (y - yes) (p - yes, with proxy support)"
+#call the function for initial configuration of make.conf
+initialmakeconf
 
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
-[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+############
+############
+# initialmakeconf
 
-md5sum -c portage-latest.tar.bz2.md5sum
-
-# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own cunction (or series of functions rather)
-tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
-
-# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
-
+initialmakeconf() {
 ###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
 
 #backup the original one.
@@ -479,43 +582,8 @@ else
 cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
 fi
 
-#put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
-echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we've not chrooted into your new system yet.)"
-echo -n "
-m - manually edit
-d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
-w - wget from _____
-c - copy from _____
-v - vanilla - dont touch it!
-u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
-read -p
-[ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you'll probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-[ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
 
-echo "not quite done with your make.conf yet.  wanna select a fast mirror for portage?"
-echo -n "
-m - manually edit (feel free to 
-d - dont care, do it for me, default it with mirrorselect.
-v - vanilla - dont touch it!"
-read -p
-[ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-
-#might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
-echo "look at this and make sure it looks right (and then press q to continue once you've looked)"
-sleep 3
-less /mnt/$DISTRONAME/etc/make.conf
-echo "did that look right? (y/n)"
-read -p
-[ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-#remove this line if the above suggested looping gets made
-echo "well if it is not sorted as you want, you can always tweak it later."
-#might wanna consider making that able to be called any time (or specific non-borky times)
+#############################3halfway
 
 
 ##########################################
