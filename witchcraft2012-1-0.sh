@@ -292,6 +292,27 @@ echo "well if it is not sorted as you want, you can always tweak it later."
 #############
 #############
 
+
+##########################################
+##########################################
+# DEVNOTE 
+#prechroot and whichroot
+# prechroot is put in it's own function.  that's nice.
+# wichroot however...  
+# here's the problem, as it is, it wont work.  why?  the variables already set, wont exist in the chrooted environment.
+# suggestions for how to get around this...
+#    write variables to a file, then they'll be available from within the chrooted environment too... not quite sure how to then get them into action as variables set in the script.  might write them out to a script to be run in this one, or write it to the wichroot cheof script that runs the chroot bit.
+#    somehow directly pipe them into action again in this script, without having to write a file... somehow.
+#    
+# besides all that... aught the CHEOF also get cunked into variables too?
+#
+#
+# here's an idea....writeable chunks, so that the CHEOF it'self gets broken up, likely into lots of little CHEOFF addendums, not just into variables.   such an idea... i might branch again to try that, n then merge back into refunctionise branch, before completing all the refunctionising, 
+#   ... yeah.. no reason that shouldnt work, right?  does it over complicate the script?   well, yeah, no sorta.  it's more work, but it could potentially really augment the script's flexibility.  could even then offer the user fine-tuning of what they want to include in what they'll be offered doing in the chrootidge...   .... or is that silly redundance, since all sections are offered as options anyway (well, most are) ?    * mutch head scratching and chin rubbing. *
+
+
+
+
 #############
 #############
 # prechroot
@@ -332,6 +353,9 @@ mount --rbind /dev /mnt/$DISTRONAME/dev
 ############
 ############
 # wichroot
+
+
+################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run.
 
 wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
@@ -1295,3 +1319,19 @@ case $WITCHCRAFTMODE in
                 ;;
 esac
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# cool, now this script is leet.
