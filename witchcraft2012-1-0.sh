@@ -1,4 +1,5 @@
 #! /bin/bash
+#written by digit.  most ambitious project yet.
 
 #dev note for refunctionise branch.  
 #"im gonna:
@@ -6,19 +7,20 @@
 #and concentrate on keeping the code more concise,   #[though might keep in some of the fun silly bits for now... teehee.]#
 ##so its easier to reorganise the functions, 
 #so thatthey'll be more easilly called whenever needed through the script."
+### update, this is largely done, and i just want to look over it a few more times before considering merging back to main.  i'm sure it could be broken up even more.  i imagine once i do merge back to main, i'll immediately fork again and make another branch, likely called, revariablise, where stage3 selections will set up a variable which will alter outcomes and options later on, within the same sections [i mean so there's not a complete re-write of the script each time a new distro is added] [...  i know what i'm talking about even if it doesnt seem like it since i lack the lingo.  hehe.] this will be a bit of fun doing that.  woot. ~ digit.
 
 ######### REFUNCTIONISING NOTES
 ######## mark start and end of function first, just to be safe n sure (measure twice, cut once)
 ######## either side of the marks (on the outside of what's to be functionised), add the name of the function, as if it were being called, in place of all that text.
 ######## paste the chunk of code, marker to marker, to somewhere above where it's getting called.  
 ######## clean up marker comments, and continue on doing same with other refunctionings, and/or cleaning up code to be more func'y
-
+###see update comment above.  this shiz is near enough all done... i think.   at least for now.  always room for more refunctionising later.
 
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
-### ^ the above is now complete, and what were maaaany scripts and snippets, are all integrated into one cohesive whole... barely.  so, dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up still.
-#### but not for long.   remove ^ this ^ guff ^ once you've de-wacked the comments.
+### dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up some more still.
+# will remove this guff when the comments n shiz r cleaned up of those redundant or irelevent or outdated or just guff...
 
 #version (probably gonna keep version as "concept v0.00" until it's at least ready for a trial run.
 echo "VERSION: gentoo install test v0.00 " #oldversion#echo "VERSION: concept v0.00"
@@ -109,13 +111,12 @@ read -p
 stageinstall() {
  
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-read -p "now press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.
-Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be 
-stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser.
+read -p "now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named 
+after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
 ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
 [ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." 
-else ech
-o "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
+else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
 [ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 
 downloaded succes
 sfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to 
@@ -183,6 +184,7 @@ deskfigselector
 # simpleinstall
 
 #simpleinstall... see about adding a simplified install for presets.
+#one way to consider for this, add a variable that would permit stage3 install, and just automatically select all the defaults as much as is possible.
 simpleinstall()  { echo "incomplete portion of script, sorry"
 }
 
