@@ -111,11 +111,11 @@ read -p
 stageinstall() {
  
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-read -p "now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+read -p "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
 Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
 ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
 [ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." 
-else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you."
+else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3
 [ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] then echo "excellent you seem to have got your stage3 downloaded successfully." else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to 
 you."
 #this is just mucking around when i got a lil stressed n needed some whimsical relief.
@@ -348,7 +348,7 @@ source /etc/profile
 echo "export PS1=\"($DISTRONAME chroot) $PS1\""
 export PS1="($DISTRONAME chroot) $PS1"
 
-echo "making sure $DISTRONAME's portage tree is up to date with \"emerge --sync\" quietly.  may take a few minutes..."
+echo "making sure $DISTRONAME's portage tree is up to date with \"emerge --sync\" quietly.  may take several minutes..."
 
 emerge --sync --quiet
 
@@ -363,6 +363,7 @@ A profile is a building block for any Gentoo system. Not only does it specify de
 Previously, such a profile was untouched by the users. However, there may be certain situations in which you may decide a profile change is necessary.
 
 You can see what profile you are currently using (the one with an asterisk next to it)"
+
 eselect profile list
 
 echo "pick a number of profile you'd like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
@@ -1111,7 +1112,7 @@ case $BASEDISTRO in
                 cauldren
                 ;;
         *)
-                echo "Valid Choices are 1,2,3,4,5,6,7,8"
+                echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
                 exit 1
                 ;;
 esac
@@ -1149,7 +1150,7 @@ EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano.
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
-echo "will you need to use a http-proxy to access the web? (y):" && read -p
+echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read -p
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
 #call the drive preparation function.
