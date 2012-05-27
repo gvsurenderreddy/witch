@@ -1,5 +1,5 @@
 #! /bin/bash
-#written by digit.  most ambitious project yet.
+#written by digit.  most ambitious project yet. see http://github.com/Digit/witch for more
 
 #dev note for refunctionise branch.  
 #"im gonna:
@@ -361,12 +361,13 @@ mount --rbind /dev /mnt/$DISTRONAME/dev
 
 wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
-echo << CHEOF 
+cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF 
 ##########################################
 ##########################################
 ###################       wichroot       #
 ##########################################
 ##########################################
+#! /bin/bash
 
 echo "creating a new environment using env-update, which essentially creates environment variables, then loading those variables into memory using source."
 echo "env-update"
@@ -898,7 +899,12 @@ echo "job done. your base system is installed.  now let's make it a witch. :)"
 ##########################################
 ########################################## ok. did that... shud b ok, from _cheof_ to _cheof_  ... but now, we need to get all the variables passed into the chroot system too.
 ##########################################  .... uhhh check the CHEOF (the chroot EOF "here" command)... isnt it missing something?
-CHEOF > /mnt/$DISTRONAME/bin/witchroot && chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash" && chroot /mnt/$DISTRONAME /bin/bash witchroot
+CHEOF
+
+# && 
+chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash" && chroot /mnt/$DISTRONAME /bin/bash witchroot
+
+#warning! MAY WANT TO RE-TRIPLE-CHECK THAT^ since i moved the "here" command around a bit.  frankensteinings. did orgiginally have that line^ andand'd to the chroot directly.
 
 #
 sleep 1
@@ -909,6 +915,8 @@ chroot /mnt/$DISTRONAME /bin/bash
 
 
 #uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice?
+
+#or rather... need to get it so that the stuff in the CHEOFings, that gets put in witchroot script, gets initiated once you've chrooted...  but then, how do you tell it to execute that...   .... ah.   the issue remains. prolly better do as i said at the start of this chrootings, and get the gist of the basics from: http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ and stop freaking out over it.
 
 }
 
@@ -953,7 +961,7 @@ rewic()  {
 ##########
 
 cauldren()  {
-
+}
 ### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
 #### once the function gutting is done, remove this guff^
 
@@ -1320,14 +1328,6 @@ case $WITCHCRAFTMODE in
                 exit 1
                 ;;
 esac
-
-
-
-
-
-
-
-
 
 
 
