@@ -170,23 +170,17 @@ simpleinstall()  { echo "incomplete portion of script, sorry" && cauldren
 
 installpackagemanger() {
 
-# as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.
+# as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely wil warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
-echo "Now that the stage is installed, we continue to installing Portage, the package manager."
+echo "Now that the stage is installed, we continue to installing Portage, the package manager.  READ CAREFULLY:"
 sleep 1
 echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
 
 ready to download your portage (y - yes) (p - yes, with proxy support)"
 
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] then echo "excellent you seem to have got your package manager 
-($PACKAGEMAN
-AGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
-[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] then echo "excellent you seem to have got your 
-package mana
-ger ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  
-...unle
-ss u know better" 
+[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
 
 md5sum -c portage-latest.tar.bz2.md5sum
 
