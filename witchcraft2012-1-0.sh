@@ -178,7 +178,7 @@ in the snapshots directory, download the latest Portage snapshot (portage-latest
 
 ready to download your portage (y - yes) (p - yes, with proxy support)"
 
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/($PACKAGEMANAGERNAME)* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
 [ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
 
 md5sum -c portage-latest.tar.bz2.md5sum
