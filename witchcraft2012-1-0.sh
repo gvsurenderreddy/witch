@@ -924,7 +924,7 @@ echo "rewic, the iso remastery stuff has been gutted from this version while we 
 ##########
 
 cauldren()  {
-}
+
 ### dev note... should really gut out ALL functions, so no functions are defined within a function.  ... it'd make it much cleaner... and probably make it work.
 #### once the function gutting is done, remove this guff^
 
@@ -985,7 +985,7 @@ case $CauldrenOption in
                 echo "Valid Choices are A,B,C"
                 exit 1
                 ;;
-esac
+esac ;
 }
 
 ##########
