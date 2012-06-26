@@ -1125,7 +1125,7 @@ METADISTRO=GENTOO
 #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
 
 #this doesnt need a comment.  it's self explanitory, surely.
-ARCH=uname -m
+ARCH="uname -m"
 
 # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
 PACKAGEMANAGERNAME=portage
