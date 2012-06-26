@@ -1215,39 +1215,44 @@ echo "this is another hole yet to be filled in the script.  you could consider a
 
 deskfigselector() {
 
-#! /bin/bash
-echo "what do you want your witch based on? (warning options are incomplete)"
-select SPINTOP in \
-    'VanillaBase (no gui desktop)' \
-    'rowan (anti-bloat tiling lightweight) ' \
-    'willow (like rowan, but more lax on bloat, for comfort)' \
-    'jamella (tiling wm showcase)' \
-    'select own desktop&applications set (enter link to script)' \
-    'semi-manual suggestion list' \
-    'full manual (like VanillaBase, but able to write a command)' \
-    'other  (idfk)' \
-do
-    case $REPLY in
-        1 ) echo "ok, doing nothing here then, as is, bare $BASE" ;;
-        2 ) echo "good choice, a minimal but complete & useable desktop configuration."
-            echo "INSERT ROWAN SET INSTALLATION HERE emerges and configurations";;
-        3 ) echo "good choice, a lightweight but complete & useable desktop configuration." 
-            echo "INSERT WILLOW APP INSTALLATION HERE emerges and configurations";;
-        4 ) echo "good choice, a showcase of all tiling window managers... " 
-            echo "INSERT TILING WM INSTALLATION HERE emerges and configurations"
-            echo "INSERT TILING WM (non-repo)SOURCE INSTALLATIONS OPTION HERE and configurations"
-            echo "INSERT OPTION TO INSTALL ROWAN OR WILLOW OTHER APPS TOO emerges and configurations";;
-        5 ) echo "INSERT INSTRUCTIONS AND \"read\" USER INPUT PROMPT FOR LOCATION OF OWN INSTALL SCRIPT" ;;
-        6 ) echo "INSERT APP GROUP BY APP GROUP APPLICATION MULTIPLE CHOICE" ;;
-        7 ) echo "INSERT ABILITY TO ENTER ONE COMMAND (OR STRING OF COMMANDS) TO INSTALL DESIRED APPLICATIONS" ;;
-        8 ) echo "and idk what would go here, this is still just a dummy mock up while laying it all out." ;;
-        * ) print 'invalid.' ;;
-    esac
-    if [[ -n $SPINTOP ]]; then
-        echo "you have selected \"$SPINTOP\""
-        break
-    fi
-done
+echo "deskfigselector is temporarily out of order while fixing main install"
+
+#decomment when bringing deskfigselection back into comission.  ~ may also wanna change from stupid "select" style question, to a regular read, like tried n tested above.
+
+#echo "what do you want your witch based on? (warning options are incomplete)"
+#select SPINTOP in \
+#    'VanillaBase (no gui desktop)' \
+#    'rowan (anti-bloat tiling lightweight) ' \
+#    'willow (like rowan, but more lax on bloat, for comfort)' \
+#    'jamella (tiling wm showcase)' \
+#    'select own desktop&applications set (enter link to script)' \
+#    'semi-manual suggestion list' \
+#    'full manual (like VanillaBase, but able to write a command)' \
+#    'other  (idfk)' \
+#do
+#    case $REPLY in #or is that $REPLY sposa b $SPINTOP, no?  it baulked errors like that.
+#        1 ) echo "ok, doing nothing here then, as is, bare $BASE" ;;
+#        2 ) echo "good choice, a minimal but complete & useable desktop configuration."
+#            echo "INSERT ROWAN SET INSTALLATION HERE emerges and configurations";;
+#        3 ) echo "good choice, a lightweight but complete & useable desktop configuration." 
+#            echo "INSERT WILLOW APP INSTALLATION HERE emerges and configurations";;
+#        4 ) echo "good choice, a showcase of all tiling window managers... " 
+#            echo "INSERT TILING WM INSTALLATION HERE emerges and configurations"
+#            echo "INSERT TILING WM (non-repo)SOURCE INSTALLATIONS OPTION HERE and configurations"
+#            echo "INSERT OPTION TO INSTALL ROWAN OR WILLOW OTHER APPS TOO emerges and configurations";;
+#        5 ) echo "INSERT INSTRUCTIONS AND \"read\" USER INPUT PROMPT FOR LOCATION OF OWN INSTALL SCRIPT" ;;
+#        6 ) echo "INSERT APP GROUP BY APP GROUP APPLICATION MULTIPLE CHOICE" ;;
+#        7 ) echo "INSERT ABILITY TO ENTER ONE COMMAND (OR STRING OF COMMANDS) TO INSTALL DESIRED APPLICATIONS" ;;
+#        8 ) echo "and idk what would go here, this is still just a dummy mock up while laying it all out." ;;
+#        * ) print 'invalid.' ;;
+#    esac ; 
+#    if [[ -n $SPINTOP ]]; then
+#        echo "you have selected \"$SPINTOP\""
+#        break
+#    fi
+#done
+
+echo "sorry no deskfig selection yet" ; 
 }
 
 # FIXME ^ 
