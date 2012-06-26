@@ -1,6 +1,8 @@
 #! /bin/bash
 #written by digit.  most ambitious project yet. see http://github.com/Digit/witch for more
 
+#DEV NOTE: change the "links" commands, to reflect any browser (text or gui) the user wants.  systemrescuecd doesnt seem to have either links nor lynx!  :O  shocker.
+
 #dev note for refunctionise branch.  
 #"im gonna:
 #strip out a fuckload of the comments, 
@@ -115,9 +117,10 @@ echo drive prep complete;
 stageinstall() {
  
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-read -p "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
 Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
 ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
+read
 [ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3 ; fi
 [ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you." && stage3 ; fi
 #this is just mucking around when i got a lil stressed n needed some whimsical relief.
