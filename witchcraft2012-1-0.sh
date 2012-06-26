@@ -96,7 +96,10 @@ read
 
 echo "you want a separate home too? (y):"
 read
+[ "$REPLY" == "n" ] && echo "ok your home partition will just be lumped in with root, like the stupid people use."
+[ "$REPLY" != "y" ] && echo "i think you've gone wrong ~ should probably start this section again, and go hack the script to ask this section more sensibly, in more functions, so it can loop around back to the same question when you answer wrong... you could go badger digit to sort that if you are too scared to learn how."
 [ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
+
 
 echo drive prep complete;
 }
