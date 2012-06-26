@@ -1141,7 +1141,7 @@ EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano.
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
-echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read -p
+echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
 #call the drive preparation function.
