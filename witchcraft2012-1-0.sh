@@ -67,20 +67,21 @@ echo "welcome to the latest incarnation of the witchcraft script."
 
 
 
-#############
+############
 #############
 # driveprep
 
 driveprep() {
 #this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
- if [ -d /mnt/$a ] else mkdir /mnt
+if [ ! -d /mnt/$a ]; then mkdir /mnt ; fi
 
 echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
 read -r DISTRONAME
-if [ -d /mnt/$DISTRONAME/$a ] else mkdir /mnt/$DISTRONAME
+if [ ! -d /mnt/$DISTRONAME/$a ]; then mkdir /mnt/$DISTRONAME ; fi
+
 cd /mnt/$DISTRONAME
 
-echo "do you need to partition? (y/n):" && read -p
+echo "do you need to partition? (y/n):" && read
 [ "$REPLY" == "y" ] && partmanselector #calls the partition manager selection function "partmanselector"
 [ "$REPLY" == "n" ] && echo "ok, ready to go so..."
 
@@ -89,15 +90,15 @@ read -r ROOTDEV
 mount /dev/$ROOTDEV /mnt/$DISTRONAME
 
 echo "you want a separate boot right? (y):"
-read -p
+read
 [ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/boot && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
 # i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
 
 echo "you want a separate home too? (y):"
-read -p
-[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+read
+[ "$REPLY" == "y" ] && mkdir /mnt/$DISTRONAME/home && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
 
-#here is the end of the drivepre function.
+echo drive prep complete;
 }
 
 # driveprep
@@ -221,15 +222,9 @@ v - vanilla - dont touch it!
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
 read -p
 [ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or 
-/mnt/$DISTRONAME/usr/sh
-are/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf 
-section in
- such a state of disrepair." > /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." | tee /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC 
-/mnt/$DISTRONAME
-/etc/make.conf
+[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 [ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
 
@@ -268,7 +263,7 @@ echo "well if it is not sorted as you want, you can always tweak it later."
 # wichroot however...  
 # here's the problem, as it is, it wont work.  why?  the variables already set, wont exist in the chrooted environment.
 # suggestions for how to get around this...
-#    write variables to a file, then they'll be available from within the chrooted environment too... not quite sure how to then get them into action as variables set in the script.  might write them out to a script to be run in this one, or write it to the wichroot cheof script that runs the chroot bit.
+#    write variables to a file, then they'll be available from within the chrooted environment too... not quite sure how to then get them into action as variables set in the script.  might write them out to a script to be run in this one, or write it to the wichroot cheof script that runs the chroot bit (no that's insane).
 #    somehow directly pipe them into action again in this script, without having to write a file... somehow.
 #    
 # besides all that... aught the CHEOF also get cunked into variables too?
@@ -302,7 +297,7 @@ sleep 1
 echo "In a few moments, we will change the Linux root towards the new location. To make sure that the new environment works properly, we need to make certain file systems available there as 
 well."
 sleep 2
-echo "you should be running this from a clean non-borked system, if not... pray."
+echo "you should be running this from a clean non-borked system (systemrescuecd is a good choice), if not... pray."
 sleep 1
 
 echo "mount -t proc none /mnt/$DISTRONAME/proc"
@@ -322,7 +317,7 @@ mount --rbind /dev /mnt/$DISTRONAME/dev
 # wichroot
 
 
-################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run.
+################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!
 
 wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
@@ -850,6 +845,10 @@ chainloader +1" > /boot/grub/grub.conf
 
 echo "job done. your base system is installed.  now let's make it a witch. :)"
 
+#one very important final thought:
+exit
+# ;D  see, that was rather important, right?  ^_^
+
 ##########################################
 ##########################################
 ###################       wichroot       #
@@ -872,15 +871,15 @@ chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/ba
 
 #warning! MAY WANT TO RE-TRIPLE-CHECK THAT^ since i moved the "here" command around a bit.  frankensteinings. did orgiginally have that line^ andand'd to the chroot directly.
 
-#
-sleep 1
-echo "chroot /mnt/$DISTRONAME /bin/bash"
-chroot /mnt/$DISTRONAME /bin/bash
+#oops, left this part in there... dont want to enter the chroot twice!
+#sleep 1
+#echo "chroot /mnt/$DISTRONAME /bin/bash"
+#chroot /mnt/$DISTRONAME /bin/bash
 #^^^^^ end of witchroot function here?  or just before the chroot command?
 #going for just after, for now.
 
 
-#uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice?
+#uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice? yes, it was.  i think i sorted that now by commenting out that second one broken up over lines.  ... now srsly, we're gonna hafta clean up all this mucky excessive commenting.  oh well, at least it's keeping your head straight.
 
 #or rather... need to get it so that the stuff in the CHEOFings, that gets put in witchroot script, gets initiated once you've chrooted...  but then, how do you tell it to execute that...   .... ah.   the issue remains. prolly better do as i said at the start of this chrootings, and get the gist of the basics from: http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ and stop freaking out over it.
 
