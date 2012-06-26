@@ -75,7 +75,7 @@ driveprep() {
 #this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
 if [ ! -d /mnt/$a ]; then mkdir /mnt ; fi
 
-echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt.):"
+echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt/___.):"
 read -r DISTRONAME
 if [ ! -d /mnt/$DISTRONAME/$a ]; then mkdir /mnt/$DISTRONAME ; fi
 
