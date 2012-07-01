@@ -247,7 +247,7 @@ read -p
 [ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
 #remove this line if the above suggested looping gets made
 echo "well if it is not sorted as you want, you can always tweak it later."
-#might wanna consider making that able to be called any time (or specific non-borky times)
+#might wanna consider making that able to be called any time (or at least specific non-borky times)
 sleep 1 ;
 }
 # initialmakeconf
@@ -867,7 +867,7 @@ exit
 CHEOF
 
 # && 
-chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash" && chroot /mnt/$DISTRONAME /bin/bash witchroot
+chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash citchroot" && sleep 1 && chroot /mnt/$DISTRONAME /bin/bash witchroot
 
 #warning! MAY WANT TO RE-TRIPLE-CHECK THAT^ since i moved the "here" command around a bit.  frankensteinings. did orgiginally have that line^ andand'd to the chroot directly.
 
@@ -882,7 +882,7 @@ chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/ba
 #uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice? yes, it was.  i think i sorted that now by commenting out that second one broken up over lines.  ... now srsly, we're gonna hafta clean up all this mucky excessive commenting.  oh well, at least it's keeping your head straight.
 
 #or rather... need to get it so that the stuff in the CHEOFings, that gets put in witchroot script, gets initiated once you've chrooted...  but then, how do you tell it to execute that...   .... ah.   the issue remains. prolly better do as i said at the start of this chrootings, and get the gist of the basics from: http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ and stop freaking out over it.
-
+sleep 1 ;
 }
 
 # wichroot
@@ -956,6 +956,7 @@ cauldren()  {
 # rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
 # tho he prolly has new ones now.
 clear
+sleep 1 
 echo "ok, so you want to install some hardcore 'nix."
 echo
 echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
@@ -1108,7 +1109,7 @@ case $BASEDISTRO in
                 echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
                 exit 1
                 ;;
-esac
+esac ;
 }
 
 
@@ -1189,6 +1190,7 @@ METADISTRO=FUNTOO
 #these base distro choices, will set variables which will control the shape of various options (/install sections) suited to that distro (e.g. differences of stuff included in the stage3s)
 #this will be really cool simple additions in some places, like if metadistro = funtoo then diddle-de-dee ~ maybe.  not rly decided on which route to take with sorting out for the multi-distro bases.
 echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what's going on, and to join in, in building the script. :)"
+;
 }
 
 installexherbo() {
@@ -1196,6 +1198,7 @@ METADISTRO=EXHERBO
 #kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
 echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the 
 installgentoo and installfuntoo sections.  easy.   ... er... or do it right, n hook it up with all the cool variables, future proofing it."
+;
 }
 
 installdebian() {
@@ -1203,6 +1206,7 @@ METADISTRO=DEBIAN
 #hehe.  debootstrapping's close enough to a gentoo style stage three that we aught include it too.  :)  yay.
 echo "this is another hole yet to be filled in the script.  you could consider a manual debootstrap debian install. http://www.debian-administration.org/articles/426 see?"
 #possibly out of date, but a good suggestion of a place to start for adding debian-base to this script.
+;
 }
 
 ##########
