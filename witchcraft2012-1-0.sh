@@ -37,6 +37,7 @@ sleep 3
 echo "Hi, \"$USER\"."
 sleep 1
 echo "welcome to the latest incarnation of the witchcraft script."
+sleep 1
 
 #the plan for this script is as a wrapper for the various commands required for building a gentoo/funtoo/exherbo/witch, offering preset options to choose from, and a final option offering the ability to input your own commands or data.
 
@@ -88,7 +89,7 @@ echo "do you need to partition? (y/n):" && read
 [ "$REPLY" == "n" ] && echo "ok, ready to go so..."
 
 echo "where ya putting your root dir? (e.g. sda3):"
-read -r ROOTDEV
+read -r RbOOTDEV
 mount /dev/$ROOTDEV /mnt/$DISTRONAME
 
 echo "you want a separate boot right? (y):"
@@ -161,7 +162,7 @@ deskfigselector
 
 #simpleinstall... see about adding a simplified install for presets.
 #one way to consider for this, add a variable that would permit stage3 install, and just automatically select all the defaults as much as is possible.
-simpleinstall()  { echo "incomplete portion of script, sorry" && cauldren
+simpleinstall()  { echo "incomplete portion of script, sorry" && sleep 2 && cauldren;
 }
 
 # simpleinstall
@@ -178,7 +179,7 @@ installpackagemanger() {
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely wil warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
 echo "Now that the stage is installed, we continue to installing Portage, the package manager.  READ CAREFULLY:"
-sleep 1
+sleep 2
 echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
 
@@ -189,7 +190,7 @@ ready to download your portage (y - yes) (p - yes, with proxy support)"
 
 md5sum -c portage-latest.tar.bz2.md5sum
 
-# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own cunction (or series of functions rather)
+# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
 tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
 
 # /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
@@ -208,12 +209,7 @@ initialmakeconf() {
 ###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
 
 #backup the original one.
-if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] 
-then
-cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup
-else 
-cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
-fi
+if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] ; then cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup ; else cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ; fi ;
 
 #put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
 echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we have not chrooted into your new system yet.)"
@@ -252,7 +248,7 @@ read -p
 #remove this line if the above suggested looping gets made
 echo "well if it is not sorted as you want, you can always tweak it later."
 #might wanna consider making that able to be called any time (or specific non-borky times)
-
+sleep 1 ;
 }
 # initialmakeconf
 #############
