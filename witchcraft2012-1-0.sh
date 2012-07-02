@@ -104,7 +104,7 @@ read
 [ "$REPLY" == "y" ] && if [ ! -d /mnt/$DISTRONAME/home/$a ]; then mkdir /mnt/$DISTRONAME/home ; fi && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
 
 
-echo drive prep complete;
+echo "drive prep complete" && sleep 1;
 }
 
 # driveprep
