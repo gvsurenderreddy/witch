@@ -221,7 +221,7 @@ w - wget from _____
 c - copy from _____
 v - vanilla - dont touch it!
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
-read -p
+read
 [ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." | tee /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
