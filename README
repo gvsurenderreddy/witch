@@ -21,7 +21,7 @@ or
 Until witchcraft gets out of alpha, you may want to do this in a virtual machine running systemrescuecd or another gentoo-based live distro (or other distro even).
 
 iso remastery has been removed for a complete re-write.
-only the proper gentoo install section is written so far. (will go through a second refunctionising and revariablising to accomodate funtoo, exherbo etc with greater ease, later, once we suss the 
+only the proper gentoo install section is written so far. (will go through a second refunctionising and revariablising to accomodate funtoo, exherbo etc with greater ease, later, once we suss the chroot issue, and get working installs out of it)
 
 ~~~~~~~~~~~~~~~~~~~~
 
