@@ -174,7 +174,7 @@ simpleinstall()  { echo "incomplete portion of script, sorry" && sleep 2 && caul
 ############
 # installpackagemanager
 
-installpackagemanger() {
+installpackagemanager() {
 
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely wil warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
@@ -210,6 +210,7 @@ initialmakeconf() {
 
 #backup the original one.
 if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] ; then cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup ; else cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ; fi ;
+echo "made backup make.conf" && sleep 1
 
 #put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
 echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we have not chrooted into your new system yet.)"
