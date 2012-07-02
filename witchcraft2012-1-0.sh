@@ -89,7 +89,7 @@ echo "do you need to partition? (y/n):" && read
 [ "$REPLY" == "n" ] && echo "ok, ready to go so..."
 
 echo "where ya putting your root dir? (e.g. sda3):"
-read -r RbOOTDEV
+read -r ROOTDEV
 mount /dev/$ROOTDEV /mnt/$DISTRONAME
 
 echo "you want a separate boot right? (y):"
