@@ -1190,7 +1190,7 @@ METADISTRO=FUNTOO
 #these base distro choices, will set variables which will control the shape of various options (/install sections) suited to that distro (e.g. differences of stuff included in the stage3s)
 #this will be really cool simple additions in some places, like if metadistro = funtoo then diddle-de-dee ~ maybe.  not rly decided on which route to take with sorting out for the multi-distro bases.
 echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what's going on, and to join in, in building the script. :)"
-;
+
 }
 
 installexherbo() {
@@ -1198,7 +1198,7 @@ METADISTRO=EXHERBO
 #kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
 echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the 
 installgentoo and installfuntoo sections.  easy.   ... er... or do it right, n hook it up with all the cool variables, future proofing it."
-;
+
 }
 
 installdebian() {
@@ -1206,7 +1206,7 @@ METADISTRO=DEBIAN
 #hehe.  debootstrapping's close enough to a gentoo style stage three that we aught include it too.  :)  yay.
 echo "this is another hole yet to be filled in the script.  you could consider a manual debootstrap debian install. http://www.debian-administration.org/articles/426 see?"
 #possibly out of date, but a good suggestion of a place to start for adding debian-base to this script.
-;
+
 }
 
 ##########
@@ -1258,7 +1258,7 @@ echo "deskfigselector is temporarily out of order while fixing main install"
 #    fi
 #done
 
-echo "sorry no deskfig selection yet" ; 
+echo "sorry no deskfig selection yet"
 }
 
 # FIXME ^ 
