@@ -116,6 +116,9 @@ echo drive prep complete;
 # stageinstall
 
 stageinstall() {
+
+#added this line, just to be sure.
+cd /mnt/$DISTRONAME
  
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
