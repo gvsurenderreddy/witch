@@ -234,7 +234,7 @@ echo -n "
 m - manually edit 
 d - dont care, auto-pick, default it with mirrorselect.
 v - vanilla - dont touch it."
-read -p
+read
 [ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
@@ -244,7 +244,7 @@ echo "look at this and make sure it looks right (and then press q to continue on
 sleep 3
 less /mnt/$DISTRONAME/etc/make.conf
 echo "did that look right? (y/n)"
-read -p
+read
 [ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
 #remove this line if the above suggested looping gets made
 echo "well if it is not sorted as you want, you can always tweak it later."
@@ -468,7 +468,7 @@ c - copy from _____ (warning this will overwrite existing make.conf)
 v - vanilla - dont touch it!  leave as is now.
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
 enter letter of preference: "
-read -p
+read
 [ "$REPLY" == "m" ] && $EDITOR /etc/make.conf
 [ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you'll probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/make.conf
@@ -496,7 +496,7 @@ w - wget from _____ (warning this will overwrite existing locale.gen)
 c - copy from _____ (warning this will overwrite existing locale.gen)
 v - vanilla - dont touch it!  leave as is now.
 "
-read -p
+read
 [ "$REPLY" == "m" ] && $EDITOR /etc/locale.gen
 [ "$REPLY" == "d" ] && echo "looks like the locale.gen default hasnt been made yet.  you'll probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/locale.gen
@@ -537,7 +537,7 @@ g - gentoo-sources + genkernel
 m - manual (incomplete)
 
 select which option:   "
-read -p 
+read
 [ "$REPLY" == "g" ] && emerge gentoo-sources && emerge genkernel && genkernel all && ls /boot/kernel* /boot/initramfs* > kernelandinitinfo
 [ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you'll have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
 
@@ -580,7 +580,7 @@ m - manual         (opens in editor)
 s - skip           (manual later)
 g - guided         (warning incomplete)
 select which option:   "
-read -p 
+read
 [ "$REPLY" == "m" ] && echo "manual editing /etc/fstab selected" && $EDITOR /etc/fstab
 [ "$REPLY" == "s" ] && echo "skipping..."
 [ "$REPLY" == "g" ] && echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
@@ -625,7 +625,7 @@ w - wget from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 v - vanilla - dont touch it!  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/hostname)"
-read -p
+read
 [ "$REPLY" == "m" ] && echo "ok, to $EDITOR /etc/conf.d/hostname" && $EDITOR /etc/conf.d/hostname
 [ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
@@ -646,7 +646,7 @@ w - wget from _____ (warning this will overwrite existing /etc/conf.d/net)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/net)
 v - RECOMMENDED: vanilla - dont touch it!  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/net)"
-read -p
+read
 [ "$REPLY" == "m" ] && $EDITOR /etc/conf.d/net
 [ "$REPLY" == "d" ] && echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/net
@@ -657,11 +657,11 @@ read -p
 ENTER HOSTNAME:" && read -p DOMNOM && echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
 
 echo "u wanna use dhcp right? y/n:  "
-read -p
+read
 [ "$REPLY" == "y" ] && echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
 
 echo "and u want to have networking activated at boot automatically for you, of course, right? y/n:  "
-read -p
+read
 [ "$REPLY" == "y" ] && echo "ok.. " && echo "cd /etc/init.d" && cd /etc/init.d && echo "ln -s net.lo net.eth0" && ln -s net.lo net.eth0 && echo "this next bit is clever.  you should learn about rc-update.  a nice feature of gentoo." && echo "rc-update add net.eth0 default" && rc-update add net.eth0 default
 
 echo "If you have several network interfaces, you need to create the appropriate net.eth1, net.eth2 etc. just like you did with net.eth0."
@@ -673,7 +673,7 @@ echo "127.0.0.1     $HOSTNOM.$DOMNOM $HOSTNOM localhost" > /etc/hosts
 
 #PCMCIA section.
 echo "do you need PCMCIA? y/n:  "
-read -p
+read
 [ "$REPLY" == "y" ] && emerge pcmciautils
 
 
@@ -691,7 +691,7 @@ echo "that should be your root password configured.  dont forget it, remember it
 
 echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :)"
 sleep 2
-read -p
+read
 [ "$REPLY" == "y" ] && $EDITOR /etc/rc.conf
 
 clear
@@ -702,12 +702,12 @@ sleep 1
 echo "Take special care with the keymap variable! If you select the wrong keymap, you will get weird results when typing on your keyboard!"
 sleep 1
 echo " do you need to change your keymap? "
-read -p
+read
 [ "$REPLY" == "y" ] && $EDITOR etc/conf.d/keymaps
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs.
 wanna change time?"
-read -p
+read
 [ "$REPLY" == "y" ] && $EDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
 clear
@@ -748,7 +748,7 @@ e. no thnx (only if you're sure)
 
 select a,b,c or d and press ENTER.
 "
-read -p
+read
 [ "$REPLY" == "a" ] && emerge syslogd && rc-update add syslogd default
 [ "$REPLY" == "b" ] && emerge syslog-ng && rc-update add syslog-ng default
 [ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
@@ -776,7 +776,7 @@ d. enter name of other cron
 e. no cron (r u sure?)
 
 "
-read -p
+read
 [ "$REPLY" == "a" ] && emerge vixie-cron && rc-update add vixie-cron default
 [ "$REPLY" == "b" ] && emerge dcron && rc-update add dcron default && crontab /etc/crontab
 [ "$REPLY" == "c" ] && emerge fcron && rc-update add fcron default && crontab /etc/crontab
@@ -786,7 +786,7 @@ read -p
 echo "If you want to index your system's files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
 do you want locate? (y)
 "
-read -p
+read
 [ "$REPLY" == "y" ] && emerge mlocate
 
 #functionise
@@ -797,7 +797,7 @@ p. ppp
 b. both
 q. neither
 "
-read -p
+read
 
 [ "$REPLY" == "d" ] && emerge phcpd
 [ "$REPLY" == "d" ] && emerge ppp
