@@ -194,7 +194,7 @@ ready to download your portage (y - yes) (p - yes, with proxy support)"
 md5sum -c portage-latest.tar.bz2.md5sum
 
 # this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
-tar -xvjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/gentoo/usr
+tar -xjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 
 # /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
 
@@ -239,7 +239,7 @@ d - dont care, auto-pick, default it with mirrorselect.
 v - vanilla - dont touch it."
 read
 [ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf && mirrorselect -i -o >> /mnt/gentoo/etc/make.conf
+[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 
 #might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
