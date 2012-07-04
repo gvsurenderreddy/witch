@@ -129,14 +129,23 @@ cd /mnt/$DISTRONAME
 #                                                           
 #here's the rebrowserising of witchcraft.  cross fingers it doesnt get messy.
 #
+#
+
+echo "this can use browsers to download vital parts (and les vital parts too)"
+echo "which browser would you like to use? (make sure you have it available to use)"
+sleep 1
+echo "enter the name of your chosen browser now:"
+read -p IBROWSER
+echo "great, you have decided to use \"$IBROWSER\""
+
 
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
 Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
-ready to do find your stage3? (y - yes) (p - yes, with proxy support)"
+ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3 ; fi
-[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you." && stage3 ; fi
+[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3 ; fi
+[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you." && stage3 ; fi
 #this is just mucking around when i got a lil stressed n needed some whimsical relief.
 [ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we'll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don't have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it's no skin off our nose if you've decided to fail.  " && sleep 3 && echo -n "and anyways... we're just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you're not still here are you?  " && sleep 3 && echo -n "look we've told you already...  " && sleep 2 && echo -n "go away, there's nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it's funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i'll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i'd be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be here though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i'll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..."&& sleep 2 && echo -n " it seems there's only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the onlything keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 3 && clear && sleep 999h && exit
 
@@ -193,13 +202,13 @@ installpackagemanager() {
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
 echo "Now that the stage is installed, we continue to installing Portage, the package manager.  READ CAREFULLY:"
 sleep 2
-echo "Press y to use \"links\" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
+echo "Press y to use \" $IBROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q.
 
 ready to download your portage (y - yes) (p - yes, with proxy support)"
 
-[ "$REPLY" == "y" ] && links http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
-[ "$REPLY" == "p" ] && links -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
 
 md5sum -c portage-latest.tar.bz2.md5sum
 
@@ -1161,7 +1170,7 @@ EDITOR=mcedit
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 clear
-echo "so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
+echo "so when you use $IBROWSER to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
 echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
