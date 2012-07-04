@@ -295,19 +295,21 @@ prechroot() {
 echo " copying your net connection dns stuffs to your $DISTRONAME with
 \"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/resolv.conf\"" cp -L /etc/resolv.conf
 /mnt/$DISTRONAME/etc/resolv.conf
-
+sleep 2
 echo "TO THE CHROOT"
 sleep 1
 echo "In a few moments, we will change the Linux root towards the new location. To make sure that the new environment works properly, we need to make certain file systems available there as 
 well."
-sleep 2
+sleep 7
 echo "you should be running this from a clean non-borked system (systemrescuecd is a good choice), if not... pray."
-sleep 1
+sleep 3
 
 echo "mount -t proc none /mnt/$DISTRONAME/proc"
 mount -t proc none /mnt/$DISTRONAME/proc
+sleep 1
 echo "mount --rbind /dev /mnt/$DISTRONAME/dev"
 mount --rbind /dev /mnt/$DISTRONAME/dev
+sleep 1
 
 }
 
@@ -325,6 +327,7 @@ mount --rbind /dev /mnt/$DISTRONAME/dev
 
 wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
+sleep 1
 cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF 
 ##########################################
 ##########################################
@@ -1147,7 +1150,8 @@ EDITOR=mcedit
 #echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
-#so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it.
+clear
+echo "so when you use links to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
 echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
