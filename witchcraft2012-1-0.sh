@@ -119,7 +119,17 @@ stageinstall() {
 
 #added this line, just to be sure.
 cd /mnt/$DISTRONAME
- 
+
+###############
+#          _                                     _          
+# _ __ ___| |__  _ __ _____      _____  ___ _ __(_)___  ___ 
+#| '__/ _ \ '_ \| '__/ _ \ \ /\ / / __|/ _ \ '__| / __|/ _ \
+#| | |  __/ |_) | | | (_) \ V  V /\__ \  __/ |  | \__ \  __/
+#|_|  \___|_.__/|_|  \___/ \_/\_/ |___/\___|_|  |_|___/\___|
+#                                                           
+#here's the rebrowserising of witchcraft.  cross fingers it doesnt get messy.
+#
+
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"links\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
 Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
