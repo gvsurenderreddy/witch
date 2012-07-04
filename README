@@ -15,6 +15,54 @@ or
 
 	sh witchcraft*.sh
 	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%   tester help sugestion tip thingy   %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+to test the witchcraft script's gentoo instalation:
+first, you'll need to:
+download the systemrescuecd
+download & install virtualbox
+    launch virtualbox
+        create a new linux gentoo machine,
+            give it as much ram as you think is healthy for your computer to handle virtualising,
+            and a reasonably large virtual hd  (idk how small is safe)
+        set virtualbox's cd drive to have the systemrescuecd's iso file in it
+        start the new virtual machine
+        wait for systemrescuecd to finish booting, then type startx, and hit enter.
+            open midori, go get the witchcraft script. 
+                https://raw.github.com/Digit/witch/master/witchcraft2012-1-0.sh
+                    ^ probably the right branch, check with digit in #witchlinux
+            copy n paste that into a file somewhere in "$PATH"
+                (i.e. /bin/witchcraft is good)
+            make it executable
+                (chmod +x /bin/witchcraft)
+            ~~~for a temporary workaround until next fix,
+               do "ln -s /usr/bin/midori /usr/bin/links"
+            then run it
+                (i.e just type witchcraft into the terminal and hit enter).
+                follow the steps,
+                heed the warnings,
+                take great care to enter everything correctly.
+                but feel safe, knowing this is just a virtual machine.
+                to test the script portion that's being worked on:
+                    first question: answer b
+                    second question: answer b again
+                    third question: answer 1
+                    i'll let you figure out the rest from there.
+                or feel free to explore other paths in the script, 
+                    but be prepared for disapointment, and messages of incomplete
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%
+%%
+%
+
 
    ~alpha notes ~
 ~~~~~~~~~~~~~~~~~~~~
