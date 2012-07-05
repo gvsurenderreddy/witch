@@ -119,8 +119,7 @@ cd /mnt/$DISTRONAME
 echo "witchcraft can use browsers to download vital parts (and less vital parts too)"
 echo "which browser would you like to use? (make sure you have it available to use)"
 sleep 1
-echo "enter the name of your chosen browser now:"
-read -p IBROWSER
+read -p "enter the name of your chosen browser now:" IBROWSER
 echo "great, you have decided to use \"$IBROWSER\""
 
 
