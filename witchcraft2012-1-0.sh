@@ -129,9 +129,11 @@ cd /mnt/$DISTRONAME
 #                                                           
 #here's the rebrowserising of witchcraft.  cross fingers it doesnt get messy.
 #
-#
+#copied from digit's witchnotes.
+#change the browser bit.  at least extend the explanation, or re-word to something like, "download the .tar.bz2 stage3 file apropriate for your architechture, to /mnt/$DISTRONAME/" and then add a "are you ready to proceed? (have you got the stage3 in your distro-to-be's root dir?)" and perhaps even altering it, since i already have a check in place, change what happens upon that check failing, so that it gives the user time to arrange that to make sure it is there... perhaps even advising/educating on ways to do that (like explaining how with tty n wget or cp etc).
 
-echo "this can use browsers to download vital parts (and les vital parts too)"
+
+echo "witchcraft can use browsers to download vital parts (and less vital parts too)"
 echo "which browser would you like to use? (make sure you have it available to use)"
 sleep 1
 echo "enter the name of your chosen browser now:"
