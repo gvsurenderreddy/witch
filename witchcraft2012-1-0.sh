@@ -122,10 +122,9 @@ sleep 1
 read -p "enter the name of your chosen browser now:" IBROWSER
 echo "great, you have decided to use \"$IBROWSER\""
 
-
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-echo "READ INSTRUCTIONS CAREFULLY - now press y to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
-Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). Select one and press D to download. This may take some time.  When it has finished, press Q to quit the browser. 
+echo "READ INSTRUCTIONS CAREFULLY ~ here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/ ~ press y to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume. 
 ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
 [ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3 ; fi
@@ -641,8 +640,7 @@ read
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
 [ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
 [ "$REPLY" == "e" ] && echo "whadya call this computer (what is your hostname)?
-- this will be set in /etc/conf.d/hostname
-ENTER HOSTNAME:" && read -p HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
+- this will be set in /etc/conf.d/hostname" && read -p "ENTER HOSTNAME:" HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
 
 # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we'll need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i'm just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
@@ -661,9 +659,8 @@ read
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/net
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/net
 [ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-[ "$REPLY" == "e" ] && echo "whadya call this computer (what is your net)?
-- this will be set in /etc/conf.d/net
-ENTER HOSTNAME:" && read -p DOMNOM && echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
+[ "$REPLY" == "e" ] && echo "whadya call this network (what is your net)?
+- this will be set in /etc/conf.d/net" && read -p "ENTER DOMAIN NAME:" DOMNOM && echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
 
 echo "u wanna use dhcp right? y/n:  "
 read
@@ -761,12 +758,11 @@ read
 [ "$REPLY" == "a" ] && emerge syslogd && rc-update add syslogd default
 [ "$REPLY" == "b" ] && emerge syslog-ng && rc-update add syslog-ng default
 [ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
-[ "$REPLY" == "d" ] && echo "enter name of your choice of system logger: " read -p SYSLOGA && emerge $SYSLOGA && & rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
+[ "$REPLY" == "d" ] && read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && & rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
 
 #put crons into function(s) too
 clear
 echo "now on to command schedulers, a.k.a. cron daemons."
-
 
 echo "Although it is optional and not required for your system, it is wise to install one. But what is a cron daemon? A cron daemon executes scheduled commands. It is very handy if you need to execute some command regularly (for instance daily, weekly or monthly).
 
@@ -789,7 +785,7 @@ read
 [ "$REPLY" == "a" ] && emerge vixie-cron && rc-update add vixie-cron default
 [ "$REPLY" == "b" ] && emerge dcron && rc-update add dcron default && crontab /etc/crontab
 [ "$REPLY" == "c" ] && emerge fcron && rc-update add fcron default && crontab /etc/crontab
-[ "$REPLY" == "d" ] && echo "enter name of your choice of cron: " read -p CRONNER && emerge $CRONNER && & rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
+[ "$REPLY" == "d" ] && read -p  "enter name of your choice of cron: " CRONNER && emerge $CRONNER && & rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
 
 #functionise
 echo "If you want to index your system's files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
