@@ -1,23 +1,6 @@
 #! /bin/bash
 #written by digit.  most ambitious project yet. see http://github.com/Digit/witch for more
 
-#DEV NOTE: change the "links" commands, to reflect any browser (text or gui) the user wants.  systemrescuecd doesnt seem to have either links nor lynx!  :O  shocker.
-
-#dev note for refunctionise branch.  
-#"im gonna:
-#strip out a fuckload of the comments, 
-#and concentrate on keeping the code more concise,   #[though might keep in some of the fun silly bits for now... teehee.]#
-##so its easier to reorganise the functions, 
-#so thatthey'll be more easilly called whenever needed through the script."
-### update, this is largely done, and i just want to look over it a few more times before considering merging back to main.  i'm sure it could be broken up even more.  i imagine once i do merge back to main, i'll immediately fork again and make another branch, likely called, revariablise, where stage3 selections will set up a variable which will alter outcomes and options later on, within the same sections [i mean so there's not a complete re-write of the script each time a new distro is added] [...  i know what i'm talking about even if it doesnt seem like it since i lack the lingo.  hehe.] this will be a bit of fun doing that.  woot. ~ digit.
-
-######### REFUNCTIONISING NOTES
-######## mark start and end of function first, just to be safe n sure (measure twice, cut once)
-######## either side of the marks (on the outside of what's to be functionised), add the name of the function, as if it were being called, in place of all that text.
-######## paste the chunk of code, marker to marker, to somewhere above where it's getting called.  
-######## clean up marker comments, and continue on doing same with other refunctionings, and/or cleaning up code to be more func'y
-###see update comment above.  this shiz is near enough all done... i think.   at least for now.  always room for more refunctionising later.
-
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
@@ -1332,19 +1315,6 @@ case $WITCHCRAFTMODE in
                 exit 1
                 ;;
 esac
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
