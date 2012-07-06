@@ -1141,6 +1141,7 @@ PACKAGEMANAGERNAME=portage
 
 ###editor section to be improved
 EDITOR=mcedit
+echo "setting editor to $EDITOR" && sleep 1
 #EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
 
@@ -1149,8 +1150,7 @@ EDITOR=mcedit
 #echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
-clear
-echo "so when you use $IBROWSER to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
+echo "so when you use your browser to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
 echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read
 [ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
 
@@ -1310,6 +1310,11 @@ case $WITCHCRAFTMODE in
                 exit 1
                 ;;
 esac
+
+
+
+
+
 
 
 
