@@ -354,11 +354,12 @@ echo "source /etc/profile"
 source /etc/profile
 echo "export PS1=\"($DISTRONAME chroot) $PS1\""
 export PS1="($DISTRONAME chroot) $PS1"
-
+sleep 1
 echo "making sure $DISTRONAME's portage tree is up to date with \"emerge --sync\" quietly.  may take several minutes..."
 
 emerge --sync --quiet
 
+echo "portage up to date." && sleep 1
 # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
 
 
@@ -370,7 +371,7 @@ A profile is a building block for any Gentoo system. Not only does it specify de
 Previously, such a profile was untouched by the users. However, there may be certain situations in which you may decide a profile change is necessary.
 
 You can see what profile you are currently using (the one with an asterisk next to it)"
-
+echo "eselect profile list"
 eselect profile list
 
 echo "pick a number of profile you'd like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
@@ -380,83 +381,83 @@ echo "
 read PROFILESELECT
 
 case $PROFILESELECT in
-        A|a)
+        a)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 1"
                 sleep 1
                 eselect profile set 1
                 ;;
-        B|b)
+        b)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 2"
                 sleep 1
                 eselect profile set 2
                 ;;
-        C|c)
+        c)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 3"
                 sleep 1
                 eselect profile set 3
                 ;;
-        D|d)
+        d)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 4"
                 sleep 1
                 eselect profile set 4
                 ;;
-        E|e)
+        e)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 5"
                 sleep 1
                 eselect profile set 5
                 ;;
-        F|f)
+        f)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 6"
                 sleep 1
                 eselect profile set 6
                 ;;
-        G|g)
+        g)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 7"
                 sleep 1
                 eselect profile set 7
                 ;;
-        H|h)
+        h)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 8"
                 sleep 1
                 eselect profile set 8
                 ;;
-        I|i)
+        i)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 9"
                 sleep 1
                 eselect profile set 9
                 ;;
-        J|j)
+        j)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 10"
                 sleep 1
                 eselect profile set 10
                 ;;
-        K|k)
+        k)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 11"
                 sleep 1
                 eselect profile set 11
                 ;;
-        L|l)
+        l)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 12"
                 sleep 1
                 eselect profile set 12
                 ;;
-        M|m)
+        m)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 13"
                 sleep 1
                 eselect profile set 13
                 ;;
-        N|n)
+        n)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 14"
                 sleep 1
                 eselect profile set 14
                 ;;
-        O|o)
+        o)
                 echo "Choice was $PROFILESELECT. doing: eselect profile set 15"
                 sleep 1
                 eselect profile set 15
                 ;;
-          *)
-                echo "Valid Choices are A,B,C,D,E,F,G,H,I,J,K,L,M,N,O"
+        *)
+                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you've gone wrong."
                 exit 1
                 ;;
 esac
