@@ -1141,7 +1141,7 @@ PACKAGEMANAGERNAME=portage
 
 ###editor section to be improved
 EDITOR=mcedit
-echo "setting editor to $EDITOR" && sleep 1
+echo "setting editor to $EDITOR " && sleep 1
 #EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
 
