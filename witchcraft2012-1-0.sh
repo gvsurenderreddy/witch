@@ -378,88 +378,103 @@ echo "
     a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9, j=10, k=11, l=12, m=13, n=14, o=15"
 
 read PROFILESELECT
+[ "$REPLY" == "a" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 1
+[ "$REPLY" == "b" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 2
+[ "$REPLY" == "c" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 3
+[ "$REPLY" == "d" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 4
+[ "$REPLY" == "e" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 5
+[ "$REPLY" == "f" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 6
+[ "$REPLY" == "g" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 7
+[ "$REPLY" == "h" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 8
+[ "$REPLY" == "i" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 9
+[ "$REPLY" == "j" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 10
+[ "$REPLY" == "k" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 11
+[ "$REPLY" == "l" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 12
+[ "$REPLY" == "m" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 13
+[ "$REPLY" == "n" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 14
+[ "$REPLY" == "o" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 15
 
-case $PROFILESELECT in
-        a)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 1"
-                sleep 1
-                eselect profile set 1
-                ;;
-        b)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 2"
-                sleep 1
-                eselect profile set 2
-                ;;
-        c)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 3"
-                sleep 1
-                eselect profile set 3
-                ;;
-        d)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 4"
-                sleep 1
-                eselect profile set 4
-                ;;
-        e)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 5"
-                sleep 1
-                eselect profile set 5
-                ;;
-        f)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 6"
-                sleep 1
-                eselect profile set 6
-                ;;
-        g)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 7"
-                sleep 1
-                eselect profile set 7
-                ;;
-        h)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 8"
-                sleep 1
-                eselect profile set 8
-                ;;
-        i)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 9"
-                sleep 1
-                eselect profile set 9
-                ;;
-        j)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 10"
-                sleep 1
-                eselect profile set 10
-                ;;
-        k)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 11"
-                sleep 1
-                eselect profile set 11
-                ;;
-        l)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 12"
-                sleep 1
-                eselect profile set 12
-                ;;
-        m)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 13"
-                sleep 1
-                eselect profile set 13
-                ;;
-        n)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 14"
-                sleep 1
-                eselect profile set 14
-                ;;
-        o)
-                echo "Choice was $PROFILESELECT. doing: eselect profile set 15"
-                sleep 1
-                eselect profile set 15
-                ;;
-        *)
-                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you've gone wrong."
-                exit 1
-                ;;
-esac
+#case $PROFILESELECT in
+#        a)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 1"
+#                sleep 1
+#                eselect profile set 1
+#                ;;
+#        b)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 2"
+#                sleep 1
+#                eselect profile set 2
+#                ;;
+#        c)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 3"
+#                sleep 1
+#                eselect profile set 3
+#                ;;
+#        d)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 4"
+#                sleep 1
+#                eselect profile set 4
+#                ;;
+#        e)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 5"
+#                sleep 1
+#                eselect profile set 5
+#                ;;
+#        f)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 6"
+#                sleep 1
+#                eselect profile set 6
+#                ;;
+#        g)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 7"
+#                sleep 1
+#                eselect profile set 7
+#                ;;
+#        h)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 8"
+#                sleep 1
+#                eselect profile set 8
+#                ;;
+#        i)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 9"
+#                sleep 1
+#                eselect profile set 9
+#                ;;
+#        j)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 10"
+#                sleep 1
+#                eselect profile set 10
+#                ;;
+#        k)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 11"
+#                sleep 1
+#                eselect profile set 11
+#                ;;
+#        l)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 12"
+#                sleep 1
+#                eselect profile set 12
+#                ;;
+#        m)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 13"
+#                sleep 1
+#                eselect profile set 13
+#                ;;
+#        n)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 14"
+#                sleep 1
+#                eselect profile set 14
+#                ;;
+#        o)
+#                echo "Choice was $PROFILESELECT. doing: eselect profile set 15"
+#                sleep 1
+#                eselect profile set 15
+#                ;;
+#        *)
+#                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you've gone wrong."
+#                exit 1
+#                ;;
+#esac
 
 echo "you can always try changing this later, using eselect."
 
