@@ -37,8 +37,6 @@ download & install virtualbox
                 (i.e. /bin/witchcraft is good)
             make it executable
                 (chmod +x /bin/witchcraft)
-            ~~~for a temporary workaround until next fix,
-               do "ln -s /usr/bin/midori /usr/bin/links"
             then run it
                 (i.e just type witchcraft into the terminal and hit enter).
                 follow the steps,
@@ -66,6 +64,8 @@ Until witchcraft gets out of alpha, you may want to do this in a virtual machine
 
 iso remastery has been removed for a complete re-write.
 only the proper gentoo install section is written so far. (will go through a second refunctionising and revariablising to accomodate funtoo, exherbo etc with greater ease, later, once we suss the chroot issue, and get working installs out of it)
+
+soon. ''_''
 
 ~~~~~~~~~~~~~~~~~~~~
 
