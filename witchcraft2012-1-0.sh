@@ -484,10 +484,11 @@ echo "you can always try changing this later, using eselect."
 #may decide to break this bit up and put in a seperate function() at some point perhaps.
 
 echo "you should have already made a make.conf file, and depending on what option you picked, and what you did, you may have already configured your USE flags, if you havn't, not to worry, we can do that now, or even change them later."
-echo " "
+echo " 
+showing you the /etc/make.conf in a moment" && sleep 1
 
 echo "make sure the useflags look right (and then press q to continue once you've looked)"
-sleep 3
+sleep 5
 less /etc/make.conf
 
 echo "what would you like to do for your useflags in make.conf?"
