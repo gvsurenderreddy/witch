@@ -478,6 +478,11 @@ read PROFILESELECT
 
 echo "you can always try changing this later, using eselect."
 
+###editor section to be improved
+echo "incase your chrooted environment 
+EDITOR=nano
+echo "setting editor to $EDITOR " && sleep 1
+
 #######
 #useflags section.
 #######
@@ -536,7 +541,7 @@ read
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
 [ "$REPLY" == "v" ] && echo "well that's easily done.  ... done.  locale.gen as is."
 
-echo "now running local-gen" && local-gen
+echo "now running locale-gen" && locale-gen
 sleep 1
 
 #presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what's pre-kernel-getting and what's actually kernel-getting
