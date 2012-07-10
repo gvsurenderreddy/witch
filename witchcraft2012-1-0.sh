@@ -550,12 +550,7 @@ sleep 1
 echo "let's get your timezone sorted for that...
  Look for your timezone in /usr/share/zoneinfo, then we'll copy it to /etc/localtime"
 sleep 2
-echo "enter timezone
-e.g:
-GMT
-"
-
-read TIMEZONE 
+read -p "enter timezone (e.g. GMT): " TIMEZONE 
 
 cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 
