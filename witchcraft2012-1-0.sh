@@ -739,10 +739,10 @@ read
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs.
 wanna change time?"
 read
-[ "$REPLY" == "y" ] && $EDITOR /etc/conf.d/hwclock
+[ "$REPLY" == "y" ] $EDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
 clear
-date
+echo "so according to what you've got now, the date is:" && date && sleep 3
 echo "ok, so you should probably have your network, main config file (rc.conf), keyboard and clock configured.
 now lets get tooled up with a system logger, command scheduler, and more file and network tools."
 sleep 1
@@ -780,10 +780,10 @@ e. no thnx (only if you're sure)
 select a,b,c or d and press ENTER.
 "
 read
-[ "$REPLY" == "a" ] && emerge syslogd && rc-update add syslogd default
-[ "$REPLY" == "b" ] && emerge syslog-ng && rc-update add syslog-ng default
-[ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
-[ "$REPLY" == "d" ] && read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && & rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
+[ "$REPLY" == "a" ] emerge syslogd && rc-update add syslogd default
+[ "$REPLY" == "b" ] emerge syslog-ng && rc-update add syslog-ng default
+[ "$REPLY" == "c" ] emerge metalog && rc-update add metalog default
+[ "$REPLY" == "d" ] read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
 
 #put crons into function(s) too
 clear
