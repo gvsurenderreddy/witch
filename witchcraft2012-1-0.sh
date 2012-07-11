@@ -618,7 +618,7 @@ read
 [ "$REPLY" == "s" ] && echo "skipping..."
 [ "$REPLY" == "g" ] && echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
 
-# FIXME ^ inset the fstab populator bit.
+# FIXME ^ inset the fstab populator bit.  && add the variable-ised root, home n boot partitions... 
 
 
 
