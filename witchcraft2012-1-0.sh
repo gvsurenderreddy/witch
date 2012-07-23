@@ -489,7 +489,7 @@ echo "setting editor to $EDITOR " && sleep 1
 #######
 #may decide to break this bit up and put in a seperate function() at some point perhaps.
 
-echo "you should have already made a make.conf file, and depending on what option you picked, and what you did, you may have already configured your USE flags, if you havn't, not to worry, we can do that now, or even change them later."
+echo "you should have already made a make.conf file, and depending on what option you picked, and what you did, you may have already configured your USE flags, if you have not, not to worry, we can do that now, or even change them later."
 echo " 
 showing you the /etc/make.conf in a moment" && sleep 1
 
