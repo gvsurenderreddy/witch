@@ -493,7 +493,7 @@ echo "you should have already made a make.conf file, and depending on what optio
 echo " 
 showing you the /etc/make.conf in a moment" && sleep 1
 
-echo "make sure the useflags look right (and then press q to continue once you've looked)"
+echo "make sure the useflags look right (and then press q to continue once you have looked)"
 sleep 5
 less /etc/make.conf
 
