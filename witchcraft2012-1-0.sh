@@ -721,8 +721,7 @@ echo "First we set the root password with \"passwd\""
 passwd
 echo "that should be your root password configured.  dont forget it, remember it."
 
-echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :)"
-sleep 2
+echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :) ... iz u ready for this? (y):" && sleep 2
 read
 [ "$REPLY" == "y" ] && $EDITOR /etc/rc.conf
 
