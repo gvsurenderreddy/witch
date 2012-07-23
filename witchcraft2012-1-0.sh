@@ -345,7 +345,7 @@ cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF
 ###################       wichroot       #
 ##########################################
 ##########################################
-
+EDITOR=nano #FIX ME augment that shit soon
 
 echo "creating a new environment using env-update, which essentially creates environment variables, then loading those variables into memory using source."
 echo "env-update"
@@ -734,7 +734,7 @@ echo "Take special care with the keymap variable! If you select the wrong keymap
 sleep 1
 echo " do you need to change your keymap? "
 read
-[ "$REPLY" == "y" ] && $EDITOR etc/conf.d/keymaps
+[ "$REPLY" == "y" ] $EDITOR etc/conf.d/keymaps
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs.
 wanna change time?"
