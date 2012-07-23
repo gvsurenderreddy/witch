@@ -480,7 +480,7 @@ read PROFILESELECT
 echo "you can always try changing this later, using eselect."
 
 ###editor section to be improved
-echo "incase your chrooted environment 
+echo "incase your chrooted environment"
 EDITOR=nano
 echo "setting editor to $EDITOR " && sleep 1
 
