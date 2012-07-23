@@ -255,7 +255,7 @@ read
 #might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
 echo "look at this and make sure it looks right (and then press q to continue once you have looked)"
 sleep 3
-less /mnt/$DISTRONAME/etc/make.conf
+more /mnt/$DISTRONAME/etc/make.conf
 echo "did that look right? (y/n)"
 read
 [ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
