@@ -339,12 +339,13 @@ wichroot() {
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
 sleep 1
 cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF 
+#! /bin/bash
 ##########################################
 ##########################################
 ###################       wichroot       #
 ##########################################
 ##########################################
-#! /bin/bash
+
 
 echo "creating a new environment using env-update, which essentially creates environment variables, then loading those variables into memory using source."
 echo "env-update"
