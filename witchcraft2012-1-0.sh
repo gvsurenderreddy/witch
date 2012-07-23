@@ -256,7 +256,7 @@ read
 echo "look at this and make sure it looks right (and then press q to continue once you have looked)"
 sleep 3
 more /mnt/$DISTRONAME/etc/make.conf
-echo "did that look right? (y/n)"
+echo "does that look right? (y/n)"
 read
 [ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
 #remove this line if the above suggested looping gets made
