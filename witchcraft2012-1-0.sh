@@ -186,7 +186,7 @@ installpackagemanager() {
 
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely will warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
-read -p "that's as much as we can do for that now.  are you enjoying this so far?"
+read -p "that\'s as much as we can do for that now.  are you enjoying this so far?"
 [ "$REPLY" == "y" ] echo "well good then.  now we'll carry on getting your package manager too" && sleep 2
 
 echo "Now that the stage is installed, we continue to installing Portage, the package manager.  READ CAREFULLY:"
