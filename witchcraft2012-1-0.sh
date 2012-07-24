@@ -303,8 +303,8 @@ prechroot() {
 #put prechroot and wichroot sections in a function too.
 #variable-ise this to accomodate differences between systems
 echo " copying your net connection dns stuffs to your $DISTRONAME with
-\"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/resolv.conf\"" cp -L /etc/resolv.conf
-/mnt/$DISTRONAME/etc/resolv.conf
+\"cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/resolv.conf\"" 
+cp -L /etc/resolv.conf /mnt/$DISTRONAME/etc/resolv.conf
 sleep 2
 echo "TO THE CHROOT"
 sleep 1
