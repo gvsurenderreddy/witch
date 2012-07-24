@@ -83,7 +83,7 @@ read
 echo "you want a separate home too? (y):"
 read
 [ "$REPLY" == "n" ] && echo "ok your home partition will just be lumped in with root, like the stupid people use."
-[ "$REPLY" != "y" ] && echo "i think you've gone wrong ~ should probably start this section again, and go hack the script to ask this section more sensibly, in more functions, so it can loop around back to the same question when you answer wrong... you could go badger digit to sort that if you are too scared to learn how."
+[ "$REPLY" != "y" ] && echo "i think you\'ve gone wrong ~ should probably start this section again, and go hack the script to ask this section more sensibly, in more functions, so it can loop around back to the same question when you answer wrong... you could go badger digit to sort that if you are too scared to learn how."
 [ "$REPLY" == "y" ] && if [ ! -d /mnt/$DISTRONAME/home/$a ]; then mkdir /mnt/$DISTRONAME/home ; fi && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
 
 
@@ -125,14 +125,14 @@ sleep 1
 echo ok
 sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-echo "READ INSTRUCTIONS CAREFULLY ~ here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/ ~ once you've read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
-Once the page loads and you've found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume. 
+echo "READ INSTRUCTIONS CAREFULLY ~ here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/ ~ once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
+Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume. 
 ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
-[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it is there?  give up and run away crying?  try again?  well, it's up to you.  ... taking u back to stage3 start." && stage3 ; fi
-[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it's there?  give up and run away crying?  try again?  well, it's up to you." && stage3 ; fi
+[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it is there?  give up and run away crying?  try again?  well, it\'s up to you.  ... taking u back to stage3 start." && stage3 ; fi
+[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying?  try again?  well, it\'s up to you." && stage3 ; fi
 #this is just mucking around when i got a lil stressed n needed some whimsical relief.
-[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we'll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don't have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it's no skin off our nose if you've decided to fail.  " && sleep 3 && echo -n "and anyways... we\'re just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you\'re not still here are you?  " && sleep 3 && echo -n "look we've told you already...  " && sleep 2 && echo -n "go away, there's nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it's funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i'll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i'd be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be here though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i'll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..."&& sleep 2 && echo -n " it seems there's only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the onlything keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 3 && clear && sleep 999h && exit
+[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we\'ll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don\'t have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it\'s no skin off our nose if you\'ve decided to fail.  " && sleep 3 && echo -n "and anyways... we\'re just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you\'re not still here are you?  " && sleep 3 && echo -n "look we\'ve told you already...  " && sleep 2 && echo -n "go away, there\'s nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it\'s funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i\'ll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i\'d be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be here though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i\'ll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..."&& sleep 2 && echo -n " it seems there\'s only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the onlything keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 3 && clear && sleep 999h && exit
 
 #set this so user can choose if they want verbose output
 echo "unpacking your stage3. this may take some time, please wait."
@@ -354,7 +354,7 @@ source /etc/profile
 echo "export PS1=\"($DISTRONAME chroot) $PS1\""
 export PS1="($DISTRONAME chroot) $PS1"
 sleep 1
-echo "making sure $DISTRONAME's portage tree is up to date with \"emerge --sync\" quietly.  may take several minutes..."
+echo "making sure the $PACKAGEMANAGERNAME tree of $DISTRONAME is up to date with \"emerge --sync\" quietly.  may take several minutes..."
 
 emerge --sync --quiet
 
@@ -373,7 +373,7 @@ You can see what profile you are currently using (the one with an asterisk next 
 echo "eselect profile list"
 eselect profile list
 
-echo "pick a number of profile you'd like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
+echo "pick a number of profile you would like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
 echo "
     a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9, j=10, k=11, l=12, m=13, n=14, o=15"
 
@@ -471,7 +471,7 @@ read PROFILESELECT
 #                eselect profile set 15
 #                ;;
 #        *)
-#                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you've gone wrong."
+#                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you have gone wrong."
 #                exit 1
 #                ;;
 #esac
@@ -512,12 +512,12 @@ read
 [ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/make.conf
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 [ "$REPLY" == "u" ] && cp /usr/share/portage/config/make.conf /etc/make.conf 
 
 #FIXME ^ default
 
-#functionise these following bits too?  i presume they're all fairly universal, n not much (if any) variation between base distros.
+#functionise these following bits too?  i presume they are all fairly universal, n not much (if any) variation between base distros.
 echo "You will probably only use one or maybe two locales on your system. You can specify locales you will need in /etc/locale.gen
 
 e.g.
@@ -537,19 +537,19 @@ v - vanilla - dont touch it!  leave as is now.
 "
 read
 [ "$REPLY" == "m" ] && $EDITOR /etc/locale.gen
-[ "$REPLY" == "d" ] && echo "looks like the locale.gen default hasnt been made yet.  you'll probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen #
+[ "$REPLY" == "d" ] && echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/locale.gen
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done.  locale.gen as is."
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done.  locale.gen as is."
 
 echo "now running locale-gen" && locale-gen
 sleep 1
 
-#presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what's pre-kernel-getting and what's actually kernel-getting
-echo "now you'll likely need a kernel too"
+#presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what is pre-kernel-getting and what is actually kernel-getting
+echo "now you will likely need a kernel too"
 sleep 1
-echo "let's get your timezone sorted for that...
- Look for your timezone in /usr/share/zoneinfo, then we'll copy it to /etc/localtime"
+echo "lets get your timezone sorted for that...
+ Look for your timezone in /usr/share/zoneinfo, then we will copy it to /etc/localtime"
 sleep 2
 read -p "enter timezone (e.g. GMT): " TIMEZONE 
 
@@ -562,9 +562,9 @@ sleep 3
 #exherbo has taught us well here... let the user choose what kernel they want. 
 #grand expanding of this section, offering:
 #genkernel, debian kernels, hurd, freebsd, vanila kernel.org kernels, hurd+mach, hurd+l4, xenkernel, etc etc etc.
-# ....there'in we'll see why digitteknohippie insist's it's called witch, before it's called witchlinux... the linux kernel need not even be present.  :)
+# ....there-in we will see why digitteknohippie insist's it's called witch, before it's called witchlinux... the linux kernel need not even be present.  :)
 
-echo "so let's get on with getting you a kernel..."
+echo "so lets get on with getting you a kernel..."
 sleep 1
 echo "how would you like to get a kernel?
 g - gentoo-sources + genkernel 
@@ -573,7 +573,7 @@ m - manual (incomplete)
 select which option:   "
 read
 [ "$REPLY" == "g" ] && emerge gentoo-sources && emerge genkernel && genkernel all && ls /boot/kernel* /boot/initramfs* > kernelandinitinfo
-[ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you'll have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
+[ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
 
 echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
 
@@ -605,9 +605,9 @@ The second field shows the mount point at which the partition should be mounted
 The third field shows the filesystem used by the partition
 The fourth field shows the mount options used by mount when it wants to mount the partition. As every filesystem has its own mount options, you are encouraged to read the mount man page (man mount) for a full listing. Multiple mount options are comma-separated.
 The fifth field is used by dump to determine if the partition needs to be dumped or not. You can generally leave this as 0 (zero).
-The sixth field is used by fsck to determine the order in which filesystems should be checked if the system wasn't shut down properly. The root filesystem should have 1 while the rest should have 2 (or 0 if a filesystem check isn't necessary).
+The sixth field is used by fsck to determine the order in which filesystems should be checked if the system wasn not shut down properly. The root filesystem should have 1 while the rest should have 2 (or 0 if a filesystem check is not necessary).
 "
-echo "so let's get on with setting up your fstab"
+echo "so lets get on with setting up your fstab"
 sleep 1
 echo "how would you like to configure your fstab?
 m - manual         (opens in editor)
@@ -633,7 +633,7 @@ read
 ###read NETNOM
 ###echo "dns_domain_lo=\"$NETNOM\"" >> /etc/conf.d/net
 ###
-###echo "wanna use DHCP for connection? (if you dont know what that means, it's still likely you do)"
+###echo "wanna use DHCP for connection? (if you dont know what that means, it is still likely you do)"
 ###echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
 
 # FIXME ^ add NIS section, asking first if they want it, then follow the same a above, except of course, use >> instead of > for the /et/conf.d/net http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=8
@@ -647,9 +647,9 @@ read
 ####NETWORK####
 #___#######___#
 ###############
-############### mk2  (put network mk2 in it's own function.  network mk1 can probably be deleted now, right?
+############### mk2  (put network mk2 in own function.  network mk1 can probably be deleted now, right?
 clear
-echo "you'll wanna be online too right?"
+echo "you will wanna be online too right?"
 
 #this is probably excessive for just hostname, right?  and domain name bellow too...
 echo "what do you want to do about your hostname (in /etc/conf.d/hostname)
@@ -664,12 +664,12 @@ read
 [ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
-[ "$REPLY" == "v" ] echo "well that's easily done.  ... done."
+[ "$REPLY" == "v" ] echo "well that is easily done.  ... done."
 [ "$REPLY" == "e" ] read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
 ENTER HOSTNAME:" HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
 
-# edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we'll need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i'm just commenting on this rather than getting it done, so it doesnt interupt my flow.
+# edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
 
 # the /etc/conf.d/net is a far mroe elaborate config file than hpostname.  this is dangerously inadequate!  ... so i added the "RECCOMENDED"s, as well as the warnings already in place.
@@ -685,7 +685,7 @@ read
 [ "$REPLY" == "d" ] && echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/net
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/net
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 [ "$REPLY" == "e" ] && echo "whadya call this network (what is your net)?
 - this will be set in /etc/conf.d/net" && read -p "ENTER DOMAIN NAME:" DOMNOM && echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
 
@@ -743,7 +743,7 @@ read
 [ "$REPLY" == "y" ] $EDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
 clear
-echo "so according to what you've got now, the date is:" && date && sleep 3
+echo "so according to what you have got now, the date is:" && date && sleep 3
 echo "ok, so you should probably have your network, main config file (rc.conf), keyboard and clock configured.
 now lets get tooled up with a system logger, command scheduler, and more file and network tools."
 sleep 1
@@ -754,7 +754,7 @@ echo "system logger"
 clear 
 echo "system logger"
 sleep 1
-#may want/need to variablise this, n have some checks of variables to know how to proceed for each base distro's different stage3s
+#may want/need to variablise this, n have some checks of variables to know how to proceed for each base distros different stage3s
 echo "Some tools are missing from the stage3 archive because several packages provide the same functionality. It is now up to you to choose which ones you want to install.
 
 The first tool you need to decide on has to provide logging facilities for your system. Unix and Linux have an excellent history of logging capabilities -- if you want you can log everything that happens on your system in logfiles. This happens through the system logger.
@@ -764,7 +764,7 @@ sysklogd, which is the traditional set of system logging daemons,
 syslog-ng, an advanced system logger, 
 and metalog which is a highly-configurable system logger. Others might be available through Portage as well - our number of available packages increases on a daily basis.
 
-If you plan on using sysklogd or syslog-ng you might want to install logrotate afterwards as those system loggers don't provide any rotation mechanism for the log files.
+If you plan on using sysklogd or syslog-ng you might want to install logrotate afterwards as those system loggers do not provide any rotation mechanism for the log files.
 
 To install the system logger of your choice, emerge it and have it added to the default runlevel using rc-update.
 
@@ -784,7 +784,7 @@ read
 [ "$REPLY" == "a" ] emerge syslogd && rc-update add syslogd default
 [ "$REPLY" == "b" ] emerge syslog-ng && rc-update add syslog-ng default
 [ "$REPLY" == "c" ] emerge metalog && rc-update add metalog default
-[ "$REPLY" == "d" ] read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
+[ "$REPLY" == "d" ] read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 
 #put crons into function(s) too
 clear
@@ -797,7 +797,7 @@ vixie-cron
 dcron
 fcron
 
-If you don't know what to choose, use vixie-cron."
+If you do not know what to choose, use vixie-cron."
 
 echo "which cron daemon do you want?
 a. emerge vixie-cron && rc-update add vixie-cron default
@@ -811,10 +811,10 @@ read
 [ "$REPLY" == "a" ] emerge vixie-cron && rc-update add vixie-cron default
 [ "$REPLY" == "b" ] emerge dcron && rc-update add dcron default && crontab /etc/crontab
 [ "$REPLY" == "c" ] emerge fcron && rc-update add fcron default && crontab /etc/crontab
-[ "$REPLY" == "d" ] read -p  "enter name of your choice of cron: " CRONNER && emerge $CRONNER && rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i'll carry on with this rudimentary version for now.
+[ "$REPLY" == "d" ] read -p  "enter name of your choice of cron: " CRONNER && emerge $CRONNER && rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 
 #functionise
-echo "If you want to index your system\'s files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
+echo "If you want to index your files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
 do you want locate? (y)
 "
 read
@@ -842,17 +842,17 @@ echo -n "boo!"
 sleep 1
 clear
 
-#oh rly, not even gonna give them a choice?  there's far more than just one.  :P  ;)  FIX ME... and functionise.   bootloader section could pretty much do with a whole rewrite.
+#oh rly, not even gonna give them a choice?  there is far more than just one.  :P  ;)  FIX ME... and functionise.   bootloader section could pretty much do with a whole rewrite.
 echo "Now that your kernel is configured and compiled and the necessary system configuration files are filled in correctly, it is time to install a program that will fire up your kernel when you start the system. Such a program is called a bootloader."
 sleep 2
 echo "installing grub"
 emerge grub
 
 clear
-echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we\'re just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
+echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
 
 cp /boot/grub/grub.conf /boot/grub/grub.conf~origbkp
-# note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  y'know like, ~if file exists then~
+# note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
 echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp" && sleep 2
 echo "
 default 0
@@ -875,7 +875,7 @@ chainloader +1" > /boot/grub/grub.conf
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
 # FIX ME ... FIX ME  ... FIX MEEEEE.   that boot section needs a serious re-work... lazy ass ....  wtf.
 
-echo "job done. your base system is installed.  now let's make it a witch. :)"
+echo "job done. your base system is installed.  now lets make it a witch. :)"
 
 #one very important final thought:
 exit
@@ -989,7 +989,7 @@ cauldren()  {
 # tho he prolly has new ones now.
 clear
 sleep 1 
-echo "ok, so you want to install some hardcore 'nix."
+echo "ok, so you want to install some hardcore nix."
 echo
 echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
 
@@ -1035,7 +1035,7 @@ esac ;
 
 partmanselector () {
 
-echo "once you've partitioned your hard drive satasfactorilly, exit the partition manager, and the script will continue."
+echo "once you have partitioned your hard drive satasfactorilly, exit the partition manager, and the script will continue."
 echo "which partition manager do you want to use?"
 echo "
     A.    fdisk
@@ -1049,7 +1049,7 @@ case $PARTITIONER in
                 echo "Choice was $PARTITIONER. launching..."
                 sleep 5
                 fdisk
-                echo "okies, i'm still working on the bit for creating file systems after using fdisk."
+                echo "okies, i\'m still working on the bit for creating file systems after using fdisk."
                 ;;
         B|b)
                 echo "Choice was $PARTITIONER. launching..."
@@ -1129,7 +1129,7 @@ case $BASEDISTRO in
                 ;;
         7)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there's no real harm in having it in here again, right?"
+                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
                 cauldren
                 ;;
         8)
@@ -1222,14 +1222,14 @@ METADISTRO=FUNTOO
 #section removed for re-functionising of the script.  
 #these base distro choices, will set variables which will control the shape of various options (/install sections) suited to that distro (e.g. differences of stuff included in the stage3s)
 #this will be really cool simple additions in some places, like if metadistro = funtoo then diddle-de-dee ~ maybe.  not rly decided on which route to take with sorting out for the multi-distro bases.
-echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what's going on, and to join in, in building the script. :)"
+echo "script section incomplete.  open your irc software and join \#witchlinux on irc.freenode.net to get the latest of what\'s going on, and to join in, in building the script. :)"
 
 }
 
 installexherbo() {
 METADISTRO=EXHERBO 
 #kitting out the script to handle exherbo installs too will be the coolest part of this.  it will ensure that the structure is more robust to handle multiple install types.
-echo "this bit aint been made yet.  but it's easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the 
+echo "this bit aint been made yet.  but it\'s easy enough.. just follow along http://www.exherbo.org/docs/install-guide.html, and enter it into this script the same way as was done for the 
 installgentoo and installfuntoo sections.  easy.   ... er... or do it right, n hook it up with all the cool variables, future proofing it."
 
 }
