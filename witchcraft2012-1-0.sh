@@ -657,7 +657,7 @@ m - manually edit
 d - dont care, do it for me, default it.  (overwrites!)
 w - wget from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/hostname)
-v - vanilla - dont touch it!  leave as is now.
+v - vanilla - dont touch it.  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/hostname)"
 read
 [ "$REPLY" == "m" ] && echo "ok, to $EDITOR /etc/conf.d/hostname" && $EDITOR /etc/conf.d/hostname
@@ -667,7 +667,7 @@ read
 [ "$REPLY" == "v" ] echo "well that is easily done.  ... done."
 [ "$REPLY" == "e" ] read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
-ENTER HOSTNAME:" HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
+ENTER HOSTNAME:" HOSTNOM && echo "hostname=$HOSTNOM" > /etc/conf.d/hostname
 
 # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
@@ -679,7 +679,7 @@ d - dont care, do it for me, default it.  (adds ns_domain_lo=\"witchnet\")
 w - wget from _____ (warning this will overwrite existing /etc/conf.d/net)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/net)
 v - RECOMMENDED: vanilla - dont touch it!  leave as is now.
-e - enter hostname now. (warning this will overwrite existing /etc/conf.d/net)"
+e - enter network name now. (warning this will overwrite existing /etc/conf.d/net)"
 read
 [ "$REPLY" == "m" ] && $EDITOR /etc/conf.d/net
 [ "$REPLY" == "d" ] && echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
@@ -731,7 +731,7 @@ echo "hopefully you have got all you need, sorted in rc.conf.  if you changed yo
 sleep 1
 echo "Gentoo uses /etc/conf.d/keymaps to handle keyboard configuration. Edit it to configure your keyboard."
 sleep 1
-echo "Take special care with the keymap variable! If you select the wrong keymap, you will get weird results when typing on your keyboard!"
+echo "Take special care with the keymap variable! If you select the wrong keymap, you will get weird results when typing on your keyboard."
 sleep 1
 echo " do you need to change your keymap? "
 read
