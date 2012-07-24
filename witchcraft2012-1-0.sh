@@ -245,7 +245,7 @@ read
 echo "not finished with your make.conf yet.  wanna pick a fast portage-mirror? "
 echo -n "
 m - manually edit 
-d - dont care, auto-pick, default it with mirrorselect.
+d - choose near mirror(s) with mirrorselect.
 v - vanilla - dont touch it."
 read
 [ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
@@ -345,7 +345,6 @@ cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF
 ###################       wichroot       #
 ##########################################
 ##########################################
-EDITOR=nano #FIX ME augment that shit soon
 
 echo "creating a new environment using env-update, which essentially creates environment variables, then loading those variables into memory using source."
 echo "env-update"
@@ -481,6 +480,7 @@ echo "you can always try changing this later, using eselect."
 
 ###editor section to be improved
 echo "incase your chrooted environment"
+EDITOR=nano #FIX ME augment that shit soon
 EDITOR=nano
 echo "setting editor to $EDITOR " && sleep 1
 
@@ -664,9 +664,10 @@ read
 [ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
-[ "$REPLY" == "v" ] && echo "well that's easily done.  ... done."
-[ "$REPLY" == "e" ] && echo "whadya call this computer (what is your hostname)?
-- this will be set in /etc/conf.d/hostname" && read -p "ENTER HOSTNAME:" HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
+[ "$REPLY" == "v" ] echo "well that's easily done.  ... done."
+[ "$REPLY" == "e" ] read -p "whadya call this computer (what is your hostname)?
+- this will be set in /etc/conf.d/hostname
+ENTER HOSTNAME:" HOSTNOM && echo "hostname=\"$HOSTNOM\"" > /etc/conf.d/hostname
 
 # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we'll need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i'm just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
@@ -726,7 +727,7 @@ read
 [ "$REPLY" == "y" ] && $EDITOR /etc/rc.conf
 
 clear
-echo "hopefully you've got all you need, sorted in rc.conf.  if you changed your editor in rc.conf, this next bit should use it instead now."
+echo "hopefully you have got all you need, sorted in rc.conf.  if you changed your editor in rc.conf, this next bit should use it instead now."
 sleep 1
 echo "Gentoo uses /etc/conf.d/keymaps to handle keyboard configuration. Edit it to configure your keyboard."
 sleep 1
@@ -872,7 +873,7 @@ chainloader +1" > /boot/grub/grub.conf
 # ^ make a seditor to convert sda1 to (hd0,0) and so on. then use $ROOTDEV seditor'd to create GRUBDEV, and use $GRUBDEV in "root (hd0,0)" as "root $GRUBDEV" instead.
 # use either something like uname -r or a clever ls /boot, to determine the kernel and define it as a variable (or use clever brackets n shiz) to use in place of initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
-
+# FIX ME ... FIX ME  ... FIX MEEEEE.   that boot section needs a serious re-work... lazy ass ....  wtf.
 
 echo "job done. your base system is installed.  now let's make it a witch. :)"
 
