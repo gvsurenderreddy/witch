@@ -873,6 +873,9 @@ rootnoverify (hd0,5)
 makeactive
 chainloader +1" > /boot/grub/grub.conf
 
+# tee that^ so the folks can see what you mean by:
+sleep 1 && echo "as an interim kluge until you hack up something better, some crap has been thrown in your bootloader section. so you will want to find out what your kernel and initrd are called and what bootloader kernel options you want passed to it, and edit those in apropriately." && sleep 2
+
 # ^ make a seditor to convert sda1 to (hd0,0) and so on. then use $ROOTDEV seditor'd to create GRUBDEV, and use $GRUBDEV in "root (hd0,0)" as "root $GRUBDEV" instead.
 # use either something like uname -r or a clever ls /boot, to determine the kernel and define it as a variable (or use clever brackets n shiz) to use in place of initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
@@ -1249,18 +1252,102 @@ echo "this is another hole yet to be filled in the script.  you could consider a
 ##########
 ##########
 ##########
-## deskfig
+## deskfigs
 ##########
 ##########
 ##########
 ##########
+
+##########
+#idk, should i alias all the basic installer commands to unify across all base-distros, like a rosetta stone?
+
+##########
+# rowan
+###(still just in emerge commands.)
+installdeskfigrowan() {
+echo "you have chosen to install the rowan deskfig.  good choice.  is your nick Digit?"
+emerge -qv spectrwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc
+
+echo "sorry, the rest of the configuration of rowan has not yet been written into this script";
+}
+
+getdeskfig () {
+#echo "select how you would like to get your deskfig?"
+#read $METHODGETDESKFIG
+# i will put in a case esac doodad in here to gib more flex
+
+#but for now...
+echo "ok son, where are you hiding your deskfig script at?"
+read $DESKFIGSCRIPTLOC
+DESKFIGSCRIPTLOC
+
+echo "ok seriously, i have only just thrown this simple deskfig bit in as a place holder idk wtf yet"
+#it will grow, oh yes, it will grow.  ... grow to accomodate uploading and sharing and reviewing, etc.  communitization inbuilt to the software, dawg.
 
 deskfigselector() {
 
 echo "deskfigselector is temporarily out of order while fixing main install"
+echo "welcome to the witchcraft\'s deskfig selector.  here you can install what really gives your os character, it\'s desktop environment omponents and configuration."
 
 #decomment when bringing deskfigselection back into comission.  ~ may also wanna change from stupid "select" style question, to a regular read, like tried n tested above.
+echo "
+1) rowan    ~~~    minimal fully-functional desktop
+2) willow   ~~~    like rowan, but a bit more flexibility when balancing minimalism to comfort ~vaporware
+3) jamella  ~~~    a tiling window manager showcase distro ~vaporware
+4) zelda    ~~~    idkwtf, it is all still just vapourware this far down the list
+5) add your own configuration script here
+8) other
 
+enter number preference of preference:"
+
+
+read SPINTOP
+case $SPINTOP in
+        1)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the rowan bit"
+                installdeskfigrowan
+                ;;
+        2)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the willow bit"
+                installdeskfigwillow
+                ;;
+        3)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the jamella bit"
+                installdeskfigjamella
+                ;;
+        4)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the zelda bit"
+		installdeskfigzelda
+                ;;
+        5)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the Gentoo/Hurd bit"
+                getdeskfig
+                ;;
+        6)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the FreeBSD bit"
+                cauldren
+                ;;
+        7)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
+                cauldren
+                ;;
+        8)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "idkwtf goes here...  something, surely."
+                cauldren
+                ;;
+        *)
+                echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
+                exit 1
+                ;;
+esac ;
 #echo "what do you want your witch based on? (warning options are incomplete)"
 #select SPINTOP in \
 #    'VanillaBase (no gui desktop)' \
