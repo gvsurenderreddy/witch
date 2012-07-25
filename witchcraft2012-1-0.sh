@@ -251,10 +251,11 @@ d - choose near mirror(s) with mirrorselect.
 v - vanilla - dont touch it."
 read
 [ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && echo "mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf" && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 
 #might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
+#no, it is silly as it is now.
 echo "look at this and make sure it looks right (and then press q to continue once you have looked)"
 sleep 3
 more /mnt/$DISTRONAME/etc/make.conf
