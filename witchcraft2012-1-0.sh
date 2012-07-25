@@ -670,7 +670,7 @@ read
 [ "$REPLY" == "v" ] echo "well that is easily done.  ... done."
 [ "$REPLY" == "e" ] read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
-ENTER HOSTNAME:" HOSTNOM && echo "hostname=$HOSTNOM" > /etc/conf.d/hostname
+ENTER HOSTNAME:" HOSTNOM && echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
 
 # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
