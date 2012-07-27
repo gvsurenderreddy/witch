@@ -734,14 +734,13 @@ echo "hopefully you have got all you need, sorted in rc.conf.  if you changed yo
 sleep 1
 echo "Gentoo uses /etc/conf.d/keymaps to handle keyboard configuration. Edit it to configure your keyboard."
 sleep 1
-echo "Take special care with the keymap variable! If you select the wrong keymap, you will get weird results when typing on your keyboard."
+echo "Take special care with the keymap variable. If you select the wrong keymap, you will get weird results when typing on your keyboard."
 sleep 1
 echo " do you need to change your keymap? "
 read
 [ "$REPLY" == "y" ] $EDITOR etc/conf.d/keymaps
 
-echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs.
-wanna change time?"
+echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs. wanna change time? "
 read
 [ "$REPLY" == "y" ] $EDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
