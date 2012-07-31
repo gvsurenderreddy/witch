@@ -1317,7 +1317,7 @@ case $SPINTOP in
         4)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the zelda bit"
-		installdeskfigzelda
+                installdeskfigzelda
                 ;;
         5)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
