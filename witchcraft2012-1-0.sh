@@ -483,9 +483,9 @@ echo "you can always try changing this later, using eselect."
 
 ###editor section to be improved
 echo "incase your chrooted environment"
-EDITOR=nano #FIX ME augment that shit soon
-EDITOR=nano
-echo "setting editor to $EDITOR " && sleep 1
+CHEDITOR=nano #FIX ME augment that shit soon
+#EDITOR=nano
+echo "setting editor to $CHEDITOR " && sleep 1
 
 #######
 #useflags section.
@@ -511,7 +511,7 @@ v - vanilla - dont touch it!  leave as is now.
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
 enter letter of preference: "
 read
-[ "$REPLY" == "m" ] && $EDITOR /etc/make.conf
+[ "$REPLY" == "m" ] && $CHEDITOR /etc/make.conf
 [ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/make.conf
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/make.conf
@@ -539,7 +539,7 @@ c - copy from _____ (warning this will overwrite existing locale.gen)
 v - vanilla - dont touch it!  leave as is now.
 "
 read
-[ "$REPLY" == "m" ] && $EDITOR /etc/locale.gen
+[ "$REPLY" == "m" ] && $CHEDITOR /etc/locale.gen
 [ "$REPLY" == "d" ] && echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen #
 [ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/locale.gen
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
@@ -618,7 +618,7 @@ s - skip           (manual later)
 g - guided         (warning incomplete)
 select which option:   "
 read
-[ "$REPLY" == "m" ] && echo "manual editing /etc/fstab selected" && $EDITOR /etc/fstab
+[ "$REPLY" == "m" ] && echo "manual editing /etc/fstab selected" && $CHEDITOR /etc/fstab
 [ "$REPLY" == "s" ] && echo "skipping..."
 [ "$REPLY" == "g" ] && echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
 
@@ -663,7 +663,7 @@ c - copy from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 v - vanilla - dont touch it.  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/hostname)"
 read
-[ "$REPLY" == "m" ] && echo "ok, to $EDITOR /etc/conf.d/hostname" && $EDITOR /etc/conf.d/hostname
+[ "$REPLY" == "m" ] && echo "ok, to $CHEDITOR /etc/conf.d/hostname" && $CHEDITOR /etc/conf.d/hostname
 [ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
@@ -684,7 +684,7 @@ c - copy from _____ (warning this will overwrite existing /etc/conf.d/net)
 v - RECOMMENDED: vanilla - dont touch it!  leave as is now.
 e - enter network name now. (warning this will overwrite existing /etc/conf.d/net)"
 read
-[ "$REPLY" == "m" ] && $EDITOR /etc/conf.d/net
+[ "$REPLY" == "m" ] && $CHEDITOR /etc/conf.d/net
 [ "$REPLY" == "d" ] && echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/net
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/net
@@ -727,7 +727,7 @@ echo "that should be your root password configured.  dont forget it, remember it
 
 echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :) ... iz u ready for this? (y):" && sleep 2
 read
-[ "$REPLY" == "y" ] && $EDITOR /etc/rc.conf
+[ "$REPLY" == "y" ] && $CHEDITOR /etc/rc.conf
 
 clear
 echo "hopefully you have got all you need, sorted in rc.conf.  if you changed your editor in rc.conf, this next bit should use it instead now."
@@ -738,7 +738,7 @@ echo "Take special care with the keymap variable. If you select the wrong keymap
 sleep 1
 echo " do you need to change your keymap? "
 read
-[ "$REPLY" == "y" ] $EDITOR etc/conf.d/keymaps
+[ "$REPLY" == "y" ] $CHEDITOR etc/conf.d/keymaps
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs. wanna change time? "
 read
@@ -1010,7 +1010,7 @@ case $CauldrenOption in
                 simpleinstall
                 ;;
         B|b)
-                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+                echo "Choice was \"$CauldrenOption\". warning, this part of the script might still be a little buggy.  running it in a couple seconds anyway"
                 sleep 5
                 stage3
                 ;;
