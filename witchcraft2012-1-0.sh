@@ -1279,6 +1279,8 @@ DESKFIGSCRIPTLOC
 
 echo "ok seriously, i have only just thrown this simple deskfig bit in as a place holder idk wtf yet"
 #it will grow, oh yes, it will grow.  ... grow to accomodate uploading and sharing and reviewing, etc.  communitization inbuilt to the software, dawg.
+}
+
 
 deskfigselector() {
 
