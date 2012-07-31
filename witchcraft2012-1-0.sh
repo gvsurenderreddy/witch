@@ -993,9 +993,8 @@ clear
 sleep 1 
 echo "ok, so you want to install some hardcore nix."
 echo
-echo "this script presumes you have already prepared your hard drive partitions, and know where you will install to."
-
-#cauldren first question
+echo "cauldren first question"
+echo
 echo "what do you want to do?"
 echo "
     A.    simple install  -  less choices, control, flexibility.  just presets.
