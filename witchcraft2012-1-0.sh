@@ -742,7 +742,7 @@ read
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs. wanna change time? "
 read
-[ "$REPLY" == "y" ] $EDITOR /etc/conf.d/hwclock
+[ "$REPLY" == "y" ] $CHEDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
 clear
 echo "so according to what you have got now, the date is:" && date && sleep 3
