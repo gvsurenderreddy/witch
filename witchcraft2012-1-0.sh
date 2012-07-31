@@ -1288,64 +1288,64 @@ echo "deskfigselector is temporarily out of order while fixing main install"
 echo "welcome to the witchcraft\'s deskfig selector.  here you can install what really gives your os character, it\'s desktop environment omponents and configuration."
 
 #decomment when bringing deskfigselection back into comission.  ~ may also wanna change from stupid "select" style question, to a regular read, like tried n tested above.
-#echo "
-#1) rowan    ~~~    minimal fully-functional desktop
-#2) willow   ~~~    like rowan, but a bit more flexibility when balancing minimalism to comfort ~vaporware
-#3) jamella  ~~~    a tiling window manager showcase distro ~vaporware
-#4) zelda    ~~~    idkwtf, it is all still just vapourware this far down the list
-#5) add your own configuration script here
-#8) other
-#
-#enter number preference of preference:"
-#
-#
-#read SPINTOP
-#case $SPINTOP in
-#        1)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this is where you get taken to the rowan bit"
-#                installdeskfigrowan
-#                ;;
-#        2)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this is where you get taken to the willow bit"
-#                installdeskfigwillow
-#                ;;
-#        3)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this is where you get taken to the jamella bit"
-#                installdeskfigjamella
-#                ;;
-#        4)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this would be where you get taken to the zelda bit"
-#                installdeskfigzelda
-#                ;;
-#        5)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this would be where you get taken to the Gentoo/Hurd bit"
-#                getdeskfig
-#                ;;
-#        6)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this would be where you get taken to the FreeBSD bit"
-#                cauldren
-#                ;;
-#        7)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i# think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
-#                cauldren
-#                ;;
-#        8)
-#                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
-#                echo "idkwtf goes here...  something, surely."
-#                cauldren
-#                ;;
-#        *)
-#                echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
-#                exit 1
-#                ;;
-#esac ;
+echo "
+1) rowan    ~~~    minimal fully-functional desktop
+2) willow   ~~~    like rowan, but a bit more flexibility when balancing minimalism to comfort ~vaporware
+3) jamella  ~~~    a tiling window manager showcase distro ~vaporware
+4) zelda    ~~~    idkwtf, it is all still just vapourware this far down the list
+5) add your own configuration script here
+8) other
+
+enter number preference of preference:"
+
+
+read SPINTOP
+case $SPINTOP in
+        1)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the rowan bit"
+                installdeskfigrowan
+                ;;
+        2)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the willow bit"
+                installdeskfigwillow
+                ;;
+        3)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this is where you get taken to the jamella bit"
+                installdeskfigjamella
+                ;;
+        4)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the zelda bit"
+                installdeskfigzelda
+                ;;
+        5)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the Gentoo/Hurd bit"
+                getdeskfig
+                ;;
+        6)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the FreeBSD bit"
+                cauldren
+                ;;
+        7)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i#think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
+                cauldren
+                ;;
+        8)
+                echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
+                echo "idkwtf goes here...  something, surely."
+                cauldren
+                ;;
+        *)
+                echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
+                exit 1
+                ;;
+esac ;
 
 #echo "what do you want your witch based on? (warning options are incomplete)"
 #select SPINTOP in \
