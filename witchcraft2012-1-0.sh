@@ -806,19 +806,16 @@ a. emerge vixie-cron && rc-update add vixie-cron default
 b. emerge dcron && rc-update add dcron default && crontab /etc/crontab
 c. emerge fcron && rc-update add fcron default && crontab /etc/crontab
 d. enter name of other cron 
-e. no cron (r u sure?)
-
-"
+e. no cron (r u sure?)"
 read
-[ "$REPLY" == "a" ] emerge vixie-cron && rc-update add vixie-cron default
-[ "$REPLY" == "b" ] emerge dcron && rc-update add dcron default && crontab /etc/crontab
-[ "$REPLY" == "c" ] emerge fcron && rc-update add fcron default && crontab /etc/crontab
+[ "$REPLY" == "a" ] && emerge vixie-cron && rc-update add vixie-cron default
+[ "$REPLY" == "b" ] && emerge dcron && rc-update add dcron default && crontab /etc/crontab
+[ "$REPLY" == "c" ] && emerge fcron && rc-update add fcron default && crontab /etc/crontab
 [ "$REPLY" == "d" ] read -p  "enter name of your choice of cron: " CRONNER && emerge $CRONNER && rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 
 #functionise
 echo "If you want to index your files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
-do you want locate? (y)
-"
+do you want locate? (y)"
 read
 [ "$REPLY" == "y" ] && emerge mlocate
 
