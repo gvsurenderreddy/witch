@@ -570,12 +570,12 @@ sleep 3
 echo "so lets get on with getting you a kernel..."
 sleep 1
 echo "how would you like to get a kernel?
-g - gentoo-sources + genkernel 
-m - manual (incomplete)
+g - gentoo-sources and genkernel 
+m - manual (incomplete)"
+echo
+read -p "select which option:   "
 
-select which option:   "
-read
-[ "$REPLY" == "g" ] && emerge gentoo-sources && emerge genkernel && genkernel all && ls /boot/kernel* /boot/initramfs* > kernelandinitinfo
+[ "$REPLY" == "g" ] && emerge genkernel && emerge gentoo-sources && genkernel all --menuconfig && ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
 [ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
 
 echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
