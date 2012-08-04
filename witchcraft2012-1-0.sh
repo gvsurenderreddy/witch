@@ -171,6 +171,7 @@ deskfigselector
 ############
 # simpleinstall
 
+# dev update... there was that guy... i forget who... i think im following him on github, has that simple install...  could consider hacking that up to make a direct automated (as much as possible), rowan witch install.
 #simpleinstall... see about adding a simplified install for presets.
 #one way to consider for this, add a variable that would permit stage3 install, and just automatically select all the defaults as much as is possible.
 simpleinstall()  { echo "incomplete portion of script, sorry" && sleep 2 && cauldren;
@@ -198,8 +199,8 @@ echo "Press y to use \" $IBROWSER \" to navigate http://www.gentoo.org/main/en/m
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
 read -p "ready to download your portage (y - yes) (p - yes, with proxy support)"
 
-[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
-[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
 
 #sort this bit out FIXME
 #md5sum -c portage-latest.tar.bz2.md5sum
