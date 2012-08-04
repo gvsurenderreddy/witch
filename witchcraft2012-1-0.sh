@@ -482,7 +482,8 @@ read PROFILESELECT
 echo "you can always try changing this later, using eselect."
 
 ###editor section to be improved
-echo "incase your chrooted environment"
+echo "incase your chrooted environment doesnt like your editor choice from your host os you can get a new one here."
+emerge -uqv nano
 CHEDITOR=nano #FIX ME augment that shit soon
 #EDITOR=nano
 echo "setting editor to $CHEDITOR " && sleep 1
@@ -783,10 +784,10 @@ e. no thnx (only if you are sure)
 select a,b,c or d and press ENTER.
 "
 read
-[ "$REPLY" == "a" ] emerge syslogd && rc-update add syslogd default
-[ "$REPLY" == "b" ] emerge syslog-ng && rc-update add syslog-ng default
-[ "$REPLY" == "c" ] emerge metalog && rc-update add metalog default
-[ "$REPLY" == "d" ] read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
+[ "$REPLY" == "a" ] && emerge syslogd && rc-update add syslogd default
+[ "$REPLY" == "b" ] && emerge syslog-ng && rc-update add syslog-ng default
+[ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
+[ "$REPLY" == "d" ] && read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 
 #put crons into function(s) too
 clear
