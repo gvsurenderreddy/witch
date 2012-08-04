@@ -38,10 +38,10 @@ sleep 1
 #to be completed
 #gentoo install
 #other installs too*
-#tazlito hackage
+#remastery (tazlito hackage... or: 
 #and loads of little bites here n there
 
-#other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, hadron, freebsd, openbsd, dragonflybsd, stali
+#* other installs inc (in one plausible order of construction) : funtoo, exherbo, arch, slitaz, crux, sabayon, hadron, freebsd, openbsd, dragonflybsd, stali
 
 #############
 #############
@@ -738,11 +738,11 @@ echo "Take special care with the keymap variable. If you select the wrong keymap
 sleep 1
 echo " do you need to change your keymap? "
 read
-[ "$REPLY" == "y" ] $CHEDITOR etc/conf.d/keymaps
+[ "$REPLY" == "y" ] && $CHEDITOR etc/conf.d/keymaps
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs. wanna change time? "
 read
-[ "$REPLY" == "y" ] $CHEDITOR /etc/conf.d/hwclock
+[ "$REPLY" == "y" ] && $CHEDITOR /etc/conf.d/hwclock
 # FIXME^ that was just barely a step past sheer lazy.
 clear
 echo "so according to what you have got now, the date is:" && date && sleep 3
