@@ -575,7 +575,7 @@ sleep 1
 echo "how would you like to get a kernel?
 g - gentoo-sources and genkernel 
 m - manual (incomplete)"
-echo
+echo " "
 read -p "select which option: "
 [ "$REPLY" == "g" ] && emerge genkernel && emerge gentoo-sources && genkernel all --menuconfig && ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
 [ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
@@ -669,8 +669,8 @@ read
 [ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
 [ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
 [ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
-[ "$REPLY" == "v" ] echo "well that is easily done.  ... done."
-[ "$REPLY" == "e" ] read -p "whadya call this computer (what is your hostname)?
+[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
+[ "$REPLY" == "e" ] && read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
 ENTER HOSTNAME:" HOSTNOM && echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
 
