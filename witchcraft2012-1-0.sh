@@ -249,11 +249,11 @@ read
 echo "not finished with your make.conf yet.  wanna pick a fast portage-mirror? "
 echo -n "
 m - manually edit 
-d - choose near mirror(s) with mirrorselect.
+d - choose near mirror(s) with mirrorselect. [reccommended
 v - vanilla - dont touch it."
 read
 [ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf" && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
+[ "$REPLY" == "d" ] && echo "now we cleverly do: mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf" && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
 
 #might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
@@ -365,6 +365,25 @@ emerge --sync --quiet
 
 echo "portage up to date." && sleep 1
 # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
+
+#################################################################################
+#this is the best work-around i've come up with yet to deal with passing the required variables to the chrooted environment.  it's not ideal, i know, and i'm certain there's a more elegant solution out there, but for now, this will have to do.
+echo "since you're now well and truly in your newly chrooted environment, you need to set some variables again.  ~ this is an unfortunate kludge solution.  hack up, or put up. ~"
+echo 
+cheditorselect() {
+echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" && read -r CHEDITOR
+;
+}
+
+chbrowserselect() {
+echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" && read -r CHBROWSER
+;
+}
+
+cheditorselect
+chbrowserselect
+#mibi move it to before the portage sync'ing?
+#################################################################################
 
 
 #put profile selection into own function(s) too?  variablise and caseifthenesac it for the various bases and their variations (such as the number of profiles they offer)
@@ -483,12 +502,13 @@ read PROFILESELECT
 
 echo "you can always try changing this later, using eselect."
 
+######start of chroot, i added a cheditor and chbrowser bit.  so this is redundant now... i hope, since i commented it out.
 ###editor section to be improved
-echo "incase your chrooted environment doesnt like your editor choice from your host os you can get a new one here."
-emerge -uqv nano
-CHEDITOR=nano #FIX ME augment that shit soon
+#echo "incase your chrooted environment doesnt like your editor choice from your host os you can get a new one here."
+#emerge -uqv nano
+#CHEDITOR=nano #FIX ME augment that shit soon
 #EDITOR=nano
-echo "setting editor to $CHEDITOR " && sleep 1
+#echo "setting editor to $CHEDITOR " && sleep 1
 
 #######
 #useflags section.
@@ -548,6 +568,7 @@ read
 [ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
 [ "$REPLY" == "v" ] && echo "well that is easily done.  ... done.  locale.gen as is."
 
+#consider changing to "locale-gen -a" ~ see man page, and try it out. or add that as an option above.
 echo "now running locale-gen" && locale-gen
 sleep 1
 
@@ -577,7 +598,7 @@ g - gentoo-sources and genkernel
 m - manual (incomplete)"
 echo " "
 read -p "select which option: "
-[ "$REPLY" == "g" ] && emerge genkernel && emerge gentoo-sources && genkernel all --menuconfig && ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+[ "$REPLY" == "g" ] && emerge genkernel gentoo-sources && genkernel all --menuconfig && ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
 [ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
 
 echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
