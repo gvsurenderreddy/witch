@@ -1,3 +1,19 @@
+the witch free software distribution's philosophy thing, sorta.
+
+
+--attempted short/concise version:
+
+no centralised organisation.  a bazaar made of as many microcathedrals or bazaars or hybrids as there are user/developers.  everyone, no matter how small their input, is a developer.  no two teir distinction.  everyone can have their own witch.  anyone can contribute.  it's a do-ocracy. 
+
+ ~ it kinda resembles wicca in this regard.
+
+and... it must be the weight of a duck, or else it's not a witch.
+
+(so this is Digit saying his releases of witch are not THE releases of witch, they're just some releases of witch)
+
+
+
+--an older version:
 as with all decent distros, there's a core principle or philosophy which guides it's development, witch is no different in this regard.
 in practice, witch's philosophy looks like everyone creating their own distro.  building your own witch, doesnt even require you to start from an existing witch as your base/meta distro, and addapting that to become your own "version" of witch.   if you like this "no central hierarchy" philosophy, then witch is likely for you.
 you can take an existing witch, e.g. the debian-based rowan alpha4, fix it's bootloader and apt sources list, rebrand it with a new name (e.g. zelda), and release that witch.  the whimsical naming is up to you, but so far the names for existing and vapourware witches, are all quite like you might expect a witch in fiction to be called (rowan, willow, jamella, kali, etc).
