@@ -177,7 +177,7 @@ read
 # appears that to automate it
 # use netstat + wget
 
-if [ "$REPLY" == "y"]
+if [ "$REPLY" == "y" ]
 then
     $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml 
     read -p "ready to continue? (y):" 
