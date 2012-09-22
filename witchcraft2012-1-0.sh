@@ -335,8 +335,15 @@ initialmakeconf() {
 ###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
 
 #backup the original one.
-if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ] ; then cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup ; else cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ; fi ;
-echo "made backup make.conf" && sleep 1
+if [ -f /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal ]
+then 
+    cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup
+else 
+    cp /mnt/$DISTRONAME/etc/make.conf /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal
+fi
+
+echo "made backup make.conf"
+sleep 1
 
 #put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
 echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we have not chrooted into your new system yet.)"
@@ -348,22 +355,57 @@ c - copy from _____
 v - vanilla - dont touch it!
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf"
 read
-[ "$REPLY" == "m" ] && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." | tee /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
-[ "$REPLY" == "u" ] && cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
+if [ "$REPLY" == "m" ] 
+then
+ $EDITOR /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "d" ]
+then
+    echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." | tee /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "w" ] 
+then
+    echo "enter the url where your make.conf is located:" 
+    read MAKECONFURL
+    wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "c" ]
+then 
+    echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" 
+    read MAKECONFLOC
+    cp $MAKECONFLOC /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "v" ] 
+then
+    echo "well that is easily done.  ... done."
+
+elif [ "$REPLY" == "u" ] 
+then
+    cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
+
+fi
 
 echo "not finished with your make.conf yet.  wanna pick a fast portage-mirror? "
 echo -n "
 m - manually edit 
 d - choose near mirror(s) with mirrorselect. [reccommended
 v - vanilla - dont touch it."
-read
-[ "$REPLY" == "m" ] && echo "forget to do that first time?" && $EDITOR /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "d" ] && echo "now we cleverly do: mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf" && mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
+read REPLY
+
+if [ "$REPLY" == "m" ]
+then 
+    echo "forget to do that first time?" 
+    $EDITOR /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "d" ]
+then 
+    echo "now we cleverly do: mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf" 
+    mirrorselect -i -o >> /mnt/$DISTRONAME/etc/make.conf
+
+elif [ "$REPLY" == "v" ]
+then 
+    echo "well that is easily done.  ... done."
+fi
 
 #might this chunk aught be looped? so multiple checks can be done after edits?  or is that just silly?
 #no, it is silly as it is now.
@@ -372,11 +414,19 @@ sleep 3
 more /mnt/$DISTRONAME/etc/make.conf
 echo "does that look right? (y/n)"
 read
-[ "$REPLY" == "n" ] && echo "fix it then:" && sleep 1 && $EDITOR /mnt/$DISTRONAME/etc/make.conf
+
+if [ "$REPLY" == "n" ]
+then 
+    echo "fix it then:" 
+    sleep 1 
+    $EDITOR /mnt/$DISTRONAME/etc/make.conf
+fi
+
 #remove this line if the above suggested looping gets made
 echo "well if it is not sorted as you want, you can always tweak it later."
 #might wanna consider making that able to be called any time (or at least specific non-borky times)
-sleep 1 ;
+sleep 1
+
 }
 # initialmakeconf
 #############
@@ -480,13 +530,13 @@ echo "portage up to date." && sleep 1
 echo "since you're now well and truly in your newly chrooted environment, you need to set some variables again.  ~ this is an unfortunate kludge solution.  hack up, or put up. ~"
 echo 
 cheditorselect() {
-echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" && read -r CHEDITOR
-;
+    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
+    read CHEDITOR
 }
 
 chbrowserselect() {
-echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" && read -r CHBROWSER
-;
+    echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):"
+    read CHBROWSER
 }
 
 cheditorselect
@@ -511,6 +561,8 @@ echo "
     a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9, j=10, k=11, l=12, m=13, n=14, o=15"
 
 read PROFILESELECT
+
+<<COMMENT1
 [ "$REPLY" == "a" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 1
 [ "$REPLY" == "b" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 2
 [ "$REPLY" == "c" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 3
@@ -526,88 +578,89 @@ read PROFILESELECT
 [ "$REPLY" == "m" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 13
 [ "$REPLY" == "n" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 14
 [ "$REPLY" == "o" ] && echo "choice was $PROFILESELECT.doing: eselect profile set 1" && eselect profile set 15
+COMMENT1
 
-#case $PROFILESELECT in
-#        a)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 1"
-#                sleep 1
-#                eselect profile set 1
-#                ;;
-#        b)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 2"
-#                sleep 1
-#                eselect profile set 2
-#                ;;
-#        c)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 3"
-#                sleep 1
-#                eselect profile set 3
-#                ;;
-#        d)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 4"
-#                sleep 1
-#                eselect profile set 4
-#                ;;
-#        e)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 5"
-#                sleep 1
-#                eselect profile set 5
-#                ;;
-#        f)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 6"
-#                sleep 1
-#                eselect profile set 6
-#                ;;
-#        g)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 7"
-#                sleep 1
-#                eselect profile set 7
-#                ;;
-#        h)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 8"
-#                sleep 1
-#                eselect profile set 8
-#                ;;
-#        i)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 9"
-#                sleep 1
-#                eselect profile set 9
-#                ;;
-#        j)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 10"
-#                sleep 1
-#                eselect profile set 10
-#                ;;
-#        k)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 11"
-#                sleep 1
-#                eselect profile set 11
-#                ;;
-#        l)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 12"
-#                sleep 1
-#                eselect profile set 12
-#                ;;
-#        m)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 13"
-#                sleep 1
-#                eselect profile set 13
-#                ;;
-#        n)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 14"
-#                sleep 1
-#                eselect profile set 14
-#                ;;
-#        o)
-#                echo "Choice was $PROFILESELECT. doing: eselect profile set 15"
-#                sleep 1
-#                eselect profile set 15
-#                ;;
-#        *)
-#                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you have gone wrong."
-#                exit 1
-#                ;;
-#esac
+case $PROFILESELECT in
+        a)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 1"
+                sleep 1
+                eselect profile set 1
+                ;;
+        b)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 2"
+                sleep 1
+                eselect profile set 2
+                ;;
+        c)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 3"
+                sleep 1
+                eselect profile set 3
+                ;;
+        d)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 4"
+                sleep 1
+                eselect profile set 4
+                ;;
+        e)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 5"
+                sleep 1
+                eselect profile set 5
+                ;;
+        f)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 6"
+                sleep 1
+                eselect profile set 6
+                ;;
+        g)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 7"
+                sleep 1
+                eselect profile set 7
+                ;;
+        h)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 8"
+                sleep 1
+                eselect profile set 8
+                ;;
+        i)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 9"
+                sleep 1
+                eselect profile set 9
+                ;;
+        j)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 10"
+                sleep 1
+                eselect profile set 10
+                ;;
+        k)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 11"
+                sleep 1
+                eselect profile set 11
+                ;;
+        l)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 12"
+                sleep 1
+                eselect profile set 12
+                ;;
+        m)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 13"
+                sleep 1
+                eselect profile set 13
+                ;;
+        n)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 14"
+                sleep 1
+                eselect profile set 14
+                ;;
+        o)
+                echo "Choice was $PROFILESELECT. doing: eselect profile set 15"
+                sleep 1
+                eselect profile set 15
+                ;;
+        *)
+                echo "Valid Choices are a,b,c,d,e,f,g,,i,j,k,l,m,n,o, so you have gone wrong."
+                exit 1
+                ;;
+esac
 
 echo "you can always try changing this later, using eselect."
 
@@ -642,13 +695,36 @@ c - copy from _____ (warning this will overwrite existing make.conf)
 v - vanilla - dont touch it!  leave as is now.
 u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
 enter letter of preference: "
-read
-[ "$REPLY" == "m" ] && $CHEDITOR /etc/make.conf
-[ "$REPLY" == "d" ] && echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf #
-[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/make.conf
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/make.conf
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
-[ "$REPLY" == "u" ] && cp /usr/share/portage/config/make.conf /etc/make.conf 
+read REPLY
+case $REPLY in 
+    m) 
+		$CHEDITOR /etc/make.conf 
+    ;;
+
+    d) 
+		echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf 
+	;;
+
+	w) 
+		echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
+		read MAKECONFURL 
+		wget $MAKECONFURL -o /etc/make.conf
+	;;
+
+	c)
+		echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
+		read MAKECONFLOC
+		cp $MAKECONFLOC /etc/make.conf
+	;;
+	
+	v)
+		echo "well that is easily done.  ... done."
+	;;
+
+	u) 
+		cp /usr/share/portage/config/make.conf /etc/make.conf 
+	;;
+esac
 
 #FIXME ^ default
 
@@ -670,12 +746,32 @@ w - wget from _____ (warning this will overwrite existing locale.gen)
 c - copy from _____ (warning this will overwrite existing locale.gen)
 v - vanilla - dont touch it!  leave as is now.
 "
-read
-[ "$REPLY" == "m" ] && $CHEDITOR /etc/locale.gen
-[ "$REPLY" == "d" ] && echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen #
-[ "$REPLY" == "w" ] && echo "enter the url where your make.conf is located:" && read -r MAKECONFURL && wget $MAKECONFURL -o /etc/locale.gen
-[ "$REPLY" == "c" ] && echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" && read -r MAKECONFLOC && cp $MAKECONFLOC /etc/locale.gen
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done.  locale.gen as is."
+read REPLY
+case $REPLY in
+	m)
+		$CHEDITOR /etc/locale.gen
+	;;
+
+	d) 
+		echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen
+	;;
+
+	w) 
+		echo "enter the url where your make.conf is located:" 
+		read MAKECONFURL 
+		wget $MAKECONFURL -o /etc/locale.gen
+	;;
+
+	c) 
+		echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
+		read MAKECONFLOC 
+		cp $MAKECONFLOC /etc/locale.gen
+	;;
+
+	v)
+		echo "well that is easily done.  ... done.  locale.gen as is."
+	;;
+esac
 
 #consider changing to "locale-gen -a" ~ see man page, and try it out. or add that as an option above.
 echo "now running locale-gen" && locale-gen
@@ -707,8 +803,17 @@ g - gentoo-sources and genkernel
 m - manual (incomplete)"
 echo " "
 read -p "select which option: "
-[ "$REPLY" == "g" ] && emerge genkernel gentoo-sources && genkernel all --menuconfig && ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
-[ "$REPLY" == "m" ] && echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
+case $REPLY in
+	g) 
+		emerge genkernel gentoo-sources
+		genkernel all --menuconfig 
+		ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+	;;
+
+	m) 
+		echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
+	;;
+esac
 
 echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
 
@@ -750,9 +855,20 @@ s - skip           (manual later)
 g - guided         (warning incomplete)
 select which option:   "
 read
-[ "$REPLY" == "m" ] && echo "manual editing /etc/fstab selected" && $CHEDITOR /etc/fstab
-[ "$REPLY" == "s" ] && echo "skipping..."
-[ "$REPLY" == "g" ] && echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
+case $REPLY in
+	m) 
+		echo "manual editing /etc/fstab selected" 
+		$CHEDITOR /etc/fstab
+	;;
+
+	s) 
+		echo "skipping..."
+	;;
+
+	g)
+	echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
+	;;
+esac
 
 # FIXME ^ inset the fstab populator bit.  && add the variable-ised root, home n boot partitions... 
 
@@ -795,14 +911,39 @@ c - copy from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 v - vanilla - dont touch it.  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/hostname)"
 read
-[ "$REPLY" == "m" ] && echo "ok, to $CHEDITOR /etc/conf.d/hostname" && $CHEDITOR /etc/conf.d/hostname
-[ "$REPLY" == "d" ] && echo "witchgnubox" > /etc/conf.d/hostname #
-[ "$REPLY" == "w" ] && echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/hostname
-[ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/hostname
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
-[ "$REPLY" == "e" ] && read -p "whadya call this computer (what is your hostname)?
+case $REPLY in
+	m)
+		echo "ok, to $CHEDITOR /etc/conf.d/hostname" 
+		$CHEDITOR /etc/conf.d/hostname
+	;;
+
+	d) 
+		echo "witchgnubox" > /etc/conf.d/hostname #
+	;;
+
+	w) 
+		echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):"
+		read HOSTNOMURL 
+		wget $HOSTNOMURL -o /etc/conf.d/hostname
+	;;
+
+	c) 
+		echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" 
+		read HOSTNOMLOC 
+		cp $HOSTNOMLOC /etc/conf.d/hostname
+	;;
+
+	v) 
+		echo "well that is easily done.  ... done."
+	;;
+
+	e) 
+		read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
-ENTER HOSTNAME:" HOSTNOM && echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
+ENTER HOSTNAME:" HOSTNOM 
+		echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
+	;;
+esac
 
 # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
 echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
@@ -815,22 +956,63 @@ w - wget from _____ (warning this will overwrite existing /etc/conf.d/net)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/net)
 v - RECOMMENDED: vanilla - dont touch it!  leave as is now.
 e - enter network name now. (warning this will overwrite existing /etc/conf.d/net)"
-read
-[ "$REPLY" == "m" ] && $CHEDITOR /etc/conf.d/net
-[ "$REPLY" == "d" ] && echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
-[ "$REPLY" == "w" ] && echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" && read -r HOSTNOMURL && wget $HOSTNOMURL -o /etc/conf.d/net
-[ "$REPLY" == "c" ] && echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):" && read -r HOSTNOMLOC && cp $HOSTNOMLOC /etc/conf.d/net
-[ "$REPLY" == "v" ] && echo "well that is easily done.  ... done."
-[ "$REPLY" == "e" ] && echo "whadya call this network (what is your net)?
-- this will be set in /etc/conf.d/net" && read -p "ENTER DOMAIN NAME:" DOMNOM && echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
+read REPLY
+case $REPLY in
+	m)
+		$CHEDITOR /etc/conf.d/net
+	;;
+
+	d) 
+		echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
+	;;
+
+	w) 
+		echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
+		read -r HOSTNOMURL 
+		wget $HOSTNOMURL -o /etc/conf.d/net
+	;;
+
+	c) 
+		echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):"
+		read HOSTNOMLOC
+		cp $HOSTNOMLOC /etc/conf.d/net
+	;;
+
+	v) 
+		echo "well that is easily done.  ... done."
+	;;
+
+	e) 
+		echo "whadya call this network (what is your net)?
+- this will be set in /etc/conf.d/net"
+		read -p "ENTER DOMAIN NAME:" DOMNOM
+		echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
+	;;
+esac
 
 echo "u wanna use dhcp right? y/n:  "
-read
-[ "$REPLY" == "y" ] && echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
+read REPLY
+if [ "$REPLY" == "y" ] 
+then
+	echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
+fi
 
 echo "and u want to have networking activated at boot automatically for you, of course, right? y/n:  "
-read
-[ "$REPLY" == "y" ] && echo "ok.. " && echo "cd /etc/init.d" && cd /etc/init.d && echo "ln -s net.lo net.eth0" && ln -s net.lo net.eth0 && echo "this next bit is clever.  you should learn about rc-update.  a nice feature of gentoo." && echo "rc-update add net.eth0 default" && rc-update add net.eth0 default
+read REPLY
+if [ "$REPLY" == "y" ] 
+then
+	echo "ok.. " 
+
+	echo "cd /etc/init.d" 
+	cd /etc/init.d 
+
+	echo "ln -s net.lo net.eth0"
+	ln -s net.lo net.eth0 
+
+	echo "this next bit is clever.  you should learn about rc-update.  a nice feature of gentoo." 
+	echo "rc-update add net.eth0 default" 
+	rc-update add net.eth0 default
+fi
 
 echo "If you have several network interfaces, you need to create the appropriate net.eth1, net.eth2 etc. just like you did with net.eth0."
 
@@ -842,7 +1024,10 @@ echo "127.0.0.1     $HOSTNOM.$DOMNOM $HOSTNOM localhost" > /etc/hosts
 #PCMCIA section.
 echo "do you need PCMCIA? y/n:  "
 read
-[ "$REPLY" == "y" ] && emerge pcmciautils
+if [ "$REPLY" == "y" ] 
+then
+	emerge pcmciautils
+fi
 
 
 ##############
@@ -857,9 +1042,14 @@ echo "First we set the root password with \"passwd\""
 passwd
 echo "that should be your root password configured.  dont forget it, remember it."
 
-echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :) ... iz u ready for this? (y):" && sleep 2
-read
-[ "$REPLY" == "y" ] && $CHEDITOR /etc/rc.conf
+echo "Gentoo uses /etc/rc.conf for general, system-wide configuration. Here comes /etc/rc.conf, enjoy all the comments in that file :) ... iz u ready for this? (y):" 
+sleep 2
+
+read REPLY
+if [ "$REPLY" == "y" ]
+then 
+	$CHEDITOR /etc/rc.conf
+fi
 
 clear
 echo "hopefully you have got all you need, sorted in rc.conf.  if you changed your editor in rc.conf, this next bit should use it instead now."
@@ -870,19 +1060,27 @@ echo "Take special care with the keymap variable. If you select the wrong keymap
 sleep 1
 echo " do you need to change your keymap? "
 read
-[ "$REPLY" == "y" ] && $CHEDITOR etc/conf.d/keymaps
+if [ "$REPLY" == "y" ] 
+then
+	$CHEDITOR etc/conf.d/keymaps
+fi
 
 echo "Gentoo uses /etc/conf.d/hwclock to set clock options. Edit it according to your needs. wanna change time? "
 read
-[ "$REPLY" == "y" ] && $CHEDITOR /etc/conf.d/hwclock
+if [ "$REPLY" == "y" ] 
+then
+	$CHEDITOR /etc/conf.d/hwclock
+fi
 # FIXME^ that was just barely a step past sheer lazy.
+
 clear
-echo "so according to what you have got now, the date is:" && date && sleep 3
+echo "so according to what you have got now, the date is:" && date 
+sleep 3
 echo "ok, so you should probably have your network, main config file (rc.conf), keyboard and clock configured.
 now lets get tooled up with a system logger, command scheduler, and more file and network tools."
 sleep 1
-echo "
- Installing Necessary System Tools"
+echo ""
+echo "Installing Necessary System Tools"
 sleep 1
 echo "system logger"
 clear 
@@ -914,11 +1112,29 @@ e. no thnx (only if you are sure)
 
 select a,b,c or d and press ENTER.
 "
-read
-[ "$REPLY" == "a" ] && emerge syslogd && rc-update add syslogd default
-[ "$REPLY" == "b" ] && emerge syslog-ng && rc-update add syslog-ng default
-[ "$REPLY" == "c" ] && emerge metalog && rc-update add metalog default
-[ "$REPLY" == "d" ] && read -p "enter name of your choice of system logger: " SYSLOGA && emerge $SYSLOGA && rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
+read REPLY
+case $REPLY in
+	a) 
+		emerge syslogd 
+		rc-update add syslogd default
+	;;
+
+	b) 
+		emerge syslog-ng 
+		rc-update add syslog-ng default
+	;;
+
+	c)
+		emerge metalog 
+		rc-update add metalog default
+	;;
+
+	d)
+		read -p "enter name of your choice of system logger: " SYSLOGA  
+		emerge $SYSLOGA 
+		rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
+	;;
+esac
 
 #put crons into function(s) too
 clear
@@ -940,16 +1156,37 @@ c. emerge fcron && rc-update add fcron default && crontab /etc/crontab
 d. enter name of other cron 
 e. no cron (r u sure?)"
 read
-[ "$REPLY" == "a" ] && emerge vixie-cron && rc-update add vixie-cron default
-[ "$REPLY" == "b" ] && emerge dcron && rc-update add dcron default && crontab /etc/crontab
-[ "$REPLY" == "c" ] && emerge fcron && rc-update add fcron default && crontab /etc/crontab
-[ "$REPLY" == "d" ] && read -p  "enter name of your choice of cron: " CRONNER && emerge $CRONNER && rc-update add $CRONNER default && crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
+case $REPLY in
+	a) 
+		emerge vixie-cron 
+		rc-update add vixie-cron default
+	;;
+
+	b) 
+		emerge dcron 
+		rc-update add dcron default 
+		crontab /etc/crontab
+	;;
+
+	c)
+		emerge fcron 
+		rc-update add fcron default 
+		crontab /etc/crontab
+	;;
+
+	d) 
+		read -p  "enter name of your choice of cron: " CRONNER 
+		emerge $CRONNER
+		rc-update add $CRONNER default
+		crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
+	;;
+esac
 
 #functionise
 echo "If you want to index your files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
 do you want locate? (y)"
 read
-[ "$REPLY" == "y" ] && emerge mlocate
+if [ "$REPLY" == "y" ] then emerge mlocate fi
 
 #functionise
 #re-write to add automation and other options?
@@ -961,9 +1198,9 @@ q. neither
 "
 read
 
-[ "$REPLY" == "d" ] && emerge phcpd
-[ "$REPLY" == "d" ] && emerge ppp
-[ "$REPLY" == "d" ] && emerge dhcp ppp
+if [ "$REPLY" == "d" ] then emerge phcpd fi
+if [ "$REPLY" == "d" ] then emerge ppp fi
+if [ "$REPLY" == "d" ] then emerge dhcp ppp fi
 
 clear
 sleep 1
@@ -1642,4 +1879,4 @@ case $WITCHCRAFTMODE in
 esac
 
 # aw, this script was leet with merely 1337 lines of code before.  damn you bloat!
-# hey it's 1633 now... time to refactorz! at least it's VERY clean now.
+# hey it's 1882 now... time to refactorz! at least it's VERY clean now.
