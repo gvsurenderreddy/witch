@@ -1,6 +1,8 @@
 #! /bin/bash
 #written by digit.  most ambitious project yet. see http://github.com/Digit/witch for more
 
+#refactorise branch
+
 #latest development plan. along with re-functionising more chunks, make a function menu from which install processes etc, can be accessed non-linearly, and include at all apropriate multi-choice questions, an option to return to this navigational index function map.  easy, savy.  one function to rule all functions, as n when the user wants... and, more to the imediately pertinent reason, so that testing it isnt such a pain in the hoooooop!  ... half an hour to get through to check for the bugs near the end.  gah.
 
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
