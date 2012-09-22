@@ -6,6 +6,12 @@
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
+#root check
+if [[ $EUID -ne 0 ]]; then
+  echo "You must, YOU MUST, run this in root." 2>&1
+  exit 1
+fi
+
 ### dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up some more still.
 # will remove this guff when the comments n shiz r cleaned up of those redundant or irelevent or outdated or just guff...
 
@@ -160,10 +166,16 @@ sleep 1
 echo ok
 sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-echo "READ INSTRUCTIONS CAREFULLY ~ here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/ ~ once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
-Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
-echo "ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
+echo "READ INSTRUCTIONS CAREFULLY ~"
+echo "here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/"
+echo "once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
+echo "Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
+echo ""
+echo "ready to follow those instructions? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
+
+# appears that to automate it
+# use netstat + wget
 
 if [ "$REPLY" == "y"]
 then
