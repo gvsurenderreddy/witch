@@ -11,7 +11,6 @@
 
 #version (probably gonna keep version as "concept v0.00" until it's at least ready for a trial run.
 echo "VERSION: gentoo install test v0.00 " #oldversion#echo "VERSION: concept v0.00"
-sleep 1
 echo "(means dont try to run it yet, for the sake of your computer.  retreat while you can.)"
 sleep 3
 
@@ -45,33 +44,40 @@ sleep 1
 
 #############
 #############
-#############
-#############
 ### functions
 #############
 #############
-#############
-#############
-
-
 
 ############
 #############
 # driveprep
 
 driveprep() {
+
 #this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
-if [ ! -d /mnt/$a ]; then mkdir /mnt ; fi
+if [ ! -d /mnt/$a ]
+then 
+    mkdir /mnt 
+fi
 
 echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt/___.):"
 read -r DISTRONAME
-if [ ! -d /mnt/$DISTRONAME/$a ]; then mkdir /mnt/$DISTRONAME ; fi
+if [ ! -d /mnt/$DISTRONAME/$a ]
+then 
+    mkdir /mnt/$DISTRONAME
+fi
 
 cd /mnt/$DISTRONAME
 
-echo "do you need to partition? (y/n):" && read
-[ "$REPLY" == "y" ] && partmanselector #calls the partition manager selection function "partmanselector"
-[ "$REPLY" == "n" ] && echo "ok, ready to go so..."
+echo "do you need to partition? (y/n):"
+read REPLY
+if [ "$REPLY" == "y" ]
+then
+    partmanselector #calls the partition manager selection function "partmanselector"
+elif [ "$REPLY" == "n" ]
+then 
+    echo "ok, ready to go so..."
+fi
 
 echo "where ya putting your root dir? (e.g. sda3):"
 read -r ROOTDEV
@@ -79,17 +85,44 @@ mount /dev/$ROOTDEV /mnt/$DISTRONAME
 
 echo "you want a separate boot right? (y):"
 read
-[ "$REPLY" == "y" ] && if [ ! -d /mnt/$DISTRONAME/boot/$a ]; then mkdir /mnt/$DISTRONAME/boot ; fi && echo "where ya putting your boot dir? (e.g. sda1):" && read -r BOOTDEV && mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+if [ "$REPLY" == "y" ]
+then
+    if [ ! -d /mnt/$DISTRONAME/boot/$a ]
+    then 
+        mkdir /mnt/$DISTRONAME/boot
+    fi 
+
+    echo "where ya putting your boot dir? (e.g. sda1):"
+    read -r BOOTDEV 
+    mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot
+fi
 # i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
 
 echo "you want a separate home too? (y):"
 read
-[ "$REPLY" == "n" ] && echo "ok your home partition will just be lumped in with root, like the stupid people use."
-[ "$REPLY" != "y" ] && echo "i think you\'ve gone wrong ~ should probably start this section again, and go hack the script to ask this section more sensibly, in more functions, so it can loop around back to the same question when you answer wrong... you could go badger digit to sort that if you are too scared to learn how."
-[ "$REPLY" == "y" ] && if [ ! -d /mnt/$DISTRONAME/home/$a ]; then mkdir /mnt/$DISTRONAME/home ; fi && echo "where ya putting your home dir? (e.g. sda1):" && read -r HOMEDEV && mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
 
+if [ "$REPLY" == "n" ]
+then 
+    echo "ok your home partition will just be lumped in with root, like the stupid people use."
 
-echo "drive prep complete" && sleep 1;
+elif [ "$REPLY" != "y" ]
+then
+    echo "i think you\'ve gone wrong ~ should probably start this section again, and go hack the script to ask this section more sensibly, in more functions, so it can loop around back to the same question when you answer wrong... you could go badger digit to sort that if you are too scared to learn how."
+
+elif [ "$REPLY" == "y" ]
+then
+    if [ ! -d /mnt/$DISTRONAME/home/$a ]
+    then 
+        mkdir /mnt/$DISTRONAME/home 
+    fi 
+
+echo "where ya putting your home dir? (e.g. sda1):" 
+read -r HOMEDEV
+mount /dev/$HOMEDEV /mnt/$DISTRONAME/home
+fi
+
+echo "drive prep complete" 
+sleep 1;
 }
 
 # driveprep
@@ -128,13 +161,47 @@ echo ok
 sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~ here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/ ~ once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system.  
-Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume. 
-ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
+Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
+echo "ready to do find your stage3? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
-[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it is there?  give up and run away crying?  try again?  well, it\'s up to you.  ... taking u back to stage3 start." && stage3 ; fi
-[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/stage3-* ] ; then echo "excellent you seem to have got your stage3 downloaded successfully." ; else echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying?  try again?  well, it\'s up to you." && stage3 ; fi
-#this is just mucking around when i got a lil stressed n needed some whimsical relief.
-[ "$REPLY" == "n" ] && echo "well bloody go n get ready would ya!  " && sleep 2 && echo -n "we\'ll wait.  " && sleep 2 && echo -n "hurry up though.  " && sleep 2 && echo -n "we don\'t have all day.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "oh wait... " && sleep 2 && echo -n "actually we do have all day, because this is just a script, and it\'s no skin off our nose if you\'ve decided to fail.  " && sleep 3 && echo -n "and anyways... we\'re just dicking you around...  " && sleep 2 && echo -n "this isnt actually leading anywhere usefull...  " && sleep 2 && echo -n "you should just go start this script again, and do it right.  " && sleep 3 && echo -n "but do carry on waiting if you like  ... " && sleep 2 && echo -n "this could go on all day.  " && sleep 2 && echo -n "...  " && sleep 2 && echo -n "allllll day.  " && sleep 7 && echo -n "hey, you\'re not still here are you?  " && sleep 3 && echo -n "look we\'ve told you already...  " && sleep 2 && echo -n "go away, there\'s nothing to see here.  " && sleep 2 && echo -n "this is just some stupid crap in the middle of this script for no practical use.   " && sleep 2 && echo -n "what...   " && sleep 2 && echo -n "you think it\'s funny?   " && sleep 1 && echo -n "or something?    " && sleep 2 && echo -n "ok, enough is enough.  i\'ll be back in an hour to see if you are still here...   " && sleep 1h && echo -n "told you i\'d be back.  " && sleep 3 && echo -n ";)    " && sleep 2 && echo -n "i admit, i didnt think you would still be here though.  " && sleep 2 && echo -n "impressive persiverance.  " && sleep 4 && echo -n "if you dont bog off though... i\'ll hose your system...  "   && sleep 2 && echo -n "you have been warned. " && sleep 2d && echo -n "so long sucka... final warning... about to do rm on your root dir!  " && sleep 2 && echo -n "9" && sleep 1 && echo -n "8" && sleep 1 && echo -n "7" && sleep 1 && echo -n "6" && sleep 1 && echo -n "5" && sleep 1 && echo -n "4" && sleep 1 && echo -n "3" && sleep 1 && echo -n "2" && sleep 1 && echo -n "1" && sleep 1 && echo -n "so long sucka" && echo "rm -rf /" && sleep 14 && echo "just kidding" && sleep 3 && echo "though it is seriously surprising now that you are still here...  " && sleep 2 && echo -n "you are either insane, afk, or ..." && sleep 2 && echo -n "...or i dont know what... but you should not be here reading this crap anymore." && sleep 2 && echo -n "  ..."&& sleep 2 && echo -n " it seems there\'s only one thing left to do.  " && sleep 2 && echo -n "..." && sleep 2 && echo -n "stop giving you crap to read.  "  && sleep 2 && echo -n "it must be the onlything keeping you here all this time.." && sleep 2 && echo -n "so no more..." && sleep 3 && clear && sleep 999h && exit
+
+if [ "$REPLY" == "y"]
+then
+    $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml 
+    read -p "ready to continue? (y):" 
+
+    if [ "$REPLY" == "y" ] 
+    then 
+        echo "proceeding" 
+        if [ -f /mnt/$DISTRONAME/stage3-* ]
+        then
+            echo "excellent you seem to have got your stage3 downloaded successfully." 
+            stage3
+        fi
+    fi
+
+elif [ "$REPLY" == "p" ] 
+then
+    $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    read -p "ready to continue? (y):" 
+    if [ "$REPLY" == "y" ]
+    then
+        echo "proceeding"
+        if [ -f /mnt/$DISTRONAME/stage3-* ]
+        then 
+            echo "excellent you seem to have got your stage3 downloaded successfully."
+        else 
+            echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying? try again?  well, it\'s up to you." 
+            stage3
+        fi 
+    fi
+
+#spam code removed.
+elif [ "$REPLY" == "n" ] 
+then 
+    exit
+
+fi
 
 #set this so user can choose if they want verbose output
 echo "unpacking your stage3. this may take some time, please wait."
@@ -174,7 +241,10 @@ deskfigselector
 # dev update... there was that guy... i forget who... i think im following him on github, has that simple install...  could consider hacking that up to make a direct automated (as much as possible), rowan witch install.
 #simpleinstall... see about adding a simplified install for presets.
 #one way to consider for this, add a variable that would permit stage3 install, and just automatically select all the defaults as much as is possible.
-simpleinstall()  { echo "incomplete portion of script, sorry" && sleep 2 && cauldren;
+simpleinstall()  { 
+echo "incomplete portion of script, sorry" 
+sleep 2 
+cauldren
 }
 
 # simpleinstall
@@ -199,8 +269,35 @@ echo "Press y to use \" $IBROWSER \" to navigate http://www.gentoo.org/main/en/m
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
 read -p "ready to download your portage (y - yes) (p - yes, with proxy support)"
 
-[ "$REPLY" == "y" ] && $IBROWSER http://www.gentoo.org/main/en/mirrors.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
-[ "$REPLY" == "p" ] && $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml && read -p "ready to continue? (y):" [ "$REPLY" == "y" ] && echo "proceeding" && if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] ; then echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." ; else echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" ; fi
+if [ "$REPLY" == "y" ]
+then 
+    $IBROWSER http://www.gentoo.org/main/en/mirrors.xml 
+    read -p "ready to continue? (y):" 
+    if [ "$REPLY" == "y" ] 
+    then
+        echo "proceeding" 
+        if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ]
+        then 
+            echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." 
+        else 
+            echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better"
+        fi
+    fi
+elif [ "$REPLY" == "p" ]
+then
+    $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    read -p "ready to continue? (y):" 
+    if [ "$REPLY" == "y" ] 
+    then 
+        echo "proceeding" 
+        if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] 
+        then 
+            echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully."
+        else 
+            echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+        fi
+    fi
+fi
 
 #sort this bit out FIXME
 #md5sum -c portage-latest.tar.bz2.md5sum
@@ -1131,7 +1228,7 @@ case $BASEDISTRO in
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this is where you get taken to the funtoo bit"
                 installbedrock
-		;;
+		        ;;
         3)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this is where you get taken to the funtoo bit"
@@ -1145,7 +1242,7 @@ case $BASEDISTRO in
         5)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the Gentoo/BSD bit"
-		cauldren
+		        cauldren
                 ;;
         6)
                 echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
@@ -1171,17 +1268,17 @@ case $BASEDISTRO in
                 echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
                 exit 1
                 ;;
-esac ;
+esac
 }
 
 editorselect() {
-echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" && read -r EDITOR
-;
+    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
+    read EDITOR
 }
 
 browserselect() {
-echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" && read -r BROWSER
-;
+    echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
+    read BROWSER
 }
 
 ##########
@@ -1221,14 +1318,24 @@ chmod a+rwxt tmp
 echo "you may want to review http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Optional directories before answering this question:"
 echo "do you want these optional directories?"
 read -p "mkdir -p lib/firmware \#(y/n)?"
-[ "REPLY" == "y" ] && mkdir -p lib/firmware
-read -p "mkdir -p var/chroot \#(y/n/e)"
-[ "REPLY" == "y" ] && mkdir -p var/chroot
-[ "REPLY" == "e" ] && echo "where would you like to put it then?" && read $BEDCHROOTS && mkdir -p $BEDCHROOTS
+if [ "REPLY" == "y" ]
+then 
+    mkdir -p lib/firmware
+    read -p "mkdir -p var/chroot \#(y/n/e)"
+
+    if [ "REPLY" == "y" ] 
+    then
+        mkdir -p var/chroot
+
+    elif [ "REPLY" == "e" ] 
+    then
+        echo "where would you like to put it then?" 
+        read $BEDCHROOTS
+        mkdir -p $BEDCHROOTS
+    fi
+fi
 
 echo "you may want to review \"http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Download core Bedrock Linux component sources\" for downloading of core components"
-
-
 
 echo "i tried to warn you that this bedrock section was incomplete, now look what you've done... stuck where you left off.  ... that's ok though, just follow the last link it was suggested you may have wanted to review, and carry on from there.";
 }
@@ -1259,7 +1366,8 @@ PACKAGEMANAGERNAME=portage
 ###editor section to be improved
 #EDITOR=mcedit
 editorselect
-echo "setting editor to $EDITOR " && sleep 1
+echo "setting editor to $EDITOR " 
+sleep 1
 #EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
 
@@ -1269,8 +1377,13 @@ echo "setting editor to $EDITOR " && sleep 1
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 echo "so when you use your browser to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
-echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):" && read
-[ "$REPLY" == "y" ] && echo "enter your proxy url (e.g.: proxy.server.com:8080)" && read -r PROX
+echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):"
+read REPLY
+if [ "$REPLY" == "y" ] 
+then
+    echo "enter your proxy url (e.g.: proxy.server.com:8080)"
+    read -r PROX
+fi
 
 #call the drive preparation function.
 driveprep
@@ -1435,7 +1548,7 @@ case $SPINTOP in
                 echo "Valid Choices are 1,2,3,4,5,6,7,8.  try again" && distroselector
                 exit 1
                 ;;
-esac ;
+esac
 
 #echo "what do you want your witch based on? (warning options are incomplete)"
 #select SPINTOP in \
@@ -1517,3 +1630,4 @@ case $WITCHCRAFTMODE in
 esac
 
 # aw, this script was leet with merely 1337 lines of code before.  damn you bloat!
+# hey it's 1633 now... time to refactorz! at least it's VERY clean now.
