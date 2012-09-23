@@ -36,19 +36,19 @@ sleep 1
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #call the drive preparation function.
-clear && ./procedure.d/gentoo/driveprep.sh
+clear && ./utilities.d/driveprep.sh
 
 #call the stage installation function
-clear && ./procedure.d/gentoo/stageinstall.sh
+clear && ./procedure.d/stageinstall.sh
 
 #call the package manager installation function
-clear && ./procedure.d/gentoo/installpackagemanager.sh
+clear && ./procedure.d/installpackagemanager.sh
 
 #call the function for initial configuration of make.conf
-clear && ./procedure.d/gentoo/initialmakeconf.sh
+clear && ./procedure.d/initialmakeconf.sh
 
 #call the preparation for chroot
-clear && ./procedure.d/gentoo/prechroot.sh
+clear && ./procedure.d/prechroot.sh
 
 #call the wichroot
 clear && ./procedure.d/wichroot.sh
