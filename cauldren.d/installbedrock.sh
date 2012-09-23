@@ -4,7 +4,27 @@
 ##########
 ## bedrock
 
+read -p "enter the name of your new distro: " DISTRONAME
+echo $DISTRONAME > ./.config.base.txt #1st line
+
 METADISTRO=BEDROCK
+echo $METADISTRO >> ./.config.base.txt #2nd line
+
+# Add ARCH and PACKAGEMGR!!!
+
+echo "======================"
+DISTRONAME=$(sed -n '1p' ./.config.base.txt)
+METADISTRO=$(sed -n '2p' ./.config.base.txt)
+ARCH=$(sed -n '3p' ./.config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
+echo "DISTRONAME: $DISTRONAME"
+echo "METADISTRO: $METADISTRO"
+echo "ARCH: $ARCH"
+echo "PACKAGEMGR: $PACKAGEMGR"
+echo "======================"
+sleep 1
+
+
 # you are going to want to make extensive use of this link: http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html ; for the making of this variable.
 echo "sorry this part is just a place-holder so far.  please check out http://opensource.osu.edu/~paradigm/bedrock/ to garner some idea why digit is so keen to start to include bedrock ahead of funtoo and exherbo, and ahead of even getting the gentoo install completed."
 
@@ -13,7 +33,7 @@ sleep 2
 echo
 
 echo "you may want to review http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Partitioning before deciding how to partition"
-../../tools.d/driveprep.sh
+./tools.d/driveprep.sh
 
 echo "you may want to review \"http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Creating the directory structure\" to see what's going on here."
 echo "cd /mnt/$DISTRONAME"
@@ -48,4 +68,4 @@ fi
 
 echo "you may want to review \"http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Download core Bedrock Linux component sources\" for downloading of core components"
 
-echo "i tried to warn you that this bedrock section was incomplete, now look what you've done... stuck where you left off.  ... that's ok though, just follow the last link it was suggested you may have wanted to review, and carry on from there.";
+echo "i tried to warn you that this bedrock section was incomplete, now look what you've done... stuck where you left off.  ... that's ok though, just follow the last link it was suggested you may have wanted to review, and carry on from there."

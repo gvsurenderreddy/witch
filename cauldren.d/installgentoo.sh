@@ -5,8 +5,7 @@
 ### gentoo
 
 ## this section might be included in a seperate file.
-echo "Enter the name for your distro:"
-read $DISTRONAME
+read -p "enter the name of your new distro: " DISTRONAME
 echo $DISTRONAME > ./.config.base.txt #1st line
 
 METADISTRO=GENTOO #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
@@ -37,19 +36,19 @@ sleep 1
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #call the drive preparation function.
-clear && ./procedure.d/driveprep.sh
+clear && ./procedure.d/gentoo/driveprep.sh
 
 #call the stage installation function
-clear && ./procedure.d/stageinstall.sh
+clear && ./procedure.d/gentoo/stageinstall.sh
 
 #call the package manager installation function
-clear && ./procedure.d/installpackagemanager.sh
+clear && ./procedure.d/gentoo/installpackagemanager.sh
 
 #call the function for initial configuration of make.conf
-clear && ./procedure.d/initialmakeconf.sh
+clear && ./procedure.d/gentoo/initialmakeconf.sh
 
 #call the preparation for chroot
-clear && ./procedure.d/prechroot.sh
+clear && ./procedure.d/gentoo/prechroot.sh
 
 #call the wichroot
 clear && ./procedure.d/wichroot.sh

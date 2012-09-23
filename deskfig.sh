@@ -1,6 +1,7 @@
+clear
+
 ##########
 #idk, should i alias all the basic installer commands to unify across all base-distros, like a rosetta stone?
-
 
 function deskfigselector {
 echo "deskfigselector is temporarily out of order while fixing main install"
