@@ -36,19 +36,19 @@ then
 fi
 
 #call the drive preparation function.
-driveprep
+../tools.d/driveprep.sh
 
 #call the stage installation function
-stageinstall
+../tools.d/stageinstall.sh
 
 #call the package manager installation function
-installpackagemanager
+../tools.d/installpackagemanager.sh
 
 #call the function for initial configuration of make.conf
-initialmakeconf
+../tools.d/initialmakeconf.sh
 
 #call the preparation for chroot
-prechroot
+../tools.d/prechroot.sh
 
 #call the wichroot
 wichroot
