@@ -2,14 +2,18 @@
 #############
 # driveprep
 
+echo "======================"
+DISTRONAME=$(sed -n '1p' ./.config.base.txt)
+echo "(base) Distro name: $DISTRONAME"
+echo "======================"
+
 #this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
 if [ ! -d /mnt/$a ]
 then 
     mkdir /mnt 
 fi
 
-echo "enter name for your distro/mount-point and press [ENTER].  (this will make a directory of that name in /mnt/___.):"
-read -r DISTRONAME
+echo "base distro name is $DISTRONAME (this will make a directory of that name in /mnt/___.):"
 if [ ! -d /mnt/$DISTRONAME/$a ]
 then 
     mkdir /mnt/$DISTRONAME

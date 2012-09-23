@@ -2,11 +2,20 @@
 #############
 # stageinstall
 
-BROWSER=line=$(head -n 2 ./.config.txt)
-PROX=line=$(head -n 3 ./.config.txt)
+echo "Type in the browser you are going to use in the base system:"
+read IBBROWSER
 
-#added this line, just to be sure.
-cd /mnt/$DISTRONAME
+echo $IBBROWSER >> ./.config.txt #5th line
+
+echo "======================"
+IBBROWSER=$(sed -n '5p' ./.config.txt)
+PROX=$(sed -n '3p' ./.config.txt)
+echo "(base) Browser: $IBROWSER"
+echo "Proxy: $PROX"
+echo "======================"
+
+sleep 1
+echo 
 
 ###############
 #          _                                     _          
@@ -28,7 +37,7 @@ sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~"
 echo "here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/"
-echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
+echo "once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
 echo "Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
 echo ""
 echo "ready to follow those instructions? (y - yes) (p - yes, with proxy support ~ may not work)"
@@ -39,7 +48,7 @@ read
 
 if [ "$REPLY" == "y" ]
 then
-    $BROWSER http://www.gentoo.org/main/en/mirrors2.xml 
+    $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml 
     read -p "ready to continue? (y):" 
 
     if [ "$REPLY" == "y" ] 
@@ -48,13 +57,12 @@ then
         if [ -f /mnt/$DISTRONAME/stage3-* ]
         then
             echo "excellent you seem to have got your stage3 downloaded successfully." 
-            stage3
         fi
     fi
 
 elif [ "$REPLY" == "p" ] 
 then
-    $BROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
     read -p "ready to continue? (y):" 
     if [ "$REPLY" == "y" ]
     then
@@ -64,7 +72,6 @@ then
             echo "excellent you seem to have got your stage3 downloaded successfully."
         else 
             echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying? try again?  well, it\'s up to you." 
-            stage3
         fi 
     fi
 
@@ -72,7 +79,6 @@ then
 elif [ "$REPLY" == "n" ] 
 then 
     exit
-
 fi
 
 #set this so user can choose if they want verbose output

@@ -1,3 +1,8 @@
+echo "======================"
+DISTRONAME=$(sed -n '4p' ./.config.txt)
+echo "(base) Distro name: $DISTRONAME"
+echo "======================"
+
 #put prechroot and wichroot sections in a function too.
 #variable-ise this to accomodate differences between systems
 echo " copying your net connection dns stuffs to your $DISTRONAME with

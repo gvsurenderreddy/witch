@@ -4,15 +4,24 @@
 ##########
 ### gentoo
 
-METADISTRO=GENTOO
-#for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
+echo "Enter the name for your distro:"
+read $DISTRONAME
+echo $DISTRONAME > ./.config.base.txt #1st line
 
-#this doesnt need a comment.  it's self explanitory, surely.
+echo "======================"
+METADISTRO=GENTOO #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
 ARCH="uname -m"
+PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
 
-# will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
-PACKAGEMGR=portage
+echo $METADISTRO >> ./.config.base.txt #2nd line
+echo $ARCH >> ./.config.base.txt #3rd line
+echo $PACKAGEMGR >> ./.config.base.txt #4th line
 
+echo "METADISTRO: $METADISTRO"
+echo "ARCH: $ARCH"
+echo "PACKAGEMGR: $PACKAGEMGR"
+echo "DISTRONAME: $DISTRONAME"
+echo "======================"
 sleep 1
 #EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
@@ -23,25 +32,25 @@ sleep 1
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #call the drive preparation function.
-./procedure.d/driveprep.sh
+clear && ./procedure.d/driveprep.sh
 
 #call the stage installation function
-./procedure.d/stageinstall.sh
+clear && ./procedure.d/stageinstall.sh
 
 #call the package manager installation function
-./procedure.d/installpackagemanager.sh $PACKAGEMGR
+clear && ./procedure.d/installpackagemanager.sh $PACKAGEMGR
 
 #call the function for initial configuration of make.conf
-./procedure.d/initialmakeconf.sh
+clear && ./procedure.d/initialmakeconf.sh
 
 #call the preparation for chroot
-./procedure.d/prechroot.sh
+clear && ./procedure.d/prechroot.sh
 
 #call the wichroot
-./procedure.d/wichroot.sh
+clear && ./procedure.d/wichroot.sh
 
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?
 #good, cos it should already be lined up to run, thnx to the stage3 function (as a top level option from cauldren), which calls it straight after running the distroselector function.
 #first you get run the witchcraft, thn you choose the cauldren, then you choose a proper stage3 install, then you get the distro, then you get the desktop.  ^_^  
-#... is how this path rolls.  ^_^
+#... is how this path rolls.  ^_^  	

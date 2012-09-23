@@ -2,6 +2,11 @@
 ############
 # wichroot
 
+echo "======================"
+DISTRONAME=$(sed -n '4p' ./.config.txt)
+echo "(base) Distro name: $DISTRONAME"
+echo "======================"
+
 ################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!
 
 echo "ENTER THE CHROOT" # http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ <- will tell you how... at least the basics of it.  this still likely means packaging up the rest of the installer for the chrooted half, into a cat-eof'd && chmod+x'd script just prior to the chroot, and then running that.
@@ -22,7 +27,7 @@ source /etc/profile
 echo "export PS1=\"($DISTRONAME chroot) $PS1\""
 export PS1="($DISTRONAME chroot) $PS1"
 sleep 1
-echo "making sure the $PACKAGEMANAGERNAME tree of $DISTRONAME is up to date with \"emerge --sync\" quietly.  may take several minutes..."
+echo "making sure the $PACKAGEMGR tree of $DISTRONAME is up to date with \"emerge --sync\" quietly.  may take several minutes..."
 
 emerge --sync --quiet
 
