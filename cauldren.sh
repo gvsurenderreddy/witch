@@ -33,8 +33,6 @@
 # rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
 # tho he prolly has new ones now.
 
-
-
 ############
 ############
 # cauldren
@@ -79,6 +77,7 @@ esac
 
 }
 
+
 ############
 ############
 # simpleinstall
@@ -105,7 +104,7 @@ stage3 {
 #once the refunctionising is done, this may change.
 
 distroselector
-./deskfig.sh
+../deskfig.sh
 } 
 
 
