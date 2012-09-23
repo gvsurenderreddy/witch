@@ -11,7 +11,8 @@
 #root check
 if [[ $EUID -ne 0 ]]
 then
-  echo "You must, YOU MUST, run this in root." 2>&1
+  echo "You must run this in root." 2>&1
+  echo "actually you don't if you know what's called fakeroot"
   exit 1
 fi
 
@@ -105,19 +106,14 @@ sleep 1
 
 # FIXME ^ 
 
-##########
-##########
-##########
-##########
-### script
-##########
-##########
-##########
-##########
+clear #neatness freak
 
 #first question
-editorselect
-browserselect
+echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
+read EDITOR > ./.editor.txt
+
+echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
+read BROWSER > ./.browser.txt
 
 #second question
 echo "what do you want to do?"
@@ -150,15 +146,5 @@ case $WITCHCRAFTMODE in
                 ;;
 esac
 
-# Functions
-editorselect() {
-    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
-    read EDITOR
-	$EDITOR > .editor.txt
-}
 
-browserselect() {
-    echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
-    read BROWSER
-}
 

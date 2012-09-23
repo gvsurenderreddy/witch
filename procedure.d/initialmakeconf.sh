@@ -2,6 +2,8 @@
 ############
 # initialmakeconf
 
+$EDITOR=line=$(head -n 1 ../.editor.txt)
+
 ###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
 
 #backup the original one.

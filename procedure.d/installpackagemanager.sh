@@ -1,3 +1,5 @@
+BROWSER=line=$(head -n 1 ../.browser.txt)
+
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely will warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
 #read -p "that is as much as we can do for that now.  are you enjoying this so far?"
@@ -5,13 +7,13 @@
 
 echo "Now that the stage is installed, we continue to installing Portage, the package manager.  READ CAREFULLY:"
 sleep 2
-echo "Press y to use \" $IBROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
+echo "Press y to use \" $BROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
 read -p "ready to download your portage (y - yes) (p - yes, with proxy support)"
 
 if [ "$REPLY" == "y" ]
 then 
-    $IBROWSER http://www.gentoo.org/main/en/mirrors.xml 
+    $BROWSER http://www.gentoo.org/main/en/mirrors.xml 
     read -p "ready to continue? (y):" 
     if [ "$REPLY" == "y" ] 
     then
@@ -25,7 +27,7 @@ then
     fi
 elif [ "$REPLY" == "p" ]
 then
-    $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    $BROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
     read -p "ready to continue? (y):" 
     if [ "$REPLY" == "y" ] 
     then 

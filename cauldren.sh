@@ -33,7 +33,7 @@
 # rstrcog's exherbo global useflags http://pastebin.com/QQbeUpk5
 # tho he prolly has new ones now.
 
-cauldern # from the start
+
 
 ############
 ############
@@ -193,3 +193,5 @@ case $BASEDISTRO in
                 ;;
 esac
 }
+
+cauldern # from the start
