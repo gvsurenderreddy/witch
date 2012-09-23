@@ -11,7 +11,10 @@ echo "you have chosen to install the rowan deskfig.  good choice.  is your nick 
 
 case $PACKAGEMGR in
 	portage) emerge -qv spectrwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc ;;
-	*) echo "the package manager: $PACKAGEMGR is invalid." ;;
+	*) 
+		echo "the package manager: $PACKAGEMGR is invalid for rowan. Redirecting you back..." 
+		./rewic.sh
+	;;
 esac
 
 echo "sorry, the rest of the configuration of rowan has not yet been written into this script"
