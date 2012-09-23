@@ -11,12 +11,8 @@ METADISTRO=GENTOO
 ARCH="uname -m"
 
 # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
-PACKAGEMANAGERNAME=portage
+PACKAGEMGR=portage
 
-###editor section to be improved
-#EDITOR=mcedit
-editorselect
-echo "setting editor to $EDITOR " 
 sleep 1
 #EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
 #echo "what is your prefered text editor?" && read -r EDITOR
@@ -26,32 +22,23 @@ sleep 1
 #echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
-echo "so when you use your browser to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
-echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):"
-read REPLY
-if [ "$REPLY" == "y" ] 
-then
-    echo "enter your proxy url (e.g.: proxy.server.com:8080)"
-    read -r PROX
-fi
-
 #call the drive preparation function.
-../procedure.d/driveprep.sh
+./procedure.d/driveprep.sh
 
 #call the stage installation function
-../procedure.d/stageinstall.sh
+./procedure.d/stageinstall.sh
 
 #call the package manager installation function
-../procedure.d/installpackagemanager.sh
+./procedure.d/installpackagemanager.sh $PACKAGEMGR
 
 #call the function for initial configuration of make.conf
-../procedure.d/initialmakeconf.sh $EDITOR
+./procedure.d/initialmakeconf.sh
 
 #call the preparation for chroot
-../procedure.d/prechroot.sh
+./procedure.d/prechroot.sh
 
 #call the wichroot
-../procedure.d/wichroot.sh
+./procedure.d/wichroot.sh
 
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?

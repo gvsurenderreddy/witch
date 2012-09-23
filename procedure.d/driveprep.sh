@@ -21,7 +21,7 @@ echo "do you need to partition? (y/n):"
 read REPLY
 if [ "$REPLY" == "y" ]
 then
-    partmanselector #calls the partition manager selection function "partmanselector"
+    ./utilities.d/partmanselector.sh #calls the partition manager selection function "partmanselector"
 elif [ "$REPLY" == "n" ]
 then 
     echo "ok, ready to go so..."

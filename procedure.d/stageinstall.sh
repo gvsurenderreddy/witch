@@ -2,7 +2,8 @@
 #############
 # stageinstall
 
-BROWSER=line=$(head -n 1 ../.browser.txt)
+BROWSER=line=$(head -n 2 ./.config.txt)
+PROX=line=$(head -n 3 ./.config.txt)
 
 #added this line, just to be sure.
 cd /mnt/$DISTRONAME

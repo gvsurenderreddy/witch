@@ -1,9 +1,8 @@
 ##########
 #idk, should i alias all the basic installer commands to unify across all base-distros, like a rosetta stone?
 
-deskfigselector #From the start
 
-deskfigselector {
+function deskfigselector {
 echo "deskfigselector is temporarily out of order while fixing main install"
 echo "welcome to the witchcraft\'s deskfig selector.  here you can install what really gives your os character, it\'s desktop environment omponents and configuration."
 
@@ -52,3 +51,5 @@ case $SPINTOP in
                 ;;
 esac
 }
+
+deskfigselector #From the start

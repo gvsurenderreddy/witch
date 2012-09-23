@@ -1,4 +1,4 @@
-BROWSER=line=$(head -n 1 ../.browser.txt)
+$PROX=
 
 # as with stage download above, this needs to be put in a more automated and option-able method.  likely using "case - esac" or using earlier defined packagemanager choice.  ... so likely will warrant a refunctionising, creating a separate installportage and installpaludis, and... other?
 # also, variablise it to be basedistro-savvy, so sensible defaults can be chosen, if ya like.
@@ -20,7 +20,7 @@ then
         echo "proceeding" 
         if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ]
         then 
-            echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully." 
+            echo "excellent you seem to have got your package manager ($1) gubbins downloaded successfully." 
         else 
             echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better"
         fi
@@ -34,9 +34,9 @@ then
         echo "proceeding" 
         if [ -f /mnt/$DISTRONAME/$PACKAGEMANAGERNAME* ] 
         then 
-            echo "excellent you seem to have got your package manager ($PACKAGEMANAGERNAME) gubbins downloaded successfully."
+            echo "excellent you seem to have got your package manager ($1) gubbins downloaded successfully."
         else 
-            echo "sorry, it didnt seem like ($PACKAGEMANAGERNAME) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+            echo "sorry, it didnt seem like ($1) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
         fi
     fi
 fi
@@ -46,7 +46,7 @@ fi
 
 
 # this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
-echo "just uncompressing your $PACKAGEMANAGERNAME now, have a little wait."
-tar -xjf /mnt/$DISTRONAME/$PACKAGEMANAGERNAME-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
+echo "just uncompressing your $1 now, have a little wait."
+tar -xjf /mnt/$DISTRONAME/$1-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 
 # /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.

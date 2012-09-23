@@ -13,7 +13,7 @@ sleep 2
 echo
 
 echo "you may want to review http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Partitioning before deciding how to partition"
-../tools.d/driveprep.sh
+../../tools.d/driveprep.sh
 
 echo "you may want to review \"http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Creating the directory structure\" to see what's going on here."
 echo "cd /mnt/$DISTRONAME"

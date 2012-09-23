@@ -18,4 +18,9 @@
 
 #might wanna consider nabbing some ideas from debian-live-helper and the linux-live scripts famed from the slackers.  
 #but tazlito's remasterer is rather the tits, so if we could get it to work instead, it'd be... " the tits "
-echo "rewic, the iso remastery stuff has been gutted from this version while we work out the installer stuff ~ no loss it didnt work yet anyway." ;
+
+function rewic {
+echo "rewic, the iso remastery stuff has been gutted from this version while we work out the installer stuff ~ no loss it didnt work yet anyway." 
+}
+
+rewic

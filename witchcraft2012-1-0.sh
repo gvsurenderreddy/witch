@@ -24,10 +24,10 @@ fi
 #version (probably gonna keep version as "concept v0.00" until it's at least ready for a trial run.
 echo "VERSION: gentoo install test v0.00 " #oldversion#echo "VERSION: concept v0.00"
 echo "(means dont try to run it yet, for the sake of your computer.  retreat while you can.)"
-sleep 3
 
 ##dev-intro
 #for sake of navigation, check out the functions: rewic, cauldren (and it's functions), distroselector, deskfigselector.  they're all launched in a tree of options, starting at the end of this script, after all the functions have been defined.
+echo 
 
 #intro
 echo "Hi, \"$USER\"."
@@ -108,12 +108,30 @@ sleep 1
 
 # FIXME ^ 
 
-#first question
-echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
-read EDITOR > ./.editor.txt
+clear
 
-echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
-read BROWSER > ./.browser.txt
+#first question
+echo "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
+read EDITOR 
+echo $EDITOR > ./.config.txt #1st line
+
+echo "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
+read BROWSER 
+echo $BROWSER >> ./.config.txt #2nd line
+
+echo "so when you use your browser to find and select your stage, package manager, kernel, etc later on in this script, it will use your proxy, if you need it."
+echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):"
+read REPLY
+if [ "$REPLY" == "y" ] 
+then
+    echo "enter your proxy url (e.g.: proxy.server.com:8080)"
+    read PROX
+	echo $PROX >> ./.config.txt #3rd line
+else
+	echo "null" >> ./.config.txt
+fi
+
+clear
 
 #second question
 echo "what do you want to do?"
