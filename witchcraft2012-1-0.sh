@@ -8,6 +8,8 @@
 # re-laying out witchcraft2011 with functions http://mywiki.wooledge.org/BashGuide/CompoundCommands#Functions 
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
+clear #neatness freak
+
 #root check
 if [[ $EUID -ne 0 ]]
 then
@@ -105,8 +107,6 @@ sleep 1
 #done
 
 # FIXME ^ 
-
-clear #neatness freak
 
 #first question
 echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
