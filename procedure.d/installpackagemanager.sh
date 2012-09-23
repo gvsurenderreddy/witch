@@ -1,8 +1,8 @@
 echo "======================"
-IBBROWSER=$(sed -n '5p' ./.config.txt)
-PROX=$(sed -n '3p' ./.config.txt)
-PACKAGEMGR=$1
-DISTRONAME=$(sed -n '4p' ./.config.txt)
+IBROWSER=$(sed -n '1p' ./.config.browser.txt)
+PROX=$(sed -n '2p' ./.config.browser.txt)
+DISTRONAME=$(sed -n '1p' ./.config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
 echo "(base) Browser: $IBROWSER"
 echo "Proxy: $PROX"
 echo "Package manager: $PACKAGEMGR"

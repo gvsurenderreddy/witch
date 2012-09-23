@@ -3,13 +3,25 @@
 # stageinstall
 
 echo "Type in the browser you are going to use in the base system:"
-read IBBROWSER
+read IBROWSER
 
-echo $IBBROWSER >> ./.config.txt #5th line
+echo $IBROWSER >> ./.config.browser.txt #1st line
+
+echo "so when you use your browser to find and select your stage, package manager, kernel, etc, it will use your proxy, if you need it."
+echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):"
+read REPLY
+if [ "$REPLY" == "y" ] 
+then
+    echo "enter your proxy url (e.g.: proxy.server.com:8080)"
+    read PROX
+	echo $PROX >> ./.config.browser.txt #2nd line
+else
+	echo "null" >> ./.config.browser.txt #2nd line
+fi
 
 echo "======================"
-IBBROWSER=$(sed -n '5p' ./.config.txt)
-PROX=$(sed -n '3p' ./.config.txt)
+IBROWSER=$(sed -n '1p' ./.config.browser.txt)
+PROX=$(sed -n '2p' ./.config.browser.txt)
 echo "(base) Browser: $IBROWSER"
 echo "Proxy: $PROX"
 echo "======================"

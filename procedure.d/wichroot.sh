@@ -3,8 +3,10 @@
 # wichroot
 
 echo "======================"
-DISTRONAME=$(sed -n '4p' ./.config.txt)
+DISTRONAME=$(sed -n '1p' ./.config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
 echo "(base) Distro name: $DISTRONAME"
+echo "PACKAGEMGR: $PACKAGEMGR"
 echo "======================"
 
 ################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!

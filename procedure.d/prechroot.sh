@@ -1,5 +1,5 @@
 echo "======================"
-DISTRONAME=$(sed -n '4p' ./.config.txt)
+DISTRONAME=$(sed -n '1p' ./.config.base.txt)
 echo "(base) Distro name: $DISTRONAME"
 echo "======================"
 
