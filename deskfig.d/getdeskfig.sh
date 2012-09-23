@@ -1,5 +1,3 @@
-getdeskfig #From the start
-
 getdeskfig () {
 #echo "select how you would like to get your deskfig?"
 #read $METHODGETDESKFIG
@@ -14,3 +12,4 @@ echo "ok seriously, i have only just thrown this simple deskfig bit in as a plac
 #it will grow, oh yes, it will grow.  ... grow to accomodate uploading and sharing and reviewing, etc.  communitization inbuilt to the software, dawg.
 }
 
+getdeskfig #From the start
