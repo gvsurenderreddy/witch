@@ -68,15 +68,6 @@ sleep 1
 #
 # here's an idea....writeable chunks, so that the CHEOF it'self gets broken up, likely into lots of little CHEOFF addendums, not just into variables.   such an idea... i might branch again to try that, n then merge back into refunctionise branch, before completing all the refunctionising, 
 
-editorselect() {
-    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
-    read EDITOR
-}
-
-browserselect() {
-    echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
-    read BROWSER
-}
 
 
 #echo "what do you want your witch based on? (warning options are incomplete)"
@@ -125,6 +116,10 @@ browserselect() {
 ##########
 
 #first question
+editorselect
+browserselect
+
+#second question
 echo "what do you want to do?"
 echo "
     A.    write iso of current operating system (rewic)
@@ -155,5 +150,15 @@ case $WITCHCRAFTMODE in
                 ;;
 esac
 
-# aw, this script was leet with merely 1337 lines of code before.  damn you bloat!
-# hey it's 1882 now... time to refactorz! at least it's VERY clean now.
+# Functions
+editorselect() {
+    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
+    read EDITOR
+	$EDITOR > .editor.txt
+}
+
+browserselect() {
+    echo "what is your prefered web browser? (type the name of it\'s executable as exists on host system):" 
+    read BROWSER
+}
+
