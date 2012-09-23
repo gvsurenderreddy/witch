@@ -9,7 +9,8 @@
 #(think of functions like variables, that can contain huge chunks of code, easily, without getting into silly chains of && && &&.)
 
 #root check
-if [[ $EUID -ne 0 ]]; then
+if [[ $EUID -ne 0 ]]
+then
   echo "You must, YOU MUST, run this in root." 2>&1
   exit 1
 fi
