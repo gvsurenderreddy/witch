@@ -107,25 +107,35 @@ sleep 1
 
 # FIXME ^ 
 
+### time to set up a nice little environmental variable
+export WITCH="$0"
+
 clear
 
 #first question
 echo "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
 read EDITOR 
-echo $EDITOR > ./config.txt #1st line
+echo $EDITOR > $WITCH/config.txt #1st line
 
 echo ""
 
 echo "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
 read BROWSER 
-echo $BROWSER >> ./config.txt #2nd line
+echo $BROWSER >> $WITCH/config.txt #2nd line
 
 echo ""
 
-echo "so... you need a proxy? you might want to stay hidden :P" 
+echo "so... you need a proxy? you might want to stay hidden :P just press enter if you don't know what i am talking about or you don't need one" 
 read PROX 
-echo $PROX >> ./config.txt #3rd line
+echo $PROX >> $WITCH/config.txt #3rd line
 
+echo ""
+
+echo "finally are you an ub0r l33t? [y/n] we give ub0r l33ts the supreme choice to intervene (not yet implemeneted :P)"
+read INTERVENE
+echo $INTERVENE >> $WITCH/config.txt #4th line
+
+# the end
 clear
 
 #second question
@@ -141,12 +151,12 @@ case $WITCHCRAFTMODE in
         A|a)
                 echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
                 sleep 5
-                ./rewic.sh
+                $WITCH/rewic.sh
                 ;;
         B|b)
                 echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
                 sleep 5
-                ./cauldren.sh
+                $WITCH/cauldren.sh
                 ;;
         C|c) 
                 echo "Choice was $WITCHCRAFTMODE. this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
@@ -158,6 +168,3 @@ case $WITCHCRAFTMODE in
                 exit 1
                 ;;
 esac
-
-
-
