@@ -114,9 +114,17 @@ echo "what is your prefered text editor? (type the name of it's executable as ex
 read EDITOR 
 echo $EDITOR > ./config.txt #1st line
 
+echo ""
+
 echo "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
 read BROWSER 
 echo $BROWSER >> ./config.txt #2nd line
+
+echo ""
+
+echo "so... you need a proxy? you might want to stay hidden :P" 
+read PROX 
+echo $PROX >> ./config.txt #3rd line
 
 clear
 
