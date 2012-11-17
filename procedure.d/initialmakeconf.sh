@@ -4,8 +4,8 @@
 # GLOBAL needs no change.
 
 echo "======================"
-EDITOR=$(sed -n '1p' ./config.txt)
-DISTRONAME=$(sed -n '1p' ./config.base.txt)
+EDITOR=$(sed -n '1p' $WITCH/config.txt)
+DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 echo "Editor: $EDITOR"
 echo "(base) Distro name: $DISTRONAME"
 echo "======================"

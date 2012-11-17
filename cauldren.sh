@@ -44,8 +44,8 @@ function stage3 {
 #currently just calls the distroselector function, to select which route of stage3 install to use, (gentoo, funtoo, etc) and then the desktop selector
 #once the refunctionising is done, this may change.
 
-./distroselect.sh
-./deskfig.sh
+$WITCH/distroselect.sh
+$WITCH/deskfig.sh
 } 
 
 ############
@@ -95,8 +95,9 @@ case $CauldrenOption in
                 ;;
         C|c) 
                 echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
-				echo "exiting to full manual mode now"
-				exit
+                echo "you ub0r l33t... i have a feeling we might get hacked by you"
+		echo "exiting to full manual mode now"
+		exit
                 ;;
           *)
                 echo "Valid Choices are A,B,C"

@@ -4,7 +4,7 @@
 ## GLOBAL needs no changes
 
 echo "======================"
-DISTRONAME=$(sed -n '1p' ./config.base.txt)
+DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 echo "(base) Distro name: $DISTRONAME"
 echo "======================"
 

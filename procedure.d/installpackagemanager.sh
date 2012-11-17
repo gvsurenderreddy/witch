@@ -1,16 +1,16 @@
 # Needs some changes. METADISTRO has been included for usage.
 
 echo "======================"
-BROWSER=$(sed -n '1p' ./config.txt)
-PROX=$(sed -n '2p' ./config.txt)
-DISTRONAME=$(sed -n '1p' ./config.base.txt)
-PACKAGEMGR=$(sed -n '4p' ./config.base.txt)
+BROWSER=$(sed -n '1p' $WITCH/config.txt)
+PROX=$(sed -n '2p' $WITCH/config.txt)
+DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
+PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
 echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
 echo "Package manager: $PACKAGEMGR"
 echo "(base) Distro name: $DISTRONAME"
 
-METADISTRO=$(sed -n '2p' ./.config.base.txt)
+METADISTRO=$(sed -n '2p' $WITCH/.config.base.txt)
 echo "(base) Metadistro: $METADISTRO"
 echo "======================"
 

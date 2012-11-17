@@ -23,27 +23,27 @@ case $SPINTOP in
         1)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this is where you get taken to the rowan bit"
-                ./deskfig.d/installrowan.sh
+                $WITCH/deskfig.d/installrowan.sh
                 ;;
         2)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this is where you get taken to the willow bit"
-                ./deskfig.d/installwillow.sh
+                $WITCH/deskfig.d/installwillow.sh
                 ;;
         3)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this is where you get taken to the jamella bit"
-                ./deskfig.d/installjamella.sh
+                $WITCH/deskfig.d/installjamella.sh
                 ;;
         4)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the zelda bit"
-                ./deskfig.d/installzelda.sh
+                $WITCH/deskfig.d/installzelda.sh
                 ;;
         5)
                 echo "Choice was $SPINTOP, sorry, this part of the script is incomplete"
                 echo "this would be where you get taken to the Gentoo/Hurd bit"
-                ./deskfig.d/getdeskfig.sh
+                $WITCH/deskfig.d/getdeskfig.sh
                 ;;
         *)
                 echo "Non-valid choice. try again" 

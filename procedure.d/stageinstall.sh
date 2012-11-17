@@ -4,12 +4,12 @@
 # Needs some changes. METADISTRO has been included for usage.
 
 echo "======================"
-IBROWSER=$(sed -n '2p' ./config.txt)
-PROX=$(sed -n '3p' ./config.txt)
+BROWSER=$(sed -n '2p' $WITCH/config.txt)
+PROX=$(sed -n '3p' $WITCH/config.txt)
 echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
 
-DISTRONAME=$(sed -n '2p' ./config.base.txt)
+DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
 echo "(base) Metadistro: $DISTRONAME"
 echo "======================"
 

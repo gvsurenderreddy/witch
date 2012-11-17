@@ -5,12 +5,12 @@
 # Oh, and refactor it to make it easier to unify. Only some sections require change.
 
 echo "======================"
-DISTRONAME=$(sed -n '1p' ./config.base.txt)
-PACKAGEMGR=$(sed -n '4p' ./config.base.txt)
+DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
+PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
 echo "(base) Distro name: $DISTRONAME"
 echo "PACKAGEMGR: $PACKAGEMGR"
 
-METADISTRO=$(sed -n '2p' ./config.base.txt)
+METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
 echo "(base) Metadistro: $METADISTRO"
 echo "======================"
 
