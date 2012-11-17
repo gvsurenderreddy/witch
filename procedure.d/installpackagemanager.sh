@@ -1,11 +1,11 @@
 # Needs some changes. METADISTRO has been included for usage.
 
 echo "======================"
-IBROWSER=$(sed -n '1p' ./.config.browser.txt)
-PROX=$(sed -n '2p' ./.config.browser.txt)
-DISTRONAME=$(sed -n '1p' ./.config.base.txt)
-PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
-echo "(base) Browser: $IBROWSER"
+BROWSER=$(sed -n '1p' ./config.txt)
+PROX=$(sed -n '2p' ./config.txt)
+DISTRONAME=$(sed -n '1p' ./config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./config.base.txt)
+echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
 echo "Package manager: $PACKAGEMGR"
 echo "(base) Distro name: $DISTRONAME"
@@ -23,13 +23,13 @@ echo "======================"
 
 	echo "Now that the stage is installed, we continue to installing your package manager.  READ CAREFULLY:"
 	sleep 2
-	echo "Press y to use \" $IBROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
+	echo "Press y to use \" $BROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
 	read -p "ready to download your portage (y - yes) (p - yes, with proxy support)"
 
 	if [ "$REPLY" == "y" ]
 	then 
-    	$IBROWSER http://www.gentoo.org/main/en/mirrors.xml 
+    	$BROWSER http://www.gentoo.org/main/en/mirrors.xml 
     	read -p "ready to continue? (y):" 
     	if [ "$REPLY" == "y" ] 
     	then
@@ -43,7 +43,7 @@ in the snapshots directory, download the latest Portage snapshot (portage-latest
     	fi
 	elif [ "$REPLY" == "p" ]
 	then
-    	$IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    	$BROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
     	read -p "ready to continue? (y):" 
    		if [ "$REPLY" == "y" ] 
    		then 

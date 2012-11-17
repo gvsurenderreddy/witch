@@ -14,7 +14,6 @@ clear #neatness freak
 if [[ $EUID -ne 0 ]]
 then
   echo "You must run this in root." 2>&1
-  echo "actually you don't if you know what's called fakeroot"
   exit 1
 fi
 
@@ -113,11 +112,11 @@ clear
 #first question
 echo "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
 read EDITOR 
-echo $EDITOR > ./.config.txt #1st line
+echo $EDITOR > ./config.txt #1st line
 
 echo "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
 read BROWSER 
-echo $BROWSER >> ./.config.txt #2nd line
+echo $BROWSER >> ./config.txt #2nd line
 
 clear
 

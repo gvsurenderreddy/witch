@@ -3,7 +3,7 @@
 ###(still just in emerge commands.)
 
 echo "======================"
-PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./config.base.txt)
 echo "PACKAGEMGR: $PACKAGEMGR"
 echo "======================"
 

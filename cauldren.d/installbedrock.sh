@@ -5,18 +5,18 @@
 ## bedrock
 
 read -p "enter the name of your new distro: " DISTRONAME
-echo $DISTRONAME > ./.config.base.txt #1st line
+echo $DISTRONAME > ./config.base.txt #1st line
 
 METADISTRO=BEDROCK
-echo $METADISTRO >> ./.config.base.txt #2nd line
+echo $METADISTRO >> ./config.base.txt #2nd line
 
 # Add ARCH and PACKAGEMGR!!!
 
 echo "======================"
-DISTRONAME=$(sed -n '1p' ./.config.base.txt)
-METADISTRO=$(sed -n '2p' ./.config.base.txt)
-ARCH=$(sed -n '3p' ./.config.base.txt)
-PACKAGEMGR=$(sed -n '4p' ./.config.base.txt)
+DISTRONAME=$(sed -n '1p' ./config.base.txt)
+METADISTRO=$(sed -n '2p' ./config.base.txt)
+ARCH=$(sed -n '3p' ./config.base.txt)
+PACKAGEMGR=$(sed -n '4p' ./config.base.txt)
 echo "DISTRONAME: $DISTRONAME"
 echo "METADISTRO: $METADISTRO"
 echo "ARCH: $ARCH"

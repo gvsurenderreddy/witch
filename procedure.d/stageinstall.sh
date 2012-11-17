@@ -3,31 +3,14 @@
 # stageinstall
 # Needs some changes. METADISTRO has been included for usage.
 
-echo "Type in the browser you are going to use in the base system:"
-read IBROWSER
-
-echo $IBROWSER >> ./.config.browser.txt #1st line
-
-echo "so when you use your browser to find and select your stage, package manager, kernel, etc, it will use your proxy, if you need it."
-echo "will you need to use a http-proxy to access the web? (y)(if not sure, probably not):"
-read REPLY
-if [ "$REPLY" == "y" ] 
-then
-    echo "enter your proxy url (e.g.: proxy.server.com:8080)"
-    read PROX
-	echo $PROX >> ./.config.browser.txt #2nd line
-else
-	echo "null" >> ./.config.browser.txt #2nd line
-fi
-
 echo "======================"
-IBROWSER=$(sed -n '1p' ./.config.browser.txt)
-PROX=$(sed -n '2p' ./.config.browser.txt)
-echo "(base) Browser: $IBROWSER"
+IBROWSER=$(sed -n '1p' ./config.txt)
+PROX=$(sed -n '2p' ./.config.txt)
+echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
 
-METADISTRO=$(sed -n '2p' ./.config.base.txt)
-echo "(base) Metadistro: $METADISTRO"
+DISTRONAME=$(sed -n '2p' ./.config.base.txt)
+echo "(base) Metadistro: $DISTRONAME"
 echo "======================"
 
 sleep 1
@@ -51,9 +34,10 @@ sleep 1
 echo ok
 sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
-echo "READ INSTRUCTIONS CAREFULLY ~"
+echo "READ INSTRUCTIONS CAREFULLY ~"	
+
 echo "here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/"
-echo "once you\'ve read these instructions, press y (and enter) to use \"$IBROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
+echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
 echo "Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
 echo ""
 echo "ready to follow those instructions? (y - yes) (p - yes, with proxy support ~ may not work)"
@@ -64,7 +48,7 @@ read
 
 if [ "$REPLY" == "y" ]
 then
-    $IBROWSER http://www.gentoo.org/main/en/mirrors2.xml 
+    $BROWSER http://www.gentoo.org/main/en/mirrors2.xml 
     read -p "ready to continue? (y):" 
 
     if [ "$REPLY" == "y" ] 
@@ -78,7 +62,7 @@ then
 
 elif [ "$REPLY" == "p" ] 
 then
-    $IBROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
+    $BROWSER -http-proxy $PROX http://www.gentoo.org/main/en/mirrors.xml 
     read -p "ready to continue? (y):" 
     if [ "$REPLY" == "y" ]
     then
