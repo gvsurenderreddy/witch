@@ -13,7 +13,7 @@ ARCH="uname -m"
 PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
 
 echo $METADISTRO >> ./config.base.txt #2nd line
-echo $ARCH >> ./.config.base.txt #3rd line
+echo $ARCH >> ./config.base.txt #3rd line
 echo $PACKAGEMGR >> ./config.base.txt #4th line
 
 echo "======================"
