@@ -22,6 +22,7 @@ echo "(means dont try to run it yet, for the sake of your computer.  retreat whi
 echo 
 
 #intro
+sleep 1
 echo "Hi, \"$USER\"."
 sleep 1
 echo "welcome to the latest incarnation of the witchcraft script."
@@ -100,82 +101,83 @@ sleep 1
 
 # FIXME ^ 
 
-# a board guy who loves colors.
-export Reset='\e[0m'
-export Red='\e[1;31m'
-export Green='\e[1;32m'
-export Yellow='\e[1;33m'
+questions() {
+    # your native directory
+    echo "Your native directory is... $WITCH"
+
+    $WITCH/color.sh QUESTION "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
+    read EDITOR 
+    echo $EDITOR > $WITCH/config.txt #1st line
+
+    $WITCH/color.sh QUESTION "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
+    read BROWSER 
+    echo $BROWSER >> $WITCH/config.txt #2nd line
+
+    $WITCH/color.sh QUESTION "so... you need a proxy? you might want to stay hidden :P just press enter if you don't know what i am talking about or you don't need one" 
+    read PROX 
+    echo $PROX >> $WITCH/config.txt #3rd line
+
+    $WITCH/color.sh QUESTION "finally are you an ub0r l33t? [y/n] we give ub0r l33ts the supreme choice to intervene (not yet implemeneted :P)"
+    read INTERVENE
+    echo $INTERVENE >> $WITCH/config.txt #4th line
+}
+
+menu() {
+    clear
+	$WITCH/color.sh QUESTION "what do you want to do?"
+	$WITCH/color.sh GREEN "
+    A.    write iso of current operating system (rewic)
+    B.    install a new operating system (cauldren)
+    C.    do it all yourself
+    Q.    quit because you don't want to listen to us anymore"
+
+	read WITCHCRAFTMODE
+
+	case $WITCHCRAFTMODE in
+		A|a)
+            echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+            sleep 5
+            $WITCH/rewic.sh
+            ;;
+		B|b)
+            echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+            sleep 5
+            $WITCH/cauldren.sh
+            ;;
+		C|c) 
+            echo "Choice was $WITCHCRAFTMODE. this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
+            echo "exiting to full manual mode now"
+            exit
+            ;;
+		Q|q) 
+            exit
+            ;;
+		*)
+            $WITCH/color.sh RED "Valid Choices are A,B,C. Don't press Q. Please."
+			sleep 5
+			menu
+            ;;
+	esac
+}
+
+echo ""
 
 ### time to set up a nice little environmental variable
 pushd `dirname $0` > /dev/null
 export WITCH=`pwd`
 popd > /dev/null
 
-clear
-
-# your native directory
-echo "Your native directory is... $WITCH"
-
 #root check
 if [[ $EUID -ne 0 ]]
 then
-    $WITCH/utilities.d/error.sh "You must run this in root!"
+    $WITCH/color.sh RED "Hmm, you don't have any root. Poor you."
+    $WITCH/color.sh ERROR "go back and get root. before you come back."
     exit 1
+else
+    $WITCH/color.sh RED "And you've passed thy root test! You may continue..."
+    sleep 3
 fi
 
-#first question
-echo "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
-read EDITOR 
-echo $EDITOR > $WITCH/config.txt #1st line
-
-echo ""
-
-echo "what is your prefered web browser? (type the name of it's executable as exists on host system):" 
-read BROWSER 
-echo $BROWSER >> $WITCH/config.txt #2nd line
-
-echo ""
-
-echo "so... you need a proxy? you might want to stay hidden :P just press enter if you don't know what i am talking about or you don't need one" 
-read PROX 
-echo $PROX >> $WITCH/config.txt #3rd line
-
-echo ""
-
-echo "finally are you an ub0r l33t? [y/n] we give ub0r l33ts the supreme choice to intervene (not yet implemeneted :P)"
-read INTERVENE
-echo $INTERVENE >> $WITCH/config.txt #4th line
-
-# the end
-clear
-
-#second question
-echo "what do you want to do?"
-echo "
-    A.    write iso of current operating system (rewic)
-    B.    install a new operating system (cauldren)
-    C.    do it all yourself"
-
-read WITCHCRAFTMODE
-
-case $WITCHCRAFTMODE in
-        A|a)
-                echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
-                sleep 5
-                $WITCH/rewic.sh
-                ;;
-        B|b)
-                echo "Choice was $WITCHCRAFTMODE. sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
-                sleep 5
-                $WITCH/cauldren.sh
-                ;;
-        C|c) 
-                echo "Choice was $WITCHCRAFTMODE. this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
-                echo "exiting to full manual mode now"
-                exit
-                ;;
-          *)
-                echo "Valid Choices are A,B,C"
-                exit 1
-                ;;
-esac
+echo
+questions
+menu

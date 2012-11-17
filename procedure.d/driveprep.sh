@@ -22,15 +22,21 @@ fi
 
 cd /mnt/$DISTRONAME
 
-echo "do you need to partition? (y/n):"
+echo "do you need to partition? creating your partition for your own little witch. (y/n) :"
 read REPLY
 if [ "$REPLY" == "y" ]
 then
-    ./procedure.d/partmanselector.sh #calls the partition manager selection function "partmanselector"
+    $WITCH/procedure.d/partmanselector.sh #calls the partition manager selection function "partmanselector"
 elif [ "$REPLY" == "n" ]
 then 
     echo "ok, ready to go so..."
 fi
+
+sleep 1
+echo
+echo "here's a nice little list of your drives."
+fdisk -l
+echo
 
 echo "where ya putting your root dir? (e.g. sda3):"
 read -r ROOTDEV

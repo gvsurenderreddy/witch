@@ -27,8 +27,6 @@ echo "ARCH: $ARCH"
 echo "PACKAGEMGR: $PACKAGEMGR"
 echo "======================"
 sleep 1
-#EDITOR=hash mcedit 2>&- || { echo >&2 "mcedit is not installed.  how about nano..."; nano 1; }
-#echo "what is your prefered text editor?" && read -r EDITOR
 
 #get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
 #TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
@@ -36,7 +34,7 @@ sleep 1
 #   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #call the drive preparation function.
-clear && $WITCH/utilities.d/driveprep.sh
+clear && $WITCH/procedure.d/driveprep.sh
 
 #call the stage installation function
 clear && $WITCH/procedure.d/stageinstall.sh

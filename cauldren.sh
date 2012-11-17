@@ -74,8 +74,8 @@ echo "ok, so you want to install some hardcore nix."
 echo
 echo "cauldren first question"
 echo
-echo "what do you want to do?"
-echo "
+$WITCH/color.sh QUESTION "what do you want to do?"
+$WITCH/color.sh GREEN "
     A.    simple install  -  less choices, control, flexibility.  just presets.
     B.    proper install  -  pick which metadistro, and which desktop config.
     C.    v leet install  -  do it all yourself"

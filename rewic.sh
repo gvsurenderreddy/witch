@@ -20,7 +20,7 @@
 #but tazlito's remasterer is rather the tits, so if we could get it to work instead, it'd be... " the tits "
 
 function rewic {
-echo "rewic, the iso remastery stuff has been gutted from this version while we work out the installer stuff ~ no loss it didnt work yet anyway." 
+    echo "rewic, the iso remastery stuff has been gutted from this version while we work out the installer stuff ~ no loss it didnt work yet anyway." 
 }
 
 rewic
