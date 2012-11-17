@@ -10,13 +10,6 @@
 
 clear #neatness freak
 
-#root check
-if [[ $EUID -ne 0 ]]
-then
-  echo "You must run this in root." 2>&1
-  exit 1
-fi
-
 ### dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up some more still.
 # will remove this guff when the comments n shiz r cleaned up of those redundant or irelevent or outdated or just guff...
 
@@ -107,10 +100,28 @@ sleep 1
 
 # FIXME ^ 
 
+# a board guy who loves colors.
+export Reset='\e[0m'
+export Red='\e[1;31m'
+export Green='\e[1;32m'
+export Yellow='\e[1;33m'
+
 ### time to set up a nice little environmental variable
-export WITCH="$0"
+pushd `dirname $0` > /dev/null
+export WITCH=`pwd`
+popd > /dev/null
 
 clear
+
+# your native directory
+echo "Your native directory is... $WITCH"
+
+#root check
+if [[ $EUID -ne 0 ]]
+then
+    $WITCH/utilities.d/error.sh "You must run this in root!"
+    exit 1
+fi
 
 #first question
 echo "what is your prefered text editor? (type the name of it's executable as exists on host system):" 
