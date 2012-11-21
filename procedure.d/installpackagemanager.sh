@@ -10,7 +10,7 @@ echo "Proxy: $PROX"
 echo "Package manager: $PACKAGEMGR"
 echo "(base) Distro name: $DISTRONAME"
 
-METADISTRO=$(sed -n '2p' $WITCH/.config.base.txt)
+METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
 echo "(base) Metadistro: $METADISTRO"
 echo "======================"
 
@@ -25,8 +25,11 @@ echo "======================"
 	sleep 2
 	echo "Press y to use \" $BROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
 in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
-	read -p "ready to download your portage (y - yes) (p - yes, with proxy support)"
-
+    $WITCH/color.sh YELLOW "make sure it's in the /mnt/$DISTRONAME path"
+    echo ""
+	$WITCH/color.sh GREEN "ready to download your portage (y - yes) (p - yes, with proxy support)"
+    read
+    
 	if [ "$REPLY" == "y" ]
 	then 
     	$BROWSER http://www.gentoo.org/main/en/mirrors.xml 

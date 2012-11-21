@@ -36,11 +36,16 @@ sleep 1
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~"	
 
-echo "here you need to download a stage3 compressed tarball to /mnt/$DISTRONAME/"
-echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to downalod your stage3 tarball for the base system."  
-echo "Once the page loads and you\'ve found a nearby mirror, navigate to the releases/x86/autobuilds/ directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures). if using links text browser: Select one and press D to download. Otherwise, download however you wish.  This may take some time.  When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
+echo "here you need to extract a stage3 compressed tarball to /mnt/$DISTRONAME/"
+echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to download your stage3 tarball for the base system."  
 echo ""
-echo "ready to follow those instructions? (y - yes) (p - yes, with proxy support ~ may not work)"
+echo "Once the page loads and you\'ve found a nearby mirror, navigate to the ** releases/x86/autobuilds/ ** directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures)." 
+echo "If you're using a text browser: Select one and press D to download. Otherwise, download however you wish."
+echo ""
+echo "This may take some time. When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
+$WITCH/color.sh YELLOW "make sure it's in the /mnt/$DISTRONAME/ path."
+echo ""
+$WITCH/color.sh GREEN "ready to follow those instructions? (y - yes) (p - yes, with proxy support ~ may not work)"
 read
 
 # appears that to automate it
@@ -48,7 +53,7 @@ read
 
 if [ "$REPLY" == "y" ]
 then
-    $BROWSER http://www.gentoo.org/main/en/mirrors2.xml 
+    $BROWSER http://www.gentoo.org/main/en/mirrors2.xml || $WITCH/color.sh ERROR "hmm things don't seem to have worked. navigate http://www.gentoo.org/main/en/mirrors2.xml and download to the witch directory"
     read -p "ready to continue? (y):" 
 
     if [ "$REPLY" == "y" ] 
@@ -70,8 +75,10 @@ then
         if [ -f /mnt/$DISTRONAME/stage3-* ]
         then 
             echo "excellent you seem to have got your stage3 downloaded successfully."
+            sleep 2
         else 
             echo "sorry, it didnt seem like you got a stage3 then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying? try again?  well, it\'s up to you." 
+            sleep 2
         fi 
     fi
 
@@ -83,7 +90,8 @@ fi
 
 #set this so user can choose if they want verbose output
 echo "unpacking your stage3. this may take some time, please wait."
-tar -xjpf stage3-* 
+$WITCH/extract.sh /mnt/$DISTRONAME/stage3-* || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself."
+sleep 1 
 
 #here ends the stage install section.   simple huh?  ;D
 #maybe too simple.  REFUNCTIONISE and REVARIABLISE
