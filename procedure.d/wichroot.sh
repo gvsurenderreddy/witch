@@ -26,20 +26,37 @@ cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF
 ##########################################
 ##########################################
 
-echo "creating a new environment using env-update, which essentially creates environment variables, then loading those variables into memory using source."
-echo "env-update"
-env-update
+echo "creating a new environment by essentially creating environment variables, then loading those variables into memory using source."
+case "$METADISTRO" in
+    "GENTOO")
+        echo "env-update"
+        env-update
+    ;;
+esac
+
 echo "source /etc/profile"
 source /etc/profile
 echo "export PS1=\"($DISTRONAME chroot) $PS1\""
 export PS1="($DISTRONAME chroot) $PS1"
 sleep 1
-echo "making sure the $PACKAGEMGR tree of $DISTRONAME is up to date with \"emerge --sync\" quietly.  may take several minutes..."
 
-emerge --sync --quiet
+echo "making sure the $PACKAGEMGR tree of $DISTRONAME is up to date..."
+case "$PACKAGEMGR" in
+    "portage")
+        echo "...with \"emerge --sync\" quietly.  may take several minutes..."
+        emerge --sync --quiet
+        echo "portage is now up to date." 
+        sleep 1
+        # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
+    ;;
 
-echo "portage up to date." && sleep 1
-# add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
+    "dpkg") # little example
+        echo "...with \"aptitude update\" not so quietly though. may take several minutes..."
+        aptitude update
+        echo "your system is now up to date"
+        sleep 1
+    ;;
+esac
 
 #################################################################################
 #this is the best work-around i've come up with yet to deal with passing the required variables to the chrooted environment.  it's not ideal, i know, and i'm certain there's a more elegant solution out there, but for now, this will have to do.
@@ -60,29 +77,39 @@ chbrowserselect
 #mibi move it to before the portage sync'ing?
 #################################################################################
 
-gentoo_config() {
-#put profile selection into own function(s) too?  variablise and caseifthenesac it for the various bases and their variations (such as the number of profiles they offer)
-echo "First, a small definition is in place.
+## GENTOO SPECIFIC
+profile_config() {
+    #put profile selection into own function(s) too?  variablise and caseifthenesac it for the various bases and their variations (such as the number of profiles they offer)
+    echo "First, a small definition is in place.
 
-A profile is a building block for any Gentoo system. Not only does it specify default values for USE, CFLAGS and other important variables, it also locks the system to a certain range of package versions. This is all maintained by the Gentoo developers.
+    A profile is a building block for any Gentoo system. Not only does it specify default values for USE, CFLAGS and other important variables, it also locks the system to a certain range of package versions. This is all maintained by the Gentoo developers.
 
-Previously, such a profile was untouched by the users. However, there may be certain situations in which you may decide a profile change is necessary.
+    Previously, such a profile was untouched by the users. However, there may be certain situations in which you may decide a profile change is necessary.
 
-You can see what profile you are currently using (the one with an asterisk next to it)"
-echo "eselect profile list"
-eselect profile list
+    You can see what profile you are currently using (the one with an asterisk next to it)"
+    echo "with eselect profile list:"
+    sleep 1
+    eselect profile list
 
-echo "pick a number of profile you would like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
-echo "Choose a number from 1 to 15."
+    sleep 3
 
-read PROFILESELECT
+    echo "pick a number of profile you would like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
+    echo "Choose a number from 1 to 15."
 
-echo "Choice was $PROFILESELECT. doing: eselect profile set $PROFILESELECT"
-sleep 1
-eselect profile set $PROFILESELECT
+    read PROFILESELECT
 
-echo "you can always try changing this later, using eselect."
+    echo "Choice was $PROFILESELECT. doing: eselect profile set $PROFILESELECT"
+    sleep 1
+    eselect profile set $PROFILESELECT
+
+    echo "you can always try changing this later, using eselect."
 }
+
+case "$METADISTRO" in
+    "GENTOO")
+        gentoo_config
+    ;;
+esac
 
 ######start of chroot, i added a cheditor and chbrowser bit.  so this is redundant now... i hope, since i commented it out.
 ###editor section to be improved
@@ -97,161 +124,186 @@ echo "you can always try changing this later, using eselect."
 #######
 #may decide to break this bit up and put in a seperate function() at some point perhaps.
 
-echo "you should have already made a make.conf file, and depending on what option you picked, and what you did, you may have already configured your USE flags, if you have not, not to worry, we can do that now, or even change them later."
-echo " 
-showing you the /etc/make.conf in a moment" && sleep 1
+useflags() {
+    echo "you should have already made a make.conf file, and depending on what option you picked, and what you did, you may have already configured your USE flags, if you have not, not to worry, we can do that now, or even change them later."
+    echo " 
+    showing you the /etc/make.conf in a moment" && sleep 1
 
-echo "make sure the useflags look right (and then press q to continue once you have looked)"
-sleep 5
-less /etc/make.conf
+    echo "make sure the useflags look right (and then press q to continue once you have looked)"
+    sleep 5
+    less /etc/make.conf
 
-echo "what would you like to do for your useflags in make.conf?"
+    echo "what would you like to do for your useflags in make.conf?"
 
-echo "
-m - manually edit
-d - dont care, do it for me, default it.  (warning, incomplete! overwrites!)
-w - wget from _____ (warning this will overwrite existing make.conf)
-c - copy from _____ (warning this will overwrite existing make.conf)
-v - vanilla - dont touch it!  leave as is now.
-u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
-enter letter of preference: "
-read REPLY
-case $REPLY in 
-    m) 
-		$CHEDITOR /etc/make.conf 
-    ;;
+    echo "
+    m - manually edit
+    d - dont care, do it for me, default it.  (warning, incomplete! overwrites!)
+    w - wget from _____ (warning this will overwrite existing make.conf)
+    c - copy from _____ (warning this will overwrite existing make.conf)
+    v - vanilla - dont touch it!  leave as is now.
+    u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/make.conf (warning, this will overwrite existing make.conf)
+    enter letter of preference: "
+    read REPLY
+    case $REPLY in 
+        m) 
+		    $CHEDITOR /etc/make.conf 
+        ;;
 
-    d) 
-		echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." > /etc/make.conf 
-	;;
+        d) 
+		    echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /etc/make.conf~rawvanillaoriginal or /usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to \#witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair."
+	    ;;
 
-	w) 
-		echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
-		read MAKECONFURL 
-		wget $MAKECONFURL -o /etc/make.conf
-	;;
+	    w) 
+		    echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
+		    read MAKECONFURL 
+		    wget $MAKECONFURL -o /etc/make.conf
+	    ;;
 
-	c)
-		echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
-		read MAKECONFLOC
-		cp $MAKECONFLOC /etc/make.conf
-	;;
+	    c)
+		    echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
+		    read MAKECONFLOC
+		    cp $MAKECONFLOC /etc/make.conf
+	    ;;
 	
-	v)
-		echo "well that is easily done.  ... done."
-	;;
+	    v)
+		    echo "well that is easily done.  ... done."
+	    ;;
 
-	u) 
-		cp /usr/share/portage/config/make.conf /etc/make.conf 
-	;;
-esac
+	    u) 
+		    cp /usr/share/portage/config/make.conf /etc/make.conf 
+	    ;;
+    esac
 
-#FIXME ^ default
+    #FIXME ^ default
+}
 
-#functionise these following bits too?  i presume they are all fairly universal, n not much (if any) variation between base distros.
-echo "You will probably only use one or maybe two locales on your system. You can specify locales you will need in /etc/locale.gen
+useflags
 
-e.g.
+locale_select() {
+    #functionise these following bits too?  i presume they are all fairly universal, n not much (if any) variation between base distros.
+    echo "You will probably only use one or maybe two locales on your system. You can specify locales you will need in /etc/locale.gen
 
-en_GB ISO-8859-1
-en_GB.UTF-8 UTF-8
-en_US ISO-8859-1
-en_US.UTF-8 UTF-8
+    e.g.
 
-"
-echo "
-m - manually edit
-d - dont care, do it for me, default it.  (warning, incomplete! overwrites!)
-w - wget from _____ (warning this will overwrite existing locale.gen)
-c - copy from _____ (warning this will overwrite existing locale.gen)
-v - vanilla - dont touch it!  leave as is now.
-"
-read REPLY
-case $REPLY in
-	m)
-		$CHEDITOR /etc/locale.gen
-	;;
+    en_GB ISO-8859-1
+    en_GB.UTF-8 UTF-8
+    en_US ISO-8859-1
+    en_US.UTF-8 UTF-8
 
-	d) 
-		echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen
-	;;
+    "
+    echo "
+    m - manually edit
+    d - dont care, do it for me, default it.  (warning, incomplete! overwrites!)
+    w - wget from _____ (warning this will overwrite existing locale.gen)
+    c - copy from _____ (warning this will overwrite existing locale.gen)
+    v - vanilla - dont touch it!  leave as is now.
+    "
+    read REPLY
+    case $REPLY in
+	    m)
+		    $CHEDITOR /etc/locale.gen
+	    ;;
 
-	w) 
-		echo "enter the url where your make.conf is located:" 
-		read MAKECONFURL 
-		wget $MAKECONFURL -o /etc/locale.gen
-	;;
+	    d) 
+		    echo "looks like the locale.gen default hasnt been made yet.  you will probably want to go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the locale.gen section in such a state of disrepair." >> /etc/locale.gen
+	    ;;
 
-	c) 
-		echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
-		read MAKECONFLOC 
-		cp $MAKECONFLOC /etc/locale.gen
-	;;
+	    w) 
+		    echo "enter the url where your make.conf is located:" 
+		    read MAKECONFURL 
+		    wget $MAKECONFURL -o /etc/locale.gen
+	    ;;
 
-	v)
-		echo "well that is easily done.  ... done.  locale.gen as is."
-	;;
-esac
+	    c) 
+		    echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
+		    read MAKECONFLOC 
+		    cp $MAKECONFLOC /etc/locale.gen
+	    ;;
 
-#consider changing to "locale-gen -a" ~ see man page, and try it out. or add that as an option above.
-echo "now running locale-gen" && locale-gen
-sleep 1
+	    v)
+		    echo "well that is easily done.  ... done.  locale.gen as is."
+	    ;;
+    esac
 
-#presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what is pre-kernel-getting and what is actually kernel-getting
-echo "now you will likely need a kernel too"
-sleep 1
-echo "lets get your timezone sorted for that...
- Look for your timezone in /usr/share/zoneinfo, then we will copy it to /etc/localtime"
-sleep 2
-read -p "enter timezone (e.g. GMT): " TIMEZONE 
+    #consider changing to "locale-gen -a" ~ see man page, and try it out. or add that as an option above.
+    echo "now running locale-gen" && locale-gen
+    sleep 1
+}
 
-cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+locale_select
 
-echo "The core around which all distributions are built is the Linux kernel. It is the layer between the user programs and your system hardware. Gentoo provides its users several possible kernel sources. A full listing with description is available at http://www.gentoo.org/doc/en/gentoo-kernel.xml "
+kernel() {
+    #presumably  put the kernel section in a variablised functionised chunk too?   could do with some clean up of what is pre-kernel-getting and what is actually kernel-getting
+    echo "now you will likely need a kernel too"
+    sleep 1
+    echo "lets get your timezone sorted for that...
+     Look for your timezone in /usr/share/zoneinfo, then we will copy it to /etc/localtime"
+    sleep 2
+    read -p "enter timezone (e.g. GMT): " TIMEZONE 
 
-sleep 3
-#see previous comment.   kernel-getting.  
-#exherbo has taught us well here... let the user choose what kernel they want. 
-#grand expanding of this section, offering:
-#genkernel, debian kernels, hurd, freebsd, vanila kernel.org kernels, hurd+mach, hurd+l4, xenkernel, etc etc etc.
-# ....there-in we will see why digitteknohippie insist's it's called witch, before it's called witchlinux... the linux kernel need not even be present.  :)
+    cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 
-echo "so lets get on with getting you a kernel..."
-sleep 1
-echo "how would you like to get a kernel?
-g - gentoo-sources and genkernel 
+    echo "The core around which all distributions are built is the Linux kernel. It is the layer between the user programs and your system hardware. Gentoo provides its users several possible kernel sources. A full listing with description is available at http://www.gentoo.org/doc/en/gentoo-kernel.xml "
+
+    sleep 3
+    #see previous comment.   kernel-getting.  
+    #exherbo has taught us well here... let the user choose what kernel they want. 
+    #grand expanding of this section, offering:
+    #genkernel, debian kernels, hurd, freebsd, vanila kernel.org kernels, hurd+mach, hurd+l4, xenkernel, etc etc etc.
+    # ....there-in we will see why digitteknohippie insist's it's called witch, before it's called witchlinux... the linux kernel need not even be present.  :)
+
+    echo "so lets get on with getting you a kernel..."
+    sleep 1
+    echo "how would you like to get a kernel?
+d - go on to a nicer menu    
 m - manual (incomplete)"
-echo " "
-read -p "select which option: "
-case $REPLY in
-	g) 
-		emerge genkernel gentoo-sources
-		genkernel all --menuconfig 
-		ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
-	;;
+    echo " "
+    read -p "select which option: "
+    case $REPLY in
+	    d) 
+	        echo "Here it comes again."
+	        case "$METADISTRO" in
+	            "GENTOO")
+	                echo "g - gentoo-sources and genkernel"
+	                read -p "select which option: "
+                    case $REPLY in
+                        g)
+		                    emerge genkernel gentoo-sources
+		                    genkernel all --menuconfig 
+		                    ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+		                ;;
+		            esac
+		        ;;
+		   esac
+	    ;;
 
-	m) 
-		echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
-	;;
-esac
+	    m) 
+		    echo "woah there cowboy, how complete do you think this script is already!?  didnt we tell you this bit was incomplete.  ...you will have to sort that out entirely yourself later then.  http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap3 might b handy"
+	    ;;
+    esac
 
-echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
+    echo "- skipping kernel modules section, due to incompleteness.  see 7.e. Kernel Modules here: http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=7#doc_chap5 "
 
-#echo "you might want kernel modules too right?"
+    #echo "you might want kernel modules too right?"
 
-# FIXME
-#
-#echo "To view all available modules"
-#
-#ls /boot/linux*
-#find /lib/modules/$KERNV/ -type f -iname '*.o' -or -iname '*.ko' | less
-### need to get the just compiled kernel name and version extracted cleanly, to be inserted there on $KERNV
-# FIXME
+    # FIXME
+    #
+    #echo "To view all available modules"
+    #
+    #ls /boot/linux*
+    #find /lib/modules/$KERNV/ -type f -iname '*.o' -or -iname '*.ko' | less
+    ### need to get the just compiled kernel name and version extracted cleanly, to be inserted there on $KERNV
+    # FIXME
 
-#ls -l /usr/src/linux
+    #ls -l /usr/src/linux
+    
+}
+
+kernel
 
 #put fstab section in it's own function
-echo "
+fstab() {
+    echo "
 _______What is fstab?
 
 Under Linux, all partitions used by the system must be listed in /etc/fstab. This file contains the mount points of those partitions (where they are seen in the file system structure), how they should be mounted and with what special options (automatically or not, whether users can mount them or not, etc.)
@@ -267,188 +319,192 @@ The fourth field shows the mount options used by mount when it wants to mount th
 The fifth field is used by dump to determine if the partition needs to be dumped or not. You can generally leave this as 0 (zero).
 The sixth field is used by fsck to determine the order in which filesystems should be checked if the system wasn not shut down properly. The root filesystem should have 1 while the rest should have 2 (or 0 if a filesystem check is not necessary).
 "
-echo "so lets get on with setting up your fstab"
-sleep 1
-echo "how would you like to configure your fstab?
+    echo "so lets get on with setting up your fstab"
+    sleep 1
+    echo "how would you like to configure your fstab?
 m - manual         (opens in editor)
 s - skip           (manual later)
 g - guided         (warning incomplete)
 select which option:   "
-read
-case $REPLY in
-	m) 
-		echo "manual editing /etc/fstab selected" 
-		$CHEDITOR /etc/fstab
-	;;
+    read
+    case $REPLY in
+	    m) 
+		    echo "manual editing /etc/fstab selected" 
+		    $CHEDITOR /etc/fstab
+	    ;;
 
-	s) 
-		echo "skipping..."
-	;;
+	    s) 
+		    echo "skipping..."
+	    ;;
 
-	g)
-	echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
-	;;
-esac
+	    g)
+	        echo "silly sausage, this bit hasnt been made yet.  you can just sort out your fstab by yourself later.   fyi, this section will include a series of input choices for the various partitions/mounts."
+	    ;;
+    esac
 
-# FIXME ^ inset the fstab populator bit.  && add the variable-ised root, home n boot partitions... 
+    # FIXME ^ inset the fstab populator bit.  && add the variable-ised root, home n boot partitions... 
+}
 
+fstab
 
+network() {
+    ####NETWORK#### mk1
 
-####NETWORK#### mk1
+    # FIXME the whole network section could do with an overhaul and simplification and cleaning up.
 
-# FIXME the whole network section could do with an overhaul and simplification and cleaning up.
+    ###old first attempt at making the network section
+    ###echo "whadya call this computer (what is your hostname)?
+    ###- this will be set in /etc/conf.d/net"
+    ###read NETNOM
+    ###echo "dns_domain_lo=\"$NETNOM\"" >> /etc/conf.d/net
+    ###
+    ###echo "wanna use DHCP for connection? (if you dont know what that means, it is still likely you do)"
+    ###echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
 
-###old first attempt at making the network section
-###echo "whadya call this computer (what is your hostname)?
-###- this will be set in /etc/conf.d/net"
-###read NETNOM
-###echo "dns_domain_lo=\"$NETNOM\"" >> /etc/conf.d/net
-###
-###echo "wanna use DHCP for connection? (if you dont know what that means, it is still likely you do)"
-###echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
+    # FIXME ^ add NIS section, asking first if they want it, then follow the same a above, except of course, use >> instead of > for the /et/conf.d/net http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=8
 
-# FIXME ^ add NIS section, asking first if they want it, then follow the same a above, except of course, use >> instead of > for the /et/conf.d/net http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=8
+    # FIXME ^ change to a menu selection, allowing manual editing of hostname and net configs as an option, as well as "do it now" option, as above.
 
-# FIXME ^ change to a menu selection, allowing manual editing of hostname and net configs as an option, as well as "do it now" option, as above.
+    # FIXME ^ net'll likely need mending, since the host and net files 
 
-# FIXME ^ net'll likely need mending, since the host and net files 
+    ###############
+    #___#######___#
+    ####NETWORK####
+    #___#######___#
+    ###############
+    ############### mk2  (put network mk2 in own function.  network mk1 can probably be deleted now, right?
+    clear
+    echo "you will wanna be online too right?"
 
-###############
-#___#######___#
-####NETWORK####
-#___#######___#
-###############
-############### mk2  (put network mk2 in own function.  network mk1 can probably be deleted now, right?
-clear
-echo "you will wanna be online too right?"
-
-#this is probably excessive for just hostname, right?  and domain name bellow too...
-echo "what do you want to do about your hostname (in /etc/conf.d/hostname)
+    #this is probably excessive for just hostname, right?  and domain name bellow too...
+    echo "what do you want to do about your hostname (in /etc/conf.d/hostname)
 m - manually edit
 d - dont care, do it for me, default it.  (overwrites!)
 w - wget from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/hostname)
 v - vanilla - dont touch it.  leave as is now.
 e - enter hostname now. (warning this will overwrite existing /etc/conf.d/hostname)"
-read
-case $REPLY in
-	m)
-		echo "ok, to $CHEDITOR /etc/conf.d/hostname" 
-		$CHEDITOR /etc/conf.d/hostname
-	;;
+    read
+    case $REPLY in
+	    m)
+		    echo "ok, to $CHEDITOR /etc/conf.d/hostname" 
+		    $CHEDITOR /etc/conf.d/hostname
+	    ;;
 
-	d) 
-		echo "witchgnubox" > /etc/conf.d/hostname #
-	;;
+	    d) 
+		    echo "witchgnubox" > /etc/conf.d/hostname #
+	    ;;
 
-	w) 
-		echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):"
-		read HOSTNOMURL 
-		wget $HOSTNOMURL -o /etc/conf.d/hostname
-	;;
+	    w) 
+		    echo "enter the url where your hostname filef is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):"
+		    read HOSTNOMURL 
+		    wget $HOSTNOMURL -o /etc/conf.d/hostname
+	    ;;
 
-	c) 
-		echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" 
-		read HOSTNOMLOC 
-		cp $HOSTNOMLOC /etc/conf.d/hostname
-	;;
+	    c) 
+		    echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/hostname):" 
+		    read HOSTNOMLOC 
+		    cp $HOSTNOMLOC /etc/conf.d/hostname
+	    ;;
 
-	v) 
-		echo "well that is easily done.  ... done."
-	;;
+	    v) 
+		    echo "well that is easily done.  ... done."
+	    ;;
 
-	e) 
-		read -p "whadya call this computer (what is your hostname)?
+	    e) 
+		    read -p "whadya call this computer (what is your hostname)?
 - this will be set in /etc/conf.d/hostname
 ENTER HOSTNAME:" HOSTNOM 
-		echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
-	;;
-esac
+		    echo "hostname=$HOSTNOM " > /etc/conf.d/hostname
+	    ;;
+    esac
 
-# edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
-echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
+    # edit this line, so that it finishes using $HOSTNOM.  would be easy if you just used last option only... but if insisting on the excessive version here, then we wikl need a clever extraction of $HOSTNOM from /etc/conf.d/hostname.  not important rly... so i am just commenting on this rather than getting it done, so it doesnt interupt my flow.
+    echo "ok, so that should be your /etc/conf.d/hostname configured so it has your hostname."
 
-# the /etc/conf.d/net is a far mroe elaborate config file than hpostname.  this is dangerously inadequate!  ... so i added the "RECCOMENDED"s, as well as the warnings already in place.
-echo "what do you want to do about your domain name (in /etc/conf.d/net)
+    # the /etc/conf.d/net is a far mroe elaborate config file than hpostname.  this is dangerously inadequate!  ... so i added the "RECCOMENDED"s, as well as the warnings already in place.
+    echo "what do you want to do about your domain name (in /etc/conf.d/net)
 m - RECOMMENDED: manually edit
 d - dont care, do it for me, default it.  (adds ns_domain_lo=\"witchnet\")
 w - wget from _____ (warning this will overwrite existing /etc/conf.d/net)
 c - copy from _____ (warning this will overwrite existing /etc/conf.d/net)
 v - RECOMMENDED: vanilla - dont touch it!  leave as is now.
 e - enter network name now. (warning this will overwrite existing /etc/conf.d/net)"
-read REPLY
-case $REPLY in
-	m)
-		$CHEDITOR /etc/conf.d/net
-	;;
+    read REPLY
+    case $REPLY in
+	    m)
+		    $CHEDITOR /etc/conf.d/net
+	    ;;
 
-	d) 
-		echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
-	;;
+	    d) 
+		    echo "ns_domain_lo=\"witchnet\"" >> /etc/conf.d/net #
+	    ;;
 
-	w) 
-		echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
-		read -r HOSTNOMURL 
-		wget $HOSTNOMURL -o /etc/conf.d/net
-	;;
+	    w) 
+		    echo "enter the url where your hostname file is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
+		    read -r HOSTNOMURL 
+		    wget $HOSTNOMURL -o /etc/conf.d/net
+	    ;;
 
-	c) 
-		echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):"
-		read HOSTNOMLOC
-		cp $HOSTNOMLOC /etc/conf.d/net
-	;;
+	    c) 
+		    echo "enter the location where your hostname file is located (e.g. /mnt/myexternal/myconfigbkpoverlay/etc/conf.d/net):"
+		    read HOSTNOMLOC
+		    cp $HOSTNOMLOC /etc/conf.d/net
+	    ;;
 
-	v) 
-		echo "well that is easily done.  ... done."
-	;;
+	    v) 
+		    echo "well that is easily done.  ... done."
+	    ;;
 
-	e) 
-		echo "whadya call this network (what is your net)?
+	    e) 
+		    echo "whadya call this network (what is your net)?
 - this will be set in /etc/conf.d/net"
-		read -p "ENTER DOMAIN NAME:" DOMNOM
-		echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
-	;;
-esac
+		    read -p "ENTER DOMAIN NAME:" DOMNOM
+		    echo "ns_domain_lo=\"$DOMNOM\"" > /etc/conf.d/net
+	    ;;
+    esac
 
-echo "u wanna use dhcp right? y/n:  "
-read REPLY
-if [ "$REPLY" == "y" ] 
-then
-	echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
-fi
+    echo "u wanna use dhcp right? y/n:  "
+    read REPLY
+    if [ "$REPLY" == "y" ] 
+    then
+	    echo "config_eth0=\"dhcp\"" >> /etc/conf.d/net
+    fi
 
-echo "and u want to have networking activated at boot automatically for you, of course, right? y/n:  "
-read REPLY
-if [ "$REPLY" == "y" ] 
-then
-	echo "ok.. " 
+    echo "and u want to have networking activated at boot automatically for you, of course, right? y/n:  "
+    read REPLY
+    if [ "$REPLY" == "y" ] 
+    then
+	    echo "ok.. " 
 
-	echo "cd /etc/init.d" 
-	cd /etc/init.d 
+	    echo "cd /etc/init.d" 
+	    cd /etc/init.d 
 
-	echo "ln -s net.lo net.eth0"
-	ln -s net.lo net.eth0 
+	    echo "ln -s net.lo net.eth0"
+	    ln -s net.lo net.eth0 
 
-	echo "this next bit is clever.  you should learn about rc-update.  a nice feature of gentoo." 
-	echo "rc-update add net.eth0 default" 
-	rc-update add net.eth0 default
-fi
+	    echo "this next bit is clever.  you should learn about rc-update.  a nice feature of gentoo." 
+	    echo "rc-update add net.eth0 default" 
+	    rc-update add net.eth0 default
+    fi
 
-echo "If you have several network interfaces, you need to create the appropriate net.eth1, net.eth2 etc. just like you did with net.eth0."
+    echo "If you have several network interfaces, you need to create the appropriate net.eth1, net.eth2 etc. just like you did with net.eth0."
 
-echo "now we inform linux about your network. in /etc/hosts"
-# FIXME obviously this needs work prior, as already commented on, to make sure these variables are set more cleanly and cleverly.
-echo "127.0.0.1     $HOSTNOM.$DOMNOM $HOSTNOM localhost" > /etc/hosts
-# see 2.9 / 2.10 for more elaborate stuff required to be set up here.  ... yes, /etc/hosts needs a more elaborate series of questions asked for it.
+    echo "now we inform linux about your network. in /etc/hosts"
+    # FIXME obviously this needs work prior, as already commented on, to make sure these variables are set more cleanly and cleverly.
+    echo "127.0.0.1     $HOSTNOM.$DOMNOM $HOSTNOM localhost" > /etc/hosts
+    # see 2.9 / 2.10 for more elaborate stuff required to be set up here.  ... yes, /etc/hosts needs a more elaborate series of questions asked for it.
 
-#PCMCIA section.
-echo "do you need PCMCIA? y/n:  "
-read
-if [ "$REPLY" == "y" ] 
-then
-	emerge pcmciautils
-fi
+    #PCMCIA section.
+    echo "do you need PCMCIA? y/n:  "
+    read
+    if [ "$REPLY" == "y" ] 
+    then
+	    emerge pcmciautils
+    fi
+}
 
+network
 
 ##############
 #___######___#
@@ -641,7 +697,8 @@ echo "note, this section is just minimally done, very basic.  you will no doubt 
 
 cp /boot/grub/grub.conf /boot/grub/grub.conf~origbkp
 # note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
-echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp" && sleep 2
+echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp"
+sleep 2
 echo "
 default 0
 timeout 30
@@ -659,7 +716,9 @@ makeactive
 chainloader +1" > /boot/grub/grub.conf
 
 # tee that^ so the folks can see what you mean by:
-sleep 1 && echo "as an interim kluge until you hack up something better, some crap has been thrown in your bootloader section. so you will want to find out what your kernel and initrd are called and what bootloader kernel options you want passed to it, and edit those in apropriately." && sleep 2
+sleep 1 
+echo "as an interim kluge until you hack up something better, some crap has been thrown in your bootloader section. so you will want to find out what your kernel and initrd are called and what bootloader kernel options you want passed to it, and edit those in apropriately." 
+sleep 2
 
 # ^ make a seditor to convert sda1 to (hd0,0) and so on. then use $ROOTDEV seditor'd to create GRUBDEV, and use $GRUBDEV in "root (hd0,0)" as "root $GRUBDEV" instead.
 # use either something like uname -r or a clever ls /boot, to determine the kernel and define it as a variable (or use clever brackets n shiz) to use in place of initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
@@ -689,8 +748,10 @@ exit
 ##########################################  .... uhhh check the CHEOF (the chroot EOF "here" command)... isnt it missing something?
 CHEOF
 
-# && 
-chmod +x /mnt/$DISTRONAME/bin/witchroot && echo "chroot /mnt/$DISTRONAME /bin/bash citchroot" && sleep 1 && chroot /mnt/$DISTRONAME /bin/bash witchroot
+chmod +x /mnt/$DISTRONAME/bin/witchroot 
+echo "chroot /mnt/$DISTRONAME /bin/bash citchroot" 
+sleep 1 
+chroot /mnt/$DISTRONAME /bin/bash witchroot
 
 #warning! MAY WANT TO RE-TRIPLE-CHECK THAT^ since i moved the "here" command around a bit.  frankensteinings. did orgiginally have that line^ andand'd to the chroot directly.
 
