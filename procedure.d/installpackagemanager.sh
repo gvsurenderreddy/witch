@@ -1,8 +1,9 @@
 # Needs some changes. METADISTRO has been included for usage.
+# REQUIRES FIXING
 
 echo "======================"
-BROWSER=$(sed -n '1p' $WITCH/config.txt)
-PROX=$(sed -n '2p' $WITCH/config.txt)
+BROWSER=$(sed -n '2p' $WITCH/config.txt)
+PROX=$(sed -n '3p' $WITCH/config.txt)
 DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
 echo "(base) Browser: $BROWSER"
@@ -24,7 +25,7 @@ echo "======================"
 	echo "Now that the stage is installed, we continue to installing your package manager.  READ CAREFULLY:"
 	sleep 2
 	echo "Press y to use \" $BROWSER \" to navigate http://www.gentoo.org/main/en/mirrors2.xml to the snapshots directory in a mirror close to you.
-in the snapshots directory, download the latest Portage snapshot (portage-latest.tar.bz2) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
+in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT portage-latest.tar.xz) by selecting it and pressing D. When it finishes downloading, exit the browser by pressing q."
     $WITCH/color.sh YELLOW "make sure it's in the /mnt/$DISTRONAME path"
     echo ""
 	$WITCH/color.sh GREEN "ready to download your portage (y - yes) (p - yes, with proxy support)"
@@ -66,7 +67,7 @@ in the snapshots directory, download the latest Portage snapshot (portage-latest
 
 	# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
 	echo "just uncompressing your $PACKAGEMGR now, have a little wait."
-	tar -xjf /mnt/$DISTRONAME/$PACKAGEMGR-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
+	tar -xvjf /mnt/$DISTRONAME/$PACKAGEMGR-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 
 	# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
 

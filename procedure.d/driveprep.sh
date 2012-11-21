@@ -39,8 +39,8 @@ fdisk -l
 echo
 
 error() { # first parameter is error message, second is fuction to execute
-    $WITCH/color.sh ERROR $1
-    $2
+    $WITCH/color.sh ERROR "$1"
+    "$2"
 }
 
 rootdir() {
