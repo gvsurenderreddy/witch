@@ -29,6 +29,39 @@ cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF
 ##########################################
 ##########################################
 
+### functions here to make life easier
+install_pkg() { # put the packages to be installed as a string.
+    case "\$1" in
+        "portage")
+            echo "Installing package \$2 ..."
+            emerge \$2
+        ;;
+        "dpkg")
+            echo "Installing package \$2 ..."
+            aptitude install \$2
+        ;;
+    esac
+}
+
+update_pkg() {
+    case "\$1" in
+        "portage")
+            echo "updating with \"emerge --sync\" not so quietly though.  may take several minutes..."
+            emerge --sync\
+            echo "portage is now up to date." 
+            sleep 1
+            # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
+        ;;
+
+        "dpkg") # little example
+            echo "updating with \"aptitude update\" not so quietly though. may take several minutes..."
+            aptitude update
+            echo "your system is now up to date"
+            sleep 1
+        ;;
+    esac
+}
+
 echo "creating a new environment by essentially creating environment variables, then loading those variables into memory using source."
 case "$METADISTRO" in
     "GENTOO")
@@ -47,22 +80,7 @@ sleep 2 && clear
 
 echo "making sure the $PACKAGEMGR tree of $DISTRONAME is up to date..."
 echo
-case "$PACKAGEMGR" in
-    "portage")
-        echo "...with \"emerge --sync\" not so quietly though.  may take several minutes..."
-        emerge --sync\
-        echo "portage is now up to date." 
-        sleep 1
-        # add some savvy check to know if there's a new portage, n then have the script do, as the handbook says: If you are warned that a new Portage version is available and that you should update Portage, you should do it now using emerge --oneshot portage. 
-    ;;
-
-    "dpkg") # little example
-        echo "...with \"aptitude update\" not so quietly though. may take several minutes..."
-        aptitude update
-        echo "your system is now up to date"
-        sleep 1
-    ;;
-esac
+update_pkg 
 
 sleep 2 && clear
 
@@ -70,20 +88,15 @@ sleep 2 && clear
 #this is the best work-around i've come up with yet to deal with passing the required variables to the chrooted environment.  it's not ideal, i know, and i'm certain there's a more elegant solution out there, but for now, this will have to do.
 echo "since you're now well and truly in your newly chrooted environment, you need to set some variables again.  ~ this is an unfortunate kludge solution.  hack up, or put up. ~"
 echo 
-cheditorselect() {
-    echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
-    read CHEDITOR
-    export EDITOR="\$CHEDITOR"
-}
-
-cheditorselect
+echo "what is your prefered text editor? (type the name of it\'s executable as exists on host system):" 
+read CHEDITOR
+export EDITOR="\$CHEDITOR"
+    
 #mibi move it to before the portage sync'ing?
 #################################################################################
 
 sleep 2 && clear
-
-## GENTOO SPECIFIC
-gentoo_config() {
+gentoo_config() { ## GENTOO SPECIFIC
     #put profile selection into own function(s) too?  variablise and caseifthenesac it for the various bases and their variations (such as the number of profiles they offer)
     echo "First, a small definition is in place."
     sleep 1
@@ -262,16 +275,27 @@ kernel() {
 
     echo "so lets get on with getting you a kernel..."
     sleep 1
-    echo "how would you like to get a kernel?
-g - gentoo-sources and genkernel  
-m - manual (incomplete)"
-    echo " "
+    # figure out a nice way to do this
+    echo "how would you like to get a kernel?"
+    case "$METADISTRO" in
+        "GENTOO") echo "i - gentoo-sources and genkernel " ;;
+        "DEBIAN") echo "i - debian repositories " ;;
+    esac
+    echo "m - manual (incomplete)"
+    echo
     read -p "select which option: "
     case "\$REPLY" in
-        g)
-		    emerge genkernel gentoo-sources
-		    genkernel all --menuconfig 
-		    ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+        i) ## here you go. start making it seperate.
+            case "$METADISTRO" in
+            "GENTOO")
+		        install_pkg $PACKAGEMGR "genkernel gentoo-sources"
+		        genkernel all --menuconfig 
+		        ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+		    ;;
+		    "DEBIAN") ## ask for kernel version since debian has different kernels
+		    ## added as a proof of concept. fill it in later
+		    ;;
+		    esac
 	    ;;
 
 	    m) 
@@ -506,7 +530,7 @@ e - enter network name now. (warning this will overwrite existing /etc/conf.d/ne
     read
     if [ "\$REPLY" == "y" ] 
     then
-        $EDITOR /etc/hosts
+        \$EDITOR /etc/hosts
     fi
 
     #PCMCIA section.
@@ -514,7 +538,7 @@ e - enter network name now. (warning this will overwrite existing /etc/conf.d/ne
     read
     if [ "\$REPLY" == "y" ] 
     then
-	    emerge pcmciautils
+	    install_pkg $PACKAGEMGR pcmciautils
     fi
 }
 
@@ -609,23 +633,23 @@ select a,b,c or d and press ENTER.
 read REPLY
 case \$REPLY in
 	a) 
-		emerge syslogd 
+		install_pkg $PACKAGEMGR syslogd 
 		rc-update add syslogd default
     ;;
 
 	b) 
-		emerge syslog-ng 
+		install_pkg $PACKAGEMGR syslog-ng 
 		rc-update add syslog-ng default
 	;;
 
 	c)
-		emerge metalog 
+		install_pkg $PACKAGEMGR metalog 
 		rc-update add metalog default
 	;;
 
 	d)
 		read -p "enter name of your choice of system logger: " SYSLOGA  
-		emerge \$SYSLOGA 
+		install_pkg $PACKAGEMGR \$SYSLOGA 
 		rc-update add \$SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 	;;
 esac
@@ -653,25 +677,25 @@ e. no cron (r u sure?)"
 read
 case "\$REPLY" in
 	a) 
-		emerge vixie-cron 
+		install_pkg $PACKAGEMGR vixie-cron 
 		rc-update add vixie-cron default
     ;;
 
 	b) 
-		emerge dcron 
+		install_pkg $PACKAGEMGR dcron 
 		rc-update add dcron default 
 		crontab /etc/crontab
 	;;
 
 	c)
-		emerge fcron 
+		install_pkg $PACKAGEMGR fcron 
 		rc-update add fcron default 
 		crontab /etc/crontab
 	;;
 
 	d) 
 		read -p  "enter name of your choice of cron: " CRONNER 
-		emerge \$CRONNER
+		install_pkg $PACKAGEMGR \$CRONNER
 		rc-update add \$CRONNER default
 		crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 	;;
@@ -681,9 +705,12 @@ sleep 2 && clear
 
 #functionise
 echo "If you want to index your files so you are able to quickly locate them using the locate tool, you need to install sys-apps/mlocate.
-do you want locate? (y)"
+do you want locate? [y/n]"
 read
-if [ "\$REPLY" == "y" ] then emerge mlocate fi
+if [ "\$REPLY" == "y" ] 
+then 
+    install_pkg $PACKAGEMGR mlocate 
+fi
 
 sleep 2 && clear
 
@@ -697,23 +724,20 @@ q. neither
 "
 read
 
-if [ "\$REPLY" == "d" ] then emerge phcpd fi
-if [ "\$REPLY" == "p" ] then emerge ppp fi
-if [ "\$REPLY" == "b" ] then emerge dhcp ppp fi
+case "\$REPLY" in
+    d) install_pkg $PACKAGEMGR dhcp ;;
+    p) install_pkg $PACKAGEMGR ppp ;;
+    b) install_pkg $PACKAGEMGR "dhcp ppp" ;;
+esac
 
-sleep 2 && clear
-sleep 1
-echo "now for a scary bit..."
-sleep 2
-echo -n "boo!"
-sleep 1
 sleep 2 && clear
 
 #oh rly, not even gonna give them a choice?  there is far more than just one.  :P  ;)  FIX ME... and functionise.   bootloader section could pretty much do with a whole rewrite.
+#give them syslinux too. it's a nice bootloader. maybe lilo.
 echo "Now that your kernel is configured and compiled and the necessary system configuration files are filled in correctly, it is time to install a program that will fire up your kernel when you start the system. Such a program is called a bootloader."
 sleep 2
 echo "installing grub"
-emerge grub
+install_pkg $PACKAGEMGR grub
 
 sleep 2 && clear
 echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
@@ -729,7 +753,7 @@ splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
 title=$DISTRONAME
 root (hd0,0)
-kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/$ROOTDEV udev
+kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/\$ROOTDEV udev
 initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 
 # Only in case you want to dual-boot
@@ -743,7 +767,7 @@ sleep 1
 echo "as an interim kluge until you hack up something better, some crap has been thrown in your bootloader section. so you will want to find out what your kernel and initrd are called and what bootloader kernel options you want passed to it, and edit those in apropriately." 
 sleep 2
 
-# ^ make a seditor to convert sda1 to (hd0,0) and so on. then use $ROOTDEV seditor'd to create GRUBDEV, and use $GRUBDEV in "root (hd0,0)" as "root $GRUBDEV" instead.
+# ^ make a seditor to convert sda1 to (hd0,0) and so on. then use \$ROOTDEV seditor'd to create GRUBDEV, and use $GRUBDEV in "root (hd0,0)" as "root $GRUBDEV" instead.
 # use either something like uname -r or a clever ls /boot, to determine the kernel and define it as a variable (or use clever brackets n shiz) to use in place of initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 # yes basically i've done a cop-out for this section.  i am become lazyness.  lol.
 # FIX ME ... FIX ME  ... FIX MEEEEE.   that boot section needs a serious re-work... lazy ass ....  wtf.
@@ -773,9 +797,9 @@ CHEOF
 
 echo
 chmod +x /mnt/$DISTRONAME/bin/witchroot 
-echo "chroot /mnt/$DISTRONAME /bin/bash witchroot" 
+echo "chroot /mnt/$DISTRONAME /bin/bash /bin/witchroot" 
 sleep 1 
-chroot /mnt/$DISTRONAME /bin/bash witchroot
+chroot /mnt/$DISTRONAME /bin/bash /bin/witchroot
 
 #warning! MAY WANT TO RE-TRIPLE-CHECK THAT^ since i moved the "here" command around a bit.  frankensteinings. did orgiginally have that line^ andand'd to the chroot directly.
 
@@ -790,4 +814,3 @@ chroot /mnt/$DISTRONAME /bin/bash witchroot
 #uhh... recheck that chrootage stuff... doesnt that look suspisciously like it's running chroot twice? yes, it was.  i think i sorted that now by commenting out that second one broken up over lines.  ... now srsly, we're gonna hafta clean up all this mucky excessive commenting.  oh well, at least it's keeping your head straight.
 
 #or rather... need to get it so that the stuff in the CHEOFings, that gets put in witchroot script, gets initiated once you've chrooted...  but then, how do you tell it to execute that...   .... ah.   the issue remains. prolly better do as i said at the start of this chrootings, and get the gist of the basics from: http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ and stop freaking out over it.
-sleep 1
