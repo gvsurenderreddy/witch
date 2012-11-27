@@ -736,11 +736,14 @@ sleep 2 && clear
 #give them syslinux too. it's a nice bootloader. maybe lilo.
 echo "Now that your kernel is configured and compiled and the necessary system configuration files are filled in correctly, it is time to install a program that will fire up your kernel when you start the system. Such a program is called a bootloader."
 sleep 2
-echo "installing grub"
+echo "installing grub in a moment. we'll install ncurses first."
+sleep 2
 install_pkg $PACKAGEMGR grub
 
 sleep 2 && clear
 echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
+
+echo "read more at http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1&chap=10"
 
 cp /boot/grub/grub.conf /boot/grub/grub.conf~origbkp
 # note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
@@ -751,7 +754,7 @@ default 0
 timeout 30
 splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-title=$DISTRONAME
+title=$DISTRONAME - $METADISTRO
 root (hd0,0)
 kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/\$ROOTDEV udev
 initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10

@@ -13,7 +13,7 @@ case $PACKAGEMGR in
 	portage) emerge -qv spectrwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc ;;
 	*) 
 		echo "the package manager: $PACKAGEMGR is invalid for rowan. Redirecting you back..." 
-		./rewic.sh
+		$WITCH/rewic.sh
 	;;
 esac
 

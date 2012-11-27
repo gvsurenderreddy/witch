@@ -40,7 +40,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
         	echo "proceeding" 
         	if [ -f /mnt/$DISTRONAME/$PACKAGEMGR* ]
         	then 
-            	echo "excellent you seem to have got your package manager ($1) gubbins downloaded successfully." 
+            	echo "excellent you seem to have got your package manager ($PACKAGEMGR) gubbins downloaded successfully." 
         	else 
             	echo "sorry, it didnt seem like portage got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better"
         	fi
@@ -54,9 +54,9 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
     	    echo "proceeding" 
     	    if [ -f /mnt/$DISTRONAME/$PACKAGEMGR* ] 
     	    then 
-    	        echo "excellent you seem to have got your package manager ($1) gubbins downloaded successfully."
+    	        echo "excellent you seem to have got your package manager ($PACKAGEMGR) gubbins downloaded successfully."
     	    else 
-    	        echo "sorry, it didnt seem like ($1) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
+    	        echo "sorry, it didnt seem like ($PACKAGRMGR) got downloaded correctly then.  something went wrong!  evade!  vamoose!  ...unless u know better" 
     	    fi
     	fi
 	fi
@@ -67,7 +67,9 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
 
 	# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
 	echo "just uncompressing your $PACKAGEMGR now, have a little wait."
-	tar -xvjf /mnt/$DISTRONAME/$PACKAGEMGR-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
+	case $PACKAGRMGR in
+	"portage") tar -xvjf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/ ;;
+	esac
 
 	# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.
 
