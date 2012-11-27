@@ -164,7 +164,7 @@ echo ""
 
 ### time to set up a nice little environmental variable
 pushd `dirname $0` > /dev/null
-export WITCH=`pwd`
+export WITCH=$(pwd)
 popd > /dev/null
 
 #root check

@@ -25,7 +25,7 @@ sleep 1
 
 #put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
 echo "how do you wanna handle configuring your /etc/make.conf file? (or rather, your /mnt/$DISTRONAME/etc/make.conf file, since we have not chrooted into your new system yet.)"
-echo -n "
+echo "
 m - manually edit
 d - dont care, do it for me, default it.   (warning, incomplete! overwrites!)
 w - wget from _____
@@ -35,28 +35,23 @@ u - use the fully commented one from /mnt/$DISTRONAME/usr/share/portage/config/m
 read
 if [ "$REPLY" == "m" ] 
 then
- $EDITOR /mnt/$DISTRONAME/etc/make.conf
-
+    $EDITOR /mnt/$DISTRONAME/etc/make.conf
 elif [ "$REPLY" == "d" ]
 then
     echo "looks like the make.conf default hasnt been made yet.  you will probably want to copy back from /mnt/$DISTRONAME/etc/make.conf~rawvanillaoriginal or /mnt/$DISTRONAME/etc/make.conf~wtfanewbackup /mnt/$DISTRONAME/usr/share/portage/config/make.conf or another from somewhere else, or make your own now, and maybe go to #witchlinux on irc.freenode.net and tell digitteknohippie he forgot he left the make.conf section in such a state of disrepair." | tee /mnt/$DISTRONAME/etc/make.conf
-
 elif [ "$REPLY" == "w" ] 
 then
     echo "enter the url where your make.conf is located:" 
     read MAKECONFURL
     wget $MAKECONFURL -o /mnt/$DISTRONAME/etc/make.conf
-
 elif [ "$REPLY" == "c" ]
 then 
     echo "enter the location where your make.conf is located (e.g. /mnt/$DISTRONAME/usr/share/portage/config/make.conf):" 
     read MAKECONFLOC
     cp $MAKECONFLOC /mnt/$DISTRONAME/etc/make.conf
-
 elif [ "$REPLY" == "v" ] 
 then
     echo "well that is easily done.  ... done."
-
 elif [ "$REPLY" == "u" ] 
 then
     cp /mnt/$DISTRONAME/usr/share/portage/config/make.conf /mnt/$DISTRONAME/etc/make.conf 
