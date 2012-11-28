@@ -109,7 +109,9 @@ function urlstage3 {
 
 echo "where are you getting your stage3 compressed-tarball from? what's the exact url?"
 read $STAGE3URL
-
+cd /mnt/$DISTRONAME
+pwd
+wget $STAGE3URL
 extractstage3
 }
 
@@ -149,7 +151,8 @@ case $Stage3dlmethod in
 	;;
     D|d)
 	echo "what are you doing?"
-	sleep 1
+	sleep 2
+	clear
 	cauldren
 	;;
 esac
