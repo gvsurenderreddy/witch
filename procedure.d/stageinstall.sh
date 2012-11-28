@@ -126,8 +126,8 @@ $WITCH/color.sh QUESTION "how would you like to fetch your stage3"
 echo 
 $WITCH/color.sh GREEN "
     A.    get it same way as in gentoo handbook (instructive)
-    B.    enter a direct URL to the stage3
-    C.    enter a location in the file system (already have downloaded)
+    B.    enter a direct URL to the stage3 (INCOMPLETE)
+    C.    enter a location in the file system (already have downloaded)(INCOMPLETE)
     D.    dont want a stage3"
 
 read Stage3dlmethod
@@ -139,12 +139,12 @@ case $Stage3dlmethod in
 	;;
     B|b)
 	echo "$Stage3dlmethod was selected."
-	sleep 1
+	sleep 4
 	urlstage3
 	;;
     C|c)
 	echo "$Stage3dlmethod was selected."
-	sleep 1
+	sleep 4
 	locstage3
 	;;
     D|d)
