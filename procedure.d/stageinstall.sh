@@ -5,43 +5,38 @@
 
 # REQUIRES FIXING
 
-echo "======================"
-BROWSER=$(sed -n '2p' $WITCH/config.txt)
-PROX=$(sed -n '3p' $WITCH/config.txt)
-echo "(base) Browser: $BROWSER"
-echo "Proxy: $PROX"
 
-DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
-echo "(base) Metadistro: $DISTRONAME"
-echo "======================"
 
-sleep 1
-echo 
 
-###############
-#          _                                     _          
-# _ __ ___| |__  _ __ _____      _____  ___ _ __(_)___  ___ 
-#| '__/ _ \ '_ \| '__/ _ \ \ /\ / / __|/ _ \ '__| / __|/ _ \
-#| | |  __/ |_) | | | (_) \ V  V /\__ \  __/ |  | \__ \  __/
-#|_|  \___|_.__/|_|  \___/ \_/\_/ |___/\___|_|  |_|___/\___|
-#                                                           
-#here's the rebrowserising of witchcraft.  cross fingers it doesnt get messy.
-#
 #copied from digit's witchnotes.
 #change the browser bit.  at least extend the explanation, or re-word to something like, "download the .tar.bz2 stage3 file apropriate for your architechture, to /mnt/$DISTRONAME/" and then add a "are you ready to proceed? (have you got the stage3 in your distro-to-be's root dir?)" and perhaps even altering it, since i already have a check in place, change what happens upon that check failing, so that it gives the user time to arrange that to make sure it is there... perhaps even advising/educating on ways to do that (like explaining how with tty n wget or cp etc).
 
 
+
+
+function browserstage3 {
+###############
+##############
+############
+###########
+#########
+#######
+#####
+###
+#
 echo "witchcraft will use browsers to download vital parts (and less vital parts too)"
 sleep 1
 echo ok
 sleep 1
+
+
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~"	
 
 echo "here you need to extract a stage3 compressed tarball to /mnt/$DISTRONAME/"
 echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to download your stage3 tarball for the base system."  
 echo ""
-echo "Once the page loads and you\'ve found a nearby mirror, navigate to the ** releases/x86/autobuilds/ ** directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures)." 
+echo "Once the page loads and you\'ve found a nearby mirror, navigate to the ** releases/$ARCH/autobuilds/ ** directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures)." 
 echo "If you're using a text browser: Select one and press D to download. Otherwise, download however you wish."
 echo ""
 echo "This may take some time. When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
@@ -89,11 +84,76 @@ elif [ "$REPLY" == "n" ]
 then 
     exit
 fi
+#
+###
+#####
+########
+#############
+#######################
+extractstage3
+}
 
+function urlstage3 {
+
+echo "where are you getting your stage3 compressed-tarball from? what's the exact url?"
+read $STAGE3URL
+
+extractstage3
+}
+
+function locstage3 {
+echo "where is your stage3 compressed-tarball located at? what's the exact file path adress?"
+read $STAGE3LOC
+
+extractstage3
+}
+
+function howdlstage3 {
+echo 
+$WITCH/color.sh QUESTION "how would you like to fetch your stage3"
+echo 
+$WITCH/color.sh GREEN "
+    A.    get it same way as in gentoo handbook (instructive)
+    B.    enter a direct URL to the stage3
+    C.    enter a location in the file system (already have downloaded)
+    D.    dont want a stage3"
+
+read Stage3dlmethod
+case $Stage3dlmethod in
+    A|a)
+	echo "$Stage3dlmethod was selected."
+	sleep 1
+	browserstage3
+	;;
+    B|b)
+	echo "$Stage3dlmethod was selected."
+	sleep 1
+	urlstage3
+	;;
+    C|c)
+	echo "$Stage3dlmethod was selected."
+	sleep 1
+	locstage3
+	;;
+    D|d)
+	echo "what are you doing?"
+	sleep 1
+	cauldren
+	;;
+esac
+
+}
+
+function extractstage3 {
 #set this so user can choose if they want verbose output
-echo "unpacking your stage3. this may take some time, please wait."
-$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself."
+echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, please wait."
+$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself before proceeding."
 sleep 1 
 
-#here ends the stage install section.   simple huh?  ;D
-#maybe too simple.  REFUNCTIONISE and REVARIABLISE
+}
+
+#script starts here.
+howdlstage3
+
+
+
