@@ -3,9 +3,6 @@
 # stageinstall
 # Needs some changes. METADISTRO has been included for usage.
 
-# REQUIRES FIXING
-
-
 
 
 #copied from digit's witchnotes.
@@ -30,6 +27,20 @@ echo ok
 sleep 1
 
 
+# REQUIRES FIXING
+
+echo "======================"
+BROWSER=$(sed -n '2p' $WITCH/config.txt)
+PROX=$(sed -n '3p' $WITCH/config.txt)
+echo "(base) Browser: $BROWSER"
+echo "Proxy: $PROX"
+DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
+echo "(base) Metadistro: $DISTRONAME"
+echo "======================"
+sleep 1
+echo
+
+
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~"	
 
@@ -47,6 +58,7 @@ read
 
 # appears that to automate it
 # use netstat + wget
+# will do that in another option for downloading stage3.
 
 if [ "$REPLY" == "y" ]
 then
