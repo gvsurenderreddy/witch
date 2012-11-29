@@ -68,7 +68,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
 	# this section will likely require tweaking when, as is mentioned in the previous comment, the package manager section get's put in it's own function (or series of functions rather)
 	echo "just uncompressing your $PACKAGEMGR now, have a little wait."
 	case $PACKAGRMGR in
-	"portage") tar -xvjf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/ ;;
+	"portage") tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/ ;;
 	esac
 
 	# /mnt/$DISTRONAME/usr/share/portage/config/make.conf # contains fully commented make.conf.

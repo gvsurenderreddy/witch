@@ -170,8 +170,8 @@ echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, pleas
 #if $STAGELOC is set, use $STAGELOC as source tarball to extract to /mnt/$DISTRONAME/usr/
 
 #ultra basic:
-tar -xvjf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
-
+tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
+#oops!  added the p.  must use p, to preserve perms.
 }
 
 #script starts here.
