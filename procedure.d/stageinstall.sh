@@ -26,20 +26,10 @@ sleep 1
 echo ok
 sleep 1
 
-
-# REQUIRES FIXING
-
-echo "======================"
-BROWSER=$(sed -n '2p' $WITCH/config.txt)
-PROX=$(sed -n '3p' $WITCH/config.txt)
-echo "(base) Browser: $BROWSER"
-echo "Proxy: $PROX"
-DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
-echo "(base) Metadistro: $DISTRONAME"
-echo "======================"
-sleep 1
-echo
-
+#get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
+#TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
+#echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
+#   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #variablise to denote any special needs per specific stages (such as the differences between exherbo and gentoo stages.)
 echo "READ INSTRUCTIONS CAREFULLY ~"	
@@ -190,6 +180,21 @@ tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 }
 
 #script starts here.
+
+
+echo "======================"
+BROWSER=$(sed -n '2p' $WITCH/config.txt)
+PROX=$(sed -n '3p' $WITCH/config.txt)
+echo "(base) Browser: $BROWSER"
+echo "Proxy: $PROX"
+DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
+echo "(base) Metadistro: $DISTRONAME"
+echo "======================"
+sleep 1
+echo
+
+
+
 howdlstage3
 
 

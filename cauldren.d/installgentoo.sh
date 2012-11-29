@@ -10,7 +10,11 @@ echo $DISTRONAME > $WITCH/config.base.txt #1st line
 
 METADISTRO=GENTOO #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
 ARCH="uname -m"
+
 PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
+#read -p "what is the name of the package manager you want? portage/paludis?" PACKAGEMGR
+#echo $PACKAGEMGR was selected as the package manager you want to have installed
+#^ but will leave that as the simple form until we've got some headway with paludis (and thus, likely once got some exherbo stuff working too
 
 echo $METADISTRO >> $WITCH/config.base.txt #2nd line
 echo $ARCH >> $WITCH/config.base.txt #3rd line
@@ -27,11 +31,6 @@ echo "ARCH: $ARCH"
 echo "PACKAGEMGR: $PACKAGEMGR"
 echo "======================"
 sleep 1
-
-#get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
-#TXTBROWSER=hash links 2>&- || { echo >&2 "links is not installed.  how about lynx..."; lynx 1; }
-#echo "what is your prefered text webbrowser?" && read -r TXTBROWSER
-#   ... i think.  anyways, i'll not implement (uncomment) that just yet.  it'd mean making the appropriate changes bellow too.
 
 #call the drive preparation function.
 clear && $WITCH/procedure.d/driveprep.sh
