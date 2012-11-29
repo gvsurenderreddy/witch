@@ -5,6 +5,7 @@ clear
 
 function deskfigselector {
 	echo "deskfigselector is temporarily out of order while fixing main install"
+	echo
 	echo "welcome to the witchcraft\'s deskfig selector.  here you can install what really gives your os character, it\'s desktop environment omponents and configuration."
 
 	#decomment when bringing deskfigselection back into comission.  ~ may also wanna change from stupid "select" style question, to a regular read, like tried n tested above.
