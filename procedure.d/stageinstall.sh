@@ -172,6 +172,21 @@ echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, pleas
 #ultra basic:
 tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 #oops!  added the p.  must use p, to preserve perms.
+
+###
+### hacktown/
+###
+
+#if $STAGE3LOC is-set then use $STAGE3LOC else use /stagewhatever.tar.whatever
+#perhaps set up a confirmation step, incase peeps have more than one stage3 downloaded... then they get directed to the locstage3 function
+#if tar.bz2 then xvjpf
+#if tar.xz then unxz && xvpf
+#if tar.gz then xvzpf
+
+###
+### /hacktown
+###
+
 }
 
 #script starts here.
