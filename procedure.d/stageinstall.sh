@@ -162,8 +162,15 @@ esac
 function extractstage3 {
 #set this so user can choose if they want verbose output
 echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, please wait."
-$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself before proceeding."
-sleep 1 
+
+#method removed.  to be returned to later.
+#$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself before proceeding."
+
+# FIXME MAKEME
+#if $STAGELOC is set, use $STAGELOC as source tarball to extract to /mnt/$DISTRONAME/usr/
+
+#ultra basic:
+tar -xvjf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 
 }
 
