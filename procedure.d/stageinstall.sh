@@ -47,7 +47,7 @@ echo "READ INSTRUCTIONS CAREFULLY ~"
 echo "here you need to extract a stage3 compressed tarball to /mnt/$DISTRONAME/"
 echo "once you\'ve read these instructions, press y (and enter) to use \"$BROWSER\" web browser to navigate http://www.gentoo.org/main/en/mirrors2.xml to download your stage3 tarball for the base system."  
 echo ""
-echo "Once the page loads and you\'ve found a nearby mirror, navigate to the ** releases/$ARCH/autobuilds/ ** directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures)." 
+echo "Once the page loads and you\'ve found a nearby mirror, navigate to the ** releases/$ARCH/autobuilds/ ** directory. There you should see all available stage files for your architecture (they might be stored within subdirectories named after the individual subarchitectures).  download the tar.bz2, not a tar.xz" #we'll add ability to use any format later.  or maybe ye who is reading this can. :P
 echo "If you're using a text browser: Select one and press D to download. Otherwise, download however you wish."
 echo ""
 echo "This may take some time. When it has finished, quit the browser (press q in links browser) (or just close the tab) and the rest of this script will resume."
