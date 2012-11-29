@@ -13,7 +13,7 @@ case $PACKAGEMGR in
 	portage) emerge -qv spectrwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc ;;
 	*) 
 		echo "the package manager: $PACKAGEMGR is invalid for rowan. Redirecting you back..." 
-		$WITCH/rewic.sh
+		$WITCH/rewic.sh # uhhh, really?  wtf.  rewic is the remastery portion of witchcraft... this is in the deskfig portion... never the two ought meet like this... FIX THIS, where's it going back to?  once fixed, remove this comment.
 	;;
 esac
 
