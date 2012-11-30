@@ -1,3 +1,12 @@
+echo "======================"
+BROWSER=$(sed -n '2p' $WITCH/config.txt)
+PROX=$(sed -n '3p' $WITCH/config.txt)
+echo "(base) Browser: $BROWSER"
+echo "Proxy: $PROX"
+DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
+echo "(base) Metadistro: $DISTRONAME"
+echo "======================"
+
 #############
 #############
 # stageinstall
@@ -182,16 +191,6 @@ tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
 }
 
 #script starts here.
-
-
-echo "======================"
-BROWSER=$(sed -n '2p' $WITCH/config.txt)
-PROX=$(sed -n '3p' $WITCH/config.txt)
-echo "(base) Browser: $BROWSER"
-echo "Proxy: $PROX"
-DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
-echo "(base) Metadistro: $DISTRONAME"
-echo "======================"
 sleep 1
 echo
 
