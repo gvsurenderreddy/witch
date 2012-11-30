@@ -4,7 +4,7 @@ PROX=$(sed -n '3p' $WITCH/config.txt)
 echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
 DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
-echo "(base) Metadistro: $DISTRONAME"
+echo "(base) Distroname: $DISTRONAME"
 echo "======================"
 
 #############
@@ -32,7 +32,7 @@ function browserstage3 {
 #
 echo "witchcraft will use browsers to download vital parts (and less vital parts too)"
 sleep 1
-echo ok
+echo "ok"
 sleep 1
 
 #get links n lynx variablised, so can then have either used throughout with ease (y'know, so like later on it'd be just $TXTBROWSER insteada links, and TXTBROWSER would be referenced to either links or lynx, like so: 
@@ -105,98 +105,90 @@ extractstage3
 }
 
 function urlstage3 {
-
-echo "where are you getting your stage3 compressed-tarball from? what's the exact url?"
-read $STAGE3URL
-cd /mnt/$DISTRONAME
-pwd
-wget $STAGE3URL
-extractstage3
+    echo "where are you getting your stage3 compressed-tarball from? what's the exact url?"
+    read $STAGE3URL
+    cd /mnt/$DISTRONAME
+    pwd
+    wget $STAGE3URL
+    extractstage3
 }
 
 function locstage3 {
-echo "where is your stage3 compressed-tarball located at? what's the exact file path adress?"
-read $STAGE3LOC
+    echo "where is your stage3 compressed-tarball located at? what's the exact file path adress?"
+    read $STAGE3LOC
 
-extractstage3
+    extractstage3
 }
 
 function howdlstage3 {
-echo 
-$WITCH/color.sh QUESTION "how would you like to fetch your stage3"
-echo 
-$WITCH/color.sh GREEN "
-    A.    get it same way as in gentoo handbook (instructive)
-    B.    enter a direct URL to the stage3 (INCOMPLETE)
-    C.    enter a location in the file system (already have downloaded)(INCOMPLETE)
-    D.    dont want a stage3"
+    echo 
+    $WITCH/color.sh QUESTION "how would you like to fetch your stage3"
+    echo 
+    $WITCH/color.sh GREEN "
+        A.    get it same way as in gentoo handbook (instructive)
+        B.    enter a direct URL to the stage3 (INCOMPLETE)
+        C.    enter a location in the file system (already have downloaded)(INCOMPLETE)
+        D.    dont want a stage3"
 
-read Stage3dlmethod
-case $Stage3dlmethod in
-    A|a)
-	echo "$Stage3dlmethod was selected."
-	sleep 1
-	browserstage3
-	;;
-    B|b)
-	echo "$Stage3dlmethod was selected."
-	sleep 4
-	urlstage3
-	;;
-    C|c)
-	echo "$Stage3dlmethod was selected."
-	sleep 4
-	locstage3
-	;;
-    D|d)
-	echo "what are you doing?"
-	sleep 2
-	clear
-	cauldren
-	;;
-esac
-
+    read Stage3dlmethod
+    case $Stage3dlmethod in
+        A|a)
+	    echo "$Stage3dlmethod was selected."
+	    sleep 1
+	    browserstage3
+	    ;;
+        B|b)
+	    echo "$Stage3dlmethod was selected."
+	    sleep 4
+	    urlstage3
+	    ;;
+        C|c)
+	    echo "$Stage3dlmethod was selected."
+	    sleep 4
+	    locstage3
+	    ;;
+        D|d)
+	    echo "what are you doing?"
+	    sleep 2
+	    clear
+	    cauldren
+	    ;;
+    esac
 }
 
 function extractstage3 {
-#set this so user can choose if they want verbose output
-echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, please wait."
+    #set this so user can choose if they want verbose output
+    echo "unpacking your stage3 to /mnt/$DISTRONAME/. this may take some time, please wait."
 
-#method removed.  to be returned to later.
-#$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself before proceeding."
+    #method removed.  to be returned to later.
+    #$WITCH/extract.sh /mnt/$DISTRONAME/stage3-*.tar.bz2 || $WITCH/color.sh ERROR "argh something happened. i suppose you'll have to extract it yourself before proceeding."
 
-# FIXME MAKEME
-#if $STAGELOC is set, use $STAGELOC as source tarball to extract to /mnt/$DISTRONAME/usr/
+    # FIXME MAKEME
+    #if $STAGELOC is set, use $STAGELOC as source tarball to extract to /mnt/$DISTRONAME/usr/
 
-#ultra basic:
-echo "extracting /mnt/$DISTRONAME/portage-latest.tar.bz2 to /mnt/$DISTRONAME/usr/ using:
-tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/"
-tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
-#oops!  added the p.  must use p, to preserve perms.
+    #ultra basic:
+    echo "extracting /mnt/$DISTRONAME/portage-latest.tar.bz2 to /mnt/$DISTRONAME/usr/ using:
+    tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/"
+    tar -xvjpf /mnt/$DISTRONAME/portage-latest.tar.bz2 -C /mnt/$DISTRONAME/usr/
+    #oops!  added the p.  must use p, to preserve perms.
 
-###
-### hacktown/
-###
+    ###
+    ### hacktown/
+    ###
 
-#if $STAGE3LOC is-set then use $STAGE3LOC else use /stagewhatever.tar.whatever
-#perhaps set up a confirmation step, incase peeps have more than one stage3 downloaded... then they get directed to the locstage3 function
-#if tar.bz2 then xvjpf
-#if tar.xz then unxz && xvpf
-#if tar.gz then xvzpf
+    #if $STAGE3LOC is-set then use $STAGE3LOC else use /stagewhatever.tar.whatever
+    #perhaps set up a confirmation step, incase peeps have more than one stage3 downloaded... then they get directed to the locstage3 function
+    #if tar.bz2 then xvjpf
+    #if tar.xz then unxz && xvpf
+    #if tar.gz then xvzpf
 
-###
-### /hacktown
-###
-
+    ###
+    ### /hacktown
+    ###
 }
 
 #script starts here.
 sleep 1
 echo
 
-
-
 howdlstage3
-
-
-
