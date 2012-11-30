@@ -14,6 +14,9 @@ echo "PACKAGEMGR: $PACKAGEMGR"
 
 METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
 echo "(base) Metadistro: $METADISTRO"
+
+ROOTDEV=$(sed -n '5p' $WITCH/config.base.txt)
+echo "root filesystem location: $ROOTDEV"
 echo "======================"
 
 ################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!
@@ -31,6 +34,9 @@ cat > /mnt/$DISTRONAME/bin/witchroot <<CHEOF
 
 ### functions here to make life easier
 install_pkg() { # put the packages to be installed as a string.
+
+# so... what happens if the string is different? like in debian you install this but in gentoo you install that
+# as a rule of thumb choose the most generic one, then add a if statement to check for the name and install what it's supposed to be
     case "\$1" in
         "portage")
             echo "Installing package \$2 ..."
@@ -289,8 +295,10 @@ kernel() {
             case "$METADISTRO" in
             "GENTOO")
 		        install_pkg $PACKAGEMGR "genkernel gentoo-sources"
-		        genkernel all --menuconfig 
-		        ls /boot/kernel* /boot/initramfs* > /boot/kernelandinitinfo #FIXME
+		        genkernel --menuconfig all
+		        # symlinking starts
+		        ln -s /boot/kernel* /boot/vmlinuz
+		        ln -s /boot/initramfs* /boot/initramfs.img
 		    ;;
 		    "DEBIAN") ## ask for kernel version since debian has different kernels
 		    ## added as a proof of concept. fill it in later
@@ -335,12 +343,21 @@ _______Creating /etc/fstab
 
 /etc/fstab uses a special syntax. Every line consists of six fields, separated by whitespace (space(s), tabs or a mixture). Each field has its own meaning:
 
-The first field shows the partition described (the path to the device file)
+The first field shows the partition described (the path to the device file). you can specify a UUID here too.
 The second field shows the mount point at which the partition should be mounted
 The third field shows the filesystem used by the partition
 The fourth field shows the mount options used by mount when it wants to mount the partition. As every filesystem has its own mount options, you are encouraged to read the mount man page (man mount) for a full listing. Multiple mount options are comma-separated.
 The fifth field is used by dump to determine if the partition needs to be dumped or not. You can generally leave this as 0 (zero).
 The sixth field is used by fsck to determine the order in which filesystems should be checked if the system wasn not shut down properly. The root filesystem should have 1 while the rest should have 2 (or 0 if a filesystem check is not necessary).
+
+---------------
+so as you should already know, you configured your partitions some time ago. still remember them?
+
+if not, open up another terminal and type in 'chroot /mnt/$DISTRONAME'.
+Once you enter a new chroot environment type in 'sudo fdisk -l'
+
+if yes, great!
+
 "
     echo "so lets get on with setting up your fstab"
     sleep 1
@@ -736,34 +753,58 @@ sleep 2 && clear
 #give them syslinux too. it's a nice bootloader. maybe lilo.
 echo "Now that your kernel is configured and compiled and the necessary system configuration files are filled in correctly, it is time to install a program that will fire up your kernel when you start the system. Such a program is called a bootloader."
 sleep 2
-echo "installing grub in a moment. we'll install ncurses first."
-sleep 2
-install_pkg $PACKAGEMGR grub
+echo "so, do you want your bootloader to be on a current existing system? if not, we'll put the bootloader into your witch. [y/n]"
+read REPLY
 
-sleep 2 && clear
-echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
+if [ \$REPLY == "y" ]
+then
+    echo "okay."
+    sleep 1
+    echo "this section is still incomplete, sorry. hack it up :D"
+    # chroot into the main drive (hackish method). then configure the current bootloader there.
+    # for syslinux you need to install to the witch too.
+    
+    # and to make sure i don't forget
+    # copy chain.c32 over to /boot/extlinux/
+    # then type this out:
+    # label witchname - metadistro
+    # kernel /boot/extlinux/chain.c32
+    # append hd0 1
+    #  hd0 -> xth drive. like sda would be hd0, sdb would be hd1 and etc.
+    #  1 -> partition 1. like /sda1 and /sdb1
+    
+    # that should clear things up.
+    echo ""
+else
+    echo "installing grub in a moment. we'll install ncurses first."
+    sleep 2
+    install_pkg $PACKAGEMGR grub
 
-echo "read more at http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1&chap=10"
+    sleep 2 && clear
+    echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
 
-cp /boot/grub/grub.conf /boot/grub/grub.conf~origbkp
-# note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
-echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp"
-sleep 2
-echo "
-default 0
-timeout 30
-splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+    echo "read more at http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1&chap=10"
 
-title=$DISTRONAME - $METADISTRO
-root (hd0,0)
-kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/\$ROOTDEV udev
-initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
+    cp /boot/grub/grub.conf /boot/grub/grub.conf.bk~
+    # note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
+    echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp"
+    sleep 2
+    echo "
+    default 0
+    timeout 30
+    splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-# Only in case you want to dual-boot
-title=Windows XP
-rootnoverify (hd0,5)
-makeactive
-chainloader +1" > /boot/grub/grub.conf
+    title=$DISTRONAME - $METADISTRO
+    root (hd0,0)
+    kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/$ROOTDEV udev
+    initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
+
+    # Only in case you want to dual-boot
+    title=Windows XP
+    rootnoverify (hd0,5)
+    makeactive
+    chainloader +1" > /boot/grub/grub.conf
+fi
 
 # tee that^ so the folks can see what you mean by:
 sleep 1 
