@@ -774,36 +774,44 @@ then
     #  1 -> partition 1. like /sda1 and /sdb1
     
     # that should clear things up.
-    echo ""
+    echo "i guess you should check out the file 'wichroot.sh' in 'procedure.d' and look at line 759 to 777 :D and figure out things on your own"
 else
-    echo "installing grub in a moment. we'll install ncurses first."
-    sleep 2
-    install_pkg $PACKAGEMGR grub
-
-    sleep 2 && clear
     echo "note, this section is just minimally done, very basic.  you will no doubt want to manually configure your boot loader properly.  here, we are just auto-populating it with a basic configuration which will most likely be unsuitable for anything but the most basic of partition configurations with a single boot (no \"dual boot\" or \"multi boot\"."
-
     echo "read more at http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1&chap=10"
+    
+    echo "so which bootloader do you want?"
+    read BOOTLOADER
+    
+    case \$BOOTLOADER in
+        "grub")
+        echo "so you want grub."
+        
+        echo "installing grub in a moment. we'll install ncurses first."
+        sleep 2
+        install_pkg $PACKAGEMGR grub
+        
+        echo "a backup is created at /boot/grub/grub.conf.bk~"
+        cp /boot/grub/grub.conf /boot/grub/grub.conf.bk~
+        # note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
+        echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp"
+        sleep 2
+        echo "
+        default 0
+        timeout 30
+        splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-    cp /boot/grub/grub.conf /boot/grub/grub.conf.bk~
-    # note to self, find out a way to add incremental numberings to such copyings, so backups can be non-destructive.  you know like, ~if file exists then~
-    echo "copied backup of any existing grub.conf to /boot/grub/grub.conf~origbkp"
-    sleep 2
-    echo "
-    default 0
-    timeout 30
-    splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+        title=$DISTRONAME - $METADISTRO
+        root (hd0,0)
+        kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/$ROOTDEV udev
+        initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
 
-    title=$DISTRONAME - $METADISTRO
-    root (hd0,0)
-    kernel /boot/kernel-2.6.12-gentoo-r10 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/$ROOTDEV udev
-    initrd /boot/initramfs-genkernel-amd64-2.6.12-gentoo-r10
-
-    # Only in case you want to dual-boot
-    title=Windows XP
-    rootnoverify (hd0,5)
-    makeactive
-    chainloader +1" > /boot/grub/grub.conf
+        # Only in case you want to dual-boot
+        title=Windows XP
+        rootnoverify (hd0,5)
+        makeactive
+        chainloader +1" > /boot/grub/grub.conf
+        ;;
+    esac
 fi
 
 # tee that^ so the folks can see what you mean by:
