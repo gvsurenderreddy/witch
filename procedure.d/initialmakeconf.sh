@@ -20,6 +20,13 @@ case "$METADISTRO" in
     "GENTOO") LOCATION="/mnt/$DISTRONAME/etc/portage/make.conf" ;; # look at http://www.gossamer-threads.com/lists/gentoo/dev/259544
 esac
 
+# being a nice guy, i'll create a symbolic link for them.
+if [ "$LOCATION" != "/mnt/$DISTRONAME/etc/make.conf" ]
+then
+    echo "since your make.conf is in $LOCATION and not /mnt/$DISTRONAME/etc/make.conf we'll create a symbolic link for you."
+    ln -s $LOCATION /mnt/$DISTRONAME/etc/make.conf
+fi
+
 #backup the original one.
 BACKUP=${LOCATION}.bk~
 if [ -f ${LOCATION}.bk~ ]
