@@ -780,10 +780,12 @@ else
     echo "read more at http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1&chap=10"
     
     echo "so which bootloader do you want?"
+    echo "g - grub (grub grub grub)"
+    echo "s - good old syslinux"
     read BOOTLOADER
     
     case \$BOOTLOADER in
-        "grub")
+        g)
         echo "so you want grub."
         
         echo "installing grub in a moment. we'll install ncurses first."
