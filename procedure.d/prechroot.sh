@@ -25,6 +25,9 @@ sleep 3
 echo "mount -t proc none /mnt/$DISTRONAME/proc"
 mount -t proc none /mnt/$DISTRONAME/proc
 sleep 1
+echo "mount --rbind /sys /mnt/$DISTRONAME/sys"
+mount --rbind /sys /mnt/$DISTRONAME/sys
+sleep 1
 echo "mount --rbind /dev /mnt/$DISTRONAME/dev"
 mount --rbind /dev /mnt/$DISTRONAME/dev
 sleep 1
