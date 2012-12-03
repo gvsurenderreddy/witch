@@ -65,15 +65,20 @@ eval h "!kali" = privmsg h "kali, pure vapor.  n not much of it"
 
 eval h "!witches" = privmsg h "!rowan !willow !jamella"
 
-eval h "!witch" = privmsg h "if she'd the weight of a duck, then burn her!"
+eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!"
 eval h "witch!" = privmsg h "BURN HER!"
 
 eval h "!sites" = privmsg h "wa: http://tinyurl.com/witchlinux ... that links to mostly all the witch stuff out there... sorta."
 
 eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now."
 
+eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see !gentoo !funtoo !exherbo !debian !freebsd"
 
-
+eval h "!gentoo" = privmsg h "gentoo based witches!?  yes! try out witchcraft."
+eval h "!funtoo" = privmsg h "not yet. hack it up in witchcraft."
+eval h "!exherbo" = privmsg h "not yet. hack it up in witchcraft."
+eval h "!debian" = privmsg h "vm alpha2&3, and iso alpha4 of the rowan releases, are debian based.  also pre-alpha in witchcraft."
+eval h "!freebsd" = privmsg h "not yet. hack it up in witchcraft."
 
 -- eval h x | "!goog " `isPrefixOf` x = privmsg h (drop 4 x)
 eval _   _                       = return () -- ignore everything else 
