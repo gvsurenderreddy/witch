@@ -55,9 +55,9 @@ eval h "!daskeb" = privmsg h "hello, i am daskeb, digit's haskell bot.  of cours
 
 eval h "!lunacat2" = privmsg h "hello, i am lunacat2.  lunacat died.  lunacat was a bot to help people with a sort of faq about witch, a gnu/linux opperating system distribution.  lunacat also contained info about lots more, mostly covered in digit's new bot called ema. to see some of my commands try !info"
 
-eval h "!info" = privmsg h "!witches !sites !coc sorry i dont have many commands yet.  ~under construction~" 
+eval h "!info" = privmsg h "!witches !sites !coc !bases !remaster sorry i dont have many commands yet.  ~under construction~" 
 
-eval h "!rowan" = privmsg h "rowan, wards away evil.  bloat is evil.  nuff said."
+eval h "!rowan" = privmsg h "rowan, wards away evil.  bloat is evil.  available to download as debian iso, also featured on arch, slackware and slitaz bases.  soon available in witchcraft"
 eval h "!willow" = privmsg h "willow, like rowan, but more flex."
 eval h "!jamella" = privmsg h "jamella, showcase for tiling window managers."
 eval h "!zelda" = privmsg h "zelda, pure vapor.  n not much of it"
@@ -79,6 +79,8 @@ eval h "!funtoo" = privmsg h "not yet. hack it up in witchcraft."
 eval h "!exherbo" = privmsg h "not yet. hack it up in witchcraft."
 eval h "!debian" = privmsg h "vm alpha2&3, and iso alpha4 of the rowan releases, are debian based.  also pre-alpha in witchcraft."
 eval h "!freebsd" = privmsg h "not yet. hack it up in witchcraft."
+
+eval h "!remaster" = privmsg h "not yet. hack it up in witchcraft. see https://github.com/Digit/witch/issues/5 for ways and to discuss ways"
 
 -- eval h x | "!goog " `isPrefixOf` x = privmsg h (drop 4 x)
 eval _   _                       = return () -- ignore everything else 
