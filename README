@@ -8,6 +8,11 @@ come to a witch chat here: http://wastedartist.com/distros/witch/witchat.html
 (Don't you beleave me?  Im serious,  I probaly wont even run the script myself for ages to build a system!!! ~jony123)
 (You still want to try,  Well I cant stop you ~jony123)
 
+(actually it's pretty close to being called a beta test now - Digit 20121221)
+
+to run witchcraft, download https://github.com/Digit/witch/archive/refactorise.zip and away you go from there.
+
+
 To run the witch installer script simply exicute it on a command line.  
 
 	chmod +x witchcraft*.sh
