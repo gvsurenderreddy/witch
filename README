@@ -13,7 +13,7 @@ come to a witch chat here: http://wastedartist.com/distros/witch/witchat.html
 to run witchcraft, download https://github.com/Digit/witch/archive/refactorise.zip and away you go from there.
 
 
-To run the witch installer script simply exicute it on a command line.  
+To run the witch installer script simply execute it on a command line.  
 
 	chmod +x witchcraft*.sh
 	./witchcraft*.sh
