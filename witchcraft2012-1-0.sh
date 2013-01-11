@@ -1,5 +1,5 @@
 #! /bin/bash
-#written by digit.  most ambitious project yet. see http://github.com/Digit/witch for more
+#written by digit, mostly.  most ambitious project yet. see http://github.com/Digit/witch for more
 
 #refactorise branch
 
