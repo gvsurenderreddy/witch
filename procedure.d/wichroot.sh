@@ -4,8 +4,6 @@
 # Needs some changes. METADISTRO has been included for usage.
 # Oh, and refactor it to make it easier to unify. Only some sections require change.
 
-WITCH="/home/wei2912/.dropbox-files/Dropbox/Documents/GitHub/witch"
-
 echo "======================"
 DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
