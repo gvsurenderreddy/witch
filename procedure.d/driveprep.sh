@@ -82,7 +82,7 @@ boot() {
         echo "where ya putting your boot dir? (e.g. sda1):"
         read -r BOOTDEV 
         mount /dev/$BOOTDEV /mnt/$DISTRONAME/boot || error "something went wrong. try again" boot
-        fi
+        
     fi
     # i wonder, if you can do "if $REPLY=y then else fi" or something like that. 
 }
