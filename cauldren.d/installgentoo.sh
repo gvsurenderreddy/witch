@@ -9,7 +9,7 @@ read -p "enter the name of your new distro: " DISTRONAME
 echo $DISTRONAME > $WITCH/config.base.txt #1st line
 
 METADISTRO=GENTOO #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
-ARCH="uname -m"
+#ARCH="uname -m" #setting this bellow ~ remove if it's all good.
 
 PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the user the choice, but for now, just telling it to be portage, will do.
 #read -p "what is the name of the package manager you want? portage/paludis?" PACKAGEMGR
@@ -17,7 +17,7 @@ PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the us
 #^ but will leave that as the simple form until we've got some headway with paludis (and thus, likely once got some exherbo stuff working too
 
 echo $METADISTRO >> $WITCH/config.base.txt #2nd line
-echo $ARCH >> $WITCH/config.base.txt #3rd line
+uname -m | tee >> $WITCH/config.base.txt #3rd line
 echo $PACKAGEMGR >> $WITCH/config.base.txt #4th line
 
 echo "======================"
