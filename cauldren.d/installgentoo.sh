@@ -17,7 +17,7 @@ PACKAGEMGR=portage # will need to get this bit made paludis savvy, giving the us
 #^ but will leave that as the simple form until we've got some headway with paludis (and thus, likely once got some exherbo stuff working too
 
 echo $METADISTRO >> $WITCH/config.base.txt #2nd line
-uname -m | tee >> $WITCH/config.base.txt #3rd line
+uname -m >> $WITCH/config.base.txt #3rd line
 echo $PACKAGEMGR >> $WITCH/config.base.txt #4th line
 
 echo "======================"
