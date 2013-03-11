@@ -48,7 +48,7 @@ error() { # first parameter is error message, second is fuction to execute
 rootdir() {
     echo "where ya putting your root dir? (e.g. sda3) - (NOT /root, we mean /):"
     read -r ROOTDEV
-    echo $ROOTDEV > $WITCH/config.base.txt # a late 5th line :P
+    echo $ROOTDEV >> $WITCH/config.base.txt # a late 5th line :P
     
     if [ $INTERVENE == "y" ]
     then
