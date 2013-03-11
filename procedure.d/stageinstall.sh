@@ -3,7 +3,7 @@ BROWSER=$(sed -n '2p' $WITCH/config.txt)
 PROX=$(sed -n '3p' $WITCH/config.txt)
 echo "(base) Browser: $BROWSER"
 echo "Proxy: $PROX"
-DISTRONAME=$(sed -n '2p' $WITCH/config.base.txt)
+DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 echo "(base) Distroname: $DISTRONAME"
 echo "======================"
 
