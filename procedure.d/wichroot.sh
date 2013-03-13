@@ -14,7 +14,7 @@ METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
 echo "(base) Metadistro: $METADISTRO"
 
 ROOTDEV=$(sed -n '5p' $WITCH/config.base.txt)
-echo "root filesystem location: $ROOTDEV"
+echo "Root filesystem location: $ROOTDEV"
 echo "======================"
 
 ################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!
@@ -27,23 +27,24 @@ echo > $WITCH/procedure.d/wichroot_script.sh.new
 
 while read line
 do
-
-if [[ "$(echo '$line' | grep 'DISTRONAME=placeholder')" == "$line" ]]; then 
-line="DISTRONAME=$DISTRONAME"
-fi
-
-if [[ "$(echo '$line' | grep 'PACKAGEMGR=placeholder')" == "$line" ]]; then 
-line="PACKAGEMGR=$PACKAGRMGR"
-fi
-
-if [[ "$(echo '$line' | grep 'METADISTRO=placeholder')" == "$line" ]]; then 
-line="METADISTRO=$METADISTRO"
-fi
-
-if [[ "$(echo '$line' | grep 'ROOTDEV=placeholder')" == "$line" ]]; then 
-line="ROOTDEV=$ROOTDEV"
-fi
-
+	if [[ -n "$line" ]]; then
+		if [[ "$(echo $line | grep 'DISTRONAME=placeholder')" == "$line" ]]; then  
+		# check if line is DISTRONAME=placeholder --> normal string equality check does not work
+		line="DISTRONAME=$DISTRONAME"
+		fi
+		
+		if [[ "$(echo $line | grep 'PACKAGEMGR=placeholder')" == "$line" ]]; then # etc...
+		line="PACKAGEMGR=$PACKAGEMGR"
+		fi
+		
+		if [[ "$(echo $line | grep 'METADISTRO=placeholder')" == "$line" ]]; then 
+		line="METADISTRO=$METADISTRO"
+		fi
+		
+		if [[ "$(echo $line | grep 'ROOTDEV=placeholder')" == "$line" ]]; then 
+		line="ROOTDEV=$ROOTDEV"
+		fi
+	fi
 echo "$line" >> $WITCH/procedure.d/wichroot_script.sh.new
 
 done < $WITCH/procedure.d/wichroot_script.sh
