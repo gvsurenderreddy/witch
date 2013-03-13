@@ -42,6 +42,8 @@ echo "the backup is at: $BACKUP"
 sleep 1
 
 #put make.conf configuring in own function section too, utilising variables for different bases (gentoo, exherbo, etc)
+echo "for help with this, refer to chapter 5c of the gentoo handbook
+http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&chap=5#doc_chap3"
 echo "how do you wanna handle configuring your make.conf file? (or rather, your $LOCATION file, since it might be different)"
 echo "
 m - manually edit
