@@ -79,7 +79,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
     	if [ "$REPLY" == "y" ] 
     	then
         	echo "proceeding" 
-            echo "so what's your package manager filename?"
+            echo "so what's your package manager filename? (e.g. portage-latest.tar.bz2)"
             read FILENAME
             if [ -f /mnt/$DISTRONAME/$FILENAME ]
             then
