@@ -98,7 +98,7 @@ You can see what profile you are currently using (the one with an asterisk next 
     sleep 3
     echo
     echo "pick a number of profile you would like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
-    echo "Choose a number from 1 to 15. The default is marked with an asterick."
+    echo "Choose a number from 1 to 15. The default is marked with an asterisk."
 
     read PROFILESELECT
 
