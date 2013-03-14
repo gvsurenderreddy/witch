@@ -11,8 +11,9 @@ come to a witch chat here: http://wastedartist.com/distros/witch/witchat.html
 (You still want to try,  Well I cant stop you ~jony123)
 
 (actually it's pretty close to being called a beta test now - Digit 20121221)
+(well, maybe not that close. lol. - Digit 20130314)
 
-to run witchcraft, download https://github.com/Digit/witch/archive/refactorise.zip and away you go from there.
+to run witchcraft, download https://github.com/Digit/witch/archive/master.zip and away you go from there.
 
 
 To run the witch installer script simply execute it on a command line.  
@@ -25,7 +26,7 @@ or
 	sh witchcraft*.sh
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% warning, out of date, from pre-refactoring %%%%%%
 %%%%%%%%   tester help sugestion tip thingy   %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 to test the witchcraft script's gentoo instalation:
