@@ -146,7 +146,7 @@ useflags() {
     read REPLY
     case "$REPLY" in 
         m) 
-		    $EDITOR /etc/make.conf 
+		    $EDITOR /etc/portage/make.conf 
         ;;
 
         d) 
@@ -156,13 +156,13 @@ useflags() {
 	    w) 
 		    echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
 		    read MAKECONFURL 
-		    wget $MAKECONFURL -o /etc/make.conf
+		    wget $MAKECONFURL -o /etc/portage/make.conf
         ;;
 
 	    c)
 		    echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
 		    read MAKECONFLOC
-		    cp $MAKECONFLOC /etc/make.conf
+		    cp $MAKECONFLOC /etc/portage/make.conf
         ;;
 	
 	    v)
@@ -170,7 +170,7 @@ useflags() {
         ;;
 
 	    u) 
-		    cp /usr/share/portage/config/make.conf /etc/make.conf 
+		    cp /usr/share/portage/config/make.conf /etc/portage/make.conf 
         ;;
     esac
 
