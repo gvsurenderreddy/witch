@@ -16,20 +16,20 @@ install_pkg() { # put the packages to be installed as a string.
 
 # so... what happens if the string is different? like in debian you install this but in gentoo you install that
 # as a rule of thumb choose the most generic one, then add a if statement to check for the name and install what it's supposed to be
-    case "$1" in
+    case "$PACKAGEMGR" in
         "portage")
-            echo "Installing package $2 ..."
-            emerge $2
+            echo "Installing package $1 ..."
+            emerge $1
         ;;
         "dpkg")
-            echo "Installing package $2 ..."
-            aptitude install $2
+            echo "Installing package $1 ..."
+            aptitude install $1
         ;;
     esac
 }
 
 update_pkg() {
-    case "$1" in
+    case "$PACKAGEMGR" in
         "portage")
             echo "updating with \"emerge --sync\" not so quietly though.  may take several minutes..."
             emerge --sync
