@@ -98,7 +98,7 @@ You can see what profile you are currently using (the one with an asterisk next 
     sleep 3
     echo
     echo "pick a number of profile you would like to switch to, if any, careful not to select a number that doesnt exist.  (type letter and hit enter)"
-    echo "Choose a number from 1 to 15. The default is marked with an asterisk."
+    echo "Choose a number from 1 to 15. The default is marked with an asterick."
 
     read PROFILESELECT
 
@@ -146,7 +146,7 @@ useflags() {
     read REPLY
     case "$REPLY" in 
         m) 
-		    $EDITOR /etc/portage/make.conf 
+		    $EDITOR /etc/make.conf 
         ;;
 
         d) 
@@ -156,13 +156,13 @@ useflags() {
 	    w) 
 		    echo "enter the url where your make.conf is located (e.g. http://pasterbin.com/dl.php?i=z5132942i ):" 
 		    read MAKECONFURL 
-		    wget $MAKECONFURL -o /etc/portage/make.conf
+		    wget $MAKECONFURL -o /etc/make.conf
         ;;
 
 	    c)
 		    echo "enter the location where your make.conf is located (e.g. /usr/share/portage/config/make.conf):" 
 		    read MAKECONFLOC
-		    cp $MAKECONFLOC /etc/portage/make.conf
+		    cp $MAKECONFLOC /etc/make.conf
         ;;
 	
 	    v)
@@ -170,7 +170,7 @@ useflags() {
         ;;
 
 	    u) 
-		    cp /usr/share/portage/config/make.conf /etc/portage/make.conf 
+		    cp /usr/share/portage/config/make.conf /etc/make.conf 
         ;;
     esac
 
@@ -273,7 +273,7 @@ kernel() {
         i) ## here you go. start making it seperate.
             case "$METADISTRO" in
             "GENTOO")
-		        install_pkg $PACKAGEMGR "genkernel gentoo-sources"
+		        install_pkg "genkernel gentoo-sources"
 		        genkernel --menuconfig all
 		        # symlinking starts
 		        ln -s /boot/kernel* /boot/vmlinuz
@@ -534,7 +534,7 @@ e - enter network name now. (warning this will overwrite existing /etc/conf.d/ne
     read
     if [ "$REPLY" == "y" ] 
     then
-	    install_pkg $PACKAGEMGR pcmciautils
+	    install_pkg pcmciautils
     fi
 }
 
@@ -629,23 +629,23 @@ select a,b,c or d and press ENTER.
 read REPLY
 case $REPLY in
 	a) 
-		install_pkg $PACKAGEMGR syslogd 
+		install_pkg syslogd 
 		rc-update add syslogd default
     ;;
 
 	b) 
-		install_pkg $PACKAGEMGR syslog-ng 
+		install_pkg syslog-ng 
 		rc-update add syslog-ng default
 	;;
 
 	c)
-		install_pkg $PACKAGEMGR metalog 
+		install_pkg metalog 
 		rc-update add metalog default
 	;;
 
 	d)
 		read -p "enter name of your choice of system logger: " SYSLOGA  
-		install_pkg $PACKAGEMGR $SYSLOGA 
+		install_pkg $SYSLOGA 
 		rc-update add $SYSLOGA default   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 	;;
 esac
@@ -673,25 +673,25 @@ e. no cron (r u sure?)"
 read
 case "$REPLY" in
 	a) 
-		install_pkg $PACKAGEMGR vixie-cron 
+		install_pkg vixie-cron 
 		rc-update add vixie-cron default
     ;;
 
 	b) 
-		install_pkg $PACKAGEMGR dcron 
+		install_pkg dcron 
 		rc-update add dcron default 
 		crontab /etc/crontab
 	;;
 
 	c)
-		install_pkg $PACKAGEMGR fcron 
+		install_pkg fcron 
 		rc-update add fcron default 
 		crontab /etc/crontab
 	;;
 
 	d) 
 		read -p  "enter name of your choice of cron: " CRONNER 
-		install_pkg $PACKAGEMGR $CRONNER
+		install_pkg $CRONNER
 		rc-update add $CRONNER default
 		crontab /etc/crontab   #add a sort of failsafe, so that if the emerge fails because no such package exists, user can then choose a,b,c,d or e again.  ~ yes, see this is an example where putting this into functions makes sense.  ...but i will carry on with this rudimentary version for now.
 	;;
@@ -705,7 +705,7 @@ do you want locate? [y/n]"
 read
 if [ "$REPLY" == "y" ] 
 then 
-    install_pkg $PACKAGEMGR mlocate 
+    install_pkg mlocate 
 fi
 
 sleep 2 && clear
@@ -721,9 +721,9 @@ q. neither
 read
 
 case "$REPLY" in
-    d) install_pkg $PACKAGEMGR dhcp ;;
-    p) install_pkg $PACKAGEMGR ppp ;;
-    b) install_pkg $PACKAGEMGR "dhcp ppp" ;;
+    d) install_pkg dhcp ;;
+    p) install_pkg ppp ;;
+    b) install_pkg "dhcp ppp" ;;
 esac
 
 sleep 2 && clear
@@ -769,7 +769,7 @@ else
         
         echo "installing grub in a moment. we'll install ncurses first."
         sleep 2
-        install_pkg $PACKAGEMGR grub
+        install_pkg grub
         
         echo "a backup is created at /boot/grub/grub.conf.bk~"
         cp /boot/grub/grub.conf /boot/grub/grub.conf.bk~
