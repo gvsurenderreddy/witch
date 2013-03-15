@@ -3,3 +3,33 @@
 # Rosetta Stone Package Manager
 # https://github.com/Digit/witch/issues/18
 
+#this is just an initial laying out ... much change is expected, and it is not expected to work yet.
+
+PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
+
+#basics first. AFTER we get these, we can futz over the finer grained nuanced commands.
+#install
+#remove
+#update
+#upgrade
+#search
+
+
+if $PACKAGEMGR = PORTAGE
+  if $1 = install
+    then emerge $2
+  if $1 = remove
+    then emerge -C $2
+  if $1 = update
+    then emerge --sync
+  if $1 = upgrade
+    then emerge -DuN
+  if $1 = search
+    if eix
+      then eix $2
+    else
+      emerge --search $2
+
+# ^ something like that.   basic jist.   now clean up, and repeat for other package managers.
+
+# feel free to come up with a better way... this is just an initial jotting down of the concept... not clean code.  SO LETS NOT PUT rspm COMMANDS ANYWHERE UNTIL IT IS REAL WORKING CODE.  ;)
