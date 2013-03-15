@@ -1,0 +1,3 @@
+# rspm command : package manager used : command used
+rspm install : apt-get : apt-get install
+rspm update : apt-get : apt-get update
