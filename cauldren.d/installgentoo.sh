@@ -5,7 +5,7 @@
 ### gentoo
 
 ## this section might be included in a seperate file.
-read -p "enter the name of your new distro: " DISTRONAME
+read -p "enter the name of your new distro (anything you like - but keep it short and sweet): " DISTRONAME
 echo $DISTRONAME > $WITCH/config.base.txt #1st line
 
 METADISTRO=GENTOO #for further revisions, there's sense in sort-of modularising this with even more functions, so each option can be called from a series of options.  make sense?  good.
