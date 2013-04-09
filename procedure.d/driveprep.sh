@@ -5,7 +5,7 @@
 
 echo "======================"
 DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
-echo "(base) Distro name: $DISTRONAME"
+echo "Distro name: $DISTRONAME"
 INTERVENE=$(sed -n '4p' $WITCH/config.txt)
 echo "Intervene? $INTERVENE"
 echo "======================"
@@ -16,7 +16,7 @@ then
     mkdir /mnt 
 fi
 
-echo "base distro name is $DISTRONAME (this will make a directory of that name in /mnt/___.):"
+echo "your new OS installation / distro name is $DISTRONAME (this will make a directory of that name in /mnt/___.):"
 if [ ! -d /mnt/$DISTRONAME/$a ]
 then 
     mkdir /mnt/$DISTRONAME
