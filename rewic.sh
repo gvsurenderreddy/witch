@@ -21,6 +21,8 @@
 
 function rewic {
     echo "rewic, the iso remastery stuff has been gutted from this version while we work out the installer stuff ~ no loss it didnt work yet anyway." 
+
+    echo "we strongly urge you to have a look through https://github.com/Digit/witch/issues/5 and in particular, the links in the first comment, which are a collection of resources to point the ways we could go about remastering." 
 }
 
 rewic
