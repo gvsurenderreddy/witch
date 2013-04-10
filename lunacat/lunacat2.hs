@@ -78,7 +78,7 @@ eval h "!haylo" = privmsg h "haylo released a really nice minimal~!!! what, sorr
 
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches."
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo"
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch"
 
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!"
 eval h "witch!" = privmsg h "BURN HER!"
