@@ -58,12 +58,13 @@ eval h "!lunacat2" = privmsg h "hello, i am lunacat2.  lunacat died.  lunacat wa
 eval h "!info" = privmsg h "!witches !sites !coc !bases !remaster sorry i dont have many commands yet.  ~under construction~" 
 
 eval h "!rowan" = privmsg h "rowan, wards away evil.  bloat is evil.  available to download as debian iso, also featured on arch, slackware and slitaz bases.  soon available in witchcraft"
-eval h "!willow" = privmsg h "willow, like rowan, but more flex."
-eval h "!jamella" = privmsg h "jamella, showcase for tiling window managers."
+eval h "!willow" = privmsg h "willow, like rowan, but more flex. vapourware/plan"
+eval h "!jamella" = privmsg h "jamella, showcase for tiling window managers. vapourware/plan"
 eval h "!zelda" = privmsg h "zelda, pure vapor.  n not much of it"
 eval h "!kali" = privmsg h "kali, pure vapor.  n not much of it"
 eval h "!eagle" = privmsg h "wgreenhouse's masterpiece lisp environment."
 eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
+eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 
 eval h "!slitaz" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
 eval h "!slackware" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
@@ -73,9 +74,11 @@ eval h "!funtoo" = privmsg h "digit thinks this will be the next meta-distro inc
 eval h "!arch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
 eval h "!slax" = privmsg h "we dont talk about that.  meow."
 
+eval h "!haylo" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
+
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches."
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch"
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo"
 
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!"
 eval h "witch!" = privmsg h "BURN HER!"
