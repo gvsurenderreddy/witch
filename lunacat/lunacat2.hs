@@ -62,15 +62,29 @@ eval h "!willow" = privmsg h "willow, like rowan, but more flex."
 eval h "!jamella" = privmsg h "jamella, showcase for tiling window managers."
 eval h "!zelda" = privmsg h "zelda, pure vapor.  n not much of it"
 eval h "!kali" = privmsg h "kali, pure vapor.  n not much of it"
+eval h "!eagle" = privmsg h "wgreenhouse's masterpiece lisp environment."
+eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
 
-eval h "!witches" = privmsg h "!rowan !willow !jamella"
+eval h "!slitaz" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
+eval h "!slackware" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
+eval h "!debian" = privmsg h "digit released debian-rowan-witch alpha 2, 3 and 4 with a debian base."
+eval h "!gentoo" = privmsg h "digit decided gentoo would be the first meta distro to include/complete in his witchcraft vision (a single installer/remastery tool that lets you decide your base system, and your distinct desktop environment configuration and app selection."
+eval h "!funtoo" = privmsg h "digit thinks this will be the next meta-distro included in witchcraft's cauldren, but it could just as likely be debian, or bedrock, or dragora, or whatever."
+eval h "!arch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
+eval h "!slax" = privmsg h "we dont talk about that.  meow."
+
+eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
+eval h "!knights" = privmsg h "that's ye who determine if witches."
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch"
 
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!"
 eval h "witch!" = privmsg h "BURN HER!"
 
-eval h "!sites" = privmsg h "wa: http://tinyurl.com/witchlinux ... that links to mostly all the witch stuff out there... sorta."
+eval h "!sites" = privmsg h "wa: http://tinyurl.com/witchlinux ... that links to mostly all the witch stuff out there... sorta.puffinux and invariability and whatever else, they all sorta fell through, in one way or another."
 
 eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now."
+
+eval h "!philosophy" = privmsg h "see !coc !witch !history"
 
 eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see !gentoo !funtoo !exherbo !debian !freebsd"
 
