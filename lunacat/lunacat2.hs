@@ -66,13 +66,13 @@ eval h "!eagle" = privmsg h "wgreenhouse's masterpiece lisp environment."
 eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 
-eval h "!slitaz" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
-eval h "!slackware" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
-eval h "!debian" = privmsg h "digit released debian-rowan-witch alpha 2, 3 and 4 with a debian base."
-eval h "!gentoo" = privmsg h "digit decided gentoo would be the first meta distro to include/complete in his witchcraft vision (a single installer/remastery tool that lets you decide your base system, and your distinct desktop environment configuration and app selection."
-eval h "!funtoo" = privmsg h "digit thinks this will be the next meta-distro included in witchcraft's cauldren, but it could just as likely be debian, or bedrock, or dragora, or whatever."
-eval h "!arch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
-eval h "!slax" = privmsg h "we dont talk about that.  meow."
+eval h "!slitazwitch" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
+eval h "!slackwarewitch" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
+eval h "!debianwitch" = privmsg h "digit released debian-rowan-witch alpha 2, 3 and 4 with a debian base."
+eval h "!gentoowitch" = privmsg h "digit decided gentoo would be the first meta distro to include/complete in his witchcraft vision (a single installer/remastery tool that lets you decide your base system, and your distinct desktop environment configuration and app selection."
+eval h "!funtoowitch" = privmsg h "digit thinks this will be the next meta-distro included in witchcraft's cauldren, but it could just as likely be debian, or bedrock, or dragora, or whatever."
+eval h "!archwitch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
+eval h "!slaxwitch" = privmsg h "we dont talk about that.  meow."
 
 eval h "!haylo" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
 
@@ -94,8 +94,11 @@ eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see
 eval h "!gentoo" = privmsg h "gentoo based witches!?  yes! try out witchcraft."
 eval h "!funtoo" = privmsg h "not yet. hack it up in witchcraft."
 eval h "!exherbo" = privmsg h "not yet. hack it up in witchcraft."
-eval h "!debian" = privmsg h "vm alpha2&3, and iso alpha4 of the rowan releases, are debian based.  also pre-alpha in witchcraft."
+eval h "!debian" = privmsg h "vm alpha2&3, and iso alpha4 of the rowan releases, are debian based.  also pre-alpha in witchcraft, ready for you to help hack up."
 eval h "!freebsd" = privmsg h "not yet. hack it up in witchcraft."
+eval h "!slackware" = privmsg h "unreleased alpha7s.  come hack it up in witchcraft."
+eval h "!slitaz" = privmsg h "unreleased alpha7s.  come hack it up in witchcraft."
+eval h "!bedrock" = privmsg h "barely begun to be slotted in, in witchcraft.  come help hack it up."
 
 eval h "!remaster" = privmsg h "not yet. hack it up in witchcraft. see https://github.com/Digit/witch/issues/5 for ways and to discuss ways"
 
