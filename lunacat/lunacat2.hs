@@ -89,7 +89,7 @@ eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  do
 
 eval h "!philosophy" = privmsg h "see !coc !witch !history"
 
-eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see !gentoo !funtoo !exherbo !debian !freebsd"
+eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see !gentoo !funtoo !exherbo !debian !freebsd !slackware !slitaz !bedrock"
 
 eval h "!gentoo" = privmsg h "gentoo based witches!?  yes! try out witchcraft."
 eval h "!funtoo" = privmsg h "not yet. hack it up in witchcraft."
