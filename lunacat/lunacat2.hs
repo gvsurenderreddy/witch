@@ -85,7 +85,7 @@ eval h "witch!" = privmsg h "BURN HER!"
 
 eval h "!sites" = privmsg h "wa: http://tinyurl.com/witchlinux ... that links to mostly all the witch stuff out there... sorta.puffinux and invariability and whatever else, they all sorta fell through, in one way or another."
 
-eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now."
+eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now.  make whatever you want."
 
 eval h "!philosophy" = privmsg h "see !coc !witch !history"
 
