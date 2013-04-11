@@ -87,6 +87,9 @@ eval h "!sites" = privmsg h "wa: http://tinyurl.com/witchlinux ... that links to
 
 eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now.  make whatever you want."
 
+eval h "!history" = privmsg h "Him said to digit: you should make a distro called witch, so people could burn them [to cd].  that happened.  witch's philosophy since then is that anyone can make what they want, no central authority, office or hierachy.  it's a pure do-archy.  like wicca.  (but we're not actually witches/warlocks).  see !releasecron"
+eval h "!releasecron" = privmsg h "slax-rowan-witch-alpha1, debian-rowan-witch-alpha2,3,4, arch-rowan-witch-alpha5,6, slitaz-rowan-witch-alpha7, slackwitch, witchcraft (aka alpha8, featuring ability to install gentoo-*-witch)"
+
 eval h "!philosophy" = privmsg h "see !coc !witch !history"
 
 eval h "!bases" = privmsg h "it's witchcraft!  witches can be on any base!?  see !gentoo !funtoo !exherbo !debian !freebsd !slackware !slitaz !bedrock (and try them with +witch, like !debianwitch)"
