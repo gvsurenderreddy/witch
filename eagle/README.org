@@ -1,0 +1,77 @@
+#+TITLE: EAGLE Augments Grml with Lisp and Emacs
+
+* The Problem
+
+  #+LABEL: arcane-parens
+  [[http://imgs.xkcd.com/comics/lisp_cycles.png]]
+  #+CAPTION: Lisp is arcane and mystical.
+
+  Make the most prominent Lisp flavors in 2013 (Emacs Lisp, Common
+  Lisp, and Scheme) more approachable to new hackers, by
+  bootstrapping them into an environment with sane defaults and fun
+  goodies.  Make working Lisp environments that actually do stuff
+  easily reproducible and not unique snowflakes.
+
+* TODO Project Goals [0/4]
+
+** TODO Lisp integration
+
+*** TODO Bootstrap SBCL with [[http://www.quicklisp.org/beta/][Quicklisp]]
+
+    - StumpWM
+
+    - CLFSWM
+
+    - SLIME
+
+    - Some kind of IDEish thing (CLIM-listener?  CLIMACS?)
+
+*** TODO Bootstrap Emacs with ELPA
+
+    - Org-based init, perhaps based on [[https://github.com/eschulte/emacs24-starter-kit][Eric Schulte's Emacs Starter Kit]]
+
+    - Cover the basics: Gnus, org+contrib, REPLy-goodness (SLIME, Geiser)
+
+    - [[http://elnode.org/][Elnode]] on a USB?  Brilliant!
+
+*** TODO Bootstrap Guile and [[http://www.gnu.org/software/guix/][GNU GUIX]]
+
+*** TODO MIT Lisp Machine Emulation
+
+    Investigate [[http://www.unlambda.com/index.php?n%3DMain.Cadr][MIT CADR Emulator]] licensing/redistributability status
+
+** TODO UI/UX stuff
+
+*** TODO Welcome screen
+
+    - Installs Lisp stuff from the list above on demand.
+
+    - welcome.org: Literate Org program as a guide for the distro
+
+      + People can contribute Lisp software installation/config
+        recipes by adding to the Org file or files
+
+    - Expand upon [[https://github.com/grml/grml-quickconfig][grml-quickconfig]]?
+
+*** TODO Artwork
+
+    - Desktop background: Nice options from Digit
+
+    - Syslinux theme
+
+** TODO Persistent live system
+
+   - Like [[http://grml.org/][Grml]] itself, should be a live system by default, with a quick
+     and easy installer.  Build on the tools already there.
+
+   - Either make proper Debian packages for artwork and Lisp stuffs
+     (better) or add it to the FAI chroot (kludgier).
+
+** TODO Extra Flavors
+
+   - "Warm start:" includes some pre-downloaded, pre-compiled bytecode
+     for big programs (StumpWM already ready to go as default WM,
+     etc.)
+
+   - Defiant: Security/anonymity layer for EAGLE, features Tor
+     TransProxy for main user and a tmpfs guest user
