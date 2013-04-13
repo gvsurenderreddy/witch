@@ -123,6 +123,9 @@ eval h "!bedrock" = privmsg h "barely begun to be slotted in, in witchcraft.  co
 
 eval h "!remaster" = privmsg h "not yet. hack it up in witchcraft. see https://github.com/Digit/witch/issues/5 for ways and to discuss ways"
 
+--extras
+eval h "!beards" = privmsg h "http://ompldr.org/vaTJzdw/beards3.png"
+
 -- eval h x | "!goog " `isPrefixOf` x = privmsg h (drop 4 x)
 eval _   _                       = return () -- ignore everything else 
 
