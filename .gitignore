@@ -2,5 +2,5 @@
 /*.project
 /*~
 /config.*
-/*.hi
-/*.o
+*.hi
+*.o
