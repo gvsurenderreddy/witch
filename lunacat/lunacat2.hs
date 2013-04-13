@@ -67,7 +67,7 @@ eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
 
---witches by metadistro
+--witches by metadistro  "creeds"  idk, need a better name for this.
 eval h "!creeds" = privmsg h "creeds of witches of the following types have been found: !slitazwitch !slackwarewitch !debianwitch !gentoowitch !funtoowitch !archwitch !bedrockwitch"
 eval h "!slitazwitch" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
 eval h "!slackwarewitch" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
@@ -92,11 +92,12 @@ eval h "!haylo" = privmsg h "he who came, made an awesome ultra-light (as a duck
 eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. keep tabs on what this one creates. it will make your eyes cry love from the solesof your feet."
 
 -- who n groups n whats
-eval h "!who" = privmsg h "see !knights !witches !villagers"
+eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
 eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch"
 
+-- -- --
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!    see !witches !bases !philosophy !who "
 eval h "witch!" = privmsg h "BURN HER!"
 
