@@ -76,8 +76,22 @@ eval h "!slaxwitch" = privmsg h "we dont talk about that.  meow."
 
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
 
+--knightnames
+eval h "!knightnames" = privmsg h "!digit !him !orbea !jony !wgreenhouse !wei2912 !haylo"
+eval h "!digit" = privmsg h "he who hath madeth the most, and founded and guided and whatnot, yet insists he's not the boss and anyone can make and release whatver they want with a witch stamp on it."
+eval h "!him" = privmsg h "he who nameth, and sparketh offeth this whole thing, and nameth himself so ye look illiterate."
+eval h "!orbea" = privmsg h "he who is new to linux, but we always knew was leet"
+eval h "!jony" = privmsg h "he who hath made much, and is #1 witch user/developer... after digit and wei2912.  hath been around since the start."
+eval h "!wgreenhouse" = privmsg h "he who art steady and wise.  he who maketh the eagle."
+eval h "!wei2912" = privmsg h "he who hath come in late, but made great swathing changes and augments to witchcraft."
+eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
+eval h "!haylo" = privmsg h "he who came, made an awesome ultra-light (as a duck) debian based core witch, at something like 60mb.  but did he post it anywhere that didnt expire, or in a sensible reccogniseable memorable name?  no.  ... anyone save it?..."
+eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. keep tabs on what this one creates. it will make your eyes cry love from the solesof your feet."
+
+-- who n groups n whats
+eval h "!who" = privmsg h "see !knights !witches !villagers"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
-eval h "!knights" = privmsg h "that's ye who determine if witches."
+eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
 eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch"
 
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!"
