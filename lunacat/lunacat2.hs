@@ -87,6 +87,9 @@ eval h "!orbea" = privmsg h "he who is new to linux, but we always knew was leet
 eval h "!jony" = privmsg h "he who hath made much, and is #1 witch user/developer... after digit and wei2912.  hath been around since the start."
 eval h "!wgreenhouse" = privmsg h "he who art steady and wise.  he who maketh the eagle."
 eval h "!wei2912" = privmsg h "he who hath come in late, but made great swathing changes and augments to witchcraft."
+eval h "!theredmood" = privmsg h "he who has come far, but has far to go, and gets there at speed, sometimes."
+
+--offlist knightnames
 eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
 eval h "!haylo" = privmsg h "he who came, made an awesome ultra-light (as a duck) debian based core witch, at something like 60mb.  but did he post it anywhere that didnt expire, or in a sensible reccogniseable memorable name?  no.  ... anyone save it?..."
 eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. keep tabs on what this one creates. it will make your eyes cry love from the solesof your feet."
