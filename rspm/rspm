@@ -14,7 +14,7 @@ PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
 #upgrade
 #search
 
-if $PACKAGEMGR = PORTAGE
+if [ $PACKAGEMGR = PORTAGE ]
   if $1 = install
     then emerge $2
   if $1 = remove
@@ -24,7 +24,7 @@ if $PACKAGEMGR = PORTAGE
   if $1 = upgrade
     then emerge -DuN
   if $1 = search
-    if eix
+    if eix #FIXME
       then eix $2
     else
       emerge --search $2
@@ -35,6 +35,30 @@ if $PACKAGEMGR = PALUDIS
   if $1 = remove
     then cave # ~ er, i've forgotten the paludis commands.  ...
 # etc
+
+if [ $PACKAGEMGR = APTGET ]
+  if $1 = install
+    then apt-get install $2
+  if $1 = remove
+    then apt-get remove $2
+  if $1 = update
+    then apt-get update
+  if $1 = upgrade
+    then apt-get upgrade
+  if $1 = search
+    then apt-cache search $2
+
+if [ $PACKAGEMGR = SLAPTGET ]
+  if $1 = install
+    then slapt-get install $2
+  if $1 = remove
+    then slapt-get remove $2
+  if $1 = update
+    then slapt-get update
+  if $1 = upgrade
+    then slapt-get upgrade
+  if $1 = search
+    then slapt-cache search $2  #that right?? FIXME
 
 
 # ^ something like that.   basic jist.   now clean up, and repeat for other package managers.
