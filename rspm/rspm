@@ -60,6 +60,17 @@ if [ $PACKAGEMGR = SLAPTGET ]
   if $1 = search
     then slapt-cache search $2  #that right?? FIXME
 
+if [ $PACKAGEMGR = PACMAN ]
+  if $1 = install
+    then pacman -S $2
+  if $1 = remove
+    then pacman -Rc $2
+  if $1 = update
+    then pacman -Sy
+  if $1 = upgrade
+    then pacman -Syu
+  if $1 = search
+    then pacman -Ss $2
 
 # ^ something like that.   basic jist.   now clean up, and repeat for other package managers.
 
