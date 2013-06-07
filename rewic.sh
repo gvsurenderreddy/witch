@@ -71,6 +71,7 @@ case $REWICMETHOD in
                 sleep 1
                 rewic
                 ;;
+esac
 }
 
 
