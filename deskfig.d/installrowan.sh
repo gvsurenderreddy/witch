@@ -10,7 +10,7 @@ echo "======================"
 echo "you have chosen to install the rowan deskfig.  good choice.  is your nick Digit?"
 
 case $PACKAGEMGR in
-	portage) emerge -qv spectrwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc ;;
+	portage) emerge -qv scrotwm yeahconsole tmux links mc mplayer rtorrent irssi htop bc ;;
 	*) 
 		echo "the package manager: $PACKAGEMGR is invalid for rowan. Redirecting you back..." 
 		$WITCH/deskfig.sh # that seems sane right?  certainly more sane than sending the user into rewic (the remastery witchcraft stuff).

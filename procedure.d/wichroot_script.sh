@@ -575,7 +575,7 @@ echo "-> do you need to change your keymap? [y/n]"
 read
 if [ "$REPLY" == "y" ] 
 then
-	$EDITOR etc/conf.d/keymaps
+	$EDITOR /etc/conf.d/keymaps
 fi
 
 sleep 2 && clear
