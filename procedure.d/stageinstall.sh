@@ -140,7 +140,7 @@ function browserstage3 {
 
 function urlstage3 {
     echo "where are you getting your stage3 compressed-tarball from? what's the exact url?"
-    read $STAGE3URL
+    read STAGE3URL
     cd $SYSPATH
     wget $STAGE3URL
     extractstage3 $STAGE3URL
@@ -148,7 +148,7 @@ function urlstage3 {
 
 function locstage3 {
     echo "where is your stage3 compressed-tarball located at? what's the exact file path adress?"
-    read $STAGE3LOC
+    read STAGE3LOC
     extractstage3 $STAGE3LOC
 }
 

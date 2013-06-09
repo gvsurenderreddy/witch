@@ -122,7 +122,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
 
 function urlpkg {
     echo "where are you getting your package manager compressed-tarball from? what's the exact url?"
-    read $PKGURL
+    read PKGURL
     cd $SYSPATH/usr
     wget $PKGURL
     extractpkg $PKGURL
@@ -130,7 +130,7 @@ function urlpkg {
 
 function locpkg {
     echo "where is your package manager compressed-tarball located at? what's the exact file path adress?"
-    read $PKGLOC
+    read PKGLOC
     extractpkg $PKGLOC
 }
 
