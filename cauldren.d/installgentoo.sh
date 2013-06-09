@@ -40,13 +40,13 @@ clear && $WITCH/procedure.d/initialmakeconf.sh
 # wichroot is only required for actual systems
 # for Learnix systems it's not required.
 if [ "$LEARNIX_RUN" == "true" ]; then
-	echo "The installation of your Learnix system has finished. Please remember your Learnix system's name."
+  echo "The installation of your Learnix system has finished. Please remember your Learnix system's name."
 else
-	clear && $WITCH/procedure.d/prechroot.sh
-	clear && $WITCH/procedure.d/wichroot.sh
+  clear && $WITCH/procedure.d/prechroot.sh
+  clear && $WITCH/procedure.d/wichroot.sh
 fi
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?
 #good, cos it should already be lined up to run, thnx to the stage3 function (as a top level option from cauldren), which calls it straight after running the distroselector function.
-#first you get run the witchcraft, thn you choose the cauldren, then you choose a proper stage3 install, then you get the distro, then you get the desktop.  ^_^  
-#... is how this path rolls.  ^_^  	
+#first you get run the witchcraft, thn you choose the cauldren, then you choose a proper stage3 install, then you get the distro, then you get the desktop.  ^_^
+#... is how this path rolls.  ^_^
