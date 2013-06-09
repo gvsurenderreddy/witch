@@ -103,7 +103,7 @@ function browserstage3 {
             if [ -f $SYSPATH/$FILENAME ]
             then
                 echo "excellent you seem to have got your stage3 downloaded successfully." 
-                extractstage3 $FILENAME
+                extractstage3 $SYSPATH/$FILENAME
             else
             	echo "looks like you didn't manage to download your stage3 successfully."
             	echo "in a couple of seconds we'll rerun this function."
@@ -124,7 +124,7 @@ function browserstage3 {
             then 
                 echo "excellent you seem to have got your stage3 downloaded successfully."
                 sleep 2
-                extractstage3 $FILENAME
+                extractstage3 $SYSPATH/$FILENAME
             else 
                 echo "looks like you didn't manage to download your stage3 successfully."
             	echo "in a couple of seconds we'll rerun this function."
@@ -153,15 +153,10 @@ function locstage3 {
 }
 
 function extractstage3 {
-    # so let's do the dirty work for them.
-    # they provided a URL/directory path for us.
-    
-    FILE=$(basename $1) # obtains the exact filename
-
     #set this so user can choose if they want verbose output
     echo "unpacking your stage3 ($FILE) to $SYSPATH. this may take some time, please wait."
     echo "extracting $1 to $SYSPATH"
-    tar xvf $SYSPATH/$FILE -C $SYSPATH
+    tar xvf $1 -C $SYSPATH
 }
 
 #script starts here.

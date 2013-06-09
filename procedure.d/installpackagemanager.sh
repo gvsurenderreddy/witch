@@ -88,7 +88,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
             if [ -f $SYSPATH/$FILENAME ]
             then
                 echo "excellent you seem to have got your package manager downloaded successfully." 
-                extractpkg $FILENAME
+                extractpkg $SYSPATH/$FILENAME
             else
                 echo "sorry, it didnt seem like you got a package manager then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying? try again?  well, it\'s up to you." 
                 sleep 2
@@ -106,7 +106,7 @@ in /snapshots/, download the latest Portage snapshot (portage-latest.tar.bz2 NOT
             if [ -f $SYSPATH/$FILENAME ]; then
                 echo "excellent you seem to have got your package manager downloaded successfully."
                 sleep 2
-                extractpkg $FILENAME
+                extractpkg $SYSPATH/$FILENAME
             else 
                 echo "sorry, it didnt seem like you got a package manager then... er... wtf do we do now?  carry on n presume it\'s there?  give up and run away crying? try again?  well, it\'s up to you." 
                 sleep 2
@@ -135,15 +135,9 @@ function locpkg {
 }
 
 function extractpkg {
-    # so let's do the dirty work for them.
-    # they provided a URL/directory path for us.
-    
-    FILE=$(basename $1) # obtains the exact filename
-
-    #set this so user can choose if they want verbose output
     echo "unpacking your stage3 ($FILE) to $SYSPATH/usr/. this may take some time, please wait."
     echo "extracting $1 to $SYSPATH/usr/"
-    tar xvf $SYSPATH/$FILE -C $SYSPATH
+    tar xvf $1 -C $SYSPATH/usr
 }
 
 howdlpkg
