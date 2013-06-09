@@ -139,34 +139,11 @@ function extractpkg {
     # they provided a URL/directory path for us.
     
     FILE=$(basename $1) # obtains the exact filename
-    FILE_EXT='${FILE##*.}' # obtains the filename
 
     #set this so user can choose if they want verbose output
     echo "unpacking your stage3 ($FILE) to $SYSPATH/usr/. this may take some time, please wait."
-    
-    #ultra basic:
     echo "extracting $1 to $SYSPATH/usr/"
-    
-    case "$FILE_EXT" in
-        tar.bz2) tar -xvjpf $SYSPATH/$FILE -C $SYSPATH/usr/ ;;
-        tar.xz) tar -Jxvfp $SYSPATH/$FILE -C $SYSPATH/usr/ ;;
-    esac
-
-    # $SYSPATH/usr/share/portage/config/make.conf # contains fully commented make.conf.
-
-    ###
-    ### hacktown/
-    ###
-
-    #if $STAGE3LOC is-set then use $STAGE3LOC else use /stagewhatever.tar.whatever
-    #perhaps set up a confirmation step, incase peeps have more than one stage3 downloaded... then they get directed to the locstage3 function
-    #if tar.bz2 then xvjpf
-    #if tar.xz then unxz && xvpf
-    #if tar.gz then xvzpf
-
-    ###
-    ### /hacktown
-    ###
+    tar xvf $SYSPATH/$FILE -C $SYSPATH
 }
 
 howdlpkg
