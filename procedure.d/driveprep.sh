@@ -11,34 +11,41 @@ echo "Intervene? $INTERVENE"
 echo "======================"
 
 #this is the partition preparation function.  calls of it  aught imediately preceed the stageinstall function
-if [ ! -d /mnt/$a ]
-then 
-    mkdir /mnt 
-fi
 
-echo "your new OS installation / distro name is $DISTRONAME (this will make a directory of that name in /mnt/___.):"
-if [ ! -d /mnt/$DISTRONAME/$a ]
-then 
-    mkdir /mnt/$DISTRONAME
-fi
+show_disk() {
+	sleep 1
+	echo
+	$WITCH/color.sh GREEN "here's a nice little list of your drives."
+	fdisk -l
+	echo
+}
 
-cd /mnt/$DISTRONAME
+create_mnt() {
+	if [ ! -d /mnt/$a ]
+	then 
+		mkdir /mnt 
+	fi
 
-echo "do you need to partition? creating your partition for your own little witch. (y/n) :"
-read REPLY
-if [ "$REPLY" == "y" ]
-then
-    $WITCH/procedure.d/partmanselector.sh #calls the partition manager selection function "partmanselector"
-elif [ "$REPLY" == "n" ]
-then 
-    echo "ok, ready to go so..."
-fi
+	echo "your new OS installation / distro name is $DISTRONAME (this will make a directory of that name in /mnt/___.):"
+	if [ ! -d /mnt/$DISTRONAME/$a ]
+	then 
+	    mkdir /mnt/$DISTRONAME
+	fi
 
-sleep 1
-echo
-$WITCH/color.sh GREEN "here's a nice little list of your drives."
-fdisk -l
-echo
+	cd /mnt/$DISTRONAME
+}
+
+partition() {
+	echo "do you need to partition? creating your partition for your own little witch. (y/n) :"
+	read REPLY
+	if [ "$REPLY" == "y" ]
+	then
+	    $WITCH/procedure.d/partmanselector.sh #calls the partition manager selection function "partmanselector"
+	elif [ "$REPLY" == "n" ]
+	then 
+	    echo "ok, ready to go so..."
+	fi
+}
 
 error() { # first parameter is error message, second is fuction to execute
     $WITCH/color.sh ERROR "$1"
@@ -109,10 +116,21 @@ home() {
     fi
 }
 
-# start of execution of methods
-rootdir
-boot
-home
+learnix_script() {
+	mkdir $LEARNIX/sys
+	mkdir $LEARNIX/sys/$DISTRONAME
+}
 
-echo "drive prep complete" 
+# start of execution of methods
+if [ "$LEARNIX_RUN" == "true" ]; then
+	learnix_script
+else
+	show_disk
+	create_mnt
+	partition
+	rootdir
+	boot
+	home
+fi
+
 sleep 1

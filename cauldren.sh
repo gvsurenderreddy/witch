@@ -45,7 +45,11 @@ function stage3 {
 #once the refunctionising is done, this may change.
 
 $WITCH/distroselect.sh
-$WITCH/deskfig.sh
+if [ $LEARNIX_RUN == "true" ]; then
+	echo "Skipping deskfig because you're running Learnix..."
+else
+	$WITCH/deskfig.sh
+fi
 } 
 
 ############
@@ -83,27 +87,31 @@ $WITCH/color.sh GREEN "
 read CauldrenOption
 
 case $CauldrenOption in
-        A|a)
-                echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
-                sleep 5
-                simpleinstall
-                ;;
-        B|b)
-                echo "Choice was \"$CauldrenOption\". warning, this part of the script might still be a little buggy.  running it in a couple seconds anyway"
-                sleep 5
-                stage3
-                ;;
-        C|c) 
-                echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
-                echo "you ub0r l33t... i have a feeling we might get hacked by you"
+    A|a)
+        echo "Choice was \"$CauldrenOption\". sorry, this part of the script is still under construction.  running it in a couple seconds anyway"
+        sleep 5
+        simpleinstall
+        ;;
+    B|b)
+        echo "Choice was \"$CauldrenOption\". warning, this part of the script might still be a little buggy.  running it in a couple seconds anyway"
+        sleep 5
+        stage3
+        ;;
+    C|c) 
+        echo "Choice was \"$CauldrenOption\". this part of the script is complete.  for full manual install, simply press ctrl-C at any time to enter fully manual mode."
+        echo "you ub0r l33t... i have a feeling we might get hacked by you"
 		echo "exiting to full manual mode now"
 		exit
-                ;;
-          *)
-                echo "Valid Choices are A,B,C"
-                exit 1
-                ;;
+        ;;
+    *)
+        echo "Valid Choices are A,B,C"
+        exit 1
+        ;;
 esac
 }
 
-cauldren # from the start
+if [ "$LEARNIX_RUN" == "true" ]; then
+	stage3 # proper install
+else
+	cauldren
+fi

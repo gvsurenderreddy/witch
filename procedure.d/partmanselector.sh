@@ -5,8 +5,8 @@
 
 function partman {
 echo "once you have partitioned your hard drive satasfactorilly, exit the partition manager, and the script will continue."
-echo "which partition manager do you want to use?"
-echo "
+$WITCH/color.sh QUESTION "which partition manager do you want to use?"
+$WITCH/color.sh GREEN "
     A.    fdisk
     B.    gparted
     C.    enter your own preference of partition manager"

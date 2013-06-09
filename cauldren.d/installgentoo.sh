@@ -32,24 +32,19 @@ echo "PACKAGEMGR: $PACKAGEMGR"
 echo "======================"
 sleep 1
 
-#call the drive preparation function.
 clear && $WITCH/procedure.d/driveprep.sh
-
-#call the stage installation function
 clear && $WITCH/procedure.d/stageinstall.sh
-
-#call the package manager installation function
 clear && $WITCH/procedure.d/installpackagemanager.sh
-
-#call the function for initial configuration of make.conf
 clear && $WITCH/procedure.d/initialmakeconf.sh
 
-#call the preparation for chroot
-clear && $WITCH/procedure.d/prechroot.sh
-
-#call the wichroot
-clear && $WITCH/procedure.d/wichroot.sh
-
+# wichroot is only required for actual systems
+# for Learnix systems it's not required.
+if [ "$LEARNIX_RUN" == "true" ]; then
+	echo "The installation of your Learnix system has finished. Please remember your Learnix system's name."
+else
+	clear && $WITCH/procedure.d/prechroot.sh
+	clear && $WITCH/procedure.d/wichroot.sh
+fi
 #...and there we hit the end of the gentoo installation portion of witchcraft
 #job done.  what's next... u want the deskfigselector() now dont you?
 #good, cos it should already be lined up to run, thnx to the stage3 function (as a top level option from cauldren), which calls it straight after running the distroselector function.

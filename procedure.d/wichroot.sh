@@ -7,15 +7,21 @@
 echo "======================"
 DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 PACKAGEMGR=$(sed -n '4p' $WITCH/config.base.txt)
-echo "(base) Distro name: $DISTRONAME"
+echo "Distro name: $DISTRONAME"
 echo "PACKAGEMGR: $PACKAGEMGR"
 
 METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
-echo "(base) Metadistro: $METADISTRO"
+echo "Metadistro: $METADISTRO"
 
 ROOTDEV=$(sed -n '5p' $WITCH/config.base.txt)
 echo "Root filesystem location: $ROOTDEV"
 echo "======================"
+
+if [ $LEARNIX_RUN == "true" ]; then
+    SYSPATH=$LEARNIX/sys/$DISTRONAME
+else
+    SYSPATH=/mnt/$DISTRONAME
+fi
 
 ################### wichroot likely needs an end bit to de-chroot, to make the rest of the script run. !!!!!!!!!!!!!!!!
 
@@ -49,10 +55,10 @@ echo "$line" >> $WITCH/procedure.d/wichroot_script.sh.new
 
 done < $WITCH/procedure.d/wichroot_script.sh
 
-mv $WITCH/procedure.d/wichroot_script.sh.new /mnt/$DISTRONAME/bin/witchroot
-chmod +x /mnt/$DISTRONAME/bin/witchroot 
-echo "chroot /mnt/$DISTRONAME /bin/bash /bin/witchroot" 
+mv $WITCH/procedure.d/wichroot_script.sh.new $SYSPATH/bin/witchroot
+chmod +x $SYSPATH/bin/witchroot 
+echo "chroot $SYSPATH /bin/bash /bin/witchroot" 
 sleep 1 
-chroot /mnt/$DISTRONAME /bin/bash /bin/witchroot
+chroot $SYSPATH /bin/bash /bin/witchroot
 
 #or rather... need to get it so that the stuff in the CHEOFings, that gets put in witchroot script, gets initiated once you've chrooted...  but then, how do you tell it to execute that...   .... ah.   the issue remains. prolly better do as i said at the start of this chrootings, and get the gist of the basics from: http://www.linuxquestions.org/questions/programming-9/chroot-in-shell-scripts-ensuring-that-subsequent-commands-execute-within-the-chroot-830522/ and stop freaking out over it.

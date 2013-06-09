@@ -98,4 +98,9 @@ fi
 
 echo
 questions
-menu
+
+if [ "$LEARNIX_RUN" == "true" ]; then
+	$WITCH/cauldren.sh
+else
+	menu
+fi
