@@ -116,14 +116,14 @@ home() {
   fi
 }
 
-learnix_script() {
-  mkdir $LEARNIX/sys
-  mkdir $LEARNIX/sys/$DISTRONAME
+dimg_script() {
+  mkdir $WITCH/sys
+  mkdir $WITCH/sys/$DISTRONAME
 }
 
 # start of execution of methods
-if [ "$LEARNIX_RUN" == "true" ]; then
-  learnix_script
+if [ "$DIMG_RUN" == "true" ]; then
+  dimg_script
 else
   show_disk
   create_mnt

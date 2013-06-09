@@ -39,8 +39,8 @@ clear && $WITCH/procedure.d/initialmakeconf.sh
 
 # wichroot is only required for actual systems
 # for Learnix systems it's not required.
-if [ "$LEARNIX_RUN" == "true" ]; then
-  echo "The installation of your Learnix system has finished. Please remember your Learnix system's name."
+if [ "$DIMG_RUN" == "true" ]; then
+  echo "The creation of your system has finished."
 else
   clear && $WITCH/procedure.d/prechroot.sh
   clear && $WITCH/procedure.d/wichroot.sh

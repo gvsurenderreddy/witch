@@ -14,8 +14,8 @@ echo "======================"
 
 ###### ok dude, here's where you really kinda need to make some tough decisions for a default make.conf, and also make options, and manual make.conf editing.  ... n seriously, some sembelence of a default for rowan witch, would make sense.
 
-if [ $LEARNIX_RUN == "true" ]; then
-  SYSPATH=$LEARNIX/sys/$DISTRONAME
+if [ $DIMG_RUN == "true" ]; then
+  SYSPATH=$WITCH/sys/$DISTRONAME
 else
   SYSPATH=$/mnt/$DISTRONAME
 fi

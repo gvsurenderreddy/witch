@@ -15,8 +15,8 @@ METADISTRO=$(sed -n '2p' $WITCH/config.base.txt)
 echo "Metadistro: $METADISTRO"
 echo "======================"
 
-if [ $LEARNIX_RUN == "true" ]; then
-  SYSPATH=$LEARNIX/sys/$DISTRONAME
+if [ $DIMG_RUN == "true" ]; then
+  SYSPATH=$WITCH/sys/$DISTRONAME
 else
   SYSPATH=/mnt/$DISTRONAME
 fi

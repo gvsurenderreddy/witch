@@ -17,8 +17,8 @@ ROOTDEV=$(sed -n '5p' $WITCH/config.base.txt)
 echo "Root filesystem location: $ROOTDEV"
 echo "======================"
 
-if [ $LEARNIX_RUN == "true" ]; then
-  SYSPATH=$LEARNIX/sys/$DISTRONAME
+if [ $DIMG_RUN == "true" ]; then
+  SYSPATH=$WITCH/sys/$DISTRONAME
 else
   SYSPATH=/mnt/$DISTRONAME
 fi

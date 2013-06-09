@@ -8,8 +8,8 @@ DISTRONAME=$(sed -n '1p' $WITCH/config.base.txt)
 echo "Distro name: $DISTRONAME"
 echo "======================"
 
-if [ $LEARNIX_RUN == "true" ]; then
-  SYSPATH=$LEARNIX/sys/$DISTRONAME
+if [ $DIMG_RUN == "true" ]; then
+  SYSPATH=$WITCH/sys/$DISTRONAME
 else
   SYSPATH=/mnt/$DISTRONAME
 fi

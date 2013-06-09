@@ -9,8 +9,8 @@ echo "Distroname: $DISTRONAME"
 echo "Arch: $ARCH"
 echo "======================"
 
-if [ $LEARNIX_RUN == "true" ]; then
-  SYSPATH=$LEARNIX/sys/$DISTRONAME
+if [ $DIMG_RUN == "true" ]; then
+  SYSPATH=$WITCH/sys/$DISTRONAME
 else
   SYSPATH=/mnt/$DISTRONAME
 fi

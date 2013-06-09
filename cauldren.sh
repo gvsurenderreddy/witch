@@ -45,8 +45,8 @@ function stage3 {
   #once the refunctionising is done, this may change.
   
   $WITCH/distroselect.sh
-  if [ $LEARNIX_RUN == "true" ]; then
-    echo "Skipping deskfig because you're running Learnix..."
+  if [ $DIMG_RUN == "true" ]; then
+    echo "Skipping deskfig because you're running Disk IMaGe mode..."
   else
     $WITCH/deskfig.sh
   fi
@@ -109,7 +109,7 @@ function cauldren {
   esac
 }
 
-if [ "$LEARNIX_RUN" == "true" ]; then
+if [ "$DIMG_RUN" == "true" ]; then
   stage3 # proper install
 else
   cauldren

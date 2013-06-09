@@ -99,7 +99,8 @@ fi
 echo
 questions
 
-if [ "$LEARNIX_RUN" == "true" ]; then
+if [ "$DIMG_RUN" == "true" ]; then
+  echo "Drive IMaGe generation mode activated."
   $WITCH/cauldren.sh
 else
   menu
