@@ -6,6 +6,8 @@ clear #neatness freak
 ### dont be bothered if the comments seem outta wack, they are.  ...need to go clean that up some more still.
 # will remove this guff when the comments n shiz r cleaned up of those redundant or irelevent or outdated or just guff...
 
+# digit's new simple tree plan/notion of what witchcraft is about.
+
 #version (probably gonna keep version as "concept v0.00" until it's at least ready for a trial run.
 echo "VERSION: gentoo install test v0.00 " #oldversion#echo "VERSION: concept v0.00"
 echo "(means dont try to run it yet, for the sake of your computer.  retreat while you can.)"
