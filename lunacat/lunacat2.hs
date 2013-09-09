@@ -67,7 +67,7 @@ eval h "!eagle" = privmsg h "EAGLE Augments Grml with Lisp and Emacs."
 eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
-eval h "!valroadiewitch" = privmsg h "valroadie is getting in on the action, and has wart witchos in the pipelines... more info to come."
+eval h "!griselda" = privmsg h "valroadie is getting in on the action, and has warty  witchos called griselda in the pipelines... more info to come."
 
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
@@ -102,7 +102,7 @@ eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. 
 eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !valroadiewitch"
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !griselda"
 
 -- -- --
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!    see !witches !bases !philosophy !who "
