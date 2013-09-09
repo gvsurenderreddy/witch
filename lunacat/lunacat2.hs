@@ -82,14 +82,15 @@ eval h "!bedrockwitch" = privmsg h "nothing much progressed, little beyond an in
 
 
 --knightnames
-eval h "!knightnames" = privmsg h "!digit !him !orbea !jony !wgreenhouse !wei2912 !haylo"
+eval h "!knightnames" = privmsg h "!digit !him !orbea !jony !wgreenhouse !wei2912 !haylo !valroadie"
 eval h "!digit" = privmsg h "he who hath madeth the most, and founded and guided and whatnot, yet insists he's not the boss and anyone can make and release whatver they want with a witch stamp on it.  he who maketh the rowan, willow, jamella, slackwitch and others to come he says, yet no one has seen even a slackwitch but he, and neither willow nor jamella exist as anything but air."
 eval h "!him" = privmsg h "he who nameth, and sparketh offeth this whole thing, and nameth himself so ye look illiterate."
 eval h "!orbea" = privmsg h "he who is new to linux, but we always knew was leet.  fun guy with an itchy cow."
 eval h "!jony" = privmsg h "he who hath made much, and is #1 witch user/developer... after digit and wei2912.  hath been around since the start."
 eval h "!wgreenhouse" = privmsg h "he who art steady and wise.  he who maketh the eagle."
 eval h "!wei2912" = privmsg h "he who hath come in late, but made great swathing changes and augments to witchcraft."
-eval h "!theredmood" = privmsg h "he who has come far, but has far to go, and gets there at speed, sometimes."
+eval h "!theredmood" = privmsg h "he who has come far, but has far to go, and gets there at speed, sometimes.  ... hey, where'd he go?   something i said?"
+eval h "!valroadie" = privmsg h "sir valroadie's valour is well known, nestled in quick as part of the comunity, valroadie will find us some witches to burn, that's for sure."
 
 --offlist knightnames
 eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
