@@ -50,6 +50,7 @@ eval h "!search" = privmsg h "search yourself. :P"
 -- these are some basic sample commands for u to try out to make your own ones.
 eval h "hello" = privmsg h "hello world"
 eval h "!testcommand" = privmsg h "this is the test responce."
+eval h "!meow" = privmsg h "meow."
 
 --info
 eval h "!daskeb" = privmsg h "hello, i am daskeb, digit's haskell bot.  of course, i'm just a basic starter template.  you might want to look up http://www.haskell.org/haskellwiki/Roll_your_own_IRC_bot just for starters.  i came from half of that. i now have my own web presence at http://wastedartist.com/scripts/daskeb/daskeb.html"
