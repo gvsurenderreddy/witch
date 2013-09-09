@@ -66,7 +66,7 @@ eval h "!eagle" = privmsg h "EAGLE Augments Grml with Lisp and Emacs."
 eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
-eval h "!wart" = privmsg h "valroadie is getting in on the action, and has wart witchos in the pipelines... more info to come."
+eval h "!valroadiewitch" = privmsg h "valroadie is getting in on the action, and has wart witchos in the pipelines... more info to come."
 
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
@@ -90,7 +90,7 @@ eval h "!jony" = privmsg h "he who hath made much, and is #1 witch user/develope
 eval h "!wgreenhouse" = privmsg h "he who art steady and wise.  he who maketh the eagle."
 eval h "!wei2912" = privmsg h "he who hath come in late, but made great swathing changes and augments to witchcraft."
 eval h "!theredmood" = privmsg h "he who has come far, but has far to go, and gets there at speed, sometimes.  ... hey, where'd he go?   something i said?"
-eval h "!valroadie" = privmsg h "sir valroadie's valour is well known, nestled in quick as part of the comunity, valroadie will find us some witches to burn, that's for sure."
+eval h "!valroadie" = privmsg h "sir valroadie's valour is well known, nestled in quick, wants only small warts, not all encompassing warts.  "
 
 --offlist knightnames
 eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
@@ -101,7 +101,7 @@ eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. 
 eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch"
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !valroadiewitch"
 
 -- -- --
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!    see !witches !bases !philosophy !who "
