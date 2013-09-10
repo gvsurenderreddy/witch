@@ -51,6 +51,7 @@ eval h "!search" = privmsg h "search yourself. :P"
 eval h "hello" = privmsg h "hello world"
 eval h "!testcommand" = privmsg h "this is the test responce."
 eval h "!meow" = privmsg h "meow."
+eval h "!woof" = privmsg h "GghrRrRgrhrhghrhghrhgrRgRggGRAAGHROUGHGH!!! GRARGHOUGH-GROUGHGRGROUGH!!  ... dont bark at me, bitch.  i bark with the best of dogs, and you, ~ you aint even close. "
 
 --info
 eval h "!daskeb" = privmsg h "hello, i am daskeb, digit's haskell bot.  of course, i'm just a basic starter template.  you might want to look up http://www.haskell.org/haskellwiki/Roll_your_own_IRC_bot just for starters.  i came from half of that. i now have my own web presence at http://wastedartist.com/scripts/daskeb/daskeb.html"
