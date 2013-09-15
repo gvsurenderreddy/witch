@@ -32,10 +32,28 @@ distroselect() {
       $WITCH/cauldren.d/installgentoo.sh
     ;;
     2)
-      echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
-      echo "this is where you get taken to the funtoo bit"
-      sleep 3
-      $WITCH/cauldren.d/installbedrock.sh
+      $WITCH/color.sh QUESTION "who's bedrock installer do you want to use?"
+      $WITCH/color.sh GREEN "
+        d) Digit's bedrock installer script (incomplete! dangerous)
+        p) Paradigm's official bedrock installer (recommended)
+     enter the letter corresponding to your choice:"
+      read BEDROCKINSTALLER
+      case $BEDROCKINSTALLER in
+        d)
+           echo "Choice was $BASEDISTRO, and $BEDROCKINSTALLER. sorry, this part of the script is incomplete"
+           echo "this is where you get taken to the bedrock bit"
+           sleep 3
+           $WITCH/cauldren.d/installbedrock.sh
+           $WITCH/cauldren.d/installbedrockofficial.sh
+        ;;
+        p)
+           echo "Choice was $BASEDISTRO, and $BEDROCKINSTALLER. sorry, this part of the script is incomplete"
+           echo "this is where you get taken to the bedrock bit"
+           sleep 3
+           $WITCH/cauldren.d/installbedrock.sh
+           $WITCH/cauldren.d/installbedrockofficial.sh
+        ;;
+      esac
     ;;
     3)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
