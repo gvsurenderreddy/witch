@@ -44,13 +44,10 @@ distroselect() {
            echo "this is where you get taken to the bedrock bit"
            sleep 3
            $WITCH/cauldren.d/installbedrock.sh
-           $WITCH/cauldren.d/installbedrockofficial.sh
         ;;
         p)
-           echo "Choice was $BASEDISTRO, and $BEDROCKINSTALLER. sorry, this part of the script is incomplete"
-           echo "this is where you get taken to the bedrock bit"
+           echo "Choice was $BASEDISTRO, and $BEDROCKINSTALLER. this takes you direct to third party, bedrock's offical installer direct from github."
            sleep 3
-           $WITCH/cauldren.d/installbedrock.sh
            $WITCH/cauldren.d/installbedrockofficial.sh
         ;;
       esac
