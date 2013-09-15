@@ -23,14 +23,20 @@ come to a witch chat here: http://wastedartist.com/distros/witch/witchat.html
 to run witchcraft, download https://github.com/Digit/witch/archive/master.zip and away you go from there.
 
 
-To run the witch installer script simply execute it on a command line.  
+To run the witch installer script simply execute it on a command line. Before you do so, you'll need to chmod +x the whole directory you've git cloned.
 
-	chmod +x witchcraft*.sh
+	chmod -R +x ./witch
+	cd ./witch
+
+Then, you run the script:
+
 	./witchcraft*.sh
 	
 or
 
 	sh witchcraft*.sh
+
+Please note that you'll need to be in the current directory for the script to run successfully.
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% warning, out of date, from pre-refactoring %%%%%%

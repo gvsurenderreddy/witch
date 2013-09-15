@@ -50,20 +50,20 @@ echo "you may want to review http://opensource.osu.edu/~paradigm/bedrock/1.0alph
 echo "do you want these optional directories?"
 read -p "mkdir -p lib/firmware \#(y/n)?"
 if [ "REPLY" == "y" ]
-then 
-    mkdir -p lib/firmware
-    read -p "mkdir -p var/chroot \#(y/n/e)"
-
-    if [ "REPLY" == "y" ] 
-    then
-        mkdir -p var/chroot
-
-    elif [ "REPLY" == "e" ] 
-    then
-        echo "where would you like to put it then?" 
-        read $BEDCHROOTS
-        mkdir -p $BEDCHROOTS
-    fi
+then
+  mkdir -p lib/firmware
+  read -p "mkdir -p var/chroot \#(y/n/e)"
+  
+  if [ "REPLY" == "y" ]
+  then
+    mkdir -p var/chroot
+    
+  elif [ "REPLY" == "e" ]
+  then
+    echo "where would you like to put it then?"
+    read $BEDCHROOTS
+    mkdir -p $BEDCHROOTS
+  fi
 fi
 
 echo "you may want to review \"http://opensource.osu.edu/~paradigm/bedrock/1.0alpha1/install.html#Download core Bedrock Linux component sources\" for downloading of core components"
