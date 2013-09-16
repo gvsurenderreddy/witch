@@ -17,8 +17,9 @@ distroselect() {
     6) Gentoo/Hurd
     7) FreeBSD
     8) Debian
-    9) combo
-    10) other
+    9) tinycore
+    10) combo
+    11) other
 
   enter number preference of preference:"
   
@@ -90,11 +91,17 @@ distroselect() {
     ;;
     9)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+      echo "this is where you get taken to the tinycore bit"
+      sleep 3
+      $WITCH/cauldren.d/installtinycore.sh
+    ;;
+    10)
+      echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
       echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
       sleep 3
       $WITCH/cauldren.sh
     ;;
-    10)
+    11)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
       echo "idkwtf goes here...  something, surely."
       sleep 3

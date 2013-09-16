@@ -68,6 +68,10 @@ function rewictar {
 echo "sry this has nothing coded yet, easy enough to do though right, come join the hackup in #witchlinux on irc freenode net"
 }
 
+function rewiclinuxlive {
+echo "sorry, nothing scripted in for this section yet.  come join the hackup in #witchlinux on irc freenode net.  also, of course, have a look at:"
+}
+
 function rewicmenu {
   
   echo "how u wanna do this?"
