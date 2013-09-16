@@ -64,6 +64,10 @@ if that looks wrong, do not proceed."
 
 }
 
+function rewictar {
+echo "sry this has nothing coded yet, easy enough to do though right, come join the hackup in #witchlinux on irc freenode net"
+}
+
 function rewicmenu {
   
   echo "how u wanna do this?"
@@ -74,7 +78,7 @@ function rewicmenu {
     C.    linux-live scripts
     D.    tazlito
     E.
-  D.    enter your own preference of remaster manager"
+    F.    enter your own preference of remaster manager"
   
   read REWICMETHOD
   
