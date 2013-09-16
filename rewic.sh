@@ -69,7 +69,7 @@ echo "sry this has nothing coded yet, easy enough to do though right, come join 
 }
 
 function rewiclinuxlive {
-echo "sorry, nothing scripted in for this section yet.  come join the hackup in #witchlinux on irc freenode net.  also, of course, have a look at:"
+echo "sorry, nothing scripted in for this section yet.  come join the hackup in #witchlinux on irc freenode net.  also, of course, have a look at: http://www.linux-live.org/ "
 }
 
 function rewicmenu {
