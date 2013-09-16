@@ -23,7 +23,45 @@ function rewicwitchhunt {
   witchhunt.sh
 }
 function rewicdd {
-  echo "enter the input ... jk, THIS PORTION INCOMPLETE.  STUB.  here we just dd'up wherever you choose, to wherever you choose."
+
+  echo "here we just dd'up wherever you choose, to wherever you choose.  
+      ~ though be advised, dd is:
+          very low level
+          takes long time
+          waste a lot of space!"
+ sleep 1
+ echo "warning!  this method uses dd, aka data-destroyer (due to people not respecting its power).  proceed with caution, there is no going back if you wipe your drive by accident with dd"
+ echo "what do you want copied? (enter location of what you want copied)
+e.g.:/dev/sdb1"
+ read -r WHATDD
+ echo "will use $WHATDD as the input to the dd command."
+
+ echo "where do you want it copied to? (please type full path, include filename and extension)
+e.g.:/media/chuckdrive/lemule-slack-witch-alpha1.iso"
+ read -r LOCDD
+ echo "will use $LOCD as the location dd will output to."
+
+ sleep 2
+ echo "again, the warning, please make absolute certain, that this is the right way around.
+
+will now proceed to issue this command:
+
+  dd if=$WHATDD of=$LOCDD
+
+if that looks wrong, do not proceed."
+ sleep 2
+ echo "ok to proceed? (Y/N):"
+ read 
+ read REPLY
+   if [ "$REPLY" == "y" ]
+     then 
+       dd if=$WHATDD of=$LOCDD
+     else
+       rewicmenu
+   fi
+
+#should likely rearrange that to ask people to make sure it's right at least three times. ;)
+
 }
 
 function rewicmenu {
