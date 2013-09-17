@@ -21,7 +21,7 @@ distroselect() {
     10) combo
     11) other
 
-  enter number preference of preference:"
+  enter preferred number preference of preference:"
   
   
   read BASEDISTRO

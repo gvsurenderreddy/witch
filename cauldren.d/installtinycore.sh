@@ -33,6 +33,11 @@ echo "======================"
 sleep 1
 
 clear && echo "WARNING, THIS IS JUST A STUB, IT WONT ACTUALLY INSTALL ANYTHING... YET  ... come join the hackup on #witchlinux on irc freenode net."
+sleep 2
+echo "have a look at: http://distro.ibiblio.org/tinycorelinux/install.html 
+tinycore's install page.
+"
+
 #these lines of course would take one to the rest of the gentoo install... shall these scripts get broadened for use with any base distro, or will tinycore (and others) have to go their own way?
 #clear && $WITCH/procedure.d/driveprep.sh
 #clear && $WITCH/procedure.d/stageinstall.sh
