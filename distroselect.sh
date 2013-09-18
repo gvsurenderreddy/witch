@@ -9,17 +9,19 @@ distroselect() {
   #distroselect first question
   $WITCH/color.sh QUESTION "what meta-distro do you want your witch based on?"
   $WITCH/color.sh GREEN "
-    1) Gentoo
-    2) Bedrock
-    3) Funtoo
-    4) Exherbo
-    5) Gentoo/BSD
-    6) Gentoo/Hurd
-    7) FreeBSD
-    8) Debian
-    9) tinycore
-    10) combo
-    11) other
+    1)  Gentoo     (pick me!)
+    2)  Bedrock
+    3)  Funtoo
+    4)  Exherbo     
+    5)  Gentoo/BSD
+    6)  Gentoo/Hurd
+    7)  FreeBSD
+    8)  Debian
+    9)  tinycore
+   10)  killx
+   11)  sourcemagethingy
+   88)  combo
+   99)  other
 
   enter preferred number preference of preference:"
   
@@ -97,11 +99,17 @@ distroselect() {
     ;;
     10)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
+      echo "this is where you get taken to the killx bit"
+      sleep 3
+      $WITCH/cauldren.d/installkillx.sh
+    ;;
+    88)
+      echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
       echo "this would be where you get taken to the bit that lets you custom pick each bit seperately (stage3, kernel, package manager, spintop, etc)... er, i think.   second thoughts, this might already have been an option by the time you\'re selecting which basedistro... oh well, there\'s no real harm in having it in here again, right?"
       sleep 3
       $WITCH/cauldren.sh
     ;;
-    11)
+    99)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
       echo "idkwtf goes here...  something, surely."
       sleep 3
