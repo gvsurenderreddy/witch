@@ -133,6 +133,7 @@ eval h "!bedrock" = privmsg h "barely begun to be slotted in, in !witchcraft.  c
 --extras
 eval h "!beards" = privmsg h "http://ompldr.org/vaTJzdw/beards3.png"
 eval h "!ferretwitch" = privmsg h "http://bit.ly/Y4PHg4"
+eval h "!politics" = privmsg h "http://youtu.be/zruGBWLk9s8 ''Geeks like to think that they can ignore politics, you can leave politics alone, but politics won't leave you alone.'' - Richard Matthew Stallman"
 
 --witchcraft
 eval h "!witchcraft" = privmsg h "an umbrella tool for all your witch installing, remastering, and witch sharing.  ~ in process of being written by digit and everyone else. come try out the code https://github.com/Digit/witch see also: !witchcraftidea !remastery !rewic !cauldren !witchhunt !rspm !witchcraftprogress and many more"
