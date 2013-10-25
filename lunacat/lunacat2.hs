@@ -57,6 +57,9 @@ eval h "!woof" = privmsg h "GghrRrRgrhrhghrhghrhgrRgRggGRAAGHROUGHGH!!! GRARGHOU
 eval h "!daskeb" = privmsg h "hello, i am daskeb, digit's haskell bot.  of course, i'm just a basic starter template.  you might want to look up http://www.haskell.org/haskellwiki/Roll_your_own_IRC_bot just for starters.  i came from half of that. i now have my own web presence at http://wastedartist.com/scripts/daskeb/daskeb.html"
 eval h "!lunacat2" = privmsg h "hello, i am lunacat2.  lunacat died.  lunacat was a bot to help people with a sort of faq about witch, a gnu/linux opperating system distribution.  lunacat also contained info about lots more, mostly covered in digit's new bot called ema. to see some of my commands try !info"
 eval h "!info" = privmsg h "!witches !sites !coc !bases !philosophy !who !remaster sorry i dont have many commands yet.  ~under construction~" 
+eval h "!commands" = privmsg h "you can see my code (and thus my commands) here: https://github.com/Digit/witch/blob/master/lunacat/lunacat2.hs "
+eval h "!help" = privmsg h "see !info for top level info commands.  see !commands for all."
+
 
 --witches
 eval h "!rowan" = privmsg h "rowan, wards away evil.  bloat is evil.  available to download as debian iso, also featured on arch, slackware and slitaz bases.  soon available in witchcraft"
@@ -75,8 +78,8 @@ eval h "!griselda" = privmsg h "valroadie got in on the action, and has warty  w
 eval h "!creeds" = privmsg h "creeds of witches of the following types have been found: !slitazwitch !slackwarewitch !debianwitch !gentoowitch !funtoowitch !archwitch !bedrockwitch"
 eval h "!slitazwitch" = privmsg h "digit made some slitaz based witches, but didnt release them because he can be a fussy perfectionist at times."
 eval h "!slackwarewitch" = privmsg h "digit made some slackware based witches, but didnt release them because he can be a fussy perfectionist at times."
-eval h "!debianwitch" = privmsg h "digit released debian-rowan-witch alpha 2, 3 and 4 with a debian base."
-eval h "!gentoowitch" = privmsg h "digit decided gentoo would be the first meta distro to include/complete in his witchcraft vision (a single installer/remastery tool that lets you decide your base system, and your distinct desktop environment configuration and app selection."
+eval h "!debianwitch" = privmsg h "digit released debian-rowan-witch alpha 2, 3 and 4 with a debian base.  haylowitch is debian."
+eval h "!gentoowitch" = privmsg h "digit decided gentoo would be the first meta distro to include/complete in his !witchcraft vision (a single installer/remastery tool that lets you decide your base system, and your distinct desktop environment configuration and app selection."
 eval h "!funtoowitch" = privmsg h "digit thinks this will be the next meta-distro included in witchcraft's cauldren, but it could just as likely be debian, or bedrock, or dragora, or whatever."
 eval h "!archwitch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
 eval h "!slaxwitch" = privmsg h "we dont talk about that.  meow."
@@ -112,6 +115,8 @@ eval h "witch!" = privmsg h "BURN HER!"
 --general about n stuff
 eval h "!coc" = privmsg h "code of the covenant:  dont ask to ask, just ask.  dont ask to do, just do, then inform.  no flooding.  no spam.  no official. chat priority: witch > freedomware > anything else. if you are here, you are a witch developer now.  make whatever you want."
 
+eval h "!policy" = privmsg h "dont ask to do, just do, and inform.  see !coc !philosophy"
+
 eval h "!history" = privmsg h "Him said to digit: you should make a distro called witch, so people could burn them [to cd].  that happened.  witch's philosophy since then is that anyone can make what they want, no central authority, office or hierachy.  it's a pure do-archy.  like wicca.  (but we're not actually witches/warlocks).  see !releasecron"
 eval h "!releasecron" = privmsg h "slax-rowan-witch-alpha1, debian-rowan-witch-alpha2,3,4, arch-rowan-witch-alpha5,6, slitaz-rowan-witch-alpha7, slackwitch, witchcraft (aka alpha8, featuring ability to install gentoo-*-witch)"
 
@@ -133,6 +138,7 @@ eval h "!bedrock" = privmsg h "barely begun to be slotted in, in !witchcraft.  c
 --extras
 eval h "!beards" = privmsg h "http://ompldr.org/vaTJzdw/beards3.png"
 eval h "!ferretwitch" = privmsg h "http://bit.ly/Y4PHg4"
+eval h "!politics" = privmsg h "http://youtu.be/zruGBWLk9s8 ''Geeks like to think that they can ignore politics, you can leave politics alone, but politics won't leave you alone.'' - Richard Matthew Stallman"
 
 --witchcraft
 eval h "!witchcraft" = privmsg h "an umbrella tool for all your witch installing, remastering, and witch sharing.  ~ in process of being written by digit and everyone else. come try out the code https://github.com/Digit/witch see also: !witchcraftidea !remastery !rewic !cauldren !witchhunt !rspm !witchcraftprogress and many more"
