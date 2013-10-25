@@ -72,7 +72,7 @@ eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
 eval h "!griselda" = privmsg h "valroadie got in on the action, and has warty  witchos called griselda pumped out of susestudio.  see, remastery is for everyone!"
-
+eval h "!jane" = privmsg h "cos it just wasnt right that there wasnt a slitaz based witch yet ~ quick n dirty release to remedy that.  not like the polished but unreleased because of one niggle slitaz-rowan-witches"
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
 eval h "!creeds" = privmsg h "creeds of witches of the following types have been found: !slitazwitch !slackwarewitch !debianwitch !gentoowitch !funtoowitch !archwitch !bedrockwitch"
