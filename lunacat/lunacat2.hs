@@ -1,3 +1,4 @@
+
 import Network
 import System.IO
 import Text.Printf
@@ -100,7 +101,7 @@ eval h "!valroadie" = privmsg h "sir valroadie's valour is well known, nestled i
 --offlist knightnames
 eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
 eval h "!haylo" = privmsg h "he who came, made an awesome ultra-light (as a duck) debian based core witch, at something like 60mb.  but did he post it anywhere that didnt expire, or in a sensible reccogniseable memorable name?  no.  ... anyone save it?..."
-eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. keep tabs on what this one creates. it will make your eyes cry love from the solesof your feet."
+eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. keep tabs on what this one creates. it will make your eyes cry love from the soles of your feet."
 
 -- who n groups n whats
 eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
