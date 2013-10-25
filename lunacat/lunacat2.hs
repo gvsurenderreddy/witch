@@ -68,7 +68,7 @@ eval h "!eagle" = privmsg h "EAGLE Augments Grml with Lisp and Emacs."
 eval h "!slackwitch" = privmsg h "unreleased rowan-like slackware based witches.  considered by digit as other alpha7 pre-releases during/after slitaz alpha7 pre-releases"
 eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology cream you can get for that.  or maybe it has something to do with fun guy.  vapourware."
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
-eval h "!griselda" = privmsg h "valroadie is getting in on the action, and has warty  witchos called griselda in the pipelines... more info to come."
+eval h "!griselda" = privmsg h "valroadie got in on the action, and has warty  witchos called griselda pumped out of susestudio.  see, remastery is for everyone!"
 
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
