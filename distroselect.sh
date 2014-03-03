@@ -20,6 +20,7 @@ distroselect() {
     9)  tinycore
    10)  killx
    11)  sourcemagethingy
+   42)  the answer to life, the universe and everything
    88)  combo
    99)  other
 
@@ -102,6 +103,10 @@ distroselect() {
       echo "this is where you get taken to the killx bit"
       sleep 3
       $WITCH/cauldren.d/installkillx.sh
+    ;;
+    42)
+      echo "deep thought"
+      $WITCH/cauldren.d/installmix.sh
     ;;
     88)
       echo "Choice was $BASEDISTRO, sorry, this part of the script is incomplete"
