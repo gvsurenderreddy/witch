@@ -74,6 +74,7 @@ eval h "!mycowitch" = privmsg h "maybe there's some kind of bovine dermatology c
 eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what, sorry i blinked, his pastebin expired, what was it ... anyone have a link?"
 eval h "!griselda" = privmsg h "valroadie got in on the action, and has warty  witchos called griselda pumped out of susestudio.  see, remastery is for everyone!"
 eval h "!jane" = privmsg h "cos it just wasnt right that there wasnt a slitaz based witch yet ~ quick n dirty release to remedy that.  not like the polished but unreleased because of one niggle slitaz-rowan-witches"
+eval h "!djs_exclusive_witchlinux" = privmsg h "its got everything yours has, but better. uploaded to dajjal's exclussive site."
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
 eval h "!creeds" = privmsg h "creeds of witches of the following types have been found: !slitazwitch !slackwarewitch !debianwitch !gentoowitch !funtoowitch !archwitch !bedrockwitch"
@@ -88,7 +89,7 @@ eval h "!bedrockwitch" = privmsg h "nothing much progressed, little beyond an in
 
 
 --knightnames
-eval h "!knightnames" = privmsg h "!digit !him !orbea !jony !wgreenhouse !wei2912 !haylo !valroadie"
+eval h "!knightnames" = privmsg h "!digit !him !orbea !jony !wgreenhouse !wei2912 !haylo !valroadie !dajjal"
 eval h "!digit" = privmsg h "he who hath madeth the most, and founded and guided and whatnot, yet insists he's not the boss and anyone can make and release whatver they want with a witch stamp on it.  he who maketh the rowan, willow, jamella, slackwitch and others to come he says, yet no one has seen even a slackwitch but he, and neither willow nor jamella exist as anything but air."
 eval h "!him" = privmsg h "he who nameth, and sparketh offeth this whole thing, and nameth himself so ye look illiterate."
 eval h "!orbea" = privmsg h "he who is new to linux, but we always knew was leet.  fun guy with an itchy cow."
@@ -97,6 +98,7 @@ eval h "!wgreenhouse" = privmsg h "he who art steady and wise.  he who maketh th
 eval h "!wei2912" = privmsg h "he who hath come in late, but made great swathing changes and augments to witchcraft."
 eval h "!theredmood" = privmsg h "he who has come far, but has far to go, and gets there at speed, sometimes.  ... hey, where'd he go?   something i said?"
 eval h "!valroadie" = privmsg h "sir valroadie's valour is well known, nestled in quick, wants only small warts, not all encompassing warts.  "
+eval h "!dajjal" = privmsg h "sir dajjal struck forth and boldly proclaimed: im sure it cant b that hard, ill do it now. ~ done.  its called djs_exclusive_witchlinux n it does everything urs does but better"
 
 --offlist knightnames
 eval h "!lo9rd" = privmsg h "he who art a fleeting moogle.  a good luck charm/omen."
@@ -107,7 +109,7 @@ eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. 
 eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !griselda"
+eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !griselda !djs_exclusive_witchlinux"
 
 -- -- --
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!    see !witches !bases !philosophy !who "
