@@ -1,3 +1,39 @@
+
+### the original jotting down of early notion:
 # rspm command : package manager used : command used
 rspm install : apt-get : apt-get install
 rspm update : apt-get : apt-get update
+
+
+### the simplification/shortification rethink:
+
+#install
+
+rspm install packagename
+rspm -i packagename
+rspm packagename
+
+
+#remove/uninstall
+
+rspm remove packagename
+rspm uninstall packagename #also echoes to use remove/-r
+rspm -r packagename
+rspmr packagename
+
+#sync/update (to refresh available packages list)
+
+rspm sync
+rspm update
+rspm -s
+rspms 
+
+#update/upgrade (ups installed software to newest)
+
+rspm upgrade
+rspm -u
+rspmu
+
+#sync & upgrade
+
+rspmsu
