@@ -37,3 +37,10 @@ rspmu
 #sync & upgrade
 
 rspmsu
+
+#search/find
+
+rspm search packagename
+rspm find packagename
+rspm -f packagename
+rspmf packagename
