@@ -4,6 +4,7 @@
 rspm install : apt-get : apt-get install
 rspm update : apt-get : apt-get update
 
+##^  i think i only scrawled that before going off n writing rspm.sh.  see rspm.sh for the real meat.  i've tried to keep the code as clear and just-enough as possible, though the idea below may require either a bit of muddying that clarity, and or a radical refactoring.
 
 ### the simplification/shortification rethink:
 
