@@ -1,6 +1,6 @@
 #+TITLE: BIRCH is rowan compressed harder
 ~:dev notes for a new witch idea in 2014:~
- - Digit strikes again with another idea for a witch.  (and somewhat parodies/models (t)his readme on wgreenhouse's eagle's).
+ - Digit strikes again with another idea for a witch.  (and somewhat parodies/models (t)his readme on wgreenhouse's eagle's https://github.com/Digit/witch/blob/master/eagle/README.org ).
 
 * BIRCH
 ** The Notion
