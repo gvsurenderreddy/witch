@@ -50,3 +50,5 @@ consider looking at what gentoo are up to on that front.  ;) :) :)
 
 *** others
 open to suggestions.  
+suckless?
+smaller?
