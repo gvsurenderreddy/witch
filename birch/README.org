@@ -45,7 +45,7 @@ the installation, remaster, rspm, all that jazz... if we ever get it all made n 
 
 *** udev
 udev > mdev
-will make things easier donw the road.
+will make things easier down the road.
 consider looking at what gentoo are up to on that front.  ;) :) :)
 
 *** others
