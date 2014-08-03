@@ -26,7 +26,17 @@ Make a witch that's bedrock based ultra minimal but useable core, more minimal t
 
     - brich scripts
 
+    - witchcraft scripts
+
 ** Elaboration on software selection
 
 it's just bedrock, ready to go, ootb, with some easy facilitation scripts, ii scripts to help you get help.  basically, it's bedrock, with dvtm and ii, and enough to get online, and get up n running with some kind of robust system for whatever your need...   scripts it carries can grow, but the idea being, it's just a simple stump to help you get going.  just the bedrock core, n no much more...  ... but a few witchcraft-esq scripts n the like.  who knows, it's just a notion at the moment.  pure vaporware.
 
+*** ii scripts
+Digit's got some of his own, or maybe something more elaborate like iii... lots of choice.  why?  cos ii b so darn minimal, it needs a little helping nudge, n irc is great for initial help getting going in a new os... so we gotta include ii, n enough to help any newbie use it.
+
+*** birch scripts
+idk, scripts to help out get birch growing from its initial stub, scripts to get diffeerent distros installed in birch, scripts for configurations, scripts for this that, whatever.
+
+*** witchcraft scripts
+the installation, remaster, rspm, all that jazz... if we ever get it all made n working.  ;)  
