@@ -1,10 +1,10 @@
 #+TITLE: BIRCH is rowan compressed harder
-
+~:dev notes for a new witch idea in 2014:~
 * The Notion
 
 Make a witch that's bedrock based ultra minimal but useable core, more minimal than rowan, but more capable of expansion, as per Digit's initial ideas surrounding the use of package format converters... 'cept with bedrock's way of gaining access to all packages.
 
-** Software considerations:
+** Software candidates:
 
     - Linux kernel
 
@@ -17,6 +17,8 @@ Make a witch that's bedrock based ultra minimal but useable core, more minimal t
     - Linux capabilities
 
     - udev
+
+    - gpm
 
     - dvtm
 
@@ -40,3 +42,11 @@ idk, scripts to help out get birch growing from its initial stub, scripts to get
 
 *** witchcraft scripts
 the installation, remaster, rspm, all that jazz... if we ever get it all made n working.  ;)  
+
+*** udev
+udev > mdev
+will make things easier donw the road.
+consider looking at what gentoo are up to on that front.  ;) :) :)
+
+*** others
+open to suggestions.  
