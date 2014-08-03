@@ -1,5 +1,7 @@
 #+TITLE: BIRCH is rowan compressed harder
 ~:dev notes for a new witch idea in 2014:~
+ - Digit strikes again with another idea for a witch.  (and somewhat parodies/models (t)his readme on wgreenhouse's eagle's).
+
 * BIRCH
 ** The Notion
 
@@ -53,3 +55,14 @@ consider looking at what gentoo are up to on that front.  ;) :) :)
 open to suggestions.  
 suckless?
 smaller?
+
+*** TODO plan
+**** TODO finalise added software
+**** TODO wait for bedrock
+test builds might happen, but not until a finalised version.
+***** take care to encourage bedrock code/comunity participation
+**** TODO wait/code relevant witchcraft code
+**** TODO decide release as
+    - scripts to build
+    - snapshot image
+    - iso - installer, how?
