@@ -60,6 +60,7 @@ smaller?
 **** TODO finalise added software
 **** TODO wait for bedrock
 test builds might happen, but not until a finalised version.
+~:ideally, waiting for paradigm to give version 1.0 the full release thumbs up:~
 ***** take care to encourage bedrock code/comunity participation
 **** TODO wait/code relevant witchcraft code
 **** TODO decide release as
