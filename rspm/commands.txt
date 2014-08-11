@@ -1,3 +1,50 @@
+
+
+as is currently:  install, remove, update, upgrade and search commands are preliminarily coded for portage, paludis's cave, apt-get, slaptget, pacman, and zypper.  (please pop into #witchlinux on irc.freenode.net to suggest others to add, or other ideas, fixes, etc.)
+
+### the original jotting down of early notion:
 # rspm command : package manager used : command used
 rspm install : apt-get : apt-get install
 rspm update : apt-get : apt-get update
+
+##^  i think i only scrawled that before going off n writing rspm.sh.  see rspm.sh for the real meat.  i've tried to keep the code as clear and just-enough as possible, though the idea below may require either a bit of muddying that clarity, and or a radical refactoring.   ... not to mention the issues surrounding the nuances of each package manager.
+
+### the simplification/shortification rethink:
+
+#install
+
+rspm install packagename
+rspm -i packagename
+rspm packagename
+
+
+#remove/uninstall
+
+rspm remove packagename
+rspm uninstall packagename #also echoes to use remove/-r
+rspm -r packagename
+rspmr packagename
+
+#sync/update (to refresh available packages list)
+
+rspm sync
+rspm update
+rspm -s
+rspms 
+
+#update/upgrade (ups installed software to newest)
+
+rspm upgrade
+rspm -u
+rspmu
+
+#sync & upgrade
+
+rspmsu
+
+#search/find
+
+rspm search packagename
+rspm find packagename
+rspm -f packagename
+rspmf packagename
