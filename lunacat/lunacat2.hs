@@ -41,7 +41,11 @@ eval :: Handle -> String -> IO ()
 eval h    "!quit"                = write h "QUIT" ":Exiting" >> exitWith ExitSuccess
 --eval h x | Just x <- stripPrefix "!id " x = privmsg h x
 --eval h (stripPrefix "!id " -> Just x) = privmsg h x
-eval h x | "!id " `isPrefixOf` x = privmsg h (drop 4 x)
+
+-- renamed from !id while the other cat is around
+eval h x | "!say " `isPrefixOf` x = privmsg h (drop 4 x)
+
+-- will fix some day.
 eval h "!search" = privmsg h "search yourself. :P"
 
 --do simple command/response like this:
