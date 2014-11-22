@@ -1,0 +1,32 @@
+#+TITLE: BIRCH is rowan compressed harder
+
+* The Notion
+
+Make a witch that's bedrock based ultra minimal but useable core, more minimal than rowan, but more capable of expansion, as per Digit's initial ideas surrounding the use of package format converters... 'cept with bedrock's way of gaining access to all packages.
+
+** Software considerations:
+
+    - Linux kernel
+
+    - busybox
+
+    - musl
+
+    - fuse
+
+    - Linux capabilities
+
+    - udev
+
+    - dvtm
+
+    - ii 
+
+    - ii scripts
+
+    - brich scripts
+
+** Elaboration on software selection
+
+it's just bedrock, ready to go, ootb, with some easy facilitation scripts, ii scripts to help you get help.  basically, it's bedrock, with dvtm and ii, and enough to get online, and get up n running with some kind of robust system for whatever your need...   scripts it carries can grow, but the idea being, it's just a simple stump to help you get going.  just the bedrock core, n no much more...  ... but a few witchcraft-esq scripts n the like.  who knows, it's just a notion at the moment.  pure vaporware.
+

@@ -33,8 +33,11 @@ case $PACKAGEMGR in
   
   "PALUDIS")
     case $1 in
-      "install") cave resolve $2 ;;
-      "remove") cave ;; # ~ er, i've forgotten the paludis commands.  ...
+      "install") cave resolve -x $2 ;;
+      "remove") cave resolve -Px $2 ;; # ~ er, i've forgotten the paludis commands.  ...
+      "update") cave sync ;;
+      "upgrade") cave resolve world -x
+      "search") cave search $2 ;;
     esac
     # etc
   ;;
@@ -66,6 +69,16 @@ case $PACKAGEMGR in
       "update") pacman -Sy ;;
       "upgrade") pacman -Syu ;;
       "search") pacman -Ss $2 ;;
+    esac
+  ;;
+  
+  "ZYPPER")
+    case $1 in
+      "install") zypper in $2 ;;
+      "remove") zypper rm $2 ;;
+      "update") zypper ref ;;
+      "upgrade") zypper up ;;
+      "search") zypper se $2 ;;
     esac
   ;;
 esac

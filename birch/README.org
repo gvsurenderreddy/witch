@@ -1,0 +1,69 @@
+#+TITLE: BIRCH is rowan compressed harder
+~:dev notes for a new witch idea in 2014:~
+ - Digit strikes again with another idea for a witch.  (and somewhat parodies/models (t)his readme on the readme for [[https://github.com/Digit/witch/blob/master/eagle/README.org][wgreenhouse's EAGLE]] ).
+
+* BIRCH
+** The Notion
+
+Make a witch that's bedrock based ultra minimal but useable core, more minimal than rowan, but more capable of expansion, as per Digit's initial ideas surrounding the use of package format converters... 'cept with bedrock's way of gaining access to all packages.
+
+*** Software candidates:
+
+     - Linux kernel
+
+     - busybox
+
+     - musl
+
+     - fuse
+
+     - Linux capabilities
+
+     - udev
+
+     - gpm
+
+     - dvtm
+
+     - ii 
+
+     - ii scripts
+
+     - brich scripts
+
+     - witchcraft scripts
+
+*** Elaboration on software selection
+
+it's just bedrock, ready to go, ootb, with some easy facilitation scripts, ii scripts to help you get help.  basically, it's bedrock, with dvtm and ii, and enough to get online, and get up n running with some kind of robust system for whatever your need...   scripts it carries can grow, but the idea being, it's just a simple stump to help you get going.  just the bedrock core, n no much more...  ... but a few witchcraft-esq scripts n the like.  who knows, it's just a notion at the moment.  pure vaporware.
+
+**** ii scripts
+Digit's got some of his own, or maybe something more elaborate like iii... lots of choice.  why?  cos ii b so darn minimal, it needs a little helping nudge, n irc is great for initial help getting going in a new os... so we gotta include ii, n enough to help any newbie use it.
+
+**** birch scripts
+idk, scripts to help out get birch growing from its initial stub, scripts to get diffeerent distros installed in birch, scripts for configurations, scripts for this that, whatever.
+
+**** witchcraft scripts
+the installation, remaster, rspm, all that jazz... if we ever get it all made n working.  ;)  
+
+**** udev
+udev > mdev
+will make things easier down the road.
+consider looking at what gentoo are up to on that front.  ;) :) :)
+
+**** others
+open to suggestions.  
+suckless?
+smaller?
+
+*** TODO plan
+**** TODO finalise added software
+**** TODO wait for bedrock
+test builds might happen, but not until a finalised version.
+~:ideally, waiting for paradigm to give version 1.0 the full release thumbs up:~
+***** take care to encourage bedrock code/comunity participation
+**** TODO wait/code relevant witchcraft code
+**** TODO decide release as
+    - scripts to build
+    - snapshot image
+    - iso - installer, how?
