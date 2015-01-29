@@ -79,6 +79,7 @@ eval h "!haylowitch" = privmsg h "haylo released a really nice minimal~!!! what,
 eval h "!griselda" = privmsg h "valroadie got in on the action, and has warty  witchos called griselda pumped out of susestudio.  see, remastery is for everyone!"
 eval h "!jane" = privmsg h "cos it just wasnt right that there wasnt a slitaz based witch yet ~ quick n dirty release to remedy that.  not like the polished but unreleased because of one niggle slitaz-rowan-witches"
 eval h "!djs_exclusive_witchlinux" = privmsg h "its got everything yours has, but better. uploaded to dajjal's exclussive site."
+eval h "!birch" = privmsg h "birch is rowan compressed harder.  https://github.com/Digit/witch/tree/master/birch mostly vapor, builds on non-vapor though.  "
 
 --witches by metadistro  "creeds"  idk, need a better name for this.
 eval h "!creeds" = privmsg h "creeds of witches of the following types have been found: !slitazwitch !slackwarewitch !debianwitch !gentoowitch !funtoowitch !archwitch !bedrockwitch"
@@ -89,7 +90,7 @@ eval h "!gentoowitch" = privmsg h "digit decided gentoo would be the first meta 
 eval h "!funtoowitch" = privmsg h "digit thinks this will be the next meta-distro included in witchcraft's cauldren, but it could just as likely be debian, or bedrock, or dragora, or whatever."
 eval h "!archwitch" = privmsg h "digit released a virtualbox arch rowan witch, alpha 5.  alpha 6 was historically considered, and legacy considered, a collective effort to create an archiso (or other remasterability means) version of arch witches... none was found easy nor convenient nor practical enough, and arch was put on the back burner, during a research period... at least for digit."
 eval h "!slaxwitch" = privmsg h "we dont talk about that.  meow."
-eval h "!bedrockwitch" = privmsg h "nothing much progressed, little beyond an initial starting stub in witchcraft... but come hack up the fun, or at least check out bedrock and learn how it is the biggest revolution since the GNU GPL. [statement may contain mild hyperbole]"
+eval h "!bedrockwitch" = privmsg h "nothing much progressed, little beyond an initial starting stub in witchcraft... but come hack up the fun, or at least check out bedrock and learn how it is the biggest revolution since the GNU GPL. [statement may contain mild hyperbole]  (also, see !birch)"
 
 
 --knightnames
@@ -113,7 +114,7 @@ eval h "!gutterslob" = privmsg h "he who art a fleeting deity of configuration. 
 eval h "!who" = privmsg h "see !knights !witches !villagers !creeds"
 eval h "!villagers" = privmsg h "ye whom are chomping at the bit to call anything a witch and burn it. [to cd]"
 eval h "!knights" = privmsg h "that's ye who determine if witches. see !knightnames"
-eval h "!witches" = privmsg h "!rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !griselda !djs_exclusive_witchlinux"
+eval h "!witches" = privmsg h "!birch !rowan !willow !jamella !zelda !kali !eagle !slackwitch !haylo !mycowitch !griselda !djs_exclusive_witchlinux"
 
 -- -- --
 eval h "!witch" = privmsg h "if she's the weight of a duck, then burn her!    see !witches !bases !philosophy !who "
