@@ -29,7 +29,7 @@ Make a witch that's bedrock based ultra minimal but useable core, more minimal t
 
      - ii scripts
 
-     - brich scripts
+     - birch scripts
 
      - witchcraft scripts
 
